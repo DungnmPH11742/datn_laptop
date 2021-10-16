@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Login | E-Shopper</title>
+    <link th:href="@{/user-st/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/font-awesome.min.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/prettyPhoto.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/price-range.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/animate.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/main.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/responsive.css}" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script th:src="@{/user-st/js/html5shiv.js}"></script>
+    <script th:src="@{/user-st/js/respond.min.js}"></script>
+    <!-- <![endif]&ndash;&gt;
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+</head>
+<!--/head-->
+
+<body>
+<!--/header-->
+<div th:replace="~{common/header :: headers}"></div>
+<!--/header-->
+
+<!--form Login-->
+<section id="form">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 img-background-login clear--padding">
+                <div class="img-color">
+                    <div class="title">
+                        <p class="title-1">Hello<br> World.</p>
+                        <p class="title-2">Using a single set of .col-md-* grid classes, you can create a basic grid
+                            system that starts out
+                            stacked </p>
+                        <div class="login-by">
+                            <p class="title-login-by">Login with social media</p>
+                            <div class="status-login-by">
+                                <button class="by-facebook" type="button">
+                                    <i class="fab fa-facebook-f"></i>
+                                </button>
+                                <button class="by-twitter">
+                                    <i class="fab fa-twitter"></i>
+                                    <div class="text-twitter">Login with Twitter</div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form class="col-md-6 clear--padding" id="login-form" th:action="@{/j_spring_security_check}" method='POST'>
+                <div class="conatiner form-login">
+                    <div class="title-text-login">
+                        <div class="text-log">Login</div>
+                        <div class="text-detail">Don't have account? <a href="#">Create your account</a>
+                            ,it takes less than a minute
+                        </div>
+                    </div>
+
+                    <div class="form-control-login">
+                        <div class="md-form">
+                            <input type="text" id="defaultForm-email" name='username' class="form-control"/>
+                            <label for="defaultForm-email" id="lableEmail" class="email">Your email</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="password" id="defaultForm-password" name='password' class="form-control"/>
+                            <label for="defaultForm-password" id="lablePass" class="password">Your Password</label>
+                        </div>
+                    </div>
+                    <div class="action-form-login">
+                        <div class="remember-login">
+                            <input type="checkbox" name="remember" class="remember-login" id=""> Remember Me
+                        </div>
+                        <div class="forgot-pass">
+                            <a href="#" class="forgot-password">Forgot Password ?</a> || <a href="">Đăng ký</a>
+                        </div>
+                    </div>
+                    <div class="btn-login">
+                        <button type="submit" class="btn-log fill submit-login">Login</button>
+                    </div>
+                </div>
+            </form>
+            <form class="col-md-6 clear--padding" id="sigup-form">
+                <div class="conatiner form-login">
+                    <div class="title-text-login">
+                        <div class="text-log">Đăng ký</div>
+                    </div>
+
+                    <div class="form-control-login">
+                        <div class="md-form">
+                            <input type="text" id="defaultForm-email" class="form-control">
+                            <label for="defaultForm-email" id="lableEmail" class="email">Email</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="password" id="defaultForm-password" class="form-control"/>
+                            <label for="defaultForm-password" id="lablePass" class="password">Mật khẩu</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="password" id="defaultForm-password" class="form-control"/>
+                            <label for="defaultForm-password" id="lablePass" class="password">Xác nhận mật khẩu</label>
+                        </div>
+                    </div>
+                    <div class="action-form-login">
+                        <div class="forgot-pass">
+                            <a href="#" class="forgot-password">Đăng nhập</a>
+                        </div>
+                    </div>
+                    <div class="btn-login">
+                        <button type="button" class="btn-log fill submit-login">Đăng ký</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<!--End form Login-->
+
+<!--/Footer-->
+<div th:replace="~{common/footer :: footers}"></div>
+<!--/Footer-->
+
+<script th:src="@{/user-st/js/jquery.js}"></script>
+<script th:src="@{/user-st/js/price-range.js}"></script>
+<script th:src="@{/user-st/js/jquery.scrollUp.min.js}"></script>
+<script th:src="@{/user-st/js/bootstrap.min.js}"></script>
+<script th:src="@{/user-st/js/jquery.prettyPhoto.js}"></script>
+<script th:src="@{/user-st/js/main.js}"></script>
+<script>
+
+    $(function () {
+        $("body").click(function (e) {
+            if (e.target.id == "defaultForm-email" || $('#defaultForm-email').val()) {
+                var lableEmail = document.getElementById('lableEmail');
+                lableEmail.classList.add('active');
+            } else {
+                var lableEmail = document.getElementById('lableEmail');
+                lableEmail.classList.remove('active');
+            }
+
+            if (e.target.id == "defaultForm-password" || $('#defaultForm-password').val()) {
+                var lableEmail = document.getElementById('lablePass');
+                lableEmail.classList.add('active');
+            } else {
+                var lableEmail = document.getElementById('lablePass');
+                lableEmail.classList.remove('active');
+            }
+        });
+    })
+
+    const onClickHandler = () => {
+        $("#sigup-form").html("")
+    }
+    $(document).ready(function () {
+        $("#sigup-form").html("")
+    })
+</script>
+</body>
+</html>
