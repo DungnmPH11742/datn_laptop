@@ -34,9 +34,6 @@ public class ProductsDetailVO implements Serializable {
     @Column(name = "hard_drive")
     private String hardDrive;
 
-    @Column(name = "screen")
-    private String screen;
-
     @Column(name = "webcam")
     private String webcam;
 
@@ -78,9 +75,6 @@ public class ProductsDetailVO implements Serializable {
 
     @Column(name = "warranty_period", nullable = false)
     private Integer warrantyPeriod;
-
-    @Column(name = "wattage")
-    private Float wattage;
 
     @Column(name = "accessories_included")
     private String accessoriesIncluded;

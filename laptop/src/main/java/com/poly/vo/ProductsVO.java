@@ -26,9 +26,9 @@ public class ProductsVO implements Serializable {
 
     private String unit;
 
-    private Date releaseDate;
+    private String releaseDate;
 
-    private Date dateOfManufacture;
+    private String dateOfManufacture;
 
     private Integer onSale;
 

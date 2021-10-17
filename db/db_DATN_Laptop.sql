@@ -1,6 +1,4 @@
-﻿
-
-Create database shop_laptop
+﻿Create database shop_laptop
 
 Go
 

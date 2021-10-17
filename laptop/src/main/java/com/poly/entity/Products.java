@@ -41,10 +41,10 @@ public class Products implements Serializable {
     private String unit;
 
     @Column(name = "release_date")
-    private Date releaseDate;
+    private String releaseDate;
 
     @Column(name = "date_of_manufacture")
-    private Date dateOfManufacture;
+    private String dateOfManufacture;
 
     @Column(name = "active")
     private Boolean active;
