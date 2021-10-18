@@ -27,7 +27,7 @@ public class SuccesHanler implements AuthenticationSuccessHandler {
         author.forEach(a -> {
             if (a.getAuthority().equals("ROLE_USER")) {
                 try {
-                    redirectStra.sendRedirect(request, response, "/list-ps");
+                    redirectStra.sendRedirect(request, response, "/home");
                 } catch (Exception e) {
                     // TODO: handle exception
                 }

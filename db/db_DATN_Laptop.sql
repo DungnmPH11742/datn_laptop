@@ -58,145 +58,140 @@ create table category(
 /*-------------------------------------------------------BẢNG THỂ LOẠI----------------------------------------------------------------------------*/
 Select * from category
 insert into category(name,actived,parent_id) values 
-
+('Laptop',1, null),
 /* Dell */
 ('Dell',1, 1), 
-('Dell Latitude',1, 1),
-('Dell XPS',1, 1),
-('Dell Precision',1, 1),
-('Dell Inspiron',1, 1),
-('Dell Gaming G Series',1, 1),
-('Dell Alienware',1, 1),
-('Dell Vostro',1, 1),
+('Dell Latitude',1, 2),
+('Dell XPS',1, 2),
+('Dell Precision',1, 2),
+('Dell Inspiron',1, 2),
+('Dell Gaming G Series',1, 2),
+('Dell Alienware',1, 2),
+('Dell Vostro',1, 2),
 
 /* Apple */
-('Apple',1, 2),
-('MacBook Air ',1, 2),
-('MacBook Pro',1, 2),
+('Apple',1, 1),
+('MacBook Air ',1, 10),
+('MacBook Pro',1, 10),
 
 /* Asus */
-('Asus',1, 3),
-('ExpertBook',1, 3),
-('VivoBook',1, 3),
-('ZenBook',1, 3),
-('TUF/ROG Gaming',1, 3),
-('ProArt Studio',1, 3),
+('Asus',1, 1),
+('ExpertBook',1, 13),
+('VivoBook',1, 13),
+('ZenBook',1, 13),
+('TUF/ROG Gaming',1, 13),
+('ProArt Studio',1, 13),
 
 /* Acer */
-('Acer',1, 4),
-('Nitro',1, 4),
-('Predator',1, 4),
-('Aspire',1, 4),
-('Swift',1, 4),
+('Acer',1, 1),
+('Nitro',1, 19),
+('Predator',1, 19),
+('Aspire',1, 19),
+('Swift',1, 19),
 
 /* Lenovo */
-('Lenovo',1, 5),
-('Thinkpad',1, 5),
-('IdeaPad',1, 5),
-('Legion',1, 5),
-('ThinkBook',1, 5),
+('Lenovo',1, 1),
+('Thinkpad',1, 24),
+('IdeaPad',1, 24),
+('Legion',1, 24),
+('ThinkBook',1, 24),
 
 /* Razer */
-('Razer',1, 6),
-('Blade 14',1, 6),
-('Blade 15',1, 6),
-('Blade 17',1, 6),
-('Blade Stealth',1, 6),
+('Razer',1, 1),
+('Blade 14',1, 29),
+('Blade 15',1, 29),
+('Blade 17',1, 29),
+('Blade Stealth',1, 29),
 
 /* HP */
-('HP',1, 7),
-('Elitebook',1, 7),
-('ZBook',1, 7),
-('Pavilion',1, 7),
-('14s/15s',1, 7), 
-('Envy',1, 7),
-('Omen',1, 7),
+('HP',1, 1),
+('Elitebook',1, 34),
+('ZBook',1, 34),
+('Pavilion',1, 34),
+('14s/15s',1, 34), 
+('Envy',1, 34),
+('Omen',1, 34),
 
 /* Microsoft */
-('Microsoft',1, 8),
-('Surface Book',1, 8),
-('Surface Laptop',1, 8),
-('Surface Pro',1, 8),
+('Microsoft',1, 1),
+('Surface Book',1, 41),
+('Surface Laptop',1, 41),
+('Surface Pro',1, 41),
 
 
 /* MSI */
-('MSI',1, 9),
-('GF Series',1, 9),
-('Prestige',1, 9),
-('Modern',1, 9),
-('Alpha',1, 9),
-('Bravo',1, 9),
-('GL Series',1, 9),
-('GE Series',1, 9),
-('GS Series',1, 9),
-('GT Series',1, 9),
+('MSI',1, 1),
+('GF Series',1, 45),
+('Prestige',1, 45),
+('Modern',1, 45),
+('Alpha',1, 45),
+('Bravo',1, 45),
+('GL Series',1, 45),
+('GE Series',1, 45),
+('GS Series',1, 45),
+('GT Series',1, 45),
 
 /* Lg */
-('Lg',1, 10),
-('Gram',1, 10)
+('Lg',1, 1),
+('Gram',1, 55)
 
 
 /*------------------------ PC-------------------        */
 insert into category(name,actived,parent_id) values 
-
+('PC Văn Phòng',1, null), --57
 /* Dell */
-('Máy Tính Văn Phòng Dell',1, 11), 
-('Dell OptiPlex',1, 11),
-('Dell Inspiron',1, 11),
-('Dell Vostro',1, 11),
-('Dell XPS',1, 11),
+('Máy Tính Văn Phòng Dell',1, 57), 
+('Dell OptiPlex',1, 57),
+('Dell Inspiron',1, 57),
+('Dell Vostro',1, 57),
+('Dell XPS',1, 57),
 
 /* HP */
-('Máy Tính Văn Phòng HP',1, 12), 
-('HP 280',1, 12),
-('HP 290',1, 12),
-('HP 390',1, 12),
-('HP Pavilion',1, 12),
-('HP ProDesk',1, 12),
-('HP EliteDesk',1, 12),
-('HP ProOne',1, 12),
-('HP Pro',1, 12),
-('HP EliteOne',1, 12),
-
-/* HACOMHOT */
-('Máy Tính Văn Phòng HACOMHOT',1, 13),
-('HACOM Business Home',1, 13),
-('HACOM Business Pro',1, 13),
+('Máy Tính Văn Phòng HP',1, 57), --63
+('HP 280',1, 63),
+('HP 290',1, 63),
+('HP 390',1, 63),
+('HP Pavilion',1, 63),
+('HP ProDesk',1, 63),
+('HP EliteDesk',1, 63),
+('HP ProOne',1, 63),
+('HP Pro',1, 63),
+('HP EliteOne',1, 63), -- Trừ 3
 
 /* Asus */
-('Máy Tính Văn Phòng Asus',1, 14),
+('Máy Tính Văn Phòng Asus',1, 57),
 
 /* Lenovo */
-('Máy Tính Văn Phòng Lenovo',1, 15), 
+('Máy Tính Văn Phòng Lenovo',1, 57), 
 
 /* Acer */
-('Máy Tính Văn Phòng Acer',1, 16)
+('Máy Tính Văn Phòng Acer',1, 57)
 
 /*------------------------ Màn hình máy tính-------------------        */
-
 insert into category(name,actived,parent_id) values 
-('Màn Hình Dell',1, 17), 
-('Màn Hình Dell UltraSharp',1, 17),
-('Màn Hình Dell E-Series',1, 17),
-('Màn Hình Dell S-Series',1, 17),
-('Màn Hình Dell Gaming',1, 17),
+('Màn Hình',1, null), --76
+('Màn Hình Dell',1, 76), --77
+('Màn Hình Dell UltraSharp',1, 77),
+('Màn Hình Dell E-Series',1, 77),
+('Màn Hình Dell S-Series',1, 77),
+('Màn Hình Dell Gaming',1, 77),
 --Sửa lại phần bên dưới
 
-('Màn Hình Acer',1, 22), 
-('Màn Hình AOC',1, 23), 
-('Màn Hình Apple',1, 24), 
-('Màn Hình Asus',1, 25), 
-('Màn Hình BenQ',1, 26), 
-('Màn Hình Concept D',1, 27), 
-('Màn Hình Gigabyte',1, 28), 
-('Màn Hình HKC',1, 29), 
-('Màn Hình HP',1, 30), 
-('Màn Hình HuntKey',1, 31), 
-('Màn Hình Lenovo',1, 32), 
-('Màn Hình LG',1, 33), 
-('Màn Hình MSI',1, 34), 
-('Màn Hình Samsung',1, 35),
-('Màn Hình ViewSonic',1, 36)
+('Màn Hình Acer',1, 76), 
+('Màn Hình AOC',1, 76), 
+('Màn Hình Apple',1, 76), 
+('Màn Hình Asus',1, 76), 
+('Màn Hình BenQ',1, 76), 
+('Màn Hình Concept D',1, 76), 
+('Màn Hình Gigabyte',1, 76), 
+('Màn Hình HKC',1, 76), 
+('Màn Hình HP',1, 76), 
+('Màn Hình HuntKey',1, 76), 
+('Màn Hình Lenovo',1, 76), 
+('Màn Hình LG',1, 76), 
+('Màn Hình MSI',1, 76), 
+('Màn Hình Samsung',1, 76),
+('Màn Hình ViewSonic',1, 76)
 
 
 /*-----------------------------------------------------------------------------------------------------------------------------------*/
@@ -228,6 +223,7 @@ create table products(
 	name nvarchar(100) not null,
 	date_on date not null,
 	id_category int not null,
+	type_of_item int not null,
 	input_price float,
 	output_price float,
 	quantity int,
