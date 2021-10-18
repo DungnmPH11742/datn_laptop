@@ -11,4 +11,6 @@ public interface AccountRepository extends JpaRepository<Account, Integer>, JpaS
 
     @Query("select a from Account a where a.email =?1")
     Account findUserAccount(String email);
+    void deleteById(Integer id);
+    Account findByEmail(String email);
 }
