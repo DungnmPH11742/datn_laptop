@@ -1,9 +1,9 @@
-﻿Create database shop_laptop
+﻿Create database shop_laptop2
 
 Go
 
-use shop_laptop
-
+use shop_laptop2
+select * from account
 Create table account(
 	id int identity(1,1) primary key not null,
 	full_name nvarchar(100),

@@ -13,5 +13,5 @@ public interface RoleRepository extends JpaRepository<Role, Integer>, JpaSpecifi
 
     @Query("Select r.roles from Account r where r.id =?1")
     List<Role> getRoleNames(Integer id);
-
+    Role findByRoleName(String nameRole);
 }

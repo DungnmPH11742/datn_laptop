@@ -21,5 +21,5 @@ public class AccountVO implements Serializable {
     private Date dateOfBirth;
 
     private Boolean actived;
-
+    private String nameRoles;
 }
