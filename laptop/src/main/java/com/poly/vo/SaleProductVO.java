@@ -8,7 +8,7 @@ import java.sql.Date;
 @Data
 public class SaleProductVO implements Serializable {
 
-    private Integer id;
+    private String saleCode;
 
     private String promotionType;
 

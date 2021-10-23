@@ -55,9 +55,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductsVO> getListForCate(Integer id){
+    public List<ProductsVO> getListByCate(Integer id) {
         List<ProductsVO> vos = new ArrayList<>();
-        productsRepository.getListForCate(id).forEach(products -> {
+        productsRepository.getListByCate(id).forEach(products -> {
+            vos.add(modelMapper.map(products, ProductsVO.class));
+        });
+        return vos;
+    }
+
+    @Override
+    public List<ProductsVO> getListByCodeSale(String code) {
+        List<ProductsVO> vos = new ArrayList<>();
+        productsRepository.getListByCodeSale(code).forEach(products -> {
             vos.add(modelMapper.map(products, ProductsVO.class));
         });
         return vos;

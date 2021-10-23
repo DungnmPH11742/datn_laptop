@@ -1,7 +1,6 @@
 package com.poly.service;
 
 import com.poly.vo.CategoryVO;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,4 +17,6 @@ public interface CategoryService {
     void delete(String id);
 
     List<CategoryVO> getListPage(Optional<Integer> page, Optional<Integer> row);
+
+    List<CategoryVO> getListByParent(Integer id);
 }

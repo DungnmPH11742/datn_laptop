@@ -1,7 +1,6 @@
 package com.poly.service;
 
 import com.poly.vo.ProductsVO;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,5 +18,7 @@ public interface ProductService {
 
     List<ProductsVO> getListPage(Optional<Integer> page, Optional<Integer> row);
 
-    List<ProductsVO> getListForCate(Integer id);
+    List<ProductsVO> getListByCate(Integer id);
+
+    List<ProductsVO> getListByCodeSale(String code);
 }

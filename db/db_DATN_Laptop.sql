@@ -1,9 +1,8 @@
-﻿Create database shop_laptop2
+﻿Create database shop_laptop
 
 Go
 
-use shop_laptop2
-select * from account
+use shop_laptop
 Create table account(
 	id int identity(1,1) primary key not null,
 	full_name nvarchar(100),
@@ -141,10 +140,10 @@ insert into category(name,actived,parent_id) values
 ('PC Văn Phòng',1, null), --57
 /* Dell */
 ('Máy Tính Văn Phòng Dell',1, 57), 
-('Dell OptiPlex',1, 57),
-('Dell Inspiron',1, 57),
-('Dell Vostro',1, 57),
-('Dell XPS',1, 57),
+('Dell OptiPlex',1, 58),
+('Dell Inspiron',1, 58),
+('Dell Vostro',1, 58),
+('Dell XPS',1, 58),
 
 /* HP */
 ('Máy Tính Văn Phòng HP',1, 57), --63
@@ -198,7 +197,7 @@ insert into category(name,actived,parent_id) values
 
 --Tạo 1 bảng sale 
 create table sale_product(
-	id int identity(1,1) primary key,
+	sale_code varchar(9) primary key,
 	promotion_type nvarchar(50) not null,--loại | loại sản phẩm | năm | dịp tết | mới nhập
 	date_on date not null,
 	date_off date not null,
@@ -209,11 +208,12 @@ create table sale_product(
 
 /*---------------------------------------------------BẢNG SALE--------------------------------------------------------------------------------*/
 Select * from sale_product
-insert into sale_product(promotion_type,date_on,date_off,promotion,quantity,status) values 
-	(N'Dell cùng bạn vui đến trường','2021-10-01', '2021-10-15',10,300,1), 
-	(N'Chợ tết laptop - ngập tràn khuyến mãi','2021-11-01', '2021-11-18',20,500,1), 
-	(N'Tâm điểm khai trường – chọn quà chất tôi','2021-01-15', '2021-10-30',5,400,0), 
-	(N'Máy chuẩn gu, quà vi vu','2021-05-20', '2021-06-05',15,200,0)
+insert into sale_product(sale_code, promotion_type,date_on,date_off,promotion,quantity,status) values 
+	('SL001', N'Giảm giác sốc','', '',10,null,1), 
+	('SL002', N'Dell cùng bạn vui đến trường','2021-10-01', '2021-10-15',10,300,1), 
+	('SL003', N'Chợ tết laptop - ngập tràn khuyến mãi','2021-11-01', '2021-11-18',20,500,1), 
+	('SL004', N'Tâm điểm khai trường – chọn quà chất tôi','2021-01-15', '2021-10-30',5,400,0), 
+	('SL005', N'Máy chuẩn gu, quà vi vu','2021-05-20', '2021-06-05',15,200,0)
 /*-----------------------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -231,7 +231,7 @@ create table products(
 	unit nvarchar(15) not null,--Đơn vị tính
 	release_date varchar(4), --Ngày phát hành
 	date_of_manufacture varchar(10), -- ngày sản xuất
-	on_sale int, --Khóa ngoại bảng sale
+	on_sale varchar(9), --Khóa ngoại bảng sale
 	active bit
 )
 
@@ -239,31 +239,31 @@ create table products(
 --Khóa ngoại sản phẩm 1-1 danh mục | 1-1 sale - thay đổi được 
 ALTER TABLE products ADD FOREIGN KEY (id_category) REFERENCES category(id);	
 
-ALTER TABLE products ADD FOREIGN KEY (on_sale) REFERENCES sale_product(id);	
+ALTER TABLE products ADD FOREIGN KEY (on_sale) REFERENCES sale_product(sale_code);	
 
 /*-----------------------------------------------------------------BẢNG SẢN PHẨM------------------------------------------------------------------*/
 insert into products values
 	-- lap top
-	('MQD32SA', N'Macbook Air MQD32SA/A i5 5350U','2020-11-05',2,19000000,23990000,40,1.35,'1 cái','2021','05-2021',2,1),
-	('DL3520I5', N'Dell Latitude 3520 Intel (Chính hãng)','2021-01-05',1,12000000,15990000 ,80,1.79,'1 cái','2021','06-2021',1,1),
-	('APH30021', N'Acer Predator Helios 300 2021','2020-12-15',4,29000000,33990000 ,40,2.3,'1 cái','2021','08-2021',4,1),
-	('DV3400I5', N'Dell Vostro 14 3400 Intel gen 11 (Chính Hãng)','2020-11-05',7,15000000,18990000,35,1.64,'1 cái','2021','04-2021',1,1),
-	('LI314R5', N'Lenovo IdeaPad 3 14 (AMD Ryzen 5000)','2021-05-05',5,10000000,14290000,30,1.41,'1 cái','2021','06-2021',3,1),
-	('AS514', N'Acer Swift 5 14 (Chính hãng)','2021-05-05',13,22000000,26990000,20,1,'1 cái','2021','10-2021',4,1),
-	('LYS714ITL05',N'Laptop Lenovo Yoga Slim 7 14ITL05','2021-07-10',3,2300000,26490000,13,1.36,N'1 cái','2021','05-2021',3,1),
-	('HPZB15G5',N'Laptop Workstation HP Zbook 15 G5 3AX12AV','2021-10-15',35,43990000,43990000,10,2.6,N'1 cái','2021','10-2021',null,1),
-	('MBPR13MWP52',N'Apple Macbook Pro 13 Touchbar (MWP52)','2020-10-15',35,21600000,23990000,30,1.4,N'1 cái','2020','08-2020',null,1),
+	('MQD32SA', N'Macbook Air MQD32SA/A i5 5350U','2020-11-05',11, 1,19000000,23990000,40,1.35,'1 cái','2021','05-2021','SL001',1),
+	('DL3520I5', N'Dell Latitude 3520 Intel (Chính hãng)','2021-01-05',3, 1,12000000,15990000 ,80,1.79,'1 cái','2021','06-2021','SL001',1),
+	('APH30021', N'Acer Predator Helios 300 2021','2020-12-15', 21, 1,29000000,33990000 ,40,2.3,'1 cái','2021','08-2021','SL003',1),
+	('DV3400I5', N'Dell Vostro 14 3400 Intel gen 11 (Chính Hãng)','2020-11-05', 9, 1 ,15000000,18990000,35,1.64,'1 cái','2021','04-2021','SL003',1),
+	('LI314R5', N'Lenovo IdeaPad 3 14 (AMD Ryzen 5000)','2021-05-05', 26, 1,10000000,14290000,30,1.41,'1 cái','2021','06-2021','SL001',1),
+	('AS514', N'Acer Swift 5 14 (Chính hãng)','2021-05-05', 23, 1,22000000,26990000,20,1,'1 cái','2021','10-2021','SL005',1),
+	('LYS714ITL05',N'Laptop Lenovo Yoga Slim 7 14ITL05','2021-07-10', 24, 1,2300000,26490000,13,1.36,N'1 cái','2021','05-2021','SL003',1),
+	('HPZB15G5',N'Laptop Workstation HP Zbook 15 G5 3AX12AV','2021-10-15', 36, 1,43990000,43990000,10,2.6,N'1 cái','2021','10-2021',null,1),
+	('MBPR13MWP52',N'Apple Macbook Pro 13 Touchbar (MWP52)','2020-10-15',12, 1,21600000,23990000,30,1.4,N'1 cái','2020','08-2020',null,1),
 	-- PC
-	('PCDOAIO7080',N'PC Dell OptiPlex All in One 7480','2021-09-30',57,29600000,30299000,5,5.94,N'1 cái','2021','05-2021',null,1),
-	('PCAPN608250U',N'PC Mini Asus PN60 i5-8250U','2021-10-15',18,7000000,8349000,5,0.7,N'1 cái','2021','10-2021',2,1),
-	('PCHP280G3SFF',N'PC HP 280 G3 SFF','2020-12-27',62,8000000,8989000,13,5.94,N'1 cái','2021','08-2020',1,1),
+	('PCDOAIO7080',N'PC Dell OptiPlex All in One 7480','2021-09-30', 59, 57,29600000,30299000,5,5.94,N'1 cái','2021','05-2021',null,1),
+	('PCAPN608250U',N'PC Mini Asus PN60 i5-8250U','2021-10-15', 73, 57,7000000,8349000,5,0.7,N'1 cái','2021','10-2021','SL002',1),
+	('PCHP280G3SFF',N'PC HP 280 G3 SFF','2020-12-27',64, 57,8000000,8989000,13,5.94,N'1 cái','2021','08-2020','SL001',1),
 
 	--Màn hình
-	('MAVG240YS' ,N'Màn hình Acer VG240YS','2021-10-16',22,4000000,6259000,15,3.85,'1 cái','2020','2020-05-01',2,1),
-	('MATGVG249Q', N'Màn hình Asus TUF GAMING VG249Q','2021-09-26',25,4500000,6390000,10,5.6,'1 cái','2021','2021-01-01',3,1),
-	('MDE2020H', N'Màn hình Dell E2020H','2021-04-12',17,2399000,4399000,10,2.94,'1 cái','2021', '2021-01-01',1,1),
-	('MHM24F', N'Màn hình HP M24F','2021-05-15',30,3500000,4849000,5,2.5,'1 cái','2021', '2021-05-01',4,1),
-	('MHM27FW', N'Màn hình HP M27FW','2020-02-15',30,4500000,6059000,10,2.5,'1 cái','2021', '2021-02-02',3,1);
+	('MAVG240YS' ,N'Màn hình Acer VG240YS','2021-10-16', 82, 76,4000000,6259000,15,3.85,'1 cái','2020','2020-05-01','SL001',1),
+	('MATGVG249Q', N'Màn hình Asus TUF GAMING VG249Q','2021-09-26', 85,76,4500000,6390000,10,5.6,'1 cái','2021','2021-01-01','SL003',1),
+	('MDE2020H', N'Màn hình Dell E2020H','2021-04-12',79, 76,2399000,4399000,10,2.94,'1 cái','2021', '2021-01-01','SL003',1),
+	('MHM24F', N'Màn hình HP M24F','2021-05-15', 90, 76,3500000,4849000,5,2.5,'1 cái','2021', '2021-05-01','SL003',1),
+	('MHM27FW', N'Màn hình HP M27FW','2020-02-15',90, 76,4500000,6059000,10,2.5,'1 cái','2021', '2021-02-02','SL004',1);
 /*-----------------------------------------------------------------------------------------------------------------------------------*/
 
 create table products_detail(
@@ -471,9 +471,10 @@ Create table order_details(
 	id_voucher nvarchar(10),
 	price float not null,
 	quantity int not null,
-	completion_date date,
+	completion_date date,--Đã nhận được hàng
 	received int, --0 chờ xác nhận | 1 Đang giao | 2 Đã giao | 3 Bảo hành | 4 Đổi hàng
 )
+
 --Khóa ngoại order_details 1-1 voucher | 1-1 order | 1-1 product
 ALTER TABLE order_details ADD FOREIGN KEY (id_order) REFERENCES orders(id);
 
@@ -489,4 +490,4 @@ create table contact(
 	subject nvarchar(255) not null,
 	message ntext not null,
 )
-
+select * from category

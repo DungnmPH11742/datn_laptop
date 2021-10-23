@@ -25,6 +25,9 @@ public class Products implements Serializable {
     @Column(name = "date_on", nullable = false)
     private Date dateOn;
 
+    @Column(name = "type_of_item", nullable = false)
+    private Integer typeOfItem;
+
     @Column(name = "input_price")
     private Float inputPrice;
 

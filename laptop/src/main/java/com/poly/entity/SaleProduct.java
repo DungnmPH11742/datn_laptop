@@ -15,9 +15,9 @@ public class SaleProduct implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "sale_code", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String saleCode;
 
     @Column(name = "promotion_type", nullable = false)
     private String promotionType;

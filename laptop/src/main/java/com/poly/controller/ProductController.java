@@ -16,6 +16,6 @@ public class ProductController {
 
     @RequestMapping("/list-ps")
     public List<ProductsVO> getList(){
-        return productService.getListForCate(1);
+        return productService.getListByCate(1);
     }
 }

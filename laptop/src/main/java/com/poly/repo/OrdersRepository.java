@@ -10,5 +10,4 @@ import javax.persistence.criteria.Order;
 
 @EnableJpaRepositories
 public interface OrdersRepository extends JpaRepository<Orders, Integer>, JpaSpecificationExecutor<Orders> {
-     Order findByAccount(Account account);
 }

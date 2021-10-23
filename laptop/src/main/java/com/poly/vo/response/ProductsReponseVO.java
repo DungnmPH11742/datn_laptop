@@ -1,12 +1,13 @@
-package com.poly.vo;
+package com.poly.vo.response;
 
+import com.poly.vo.SaleProductVO;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.sql.Date;
 
 @Data
-public class ProductsVO implements Serializable {
+public class ProductsReponseVO implements Serializable {
 
     private String id;
 
@@ -34,8 +35,5 @@ public class ProductsVO implements Serializable {
 
     private SaleProductVO saleProduct;
 
-    private ProductsDetailVO productsDetail;
-
     private Boolean active;
-
 }
