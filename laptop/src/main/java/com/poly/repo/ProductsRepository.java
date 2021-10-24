@@ -18,4 +18,6 @@ public interface ProductsRepository extends JpaRepository<Products, String>, Jpa
 
     @Query("select p from Products p where p.saleProduct.saleCode=:code")
     List<Products> getListByCodeSale(@Param("code") String code);
+
+
 }

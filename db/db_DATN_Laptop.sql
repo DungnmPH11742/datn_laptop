@@ -46,7 +46,7 @@ ALTER TABLE account_role ADD FOREIGN KEY (id_role) REFERENCES role(id);
 insert into account_role values (1,2), (2,1)
 /*-----------------------------------------------------------------------------------------------------------------------------------*/
 
-
+select * from category
 create table category(
 	id int identity(1,1) primary key,
 	name nvarchar(100) not null,
@@ -242,6 +242,13 @@ ALTER TABLE products ADD FOREIGN KEY (id_category) REFERENCES category(id);
 ALTER TABLE products ADD FOREIGN KEY (on_sale) REFERENCES sale_product(sale_code);	
 
 /*-----------------------------------------------------------------BẢNG SẢN PHẨM------------------------------------------------------------------*/
+laptop: CPU,RAM,Ổ cứng,VGA, Màn hình,Màu
+màn hình: Model Kích thước màn hình, Độ sáng, Tỷ lệ tương phản, Độ phân giải Full HD, Thời gian đáp ứng, Góc nhìn,Cổng giao tiếp
+pc: CPU,RAM, Ổ cứng, Wifi
+select * from category
+select * from products
+select * from products_detail
+where id = 'MDE2020H'
 insert into products values
 	-- lap top
 	('MQD32SA', N'Macbook Air MQD32SA/A i5 5350U','2020-11-05',11, 1,19000000,23990000,40,1.35,'1 cái','2021','05-2021','SL001',1),

@@ -78,12 +78,38 @@
 										</div>
 									</span>
                                 <br>
-                                <p><b>Vi xử lý: </b><th:block th:text="${product.getProductsDetail().getCpu()}"></th:block></p>
-                                <p><b>Màn hình: </b><th:block th:text="${product.getProductsDetail().getDisplaySize()}"></th:block></p>
-                                <p><b>Độ phủ màu: </b><th:block th:text="${product.getProductsDetail().getContrast()}"></th:block></p>
-                                <p><b>RAM: </b><th:block th:text="${product.getProductsDetail().getRam()}"></th:block></p>
-                                <p><b>Card đồ họa: </b><th:block th:text="${product.getProductsDetail().getVga()}"></th:block></p>
-                                <p><b>Tình trạng: </b><th:block th:text="${product.getQuantity()>0?'Còn hàng':'Tạm hết'}"></th:block></p>
+
+                                <th:block th:if="${product.getTypeOfItem()}==1"> <!-- Gộp sau  -->
+                                    <th:block th:if="${product.getProductsDetail().getCpu()}!=null"><p><b>Vi xử lý: </b> [[${product.getProductsDetail().getCpu()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getRam()} !=null"><p><b>RAM:</b> [[${product.getProductsDetail().getRam()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getHardDrive()} !=null">  <p><b>Ổ cứng: </b>[[${product.getProductsDetail().getHardDrive()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getVga()} !=null"><p><b>Card đồ họa: </b> [[${product.getProductsDetail().getVga()}]] </p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getDisplaySize()}!=null"><p><b>Màn hình: </b> [[${product.getProductsDetail().getDisplaySize()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getOperatingSystem()}!=null"><p><b>Hệ điều hành: </b> [[${product.getProductsDetail().getOperatingSystem()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getColor()}!=null"><p><b>Màu sắc: </b>[[${product.getProductsDetail().getColor()}]]</p></th:block>
+                                    <p><b>Tình trạng: </b><th:block th:text="${product.getQuantity()>0?'Còn hàng':'Tạm hết'}"></th:block></p>
+                                </th:block>
+                                <th:block th:if="${product.getTypeOfItem()}==57"><!-- Gộp sau  -->
+                                    <th:block th:if="${product.getProductsDetail().getCpu()}!=null"><p><b>Vi xử lý: </b> [[${product.getProductsDetail().getCpu()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getRam()} !=null"><p><b>RAM:</b> [[${product.getProductsDetail().getRam()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getHardDrive()} !=null">  <p><b>SSD: </b>[[${product.getProductsDetail().getHardDrive()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getVga()} !=null"><p><b>Card đồ họa: </b> [[${product.getProductsDetail().getVga()}]] </p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getDisplaySize()}!=null"><p><b>Màn hình: </b> [[${product.getProductsDetail().getDisplaySize()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getOperatingSystem()!=null}"><p><b>Hệ điều hành: </b> [[${product.getProductsDetail().getOperatingSystem()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getColor()}!=null"><p><b>Màu sắc: </b>[[${product.getProductsDetail().getColor()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getPower()}!=null"><p><b>Nguồn: </b>[[${product.getProductsDetail().getPower()}]]</p></th:block>
+                                    <p><b>Tình trạng: </b><th:block th:text="${product.getQuantity()>0?'Còn hàng':'Tạm hết'}"></th:block></p>
+                                </th:block>
+                                <th:block th:if="${product.getTypeOfItem()}==76"> <!-- Gộp sau  -->
+                                    <th:block th:if="${product.getProductsDetail().getDisplaySize()}!=null"><p><b>Kích Thước Màn Hình: </b> [[${product.getProductsDetail().getDisplaySize()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getBrightness()} !=null"><p><b>Độ Sáng Màn Hình:</b> [[${product.getProductsDetail().getBrightness()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getContrast()} !=null">  <p><b>Tỉ Lệ Tương Phản Động: </b>[[${product.getProductsDetail().getContrast()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getResolution()} !=null"><p><b>Độ Phân Giải Màn Hình: </b> [[${product.getProductsDetail().getResolution()}]] </p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getResponseTime()}!=null"><p><b>Thời Gian Đáp Ứng : </b> [[${product.getProductsDetail().getResponseTime()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getViewScreenshots()}!=null"><p><b>Góc nhìn : </b> [[${product.getProductsDetail().getViewScreenshots()}]]</p></th:block>
+                                    <p><b>Tình trạng: </b><th:block th:text="${product.getQuantity()>0?'Còn hàng':'Tạm hết'}"></th:block></p>
+                                </th:block>
+
                                 <p><b>Trạng thái: </b>Mới</p>
 <!--                                <p><b>Thương hiệu: </b><th:block th:text="${product.getProductsDetail().getCpu()}"></th:block></p>-->
                                 <button type="button" class="btn btn-fefault cart">
@@ -147,54 +173,103 @@
                     <h3>Thông số kỹ thuật</h3>
                     <table class="table table-striped">
                         <tbody>
-                        <tr>
-                            <th scope="row">Hãng sản xuất</th>
-                            <td>LG</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Tên máy</th>
-                            <td th:text="${product.getName()}"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Màu sắc</th>
-                            <td th:text="${product.getProductsDetail().getColor()}"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Bộ vi xử lý</th>
-                            <td th:text="${product.getProductsDetail().getCpu()}"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Bộ nhớ trong</th>
-                            <td>16GB LPDDR4X 4266MHz</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Mầu sắc</th>
-                            <td>Đen - Vỏ hợp kim Nano Carbon Magnesium siêu bền (theo tiêu chuẩn quân đội MIL -
-                                STD 810G)
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Bộ vi xử lý</th>
-                            <td>Intel Core i7-1165G7 (2.8Ghz upto 4.7Ghz, 12MB cache)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Bộ nhớ trong</th>
-                            <td>16GB LPDDR4X 4266MHz</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Mầu sắc</th>
-                            <td>Đen - Vỏ hợp kim Nano Carbon Magnesium siêu bền (theo tiêu chuẩn quân đội MIL -
-                                STD 810G)
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Bộ vi xử lý</th>
-                            <td>Intel Core i7-1165G7 (2.8Ghz upto 4.7Ghz, 12MB cache)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Bộ nhớ trong</th>
-                            <td>16GB LPDDR4X 4266MHz</td>
-                        </tr>
+                        <th:block>
+
+                            <tr th:if="${product.getProductsDetail().getProducer()!=null}">
+                                <th scope="row">Hãng sản xuất</th>
+                                <td>[[${product.getProductsDetail().getProducer()}]]</td>
+                            </tr>
+
+                            <tr th:if="${product.getName()!=null}">
+                                <th scope="row">Tên máy</th>
+                                <td th:text="${product.getName()}"></td>
+                            </tr>
+                            <tr th:if="${product.getProductsDetail().getColor()!=null}">
+                                <th scope="row">Màu sắc</th>
+                                <td th:text="${product.getProductsDetail().getColor()}"></td>
+                            </tr>
+                            <tr th:if="${product.getProductsDetail().getCpu()!=null}">
+                                <th scope="row">Bộ vi xử lý</th>
+                                <td th:text="${product.getProductsDetail().getCpu()}"></td>
+                            </tr>
+
+                            <tr  th:if="${product.getProductsDetail().getCpu()!=null}">
+                                <th scope="row">Ổ cứng</th>
+                                <td th:text="${product.getProductsDetail().getHardDrive()}"></td>
+                            </tr>
+                            <tr th:if="${product.getProductsDetail().getWebcam()!=null}">
+                                <th scope="row">Webcam</th>
+                                <td th:text="${product.getProductsDetail().getWebcam()}"></td>
+                            </tr>
+                            <tr th:if="${product.getProductsDetail().getVga()!=null}">
+                                <th scope="row">Card đồ họa</th>
+                                <td th:text="${product.getProductsDetail().getVga()}"></td>
+                            </tr>
+                            <tr th:if="${product.getMass()!=null}">
+                                <th scope="row">Khối lượng</th>
+                                <td> [[${product.getMass()}]] kg</td>
+                            </tr>
+                            <tr th:if="${product.getReleaseDate()!=null}">
+                                <th scope="row">Ngày phát hành</th>
+                                <td>[[${product.getReleaseDate()}]]</td>
+                            </tr>
+                            <tr th:if="${product.getProductsDetail().getOperatingSystem()!=null}">
+                                <th scope="row">Hệ điều hành</th>
+                                <td>[[${product.getProductsDetail().getOperatingSystem()}]]</td>
+                            </tr>
+                            <tr th:if="${product.getProductsDetail().getPower()!=null}">
+                                <th scope="row">Nguồn</th>
+                                <td>[[${product.getProductsDetail().getPower()}]]</td>
+                            </tr>
+                            <tr th:if="${product.getProductsDetail().getScanFrequency()!=null}">
+                                <th scope="row">Tần số quét</th>
+                                <td>[[${product.getProductsDetail().getScanFrequency()}]]</td>
+                            </tr>
+                            <tr th:if="${product.getProductsDetail().getBackgroundPanels()!=null}">
+                                <th scope="row">Tấm nền</th>
+                                <td>[[${product.getProductsDetail().getBackgroundPanels()}]]</td>
+                            </tr>
+
+                            <tr th:if="${product.getProductsDetail().getContrast()!=null}">
+                                <th scope="row">Độ tương phản</th>
+                                <td>[[${product.getProductsDetail().getContrast()}]]</td>
+                            </tr>
+
+                            <tr th:if="${product.getProductsDetail().getResponseTime()!=null}">
+                                <th scope="row">Thời gian phản hồi</th>
+                                <td>[[${product.getProductsDetail().getResponseTime()}]]</td>
+                            </tr>
+                            <tr th:if="${product.getProductsDetail().getViewScreenshots()!=null}">
+                                <th scope="row">Góc nhìn</th>
+                                <td>[[${product.getProductsDetail().getViewScreenshots()}]]</td>
+                            </tr>
+
+                            <tr th:if="${product.getProductsDetail().getDisplaySize()!=null}">
+                                <th scope="row">Kích thước màn hình</th>
+                                <td>[[${product.getProductsDetail().getDisplaySize()}]]</td>
+                            </tr>
+
+                            <tr th:if="${product.getProductsDetail().getScreenRatio()!=null}">
+                                <th scope="row">Tỉ lệ màn hình</th>
+                                <td> [[${product.getProductsDetail().getScreenRatio()}]]</td>
+                            </tr>
+
+                            <tr th:if="${product.getProductsDetail().getBrightness()!=null}">
+                                <th scope="row">Độ sáng</th>
+                                <td>[[${product.getProductsDetail().getBrightness()}]]</td>
+                            </tr>
+
+                            <tr th:if="${product.getProductsDetail().getWarrantyPeriod()!=null}">
+                                <th scope="row">Thời gian bảo hành</th>
+                                <td>[[${product.getProductsDetail().getWarrantyPeriod()}]]</td>
+                            </tr>
+
+                            <tr th:if="${product.getProductsDetail().getAccessoriesIncluded()!=null}">
+                                <th scope="row">Phụ kiện đi kèm</th>
+                                <td>[[${product.getProductsDetail().getAccessoriesIncluded()}]]</td>
+                            </tr>
+
+                        </th:block>
                         </tbody>
                     </table>
                 </div>

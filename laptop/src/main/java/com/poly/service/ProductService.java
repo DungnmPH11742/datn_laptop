@@ -1,5 +1,6 @@
 package com.poly.service;
 
+import com.poly.entity.Products;
 import com.poly.vo.ProductsVO;
 
 import java.util.List;
@@ -21,4 +22,5 @@ public interface ProductService {
     List<ProductsVO> getListByCate(Integer id);
 
     List<ProductsVO> getListByCodeSale(String code);
+
 }
