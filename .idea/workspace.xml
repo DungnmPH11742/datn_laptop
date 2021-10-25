@@ -20,7 +20,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f955a355-4ddb-4e78-9179-aaa469c6f652" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/db_DATN_Laptop.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db/db_DATN_Laptop.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/web/ProductDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/web/ProductDetailController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ProductsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ProductsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/CategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/CategoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/ProductServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/product-details.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/product-details.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +105,7 @@
       <workItem from="1635087408344" duration="3288000" />
       <workItem from="1635125353812" duration="2795000" />
       <workItem from="1635134901197" duration="5100000" />
-      <workItem from="1635150869394" duration="1494000" />
+      <workItem from="1635150869394" duration="1802000" />
     </task>
     <servers />
   </component>

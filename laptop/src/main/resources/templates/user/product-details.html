@@ -32,8 +32,7 @@
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner">
                                 <div class="col-sm-12 img--detail">
-                                    <div class="col-sm-3"  th:onclick="@{'clickId('+${product.getName()}+')'}"
-                                         th:id="${product.getId()}">
+                                    <div class="col-sm-3" >
 
                                         <img th:id="${'abc' + product.getId()}"
                                              th:src="@{/user-st/images/product/gram17-21-white-2.jpg}" alt="">
@@ -605,14 +604,7 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.prettyPhoto.js"></script>
 <script src="js/main.js"></script>
-<script >
-    const clickId=(id)=>{
-        console.log(id)
-        alert("Nghe "+id)
-    }
-    clickId(id)
 
-</script>
 </body>
 
 </html>
