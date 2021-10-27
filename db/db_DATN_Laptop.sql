@@ -14,12 +14,25 @@ Create table account(
 )
 
 Select * from account
+where actived = 'false'
+
+DBCC CHECKIDENT ('[account]', RESEED, 2)
+Select * from account
+Select * from account_role
+DBCC CHECKIDENT (account, RESEED, 0)
+delete from account
+where id >2
+
+delete from account_role
+where id_account >2
 /*------------------------------------------------------BẢNG ACCOUNT-----------------------------------------------------------------------------*/
 insert into account(full_name, phone, email,password,date_of_birth, actived)
 values ('Nam','0374563546','admin@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2010-09-08',1)
 insert into account(full_name, phone, email,password,date_of_birth, actived)
 values ('Hằng','0374656354','user@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2003-06-02',1)
 /*-----------------------------------------------------------------------------------------------------------------------------------*/
+insert into account(full_name, phone, email,password,date_of_birth, actived)
+values ('hu','0374656354','user@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2003-06-02',1)
 
 Create table role(
 	id int identity(1,1) primary key,

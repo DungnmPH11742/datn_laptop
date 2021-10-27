@@ -11,7 +11,11 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+<<<<<<< Updated upstream
       <module name="laptop" target="11" />
+=======
+      <module name="laptop" target="8" />
+>>>>>>> Stashed changes
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

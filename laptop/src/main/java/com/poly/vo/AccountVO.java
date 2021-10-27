@@ -20,6 +20,11 @@ public class AccountVO implements Serializable {
 
     private Date dateOfBirth;
 
+    private String verificationCode;
+
     private Boolean actived;
+
     private String nameRoles;
+    private String confirmPassword;
+
 }

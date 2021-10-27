@@ -37,7 +37,8 @@ public class Account implements Serializable {
 
     @Column(name = "actived")
     private Boolean actived;
-
+    @Column(name = "verification_code", length = 64)
+    private String verificationCode;
     //bi-directional many-to-one association to Blog
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
     private List<Blogs> blogs;

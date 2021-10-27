@@ -20,6 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f955a355-4ddb-4e78-9179-aaa469c6f652" name="Default Changelist" comment="">
+<<<<<<< Updated upstream
       <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
@@ -32,6 +33,25 @@
       <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/ProductService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/CategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/CategoryServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/ProductServiceImpl.java" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/verify_success.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/laptop_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/laptop_war_exploded.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/db_DATN_Laptop.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db/db_DATN_Laptop.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/web/LoginWebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/web/LoginWebController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/AccountRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/AccountRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/AccountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/AccountServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/UserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/UserDetailsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/AccountVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/AccountVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/client/click.js" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/client/click.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/common/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/common/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/login.html" afterDir="false" />
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/product-details.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/product-details.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,6 +61,13 @@
   </component>
   <component name="CodeStyleSettingsInfer">
     <option name="done" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -70,9 +97,21 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="project.structure.last.edited" value="Project" />
+<<<<<<< Updated upstream
     <property name="project.structure.proportion" value="0.15429688" />
+=======
+    <property name="project.structure.proportion" value="0.0" />
+>>>>>>> Stashed changes
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.poly.service" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\nhomDATN\datn_laptop\laptop\src\main\resources\templates\user" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="LaptopApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true">
@@ -105,7 +144,18 @@
       <workItem from="1635087408344" duration="3288000" />
       <workItem from="1635125353812" duration="2795000" />
       <workItem from="1635134901197" duration="5100000" />
+<<<<<<< Updated upstream
       <workItem from="1635150869394" duration="1802000" />
+=======
+      <workItem from="1635178859364" duration="3923000" />
+      <workItem from="1635212043907" duration="8122000" />
+      <workItem from="1635241697248" duration="11142000" />
+      <workItem from="1635254937913" duration="7334000" />
+      <workItem from="1635263722001" duration="9880000" />
+      <workItem from="1635299021721" duration="9101000" />
+      <workItem from="1635308768905" duration="20031000" />
+      <workItem from="1635331170134" duration="4297000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
@@ -125,59 +175,70 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="574" y="118" key="#com.intellij.ide.util.MemberChooser" timestamp="1635003422551">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="718" y="149" key="#com.intellij.ide.util.MemberChooser" timestamp="1635324708314">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="574" y="118" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1635003422551" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1635131834317">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="718" y="149" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1635324708314" />
+    <state x="686" y="211" key="FileChooserDialogImpl" timestamp="1635322693468">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1635131834317" />
-    <state width="1877" height="260" key="GridCell.Tab.0.bottom" timestamp="1635141407554">
+    <state x="686" y="211" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1635322693468" />
+    <state width="1877" height="139" key="GridCell.Tab.0.bottom" timestamp="1635341113337">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="217" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1635134746913" />
-    <state width="1877" height="260" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1635141407554" />
-    <state width="1877" height="260" key="GridCell.Tab.0.center" timestamp="1635141407553">
+    <state width="1877" height="139" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1635341113337" />
+    <state width="1877" height="139" key="GridCell.Tab.0.center" timestamp="1635341113337">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="217" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1635134746913" />
-    <state width="1877" height="260" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1635141407553" />
-    <state width="1877" height="260" key="GridCell.Tab.0.left" timestamp="1635141407553">
+    <state width="1877" height="139" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1635341113337" />
+    <state width="1877" height="139" key="GridCell.Tab.0.left" timestamp="1635341113337">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="217" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1635134746913" />
-    <state width="1877" height="260" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1635141407553" />
-    <state width="1877" height="260" key="GridCell.Tab.0.right" timestamp="1635141407553">
+    <state width="1877" height="139" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1635341113337" />
+    <state width="1877" height="139" key="GridCell.Tab.0.right" timestamp="1635341113337">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="217" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1635134746913" />
-    <state width="1877" height="260" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1635141407553" />
-    <state width="1877" height="260" key="GridCell.Tab.1.bottom" timestamp="1635141407554">
+    <state width="1877" height="139" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1635341113337" />
+    <state width="1877" height="139" key="GridCell.Tab.1.bottom" timestamp="1635341113337">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="217" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1635134746913" />
-    <state width="1877" height="260" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1635141407554" />
-    <state width="1877" height="260" key="GridCell.Tab.1.center" timestamp="1635141407554">
+    <state width="1877" height="139" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1635341113337" />
+    <state width="1877" height="139" key="GridCell.Tab.1.center" timestamp="1635341113337">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="217" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1635134746913" />
-    <state width="1877" height="260" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1635141407554" />
-    <state width="1877" height="260" key="GridCell.Tab.1.left" timestamp="1635141407554">
+    <state width="1877" height="139" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1635341113337" />
+    <state width="1877" height="139" key="GridCell.Tab.1.left" timestamp="1635341113337">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="217" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1635134746913" />
-    <state width="1877" height="260" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1635141407554" />
-    <state width="1877" height="260" key="GridCell.Tab.1.right" timestamp="1635141407554">
+    <state width="1877" height="139" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1635341113337" />
+    <state width="1877" height="139" key="GridCell.Tab.1.right" timestamp="1635341113337">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="217" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1635134746913" />
+<<<<<<< Updated upstream
     <state width="1877" height="260" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1635141407554" />
     <state x="311" y="0" key="SettingsEditor" timestamp="1635152539264">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1634999010437" />
     <state x="311" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1635152539264" />
+=======
+    <state width="1877" height="139" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1635341113337" />
+    <state x="311" y="0" key="SettingsEditor" timestamp="1635178888364">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1634999010437" />
+    <state x="311" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1635178888364" />
+>>>>>>> Stashed changes
     <state x="579" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1635088842994">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
