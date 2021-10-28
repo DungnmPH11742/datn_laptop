@@ -2,17 +2,19 @@ package com.poly.entity;
 
 import lombok.Data;
 import org.hibernate.criterion.Order;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Data
 @Entity
 @Table(name = "account")
 public class Account implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -37,7 +39,11 @@ public class Account implements Serializable {
 
     @Column(name = "actived")
     private Boolean actived;
-
+    @Column(name = "verification_code", length = 64)
+    private String verificationCode;
+    @Column(name = "time_token")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date timeToken;
     //bi-directional many-to-one association to Blog
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
     private List<Blogs> blogs;
@@ -60,6 +66,13 @@ public class Account implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "id_role"))
     private List<Role> roles;
 
+
+//    private Date calculateExpiryDate(int expiryTimeInMinutes) {
+//        Calendar cal = Calendar.getInstance();
+//        cal.setTime(new Timestamp(cal.getTime().getTime()));
+//        cal.add(Calendar.MINUTE, expiryTimeInMinutes);
+//        return new Date(cal.getTime().getTime());
+//    }
     //bi-directional many-to-one association to ProductRating
 //    @OneToMany(mappedBy="account")
 //    private List<ProductRating> productRatings;
