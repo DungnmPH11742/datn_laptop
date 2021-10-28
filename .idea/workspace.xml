@@ -20,13 +20,181 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e3168317-9391-4458-888c-fcf707244961" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/db_DATN_Laptop.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db/db_DATN_Laptop.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/.mvn/wrapper/MavenWrapperDownloader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/laptop.iml" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/laptop.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/LaptopApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/LaptopApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/ServletInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/ServletInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/api/Product_api.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/api/Product_api.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/common/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/common/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/config/ModelMapperConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/config/ModelMapperConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/config/SuccesHanler.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/config/SuccesHanler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/config/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/config/WebSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/TestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/TestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/web/CategoryWebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/web/CategoryWebController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/web/HomeWebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/web/HomeWebController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/web/LoginWebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/web/LoginWebController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/web/ProductDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/web/ProductDetailController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/AccountRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/AccountRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Blogs.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Blogs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Contact.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Contact.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/DeliveryAddress.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/DeliveryAddress.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Description.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Description.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/ImageDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/ImageDetail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/ImportedShipment.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/ImportedShipment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/OrderDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/OrderDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Orders.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Orders.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/ProductRating.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/ProductRating.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Products.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Products.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/ProductsDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/ProductsDetail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/SaleProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/SaleProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/ShipmentDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/ShipmentDetail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Vouchers.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Vouchers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/AccountRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/AccountRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/AccountRoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/AccountRoleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/BlogsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/BlogsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/CategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/CategoryRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ContactRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ContactRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/DeliveryAddressRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/DeliveryAddressRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/DescriptionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/DescriptionRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ImageDetailRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ImageDetailRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ImportedShipmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ImportedShipmentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/OrderDetailsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/OrderDetailsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/OrdersRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/OrdersRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ProductRatingRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ProductRatingRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ProductsDetailRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ProductsDetailRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ProductsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ProductsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/RoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/RoleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/SaleProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/SaleProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ShipmentDetailRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ShipmentDetailRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/VouchersRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/VouchersRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/AccountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/CategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/RoleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/AccountServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/CategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/CategoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/OrderServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/ProductServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/RoleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/RoleServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/UserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/UserDetailsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/validate/AccountValidate.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/validate/AccountValidate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/AccountRoleVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/AccountRoleVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/AccountVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/AccountVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/BlogsVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/BlogsVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/CategoryVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/CategoryVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/ContactVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/ContactVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/DeliveryAddressVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/DeliveryAddressVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/DescriptionVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/DescriptionVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/ImageDetailVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/ImageDetailVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/ImportedShipmentVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/ImportedShipmentVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/OrderDetailsVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/OrderDetailsVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/OrdersVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/OrdersVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/ProductRating.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/ProductRating.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/ProductsDetailVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/ProductsDetailVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/ProductsVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/ProductsVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/RoleVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/RoleVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/SaleProductVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/SaleProductVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/ShipmentDetailVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/ShipmentDetailVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/VouchersVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/VouchersVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/response/ProductsReponseVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/response/ProductsReponseVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/css/animate.css" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/css/animate.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/css/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/css/font-awesome.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/css/font-awesome.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/css/prettyPhoto.css" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/css/prettyPhoto.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/css/price-range.css" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/css/price-range.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/css/responsive.css" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/css/responsive.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/fonts/fontawesome-webfont.svg" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/fonts/fontawesome-webfont.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/fonts/glyphicons-halflings-regular.svg" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/fonts/glyphicons-halflings-regular.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/bootstrap.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/bootstrap.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/contact.js" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/contact.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/gmaps.js" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/gmaps.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/html5shiv.js" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/html5shiv.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/jquery.js" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/jquery.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/jquery.prettyPhoto.js" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/jquery.prettyPhoto.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/jquery.scrollUp.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/jquery.scrollUp.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/price-range.js" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/price-range.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/admin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/common/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/common/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/common/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/common/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/common/link.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/common/link.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/common/list_product.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/common/list_product.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/home_test.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/home_test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/404.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/blog-single.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/blog-single.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/blog.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/blog.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/cart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/checkout.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/checkout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/contact-us.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/contact-us.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/product-details.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/product-details.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/register_success.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/register_success.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/sendemail.php" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/sendemail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/shop.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/shop.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/verify_fail.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/verify_fail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/verify_success.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/verify_success.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/test/java/com/poly/LaptopApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/test/java/com/poly/LaptopApplicationTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laptop/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/target/classes/com/poly/api/Product_api.class" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/com/poly/api/Product_api.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/target/classes/com/poly/controller/web/LoginWebController.class" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/com/poly/controller/web/LoginWebController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/static/user-st/css/animate.css" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/static/user-st/css/animate.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/static/user-st/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/static/user-st/css/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/static/user-st/css/font-awesome.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/static/user-st/css/font-awesome.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/static/user-st/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/static/user-st/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/static/user-st/css/prettyPhoto.css" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/static/user-st/css/prettyPhoto.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/static/user-st/css/price-range.css" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/static/user-st/css/price-range.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/static/user-st/css/responsive.css" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/static/user-st/css/responsive.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/static/user-st/fonts/fontawesome-webfont.svg" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/static/user-st/fonts/fontawesome-webfont.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/static/user-st/fonts/glyphicons-halflings-regular.svg" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/static/user-st/fonts/glyphicons-halflings-regular.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/static/user-st/js/bootstrap.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/static/user-st/js/bootstrap.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/static/user-st/js/contact.js" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/static/user-st/js/contact.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/static/user-st/js/gmaps.js" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/static/user-st/js/gmaps.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/static/user-st/js/html5shiv.js" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/static/user-st/js/html5shiv.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/static/user-st/js/jquery.js" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/static/user-st/js/jquery.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/static/user-st/js/jquery.prettyPhoto.js" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/static/user-st/js/jquery.prettyPhoto.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/static/user-st/js/jquery.scrollUp.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/static/user-st/js/jquery.scrollUp.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/static/user-st/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/static/user-st/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/static/user-st/js/price-range.js" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/static/user-st/js/price-range.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/templates/admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/templates/admin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/templates/common/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/templates/common/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/templates/common/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/templates/common/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/templates/common/link.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/templates/common/link.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/templates/common/list_product.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/templates/common/list_product.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/templates/home_test.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/templates/home_test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/templates/user/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/templates/user/404.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/templates/user/blog-single.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/templates/user/blog-single.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/templates/user/blog.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/templates/user/blog.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/templates/user/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/templates/user/cart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/templates/user/checkout.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/templates/user/checkout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/templates/user/contact-us.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/templates/user/contact-us.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/templates/user/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/templates/user/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/templates/user/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/templates/user/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/templates/user/product-details.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/templates/user/product-details.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/templates/user/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/templates/user/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/templates/user/register_success.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/templates/user/register_success.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/templates/user/sendemail.php" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/templates/user/sendemail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/templates/user/shop.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/templates/user/shop.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/templates/user/verify_fail.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/templates/user/verify_fail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/target/classes/templates/user/verify_success.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/target/classes/templates/user/verify_success.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,6 +263,7 @@
       <option name="presentableId" value="Default" />
       <updated>1635437010203</updated>
       <workItem from="1635437012157" duration="600000" />
+      <workItem from="1635445622154" duration="191000" />
     </task>
     <servers />
   </component>

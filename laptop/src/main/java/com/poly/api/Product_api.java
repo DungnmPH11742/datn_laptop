@@ -23,8 +23,9 @@ public class Product_api {
         Category category = categoryRepository.findByName(nameBrand);
         Integer id =  (brand!=null && !brand.equals(""))?categoryRepository.findById(Integer.parseInt(brand)).get().getId():category.getId();
         Integer idRoots = (category.getParentId()==null) ? category.getId() :category.getParentId();
-        List<Category> lstCate = (category.getParentId()!=null) ? categoryRepository.findAllByParentId(category.getParentId()): categoryRepository.findAllById(idRoots);
-        productsList = (lstCate.size() !=0 )? (category.getParentId()!=null)?repository.findAllByTypeOfItemAndCategory_ParentId(idRoots,category.getId()):repository.findAllByTypeOfItem(idRoots) : repository.findAllByTypeOfItemAndCategory_Id(idRoots,category.getId());
+        List<Products> lstProducts = repository.findAllByTypeOfItemAndCategory_ParentId(idRoots,category.getId());
+        List<Category> lstCate = (category.getParentId()!=null) ? categoryRepository.findAllByParentId(idRoots) : categoryRepository.findAllById(idRoots);
+        productsList = (lstCate.size() !=0 )? (category.getParentId()!=null) ? ((lstProducts.size()!=0)?repository.findAllByTypeOfItemAndCategory_ParentId(idRoots,category.getId()):repository.findAllByCategory_Id(category.getId())) : repository.findAllByTypeOfItem(idRoots) : repository.findAllByTypeOfItemAndCategory_Id(idRoots,category.getId());
         return  (brand!=null && !brand.equals(""))? repository.findAllByCategory_IdOrCategory_Id(category.getId(),id): productsList;
     }
 

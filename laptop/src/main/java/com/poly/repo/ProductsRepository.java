@@ -23,4 +23,5 @@ public interface ProductsRepository extends JpaRepository<Products, String>, Jpa
     List<Products> findAllByTypeOfItemAndCategory_ParentId(Integer type,Integer pantId );
     List<Products> findAllByTypeOfItemAndCategory_Id(Integer type,Integer idCate );
     List<Products> findAllByTypeOfItem(Integer id);
+    List<Products> findAllByCategory_Id(Integer id);
 }
