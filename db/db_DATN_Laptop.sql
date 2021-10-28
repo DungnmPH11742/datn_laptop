@@ -13,7 +13,12 @@ Create table account(
 	actived bit,
 )
 
-Select * from account
+update  account
+set tim
+SELECT RIGHT(CONVERT(VARCHAR,GETDATE(),100),7)
+SELECT FORMAT(GETDATE() , 'HH:mm:ss')
+SELECT DATEDIFF(SECOND, '10/28/2021 1:21:40',FORMAT(GETDATE() , 'MM/dd/yyyy HH:mm:ss'))
+Select  DATEDIFF(SECOND, time_token,FORMAT(GETDATE() , 'MM/dd/yyyy HH:mm:ss')) from account
 where actived = 'false'
 
 DBCC CHECKIDENT ('[account]', RESEED, 2)
@@ -25,6 +30,8 @@ where id >2
 
 delete from account_role
 where id_account >2
+
+
 /*------------------------------------------------------BẢNG ACCOUNT-----------------------------------------------------------------------------*/
 insert into account(full_name, phone, email,password,date_of_birth, actived)
 values ('Nam','0374563546','admin@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2010-09-08',1)
@@ -229,7 +236,16 @@ insert into sale_product(sale_code, promotion_type,date_on,date_off,promotion,qu
 	('SL005', N'Máy chuẩn gu, quà vi vu','2021-05-20', '2021-06-05',15,200,0)
 /*-----------------------------------------------------------------------------------------------------------------------------------*/
 
-
+select * from category
+where parent_id  =2
+where parent_id  =1 and name like 'dell'
+select * from category
+where id =2 or id =3 or id =97
+select * from products_detail
+where producer like 'dell'
+select * from products
+where id_category =85 or id_category =85
+where products.id_category like 'dell'
 --Sản phẩm
 create table products(
 	id varchar(25) primary key, --Ảnh chính + list ảnh của image_detail 
