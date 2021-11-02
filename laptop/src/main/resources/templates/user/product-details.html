@@ -80,14 +80,7 @@
 										</div>
 									</span>
                                 <br>
-<<<<<<< Updated upstream
-                                <p><b>Vi xử lý: </b><th:block th:text="${product.getProductsDetail().getCpu()}"></th:block></p>
-                                <p><b>Màn hình: </b><th:block th:text="${product.getProductsDetail().getDisplaySize()}"></th:block></p>
-                                <p><b>Độ phủ màu: </b><th:block th:text="${product.getProductsDetail().getContrast()}"></th:block></p>
-                                <p><b>RAM: </b><th:block th:text="${product.getProductsDetail().getRam()}"></th:block></p>
-                                <p><b>Card đồ họa: </b><th:block th:text="${product.getProductsDetail().getVga()}"></th:block></p>
-                                <p><b>Tình trạng: </b><th:block th:text="${product.getQuantity()>0?'Còn hàng':'Tạm hết'}"></th:block></p>
-=======
+
 
                                 <th:block th:if="${product.getTypeOfItem()}==1"> <!-- Gộp sau  -->
                                     <th:block th:if="${product.getProductsDetail().getCpu()}!=null"><p><b>Vi xử lý: </b>
@@ -219,56 +212,7 @@
                     <h3>Thông số kỹ thuật</h3>
                     <table class="table table-striped">
                         <tbody>
-<<<<<<< Updated upstream
-                        <tr>
-                            <th scope="row">Hãng sản xuất</th>
-                            <td>LG</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Tên máy</th>
-                            <td th:text="${product.getName()}"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Màu sắc</th>
-                            <td th:text="${product.getProductsDetail().getColor()}"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Bộ vi xử lý</th>
-                            <td th:text="${product.getProductsDetail().getCpu()}"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Bộ nhớ trong</th>
-                            <td>16GB LPDDR4X 4266MHz</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Mầu sắc</th>
-                            <td>Đen - Vỏ hợp kim Nano Carbon Magnesium siêu bền (theo tiêu chuẩn quân đội MIL -
-                                STD 810G)
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Bộ vi xử lý</th>
-                            <td>Intel Core i7-1165G7 (2.8Ghz upto 4.7Ghz, 12MB cache)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Bộ nhớ trong</th>
-                            <td>16GB LPDDR4X 4266MHz</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Mầu sắc</th>
-                            <td>Đen - Vỏ hợp kim Nano Carbon Magnesium siêu bền (theo tiêu chuẩn quân đội MIL -
-                                STD 810G)
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Bộ vi xử lý</th>
-                            <td>Intel Core i7-1165G7 (2.8Ghz upto 4.7Ghz, 12MB cache)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Bộ nhớ trong</th>
-                            <td>16GB LPDDR4X 4266MHz</td>
-                        </tr>
-=======
+
                         <th:block>
 
                             <tr th:if="${product.getProductsDetail().getProducer()!=null}">

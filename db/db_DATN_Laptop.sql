@@ -10,16 +10,20 @@ Create table account(
 	email varchar(150),
 	password varchar(255),
 	date_of_birth date,
+	verification_code varchar(64),
+	time_token datetime,
 	actived bit,
 )
 
-Select * from account
+
 /*------------------------------------------------------BẢNG ACCOUNT-----------------------------------------------------------------------------*/
 insert into account(full_name, phone, email,password,date_of_birth, actived)
-values ('Nam','0374563546','admin@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2010-09-08',1)
+values ('Nam','0374563546','admin@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2010-09-08',null,null,1)
 insert into account(full_name, phone, email,password,date_of_birth, actived)
-values ('Hằng','0374656354','user@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2003-06-02',1)
+values ('Hằng','0374656354','user@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2003-06-02',null,null,1)
 /*-----------------------------------------------------------------------------------------------------------------------------------*/
+insert into account(full_name, phone, email,password,date_of_birth, actived)
+values ('hu','0374656354','user@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2003-06-02',null,null,1)
 
 Create table role(
 	id int identity(1,1) primary key,
@@ -357,16 +361,6 @@ create table image_detail(
 	id_product varchar(25) not null,
 	name_path nvarchar(150) not null,
 )
-
-insert into image_detail(id_product, name_path) values
-	('LI314R5', 'https://lumen.thinkpro.vn//backend/uploads/product/color_images/2021/6/12/ideapad314g6-arcticgrey-1.jpg'),
-	('LI314R5', 'https://lumen.thinkpro.vn//backend/uploads/product/color_images/2021/6/12/ideapad314g6-arcticgrey-3.jpg'),
-	('LI314R5', 'https://lumen.thinkpro.vn/backend/uploads/editor/v2/lenovo-ideapad-3-14-21.jpg'),
-	('LI314R5', 'https://lumen.thinkpro.vn//backend/uploads/product/color_images/2021/9/6/lenovo-ideapad-slim3-82kt004dvn-thinkpro.jpg'),
-	('LI314R5', 'https://lumen.thinkpro.vn/backend/uploads/editor/v2/lenovo-ideapad-3-14-5.jpg'),
-	('LI314R5', 'https://cdn.mediamart.vn/Product/laptop-lenovo-ideapad-slim-3-14alc6-82kt003tvn-xam-2Ta8jh.png'),
-	('LI314R5', 'https://lh3.googleusercontent.com/7PyZDb7fnzqcwOq1DN5gh9bv5BiTR2ztFNKXelmubyMqslq4QuO-jRhqNDjWgRGbVxl_ar6tpbXZ7A0UV_hkcO2oMnu6ZzCk=w500-rw'),
-	('LI314R5', 'https://congnghegiare.vn/data/upload/1624505675-lenovo-ideapad-slim-5-15itl05-i5-82fg001pvn-144320-064322-600x600.jpg');
 --Khóa ngoại ct hình ảnh N-1 sản phẩm
 ALTER TABLE image_detail ADD FOREIGN KEY (id_product) REFERENCES products(id);	
 
