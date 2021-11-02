@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Shop | E-Shopper</title>
+    <link th:href="@{/user-st/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/font-awesome.min.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/prettyPhoto.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/price-range.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/animate.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/duongtest.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/responsive.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+        integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!--[if lt IE 9]>
+    <![endif]-->
+    <script th:src="@{/user-st/js/html5shiv.js}"></script>
+    <script th:src="@{/user-st/js/respond.min.js}"></script>
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head>
+<!--/head-->
+
+<body>
+<div th:replace="~{common/header :: headers}"></div>
+
+    <!-- <section id="advertisement">
+        <div class="container">
+            <img src="images/shop/advertisement.jpg" alt="" />
+        </div>
+    </section> -->
+    
+    <section>
+        <h1 class="title-page">Máy tính xách tay</h1>
+        <div class="container">
+            <div class="row">
+                    <div class="col-sm-3">
+                        <div class="col-left">
+                        <div class="text-base tong_sp"><strong>1 - 24</strong>
+                            trên 270 sản phẩm
+                        </div>
+                        <div class="catalogue-wrap sticky">
+                            <div class="catalogue catalogue_final">
+                                <div class="flex items-center mb-2">
+                                    <h3 class="text-base leading-5 font-semibold flex items-center w-full"><span>Bộ lọc được
+                                            áp dụng</span> <a href="javascript:;" class="ml-auto text-sm font-normal underline leading-5">
+                                            Bỏ lọc
+                                        </a></h3>
+                                </div>
+                                <ul class="flex flex-wrap"> </ul>
+                            </div>
+                            <!---->
+                            <!---->
+                            <!---->
+                            <div class="catalogue">
+                                <h3 class=" items-center"><span>Thương hiệu</span>
+                                    <p class="btn-plus-category"><i class="fas fa-plus"></i></p>
+                                </h3>
+                                <div class="catalogue__list">
+                                    <label class="check-list">
+                                        <span class="text">Lenovo</span>
+                                        <input type="checkbox" value="4">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">Razer</span>
+                                        <input type="checkbox" value="3">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">Dell</span>
+                                        <input type="checkbox" value="1">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">Asus</span>
+                                        <input type="checkbox" value="8">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">HP</span>
+                                        <input type="checkbox" value="2">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">Microsoft</span>
+                                        <input type="checkbox" value="5">
+                                        <span class="checkmark"></span>
+                                    </label> <a class="view-more">
+                                        Xem thêm thương hiệu
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- Khoảng Giá -->
+                            <div class="catalogue">
+                                <h3 class=" items-center"><span>Khoảng Giá</span>
+                                    <p class="btn-plus-category"><i class="fas fa-plus"></i></p>
+                                </h3>
+                                <div class="catalogue__list">
+                                    <label class="check-list">
+                                        <span class="text">Trên 50 triệu</span>
+                                        <input type="checkbox" value="">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">40 - 50 triệu</span>
+                                        <input type="checkbox" value="">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">20 - 30 triệu</span>
+                                        <input type="checkbox" value="1">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">15 - 20 triệu</span>
+                                        <input type="checkbox" value="8">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">10 - 15 triệu</span>
+                                        <input type="checkbox" value="2">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">Dưới 10 triệu</span>
+                                        <input type="checkbox" value="5">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                    
+                            <!--Chỉ hiển thị khuyến mại-->
+                            <div class="catalogue" style="padding-top: 15px;">
+                                <label class="type__toggle-button items-start">
+                                    <span class="">Chỉ hiện thị khuyến mại</span>
+                                    <input type="checkbox" class="toggle_button">
+                                </label>
+                            </div>
+                    
+                            <!--CPU-->
+                            <div class="catalogue">
+                                <h3 class=" items-center"><span>CPU</span>
+                                    <p class="btn-plus-category"><i class="fas fa-plus"></i></p>
+                                </h3>
+                                <div class="catalogue__list">
+                                    <label class="check-list">
+                                        <span class="text">Intel Dual Core</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">Intel Core i3</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">Intel Core i5</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">Intel Core i7</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">Intel Core i9</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">Intel Xeon</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                    
+                            <!--Ram-->
+                            <div class="catalogue">
+                                <h3 class=" items-center"><span>Ram</span>
+                                    <p class="btn-plus-category"><i class="fas fa-plus"></i></p>
+                                </h3>
+                                <div class="catalogue__list">
+                                    <label class="check-list">
+                                        <span class="text">4 GB</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">8 GB</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">12 GB</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">16 GB</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">20 GB</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">32 GB</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">64 GB</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">128 GB</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                    
+                            <!--Ổ cứng-->
+                            <div class="catalogue">
+                                <h3 class=" items-center"><span>Ổ Cứng</span>
+                                    <p class="btn-plus-category"><i class="fas fa-plus"></i></p>
+                                </h3>
+                                <div class="catalogue__list">
+                                    <label class="check-list">
+                                        <span class="text">SSD</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">HDD</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <!--Kích thước màn hình-->
+                            <div class="catalogue">
+                                <h3 class=" items-center"><span>Kích thước màn hình</span>
+                                    <p class="btn-plus-category"><i class="fas fa-plus"></i></p>
+                                </h3>
+                                <div class="catalogue__list">
+                                    <label class="check-list">
+                                        <span class="text">
+                                            < 13"</span>
+                                                <input type="checkbox">
+                                                <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">13 - 13.9"</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">14 - 14.9"</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">15 - 15.9"</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">16 - 17"</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">> 17"</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                    
+                            <!--Tỉ lệ màn hình-->
+                            <div class="catalogue">
+                                <h3 class=" items-center"><span>Tỉ lệ màn hình</span>
+                                    <p class="btn-plus-category"><i class="fas fa-plus"></i></p>
+                                </h3>
+                                <div class="catalogue__list">
+                                    <label class="check-list">
+                                        <span class="text">16:9</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">16:10</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">3:2</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                    
+                            <!--Loại màn hình-->
+                            <div class="catalogue">
+                                <h3 class=" items-center"><span>Loại màn hình</span>
+                                    <p class="btn-plus-category"><i class="fas fa-plus"></i></p>
+                                </h3>
+                                <div class="catalogue__list">
+                                    <label class="check-list">
+                                        <span class="text">Nhám</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">Gương</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">Cảm ứng</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                    
+                            <!--Tần số quyét-->
+                            <div class="catalogue">
+                                <h3 class=" items-center"><span>Tần số quyét</span>
+                                    <p class="btn-plus-category"><i class="fas fa-plus"></i></p>
+                                </h3>
+                                <div class="catalogue__list">
+                                    <label class="check-list">
+                                        <span class="text">60 Hz</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">75 Hz</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">120 Hz</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                    
+                            <!--Độ phân giải-->
+                            <div class="catalogue">
+                                <h3 class=" items-center"><span>Độ phân giải</span>
+                                    <p class="btn-plus-category"><i class="fas fa-plus"></i></p>
+                                </h3>
+                                <div class="catalogue__list">
+                                    <label class="check-list">
+                                        <span class="text">1366 x 768 (HD)</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">1600 x 900 (HD+)</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">1920 x 1080 (FHD)</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">1920 x 1200 (FHD+)</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">2560 x 1440 (2K)</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">3840 x 2160 (4K)</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">3840 x 2400 (4K+)</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!--Card đồ họa-->
+                            <div class="catalogue">
+                                <h3 class=" items-center"><span>Card đồ họa</span>
+                                    <p class="btn-plus-category"><i class="fas fa-plus"></i></p>
+                                </h3>
+                                <div class="catalogue__list">
+                                    <label class="check-list">
+                                        <span class="text">Intel HD</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">Intel Iris</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">Nvidia Geforce</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">Nvidia Quadro</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">AMD Radeon</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">AMD FirePro</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!--Trọng lượng-->
+                            <div class="catalogue">
+                                <h3 class=" items-center"><span>Trọng lượng</span>
+                                    <p class="btn-plus-category"><i class="fas fa-plus"></i></p>
+                                </h3>
+                                <div class="catalogue__list">
+                                    <label class="check-list">
+                                        <span class="text">Dưới 1kg</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">1 - 1.5kg</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">1.5 - 2kg</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">2 - 2.5kg</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">2.5 - 3.5kg</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">Trên 3.5kg</span>
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-9 padding-right">
+                    <div class="features_items col_right">
+                        <!--features_items-->
+                        <div class="sort-fillter">
+                            <div class="sort-fillter__left">
+                                <strong>Sắp xếp theo:</strong> 
+                                <a   class=""> Giá tăng dần</a>
+                                <a   class=""> Giá giảm dần </a>
+                            </div>
+                            <div class="search_product_cate">
+                                <input type="text" placeholder="Tìm kiếm..." name="" id="">
+                                <button aria-label="search" class="search-button-cate">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <th:block th:if="${list_product.isEmpty()}" >
+                            <h1>Không có sản phẩm nào vui lòng chọn danh mục khác</h1>
+                        </th:block>
+                        <div th:each="p, key: ${list_product}">
+                                <div th:replace="~{common/list_product :: products}"></div>
+                        </div>
+
+                    </div>
+                    <div id="pagination">
+                        <ul class="pagination">
+                            <!---->
+                            <li th:class="${currentPage > 1} ? 'page-item' : 'page-item disalble'"><a
+                                    th:if="${currentPage >1}" th:href="@{'/category/page/1/'+${nameBrand}+'?brand='+${brand}}"
+                                    tabindex="-1" >First </a>
+                            </li>
+                            <li th:class="${currentPage >1} ? 'page-item' : 'page-item disalble'"><a
+                                    th:if="${currentPage >1}" th:href="@{'/category/page/'+ ${currentPage - 1}+'/'+${nameBrand}+'?brand='+${brand}}"
+                                    tabindex="-1" class="prev"><i class="fas fa-chevron-circle-left"></i> </a>
+                            </li>
+                            <th:block th:if="${totalPages <= 10}">
+                            <li  th:each="i: ${#numbers.sequence(1, totalPages)}" th:class="${currentPage != i ? 'page-item' : 'page-item active'}">
+
+                                <a data-v-82963a40="" tabindex="0" class="page-link" th:if="${currentPage != i}"
+                                   th:href="@{'/category/page/' + ${i}+'/'+${nameBrand}+'?brand='+${brand}}">[[${i}]]</a>
+
+                            </li>
+                            </th:block>
+
+                            <th:block th:if="${totalPages > 10}">
+
+
+                                <th:block th:if="${currentPage <= 5 || currentPage > totalPages - 4 }">
+                                    <li class="page-item " th:each="i: ${#numbers.sequence(1, 5)}" th:class="${currentPage != i ? 'page-item' : 'page-item active'}">
+                                        <a data-v-82963a40="" tabindex="0" class="page-link" th:if="${currentPage != i}"
+                                           th:href="@{'/category/page/' + ${i}+'/'+${nameBrand}+'?brand='+${brand}}">[[${i}]]</a>
+                                    </li>
+
+                                        <a data-v-82963a40="" tabindex="0" class="page-link"
+                                           th:href="@{'/category/page/' + 6+'/'+${nameBrand}+'?brand='+${brand}}">...</a>
+
+                                    <li class="page-item " th:each="i: ${#numbers.sequence(totalPages - 4 , totalPages)}" th:class="${currentPage != i ? 'page-item' : 'page-item active'}">
+                                        <a data-v-82963a40="" tabindex="0" class="page-link" th:if="${currentPage != i}"
+                                           th:href="@{'/category/page/' + ${i}+'/'+${nameBrand}+'?brand='+${brand}}">[[${i}]]</a>
+                                    </li>
+                                </th:block>
+
+
+                                <th:block th:if="${currentPage > 5 && currentPage < totalPages - 4 }">
+                                    <a data-v-82963a40="" tabindex="0" class="page-link"
+                                       th:href="@{'/category/page/' + ${currentPage - 5}+'/'+${nameBrand}+'?brand='+${brand}}">...</a>
+
+                                    <li class="page-item " th:each="i: ${#numbers.sequence(currentPage - 4 , currentPage + 4)}" th:class="${currentPage != i ? 'page-item' : 'page-item active'}">
+                                        <a data-v-82963a40="" tabindex="0" class="page-link" th:if="${currentPage != i}"
+                                           th:href="@{'/category/page/' + ${i}+'/'+${nameBrand}+'?brand='+${brand}}">[[${i}]]</a>
+                                    </li>
+
+                                    <a data-v-82963a40="" tabindex="0" class="page-link"
+                                       th:href="@{'/category/page/' + ${currentPage + 5}+'/'+${nameBrand}+'?brand='+${brand}}">...</a>
+                                </th:block>
+
+
+                                </th:block>
+
+                            <li th:class="${currentPage < totalPages} ? 'page-item' : 'page-item disalble'" >
+                                <a tabindex="0" class="next"  th:if="${currentPage < totalPages}"
+                                   th:href="@{'/category/page/' + ${currentPage + 1} +'/'+${nameBrand}+'?brand='+${brand}}"><i class="fas fa-chevron-circle-right"></i></a>
+                            </li>
+                            <th:block th:unless="${list_product.isEmpty()}" >
+                                <li th:class="${currentPage < totalPages} ? 'page-item' : 'page-item disalble'">
+                                    <a tabindex="0"   th:if="${currentPage < totalPages}" th:href="@{'/category/page/' + ${totalPages} +'/'+${nameBrand}+'?brand='+${brand}}">Last</a>
+                                </li>
+                            </th:block>
+
+                            <!---->
+                        </ul>
+                    </div>
+                    <!--features_items-->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div th:replace="~{common/footer :: footers}"></div>
+    <!--/Footer-->
+    <script th:src="@{/user-st/js/jquery.js}"></script>
+    <script th:src="@{/user-st/js/price-range.js}"></script>
+    <script th:src="@{/user-st/js/jquery.scrollUp.min.js}"></script>
+    <script th:src="@{/user-st/js/bootstrap.min.js}"></script>
+    <script th:src="@{/user-st/js/jquery.prettyPhoto.js}"></script>
+    <script th:src="@{/user-st/js/main.js}"></script>
+    <script th:src="@{/user-st/js/duongtest.js}"></script>
+
+</body>
+
+</html>

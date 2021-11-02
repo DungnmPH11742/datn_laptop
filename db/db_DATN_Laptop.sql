@@ -10,16 +10,20 @@ Create table account(
 	email varchar(150),
 	password varchar(255),
 	date_of_birth date,
+	verification_code varchar(64),
+	time_token datetime,
 	actived bit,
 )
 
-Select * from account
+
 /*------------------------------------------------------BẢNG ACCOUNT-----------------------------------------------------------------------------*/
 insert into account(full_name, phone, email,password,date_of_birth, actived)
-values ('Nam','0374563546','admin@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2010-09-08',1)
+values ('Nam','0374563546','admin@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2010-09-08',null,null,1)
 insert into account(full_name, phone, email,password,date_of_birth, actived)
-values ('Hằng','0374656354','user@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2003-06-02',1)
+values ('Hằng','0374656354','user@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2003-06-02',null,null,1)
 /*-----------------------------------------------------------------------------------------------------------------------------------*/
+insert into account(full_name, phone, email,password,date_of_birth, actived)
+values ('hu','0374656354','user@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2003-06-02',null,null,1)
 
 Create table role(
 	id int identity(1,1) primary key,

@@ -1,10 +1,14 @@
 package com.poly.service.impl;
 
+import com.poly.entity.Products;
 import com.poly.repo.ProductsRepository;
 import com.poly.service.ProductService;
 import com.poly.vo.ProductsVO;
+import com.poly.vo.response.SanPhamFilter;
+import com.querydsl.core.BooleanBuilder;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,6 +32,8 @@ public class ProductServiceImpl implements ProductService {
         });
         return vos;
     }
+
+
 
     @Override
     public ProductsVO getOne(String id) {
@@ -70,5 +76,16 @@ public class ProductServiceImpl implements ProductService {
             vos.add(modelMapper.map(products, ProductsVO.class));
         });
         return vos;
+    }
+    @Override
+    public Page<Products> getListByPageNumber(int page,int limit, List<Products> lstProducts) {
+        Pageable pageable = PageRequest.of(page - 1, limit);
+        final int start = (int)pageable.getOffset();
+        final int end = Math.min((start + pageable.getPageSize()), lstProducts.size());
+           Page page1 = new PageImpl<>(lstProducts.subList(start,end), pageable,lstProducts.size() );
+               return  page1;
+
+            //    return productsRepository.findAll(PageRequest.of(page-1,limit),sort);
+
     }
 }
