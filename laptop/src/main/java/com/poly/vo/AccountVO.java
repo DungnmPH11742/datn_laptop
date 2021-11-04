@@ -1,5 +1,6 @@
 package com.poly.vo;
 
+import com.poly.entity.AuthenticationProvider;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -21,5 +22,8 @@ public class AccountVO implements Serializable {
     private Date dateOfBirth;
 
     private Boolean actived;
+
     private String nameRoles;
+
+    private AuthenticationProvider authProvider;
 }

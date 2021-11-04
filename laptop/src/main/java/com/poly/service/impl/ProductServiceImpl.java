@@ -1,5 +1,6 @@
 package com.poly.service.impl;
 
+import com.poly.entity.Products;
 import com.poly.repo.ProductsRepository;
 import com.poly.service.ProductService;
 import com.poly.vo.ProductsVO;
@@ -31,7 +32,17 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductsVO getOne(String id) {
-        return modelMapper.map(productsRepository.getById(id), ProductsVO.class);
+        Products products = productsRepository.getById(id);
+        return modelMapper.map(products, ProductsVO.class);
+    }
+
+    @Override
+    public List<ProductsVO> findByNameContainingAndTypeOfItem(String name, int type) {
+        List<ProductsVO> vos = new ArrayList<>();
+        productsRepository.findByNameContainingAndTypeOfItem(name, type).forEach(products -> {
+            vos.add(modelMapper.map(products, ProductsVO.class));
+        });
+        return vos;
     }
 
     @Override

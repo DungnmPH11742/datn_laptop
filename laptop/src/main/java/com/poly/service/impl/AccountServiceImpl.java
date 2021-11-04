@@ -1,6 +1,7 @@
 package com.poly.service.impl;
 
 import com.poly.entity.Account;
+import com.poly.entity.AuthenticationProvider;
 import com.poly.entity.Role;
 import com.poly.repo.AccountRepository;
 import com.poly.repo.ProductsRepository;
@@ -73,4 +74,20 @@ public class AccountServiceImpl implements AccountService {
     public Account findByEmail(String email){
         return repository.findByEmail(email);
     }
+
+    @Override
+    public void createNewCustomerAfterOAuthLoginSuccess(String email, String name, AuthenticationProvider provider){
+        AccountVO accountVO = new AccountVO();
+        accountVO.setEmail(email);
+        accountVO.setFullName(name);
+        accountVO.setAuthProvider(provider);
+        repository.save(modelMapper.map(accountVO, Account.class));
+    };
+
+    @Override
+    public void upadteCustomerAfterOAuthLoginSuccess(Account account, String name, AuthenticationProvider provider){
+        account.setFullName(name);
+        account.setAuthProvider(provider);
+        repository.save(account);
+    };
 }

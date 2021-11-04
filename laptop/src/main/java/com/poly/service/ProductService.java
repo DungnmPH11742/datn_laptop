@@ -10,6 +10,8 @@ public interface ProductService {
 
     ProductsVO getOne(String id);
 
+    List<ProductsVO> findByNameContainingAndTypeOfItem(String name, int type);
+
     ProductsVO create(ProductsVO vo);
 
     ProductsVO update(ProductsVO vo);
