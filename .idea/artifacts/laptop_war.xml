@@ -3,8 +3,10 @@
     <output-path>$PROJECT_DIR$/laptop/target</output-path>
     <properties id="maven-jee-properties">
       <options>
+        <exploded>false</exploded>
         <module>laptop</module>
         <packaging>war</packaging>
+        <unpackNestedArchives>false</unpackNestedArchives>
       </options>
     </properties>
     <root id="archive" name="laptop-1.war">

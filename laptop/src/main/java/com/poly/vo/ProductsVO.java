@@ -16,7 +16,7 @@ public class ProductsVO implements Serializable {
 
     private Integer typeOfItem;
 
-    private Integer idCategory;
+    private CategoryVO category;
 
     private Float inputPrice;
 
