@@ -20,4 +20,7 @@ public interface ProductsRepository extends JpaRepository<Products, String>, Jpa
     List<Products> getListByCodeSale(@Param("code") String code);
 
     List<Products> findByNameContainingAndTypeOfItem(String name, int type);
+
+    List<Products> findByNameContaining(String name);
+
 }

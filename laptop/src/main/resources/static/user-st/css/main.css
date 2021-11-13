@@ -2851,4 +2851,61 @@ label {
 .float-right{
   float: right;
 }
+
+.d-flex{
+  display:-webkit-box!important;
+  display:-ms-flexbox!important;
+  display:flex!important
+}
+
+.align-self-center{
+  -ms-flex-item-align:center!important;
+  align-self:center!important
+}
+
+.col-1-compare{
+  border-right: .5px solid #ccc;
+  height: 50em;
+}
+
+.row-title{
+  background-color: #f1f1f1;
+  padding: .5em;
+  font-weight: 600;
+}
+
+.row-content span:nth-child(1){
+  border-right: 1px solid #ccc;
+}
+.row-content spam{
+  margin-bottom: 10px;
+}
+
+@keyframes change_height_max{
+  from{
+    top: 82.5%;
+  }
+  to{
+    top: 70%;
+  }
+}
+
+@keyframes change_height_min {
+  from{
+    top: 70%;
+  }
+  to{
+    top: 82.5%;
+  }
+}
+
+@keyframes change_height_default {
+  from{
+    top: 82.5%;
+  }
+  to{
+    top: 100%;
+  }
+}
+
 /*End Css Login*/

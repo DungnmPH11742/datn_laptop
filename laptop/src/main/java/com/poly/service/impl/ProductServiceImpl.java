@@ -39,7 +39,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductsVO> findByNameContainingAndTypeOfItem(String name, int type) {
         List<ProductsVO> vos = new ArrayList<>();
-        productsRepository.findByNameContainingAndTypeOfItem(name, type).forEach(products -> {
+        (type != 0 ? productsRepository.findByNameContainingAndTypeOfItem(name, type) : productsRepository.findByNameContaining(name)).forEach(products -> {
             vos.add(modelMapper.map(products, ProductsVO.class));
         });
         return vos;
