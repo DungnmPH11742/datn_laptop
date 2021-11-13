@@ -9,17 +9,22 @@ Create table account(
 	phone varchar(11),
 	email varchar(150),
 	password varchar(255),
+	img_url ntext,
 	date_of_birth date,
+	verification_code varchar(64),
+	time_token datetime,
 	actived bit,
 )
 
-Select * from account
+
 /*------------------------------------------------------BẢNG ACCOUNT-----------------------------------------------------------------------------*/
-insert into account(full_name, phone, email,password,date_of_birth, actived)
-values ('Nam','0374563546','admin@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2010-09-08',1)
-insert into account(full_name, phone, email,password,date_of_birth, actived)
-values ('Hằng','0374656354','user@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2003-06-02',1)
+insert into account(full_name, phone, email,password,date_of_birth, verification_code, time_token, actived)
+values ('Nam','0374563546','admin@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2010-09-08',null,null,1)
+insert into account(full_name, phone, email,password,date_of_birth, verification_code, time_token, actived)
+values ('Hằng','0374656354','user@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2003-06-02',null,null,1)
 /*-----------------------------------------------------------------------------------------------------------------------------------*/
+insert into account(full_name, phone, email,password,date_of_birth, verification_code, time_token, actived)
+values ('hu','0374656354','user@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2003-06-02',null,null,1)
 
 Create table role(
 	id int identity(1,1) primary key,
@@ -224,6 +229,7 @@ create table products(
 	date_on date not null,
 	id_category int not null,
 	type_of_item int not null,
+	img_url ntext,
 	input_price float,
 	output_price float,
 	quantity int,
@@ -244,26 +250,26 @@ ALTER TABLE products ADD FOREIGN KEY (on_sale) REFERENCES sale_product(sale_code
 /*-----------------------------------------------------------------BẢNG SẢN PHẨM------------------------------------------------------------------*/
 insert into products values
 	-- lap top
-	('MQD32SA', N'Macbook Air MQD32SA/A i5 5350U','2020-11-05',11, 1,19000000,23990000,40,1.35,'1 cái','2021','05-2021','SL001',1),
-	('DL3520I5', N'Dell Latitude 3520 Intel (Chính hãng)','2021-01-05',3, 1,12000000,15990000 ,80,1.79,'1 cái','2021','06-2021','SL001',1),
-	('APH30021', N'Acer Predator Helios 300 2021','2020-12-15', 21, 1,29000000,33990000 ,40,2.3,'1 cái','2021','08-2021','SL003',1),
-	('DV3400I5', N'Dell Vostro 14 3400 Intel gen 11 (Chính Hãng)','2020-11-05', 9, 1 ,15000000,18990000,35,1.64,'1 cái','2021','04-2021','SL003',1),
-	('LI314R5', N'Lenovo IdeaPad 3 14 (AMD Ryzen 5000)','2021-05-05', 26, 1,10000000,14290000,30,1.41,'1 cái','2021','06-2021','SL001',1),
-	('AS514', N'Acer Swift 5 14 (Chính hãng)','2021-05-05', 23, 1,22000000,26990000,20,1,'1 cái','2021','10-2021','SL005',1),
-	('LYS714ITL05',N'Laptop Lenovo Yoga Slim 7 14ITL05','2021-07-10', 24, 1,2300000,26490000,13,1.36,N'1 cái','2021','05-2021','SL003',1),
-	('HPZB15G5',N'Laptop Workstation HP Zbook 15 G5 3AX12AV','2021-10-15', 36, 1,43990000,43990000,10,2.6,N'1 cái','2021','10-2021',null,1),
-	('MBPR13MWP52',N'Apple Macbook Pro 13 Touchbar (MWP52)','2020-10-15',12, 1,21600000,23990000,30,1.4,N'1 cái','2020','08-2020',null,1),
+	('MQD32SA', N'Macbook Air MQD32SA/A i5 5350U','2020-11-05',11, 1, '',19000000,23990000,40,1.35,'1 cái','2021','05-2021','SL001',1),
+	('DL3520I5', N'Dell Latitude 3520 Intel (Chính hãng)','2021-01-05',3, 1, '',12000000,15990000 ,80,1.79,'1 cái','2021','06-2021','SL001',1),
+	('APH30021', N'Acer Predator Helios 300 2021','2020-12-15', 21, 1, '',29000000,33990000 ,40,2.3,'1 cái','2021','08-2021','SL003',1),
+	('DV3400I5', N'Dell Vostro 14 3400 Intel gen 11 (Chính Hãng)','2020-11-05', 9, 1, '' ,15000000,18990000,35,1.64,'1 cái','2021','04-2021','SL003',1),
+	('LI314R5', N'Lenovo IdeaPad 3 14 (AMD Ryzen 5000)','2021-05-05', 26, 1, '',10000000,14290000,30,1.41,'1 cái','2021','06-2021','SL001',1),
+	('AS514', N'Acer Swift 5 14 (Chính hãng)','2021-05-05', 23, 1, '',22000000,26990000,20,1,'1 cái','2021','10-2021','SL005',1),
+	('LYS714ITL05',N'Laptop Lenovo Yoga Slim 7 14ITL05','2021-07-10', 24, 1, '',2300000,26490000,13,1.36,N'1 cái','2021','05-2021','SL003',1),
+	('HPZB15G5',N'Laptop Workstation HP Zbook 15 G5 3AX12AV','2021-10-15', 36, 1, '',43990000,43990000,10,2.6,N'1 cái','2021','10-2021',null,1),
+	('MBPR13MWP52',N'Apple Macbook Pro 13 Touchbar (MWP52)','2020-10-15',12, 1, '',21600000,23990000,30,1.4,N'1 cái','2020','08-2020',null,1),
 	-- PC
-	('PCDOAIO7080',N'PC Dell OptiPlex All in One 7480','2021-09-30', 59, 57,29600000,30299000,5,5.94,N'1 cái','2021','05-2021',null,1),
-	('PCAPN608250U',N'PC Mini Asus PN60 i5-8250U','2021-10-15', 73, 57,7000000,8349000,5,0.7,N'1 cái','2021','10-2021','SL002',1),
-	('PCHP280G3SFF',N'PC HP 280 G3 SFF','2020-12-27',64, 57,8000000,8989000,13,5.94,N'1 cái','2021','08-2020','SL001',1),
+	('PCDOAIO7080',N'PC Dell OptiPlex All in One 7480','2021-09-30', 59, 57, '',29600000,30299000,5,5.94,N'1 cái','2021','05-2021',null,1),
+	('PCAPN608250U',N'PC Mini Asus PN60 i5-8250U','2021-10-15', 73, 57, '',7000000,8349000,5,0.7,N'1 cái','2021','10-2021','SL002',1),
+	('PCHP280G3SFF',N'PC HP 280 G3 SFF','2020-12-27',64, 57, '',8000000,8989000,13,5.94,N'1 cái','2021','08-2020','SL001',1),
 
 	--Màn hình
-	('MAVG240YS' ,N'Màn hình Acer VG240YS','2021-10-16', 82, 76,4000000,6259000,15,3.85,'1 cái','2020','2020-05-01','SL001',1),
-	('MATGVG249Q', N'Màn hình Asus TUF GAMING VG249Q','2021-09-26', 85,76,4500000,6390000,10,5.6,'1 cái','2021','2021-01-01','SL003',1),
-	('MDE2020H', N'Màn hình Dell E2020H','2021-04-12',79, 76,2399000,4399000,10,2.94,'1 cái','2021', '2021-01-01','SL003',1),
-	('MHM24F', N'Màn hình HP M24F','2021-05-15', 90, 76,3500000,4849000,5,2.5,'1 cái','2021', '2021-05-01','SL003',1),
-	('MHM27FW', N'Màn hình HP M27FW','2020-02-15',90, 76,4500000,6059000,10,2.5,'1 cái','2021', '2021-02-02','SL004',1);
+	('MAVG240YS' ,N'Màn hình Acer VG240YS','2021-10-16', 82, 76, '',4000000,6259000,15,3.85,'1 cái','2020','2020-05-01','SL001',1),
+	('MATGVG249Q', N'Màn hình Asus TUF GAMING VG249Q','2021-09-26', 85,76, '',4500000,6390000,10,5.6,'1 cái','2021','2021-01-01','SL003',1),
+	('MDE2020H', N'Màn hình Dell E2020H','2021-04-12',79, 76, '',2399000,4399000,10,2.94,'1 cái','2021', '2021-01-01','SL003',1),
+	('MHM24F', N'Màn hình HP M24F','2021-05-15', 90, 76, '',3500000,4849000,5,2.5,'1 cái','2021', '2021-05-01','SL003',1),
+	('MHM27FW', N'Màn hình HP M27FW','2020-02-15',90, 76, '',4500000,6059000,10,2.5,'1 cái','2021', '2021-02-02','SL004',1);
 /*-----------------------------------------------------------------------------------------------------------------------------------*/
 
 create table products_detail(
@@ -294,6 +300,7 @@ create table products_detail(
 	accessories_included ntext, --Phụ kiện đi kèm
 	see_more ntext, --Xem thêm
 )
+
 INSERT INTO dbo.[products_detail] VALUES 
 ('APH30021','Acer','Intel® Core™ i7-11800H (2.4Ghz/24MB cache)– CPU thế hệ 11 mới nhất','Đen','16GB DDR4 3200Mhz (2* 8GB)'
 ,'512GB SSD PCIe NVMe (nâng cấp tối đa 2TB SSD PCIe NVMe và 2TB HDD 2.5-inch 5400 RPM)'
@@ -355,18 +362,9 @@ ALTER TABLE products_detail ADD FOREIGN KEY (id) REFERENCES products(id);
 create table image_detail(
 	id int identity(1,1) primary key,
 	id_product varchar(25) not null,
+	img_url ntext,
 	name_path nvarchar(150) not null,
 )
-
-insert into image_detail(id_product, name_path) values
-	('LI314R5', 'https://lumen.thinkpro.vn//backend/uploads/product/color_images/2021/6/12/ideapad314g6-arcticgrey-1.jpg'),
-	('LI314R5', 'https://lumen.thinkpro.vn//backend/uploads/product/color_images/2021/6/12/ideapad314g6-arcticgrey-3.jpg'),
-	('LI314R5', 'https://lumen.thinkpro.vn/backend/uploads/editor/v2/lenovo-ideapad-3-14-21.jpg'),
-	('LI314R5', 'https://lumen.thinkpro.vn//backend/uploads/product/color_images/2021/9/6/lenovo-ideapad-slim3-82kt004dvn-thinkpro.jpg'),
-	('LI314R5', 'https://lumen.thinkpro.vn/backend/uploads/editor/v2/lenovo-ideapad-3-14-5.jpg'),
-	('LI314R5', 'https://cdn.mediamart.vn/Product/laptop-lenovo-ideapad-slim-3-14alc6-82kt003tvn-xam-2Ta8jh.png'),
-	('LI314R5', 'https://lh3.googleusercontent.com/7PyZDb7fnzqcwOq1DN5gh9bv5BiTR2ztFNKXelmubyMqslq4QuO-jRhqNDjWgRGbVxl_ar6tpbXZ7A0UV_hkcO2oMnu6ZzCk=w500-rw'),
-	('LI314R5', 'https://congnghegiare.vn/data/upload/1624505675-lenovo-ideapad-slim-5-15itl05-i5-82fg001pvn-144320-064322-600x600.jpg');
 --Khóa ngoại ct hình ảnh N-1 sản phẩm
 ALTER TABLE image_detail ADD FOREIGN KEY (id_product) REFERENCES products(id);	
 
@@ -375,7 +373,7 @@ create table blogs(
 	title nvarchar(255) primary key not null,
 	id_account int not null,
 	date_created date not null,
-	img nvarchar(150),
+	img_url ntext,
 )
 --Khóa ngoại blogs N-1
 ALTER TABLE blogs ADD FOREIGN KEY (id_account) REFERENCES account(id);
@@ -385,6 +383,7 @@ Create table description(
 	id int identity(1,1) primary key,
 	id_product varchar(25) not null,
 	id_blog nvarchar(255),
+	img_url ntext,
 	title nvarchar(255),
 	content ntext,
 )
@@ -421,7 +420,7 @@ ALTER TABLE shipment_detail ADD FOREIGN KEY (id_product) REFERENCES products(id)
 CREATE TABLE product_rating(
 	id_product varchar(25) not null,
 	id_account int not null,
-	image nvarchar(150),
+	img_url ntext,
 	star_rating int not null,
 	comment ntext,
 )
@@ -467,7 +466,7 @@ Create table orders( -- Trả hàng | Đổi hàng | Bảo hành
 	order_date date,
 	phone_number varchar(10) not null,
 	address nvarchar(60) not null,
-	quantity int not null,
+	--quantity int not null,
 	description ntext
 )
 --Khóa ngoại orders N-1 người dùng
