@@ -80,7 +80,6 @@ public class AccountServiceImpl implements AccountService {
         AccountVO accountVO = new AccountVO();
         accountVO.setEmail(email);
         accountVO.setFullName(name);
-        accountVO.setAuthProvider(provider);
         repository.save(modelMapper.map(accountVO, Account.class));
     };
 
