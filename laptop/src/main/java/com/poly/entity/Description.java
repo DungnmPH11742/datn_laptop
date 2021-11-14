@@ -17,6 +17,9 @@ public class Description implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "img_url")
+    private String imgUrl;
+
     @Column(name = "title")
     private String title;
 

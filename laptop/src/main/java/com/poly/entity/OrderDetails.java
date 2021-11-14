@@ -27,6 +27,9 @@ public class OrderDetails implements Serializable {
     @Column(name = "completion_date")
     private Date completionDate;
 
+    @Column(name = "payment_methods")
+    private Integer paymentMethods;
+
     @Column(name = "received")
     private Integer received;
 

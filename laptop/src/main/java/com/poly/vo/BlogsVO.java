@@ -14,6 +14,6 @@ public class BlogsVO implements Serializable {
 
     private Date dateCreated;
 
-    private String img;
+    private String imgUrl;
 
 }
