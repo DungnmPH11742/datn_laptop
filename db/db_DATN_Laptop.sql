@@ -362,15 +362,15 @@ ALTER TABLE products_detail ADD FOREIGN KEY (id) REFERENCES products(id);
 create table image_detail(
 	id int identity(1,1) primary key,
 	id_product varchar(25) not null,
-	img_url ntext,
-	name_path nvarchar(150) not null,
+	name_path ntext not null,
 )
 --Khóa ngoại ct hình ảnh N-1 sản phẩm
 ALTER TABLE image_detail ADD FOREIGN KEY (id_product) REFERENCES products(id);	
 
 --Tin tức
 create table blogs(
-	title nvarchar(255) primary key not null,
+	id  nvarchar(25) primary key not null,
+	title nvarchar(255) not null,
 	id_account int not null,
 	date_created date not null,
 	img_url ntext,
@@ -382,7 +382,7 @@ ALTER TABLE blogs ADD FOREIGN KEY (id_account) REFERENCES account(id);
 Create table description(
 	id int identity(1,1) primary key,
 	id_product varchar(25) not null,
-	id_blog nvarchar(255),
+	id_blog nvarchar(25),
 	img_url ntext,
 	title nvarchar(255),
 	content ntext,
@@ -390,7 +390,7 @@ Create table description(
 --Khóa ngoại mô tả N-1 sản phẩm
 ALTER TABLE description ADD FOREIGN KEY (id_product) REFERENCES products(id);	
 
-ALTER TABLE description ADD FOREIGN KEY (id_blog) REFERENCES blogs(title);
+ALTER TABLE description ADD FOREIGN KEY (id_blog) REFERENCES blogs(id);
 
 --Phân lô hàng nhập
 create table imported_shipment( --Nếu giá tiền thay đổi thống kê tiền lãi lấy giá bán từng đợt nhập trừ đi giá nhập bên lô nhập)
@@ -481,6 +481,7 @@ Create table order_details(
 	price float not null,
 	quantity int not null,
 	completion_date date,--Đã nhận được hàng
+	payment_methods int,
 	received int, --0 chờ xác nhận | 1 Đang giao | 2 Đã giao | 3 Bảo hành | 4 Đổi hàng
 )
 
