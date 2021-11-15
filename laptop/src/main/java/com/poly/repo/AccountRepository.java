@@ -1,16 +1,16 @@
 package com.poly.repo;
 
-import com.poly.entity.Category;
+import com.poly.entity.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import java.util.List;
-
 @EnableJpaRepositories
-public interface CategoryRepository extends JpaRepository<Category, Integer>, JpaSpecificationExecutor<Category> {
+public interface AccountRepository extends JpaRepository<Account, Integer>, JpaSpecificationExecutor<Account> {
 
-    @Query("select c from Category c where c.parentId =?1")
-    List<Category> getListByParent(Integer id);
+    @Query("select a from Account a where a.email =?1")
+    Account findUserAccount(String email);
+    void deleteById(Integer id);
+    Account findByEmail(String email);
 }
