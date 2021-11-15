@@ -21,8 +21,8 @@ public class Blogs implements Serializable {
     @Column(name = "date_created", nullable = false)
     private Date dateCreated;
 
-    @Column(name = "img_url")
-    private String imgUrl;
+    @Column(name = "img")
+    private String img;
 
     //bi-directional many-to-one association to Account
     @ManyToOne(fetch = FetchType.EAGER)

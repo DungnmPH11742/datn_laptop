@@ -18,6 +18,8 @@ public class OrdersVO implements Serializable {
 
     private String address;
 
+    private Integer quantity;
+
     private String description;
 
 }

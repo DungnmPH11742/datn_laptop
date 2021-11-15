@@ -34,9 +34,6 @@ public class Account implements Serializable {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "img_url")
-    private String imgUrl;
-
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
 

@@ -13,8 +13,6 @@ public class DescriptionVO implements Serializable {
 
     private String idBlog;
 
-    private String imgUrl;
-
     private String title;
 
     private String content;
