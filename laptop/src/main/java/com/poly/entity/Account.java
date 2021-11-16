@@ -1,13 +1,10 @@
 package com.poly.entity;
 
 import lombok.Data;
-import org.hibernate.criterion.Order;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -40,7 +37,6 @@ public class Account implements Serializable {
     @Column(name = "actived")
     private Boolean actived;
 
-    //từ đây, cả đăng kí t nữa nên cứ thêm vào
     @Column(name = "verification_code", length = 64)
     private String verificationCode;
     @Column(name = "time_token")
@@ -71,6 +67,4 @@ public class Account implements Serializable {
             joinColumns = @JoinColumn(name = "id_account"),
             inverseJoinColumns = @JoinColumn(name = "id_role"))
     private List<Role> roles;
-
-
 }

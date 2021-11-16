@@ -20,12 +20,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-latest.pack.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <!-- <![endif]&ndash;&gt;
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">-->
 </head>
 <!--/head-->
 
@@ -234,8 +228,7 @@
 
                     <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
-                            <th:block
-                                    th:each="key:${#numbers.sequence( 1, (4*(list_sale.size/4)<list_sale.size ? (list_sale.size/4)+1:list_sale.size/4), 1)}">
+                            <th:block th:each="key:${#numbers.sequence( 1, (4*(list_sale.size/4)<list_sale.size ? (list_sale.size/4)+1:list_sale.size/4), 1)}">
                                 <div th:if="${key == 1}" class="item active">
                                     <!---->
                                     <div th:each="p, key2:${list_sale}" th:if="${key2.count<=4}">
@@ -245,8 +238,7 @@
                                 </div>
                                 <div th:if="${key > 1}" class="item">
                                     <!---->
-                                    <div th:each="p, key2:${list_sale}"
-                                         th:if="${key2.count<=4*key} and ${key2.count> ((4*key)-4)}">
+                                    <div th:each="p, key2:${list_sale}" th:if="${key2.count<=4*key} and ${key2.count> ((4*key)-4)}">
                                         <div th:replace="~{common/list_product :: p_sale}"></div>
                                     </div>
                                     <!---->
@@ -609,6 +601,22 @@
         </div>
     </div>
 </section>
+<<<<<<< HEAD
+
+<!--/Footer-->
+<div th:replace="~{common/footer :: footers}"></div>
+<!--/Footer-->
+
+<script th:src="@{/user-st/js/jquery.js}"></script>
+<script th:src="@{/user-st/js/price-range.js}"></script>
+<script th:src="@{/user-st/js/jquery.scrollUp.min.js}"></script>
+<script th:src="@{/user-st/js/bootstrap.min.js}"></script>
+<script th:src="@{/user-st/js/jquery.prettyPhoto.js}"></script>
+<script th:src="@{/user-st/js/main.js}"></script>
+</body>
+
+</html>
+=======
 <div id="compare">
 
 </div>
@@ -831,3 +839,4 @@
 
     </script>
 </body>
+>>>>>>> main

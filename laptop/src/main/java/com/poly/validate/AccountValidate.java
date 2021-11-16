@@ -13,7 +13,9 @@ import java.util.regex.Pattern;
 
 @Component
 public class AccountValidate implements Validator {
-@Autowired private AccountService service;
+    @Autowired
+    private AccountService accountService;
+
     @Override
     public boolean supports(Class<?> clazz) {
         return AccountVO.class.equals(clazz);
@@ -33,7 +35,7 @@ public class AccountValidate implements Validator {
                 errors.rejectValue("email","errors.email","Email sai định dạng vui lòng nhập lại");
             }
         }
-        if(service.findByEmail(accountVO.getEmail())!=null){
+        if(accountService.findByEmail(accountVO.getEmail())!=null){
             errors.rejectValue("email","errors.email","Mail đã đăng ký vui lòng nhập mail khác");
         }
 
