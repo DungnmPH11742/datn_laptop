@@ -2,11 +2,11 @@ package com.poly.controller.web;
 
 import com.poly.entity.Category;
 import com.poly.entity.Products;
+import com.poly.helper.HeaderHelper;
 import com.poly.repo.CategoryRepository;
 import com.poly.repo.ProductsRepository;
 import com.poly.service.CategoryService;
 import com.poly.service.ProductService;
-import com.poly.vo.CategoryVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -28,6 +28,10 @@ public class CategoryWebController {
 
     @Autowired
     private ProductsRepository repository;
+
+    @Autowired
+    private HeaderHelper headerHelper;
+
     @Autowired
     private CategoryRepository categoryRepository;
 
@@ -58,30 +62,20 @@ public class CategoryWebController {
 
         if (idRoots == 1) {
             model.addAttribute("cate_filter", categoryService.getListByParent(1));
-            model.addAttribute("cate_id",idRoots);
+            model.addAttribute("cate_id", idRoots);
         }
         if (idRoots == 57) {
             model.addAttribute("cate_filter", categoryService.getListByParent(57));
-            model.addAttribute("cate_id",idRoots);
+            model.addAttribute("cate_id", idRoots);
         }
         if (idRoots == 76) {
             model.addAttribute("cate_filter", categoryService.getListByParent(76));
-            model.addAttribute("cate_id",idRoots);
+            model.addAttribute("cate_id", idRoots);
         }
-        model.addAttribute("cate_all", categoryService.getList());
-        model.addAttribute("cate_lt", categoryService.getListByParent(1));
-        model.addAttribute("cate_pc", categoryService.getListByParent(57));
-        model.addAttribute("cate_mo", categoryService.getListByParent(76));
         model.addAttribute("list_sale", productService.getListByCodeSale("SL001"));
 
-//
-//        model.addAttribute("nameBrand", nameBrand);
-//        model.addAttribute("brand", brand);
-//        model.addAttribute("currentPage", pageNumber);
-//        model.addAttribute("totalPages", page.getTotalPages());
-//        model.addAttribute("totalItems", page.getTotalElements());
-//        model.addAttribute("list_product", listProducts);
-//        model.addAttribute("sort", sort);
+        headerHelper.setHeaderSession(model);
+
 
         return "user/duong-test";
     }

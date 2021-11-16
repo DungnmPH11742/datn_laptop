@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 @Data
 public class ProductsVO implements Serializable {
@@ -35,6 +36,10 @@ public class ProductsVO implements Serializable {
     private SaleProductVO saleProduct;
 
     private ProductsDetailVO productsDetail;
+
+    private List<ImageDetailVO> imageDetails;
+
+    private CategoryVO category;
 
     private Boolean active;
 

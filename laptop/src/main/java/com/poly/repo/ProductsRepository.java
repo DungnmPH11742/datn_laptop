@@ -41,5 +41,8 @@ public interface ProductsRepository extends JpaRepository<Products, String>, Jpa
     @Query(value = "{call filter_Sales}", nativeQuery = true)
     List<Products> getListProductByCodeSale();
 
+    List<Products> findByNameContainingAndTypeOfItem(String name, int type);
+
+    List<Products> findByNameContaining(String name);
 
 }

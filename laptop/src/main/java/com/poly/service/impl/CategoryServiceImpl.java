@@ -1,6 +1,5 @@
 package com.poly.service.impl;
 
-import com.poly.entity.Category;
 import com.poly.repo.CategoryRepository;
 import com.poly.service.CategoryService;
 import com.poly.vo.CategoryVO;

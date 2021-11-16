@@ -12,11 +12,14 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -39,10 +42,19 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
-
     @Override
     public ProductsVO getOne(String id) {
-        return modelMapper.map(productsRepository.getById(id), ProductsVO.class);
+        Products products = productsRepository.getById(id);
+        return modelMapper.map(products, ProductsVO.class);
+    }
+
+    @Override
+    public List<ProductsVO> findByNameContainingAndTypeOfItem(String name, int type) {
+        List<ProductsVO> vos = new ArrayList<>();
+        (type != 0 ? productsRepository.findByNameContainingAndTypeOfItem(name, type) : productsRepository.findByNameContaining(name)).forEach(products -> {
+            vos.add(modelMapper.map(products, ProductsVO.class));
+        });
+        return vos;
     }
 
     @Override
@@ -82,9 +94,10 @@ public class ProductServiceImpl implements ProductService {
         });
         return vos;
     }
+
     @Override
-    public Page<Products> getListByPageNumber(int page,int limit, List<Products> lstProducts, String sortPrice) {
-        if(sortPrice.equals("asc")){
+    public Page<Products> getListByPageNumber(int page, int limit, List<Products> lstProducts, String sortPrice) {
+        if (sortPrice.equals("asc")) {
             Collections.sort(lstProducts, new Comparator<Products>() {
                 @Override
                 public int compare(Products p1, Products p2) {
@@ -94,7 +107,7 @@ public class ProductServiceImpl implements ProductService {
 
             });
         }
-        if(sortPrice.equals("desc")){
+        if (sortPrice.equals("desc")) {
             Collections.sort(lstProducts, new Comparator<Products>() {
                 @Override
                 public int compare(Products p1, Products p2) {
@@ -107,37 +120,37 @@ public class ProductServiceImpl implements ProductService {
 
 
         Pageable pageable = PageRequest.of(page - 1, limit);
-        final int start = (int)pageable.getOffset();
+        final int start = (int) pageable.getOffset();
         final int end = Math.min((start + pageable.getPageSize()), lstProducts.size());
-        Page page1 = new PageImpl<>(lstProducts.subList(start,end), pageable,lstProducts.size() );
-        return  page1;
+        Page page1 = new PageImpl<>(lstProducts.subList(start, end), pageable, lstProducts.size());
+        return page1;
     }
 
 
     @Override
-    public List<Products> retrieveProducts(ProductSearchCriteria searchCriteria)  {
+    public List<Products> retrieveProducts(ProductSearchCriteria searchCriteria) {
         Specification<Products> productsFilterSpecification = ProductsSpecifications.createProductSpecification(searchCriteria);
         return this.productsRepository.findAll(productsFilterSpecification);
     }
+
     @Override
-    public Page<Products> findAllByNameLike(int page,int limit,String name,Integer cateParent)
-    {
-        System.err.println("name: "+name);
+    public Page<Products> findAllByNameLike(int page, int limit, String name, Integer cateParent) {
+        System.err.println("name: " + name);
         List<Products> result = null;
 
         List<Products> lstProfucts = productsRepository.findAll();
-        Optional<Category> cate =  categoryRepository.findById(cateParent);
+        Optional<Category> cate = categoryRepository.findById(cateParent);
 
-        result = ( name.equals("")) ?   lstProfucts.stream().filter(x-> x.getTypeOfItem()==cate.get().getParentId())
-                .collect(Collectors.toList()) :  productsRepository.findAllByNameLike(name);
-        for(Products x:   lstProfucts = lstProfucts.stream().filter(x-> x.getTypeOfItem()==cate.get().getParentId())
-                .collect(Collectors.toList())){
-            System.err.println("teen sp laf: "+ x.getName());
+        result = (name.equals("")) ? lstProfucts.stream().filter(x -> x.getTypeOfItem() == cate.get().getParentId())
+                .collect(Collectors.toList()) : productsRepository.findAllByNameLike(name);
+        for (Products x : lstProfucts = lstProfucts.stream().filter(x -> x.getTypeOfItem() == cate.get().getParentId())
+                .collect(Collectors.toList())) {
+            System.err.println("teen sp laf: " + x.getName());
         }
         Pageable pageable = PageRequest.of(page - 1, limit);
-        final int start = (int)pageable.getOffset();
+        final int start = (int) pageable.getOffset();
         final int end = Math.min((start + pageable.getPageSize()), result.size());
-        Page pageProducts = new PageImpl<>(result.subList(start,end), pageable,result.size() );
+        Page pageProducts = new PageImpl<>(result.subList(start, end), pageable, result.size());
 
         return pageProducts;
     }

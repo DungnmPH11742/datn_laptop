@@ -41,6 +41,6 @@ public class SaleProduct implements Serializable {
     private Boolean status;
 
     //bi-directional many-to-one association to Product
-    @OneToMany(mappedBy="saleProduct")
+    @OneToMany(mappedBy = "saleProduct")
     private List<Products> products;
 }

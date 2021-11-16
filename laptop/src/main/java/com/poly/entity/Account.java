@@ -36,6 +36,7 @@ public class Account implements Serializable {
 
     @Column(name = "actived")
     private Boolean actived;
+
     @Column(name = "verification_code", length = 64)
     private String verificationCode;
     @Column(name = "time_token")
@@ -44,8 +45,12 @@ public class Account implements Serializable {
     //bi-directional many-to-one association to Blog
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
     private List<Blogs> blogs;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "auth_provider")
+    private AuthenticationProvider authProvider;
+//    hết
 
-//    bi-directional many-to-one association to DeliveryAddress
+
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
     private List<DeliveryAddress> deliveryAddresses;
 
@@ -62,5 +67,4 @@ public class Account implements Serializable {
             joinColumns = @JoinColumn(name = "id_account"),
             inverseJoinColumns = @JoinColumn(name = "id_role"))
     private List<Role> roles;
-
 }

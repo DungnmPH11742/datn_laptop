@@ -1,17 +1,14 @@
 package com.poly.service.impl;
 
 import com.poly.entity.Account;
+import com.poly.entity.AuthenticationProvider;
 import com.poly.entity.Role;
 import com.poly.repo.AccountRepository;
-import com.poly.repo.ProductsRepository;
 import com.poly.repo.RoleRepository;
 import com.poly.service.AccountService;
-import com.poly.service.ProductService;
 import com.poly.vo.AccountVO;
-import com.poly.vo.ProductsVO;
 import net.bytebuddy.utility.RandomString;
 import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -21,9 +18,7 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -40,7 +35,9 @@ public class AccountServiceImpl implements AccountService {
     private ModelMapper modelMapper;
     @Autowired
     private JavaMailSender javaMailSender;
-    private @Value("${spring.mail.username}") String nameMail;
+    private @Value("${spring.mail.username}")
+    String nameMail;
+
     @Override
     public List<AccountVO> getList() {
         List<AccountVO> vos = new ArrayList<>();
@@ -66,7 +63,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void createAccountByRegister(AccountVO accountVO, String siteURL) throws UnsupportedEncodingException, MessagingException {
-        Account account = new Account() ;
+        Account account = new Account();
         account.setPassword(bCryptPasswordEncoder.encode(accountVO.getPassword()));
         account.setFullName(accountVO.getFullName());
         account.setEmail(accountVO.getEmail());
@@ -77,12 +74,13 @@ public class AccountServiceImpl implements AccountService {
         account.setVerificationCode(randomCode);
         account.setTimeToken(new Date());
         repository.save(account);
-        sendVerificationEmail(account,siteURL);
+        sendVerificationEmail(account, siteURL);
 
     }
+
     @Override
     public void updateAccountByRegister(AccountVO accountVO, String siteURL) throws UnsupportedEncodingException, MessagingException {
-        Account account = new Account() ;
+        Account account = new Account();
         account.setId(accountVO.getId());
         account.setPassword(bCryptPasswordEncoder.encode(accountVO.getPassword()));
         account.setFullName(accountVO.getFullName());
@@ -94,7 +92,7 @@ public class AccountServiceImpl implements AccountService {
         account.setVerificationCode(randomCode);
         account.setTimeToken(new Date());
         repository.save(account);
-        sendVerificationEmail(account,siteURL);
+        sendVerificationEmail(account, siteURL);
 
     }
 
@@ -150,10 +148,12 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void deleteAccountById(Integer id) {
         repository.deleteById(id);
-    };
+    }
+
+    ;
 
     @Override
-    public Account findByEmail(String email){
+    public Account findByEmail(String email) {
         return repository.findUserAccount(email);
     }
 
@@ -173,16 +173,15 @@ public class AccountServiceImpl implements AccountService {
         if (account == null) {
             return false;
         } else {
-            System.out.println("time: "+account.getTimeToken());
+            System.out.println("time: " + account.getTimeToken());
             long miliCurent = System.currentTimeMillis();
             Date date = account.getTimeToken();
             long diff = miliCurent - (date.getTime());
-            long seconds  = (diff / 1000) ;
+            long seconds = (diff / 1000);
             System.out.println(seconds);
-            if(seconds  > 3){
+            if (seconds > 3) {
                 return false;
-            }
-            else {
+            } else {
                 account.setVerificationCode(null);
                 account.setActived(true);
                 List<Role> roles = new ArrayList<>();
@@ -195,4 +194,22 @@ public class AccountServiceImpl implements AccountService {
         }
     }
 
+    public void createNewCustomerAfterOAuthLoginSuccess(String email, String name, AuthenticationProvider provider) {
+        AccountVO accountVO = new AccountVO();
+        accountVO.setEmail(email);
+        accountVO.setFullName(name);
+        accountVO.setAuthProvider(provider);
+        repository.save(modelMapper.map(accountVO, Account.class));
+    }
+
+    ;
+
+    @Override
+    public void upadteCustomerAfterOAuthLoginSuccess(Account account, String name, AuthenticationProvider provider) {
+        account.setFullName(name);
+        account.setAuthProvider(provider);
+        repository.save(account);
+    }
+
+    ;
 }

@@ -1,5 +1,6 @@
 package com.poly.vo;
 
+import com.poly.entity.AuthenticationProvider;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -32,4 +33,5 @@ public class AccountVO implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date timeToken;
 
+    private AuthenticationProvider authProvider;
 }
