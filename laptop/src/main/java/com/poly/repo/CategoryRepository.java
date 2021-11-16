@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Set;
 
 @EnableJpaRepositories
 public interface CategoryRepository extends JpaRepository<Category, Integer>, JpaSpecificationExecutor<Category> {
@@ -16,5 +17,6 @@ public interface CategoryRepository extends JpaRepository<Category, Integer>, Jp
     List<Category> getListByParent(Integer id);
     Category findByName(String name);
    List<Category> findAllByParentId(Integer id);
+    Category findByParentId(Integer id);
    List<Category> findAllById(Integer id);
 }

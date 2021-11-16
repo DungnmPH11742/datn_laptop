@@ -46,34 +46,49 @@
                             <!--                                    </div>-->
                             <!--                                </ul>-->
                             <!--                            </li>-->
+
                             <li th:each="c:${cate_all}" th:if="${c.getParentId() == null}" class="dropdown">
-                                <a th:href="${'/category/'+c.getName().toLowerCase()}" th:text="${c.getName()}"><i class="fa fa-angle-down"></i></a>
+
+                                <a th:href="${'/category/'+c.getName().toLowerCase()}"
+                                   th:onclick="@{'category(event,'+${c.getId()}+')'}"
+                                   th:text="${c.getName()}"><i
+                                        class="fa fa-angle-down"></i>
+                                </a>
                                 <ul role="menu" class="sub-menu" th:if="${c.getId() == 1}">
                                     <div class="col-sm-10 right-menu">
                                         <!---->
-                                        <div class="row-li" th:each="key:${#numbers.sequence( 1, (5*(cate_lt.size/5)<cate_lt.size ? (cate_lt.size/5)+1:cate_lt.size/5), 1)}">
+                                        <div class="row-li"
+                                             th:each="key:${#numbers.sequence( 1, (5*(cate_lt.size/5)<cate_lt.size ? (cate_lt.size/5)+1:cate_lt.size/5), 1)}">
                                             <div th:if="${key} == 1">
                                                 <div class="sub-li" th:each="lapt2, key2:${cate_lt}"
                                                      th:if="${key2.count<=5*key}">
                                                     <li>
-                                                        <a class="parent" th:href="${'/category/'+lapt2.getName().toLowerCase()}"
+                                                        <a class="parent"
+                                                           th:href="${'/category/'+lapt2.getName().toLowerCase()}"
+                                                           th:onclick="@{'category(event,'+${c.getId()}+')'}"
                                                            th:text="${lapt2.getName()}"></a>
                                                     </li>
                                                     <li th:each="c2:${cate_all}"
                                                         th:if="${c2.getParentId() == lapt2.getId()}">
-                                                        <a th:href="@{'/category/'+${lapt2.getName().toLowerCase()}+'?brand='+${c2.getId()}}" th:text="${c2.getName()}"></a>
+                                                        <a th:href="@{'/category/'+${lapt2.getName().toLowerCase()}+'?brand='+${c2.getId()}}"
+                                                           th:onclick="@{'category(event,'+${c.getId()}+')'}"
+                                                           th:text="${c2.getName()}"></a>
                                                     </li>
                                                 </div>
                                             </div>
                                             <div th:if="${key} > 1">
                                                 <div class="sub-li" th:each="lapt2, key2:${cate_lt}"
                                                      th:if="${key2.count<=5*key} and ${key2.count>(5*key)-5}">
-                                                    <li><a class="parent"  th:href="@{'/category/'+${lapt2.getName().toLowerCase()}}"
+                                                    <li><a class="parent"
+                                                           th:href="@{'/category/'+${lapt2.getName().toLowerCase()}}"
+                                                           th:onclick="@{'category(event,'+${c.getId()}+')'}"
                                                            th:text="${lapt2.getName()}"></a>
                                                     </li>
                                                     <li th:each="c2:${cate_all}"
                                                         th:if="${c2.getParentId() == lapt2.getId()}">
-                                                        <a th:href="@{'/category/'+${lapt2.getName().toLowerCase()}+'?brand='+${c2.getId()}}"  th:text="${c2.getName()}"></a>
+                                                        <a th:href="@{'/category/'+${lapt2.getName().toLowerCase()}+'?brand='+${c2.getId()}}"
+                                                           th:onclick="@{'category(event,'+${c.getId()}+')'}"
+                                                           th:text="${c2.getName()}"></a>
                                                     </li>
                                                 </div>
                                             </div>
@@ -91,28 +106,38 @@
                                 <ul role="menu" class="sub-menu" th:if="${c.getId() == 57}">
                                     <div class="col-sm-10 right-menu">
                                         <!---->
-                                        <div class="row-li"  th:each="key:${#numbers.sequence( 1, (5*(cate_pc.size/5)<cate_pc.size ? (cate_pc.size/5)+1:cate_pc.size/5), 1)}">
+                                        <div class="row-li"
+                                             th:each="key:${#numbers.sequence( 1, (5*(cate_pc.size/5)<cate_pc.size ? (cate_pc.size/5)+1:cate_pc.size/5), 1)}">
                                             <div th:if="${key} == 1">
                                                 <div class="sub-li" th:each="lapt2, key2:${cate_pc}"
                                                      th:if="${key2.count<=5*key}">
                                                     <li>
-                                                        <a class="parent" th:href="@{'/category/'+${lapt2.getName().toLowerCase()}}"
+                                                        <a class="parent"
+                                                           th:href="@{'/category/'+${lapt2.getName().toLowerCase()}}"
+                                                           th:onclick="@{'category(event,'+${c.getId()}+')'}"
                                                            th:text="${lapt2.getName()}"></a>
                                                     </li>
                                                     <li th:each="c2:${cate_all}"
                                                         th:if="${c2.getParentId() == lapt2.getId()}">
-                                                        <a th:href="@{'/category/'+${lapt2.getName().toLowerCase()}+'?brand='+${c2.getId()}}"  th:text="${c2.getName()}"></a>
+                                                        <a  th:onclick="@{'category(event,'+${c.getId()}+')'}"
+                                                           th:href="@{'/category/'+${lapt2.getName().toLowerCase()}+'?brand='+${c2.getId()}}"
+                                                           th:text="${c2.getName()}"></a>
                                                     </li>
                                                 </div>
                                             </div>
                                             <div th:if="${key} > 1">
                                                 <div class="sub-li" th:each="lapt2, key2:${cate_pc}"
                                                      th:if="${key2.count<=5*key} and ${key2.count>(5*key)-(5*((key)-((key)-1)))}">
-                                                    <li><a class="parent" th:href="@{'/category/'+${lapt2.getName().toLowerCase()}}" th:text="${lapt2.getName()}">Dell</a>
+                                                    <li><a  th:onclick="@{'category(event,'+${c.getId()}+')'}"
+                                                           class="parent"
+                                                           th:href="@{'/category/'+${lapt2.getName().toLowerCase()}}"
+                                                           th:text="${lapt2.getName()}">Dell</a>
                                                     </li>
                                                     <li th:each="c2:${cate_all}"
                                                         th:if="${c2.getParentId() == lapt2.getId()}">
-                                                        <a th:href="@{'/category/'+${lapt2.getName().toLowerCase()}+'?brand='+${c2.getId()}}"  th:text="${c2.getName()}"></a>
+                                                        <a  th:onclick="@{'category(event,'+${c.getId()}+')'}"
+                                                           th:href="@{'/category/'+${lapt2.getName().toLowerCase()}+'?brand='+${c2.getId()}}"
+                                                           th:text="${c2.getName()}"></a>
                                                     </li>
                                                 </div>
                                             </div>
@@ -131,28 +156,39 @@
                                 <ul role="menu" class="sub-menu" th:if="${c.getId() == 76}">
                                     <div class="col-sm-10 right-menu">
                                         <!---->
-                                        <div class="row-li" th:each="key:${#numbers.sequence( 1, (5*(cate_mo.size/5)<cate_mo.size ? (cate_mo.size/5)+1:cate_mo.size/5), 1)}">
+                                        <div class="row-li"
+                                             th:each="key:${#numbers.sequence( 1, (5*(cate_mo.size/5)<cate_mo.size ? (cate_mo.size/5)+1:cate_mo.size/5), 1)}">
                                             <div th:if="${key} == 1">
                                                 <div class="sub-li" th:each="lapt2, key2:${cate_mo}"
                                                      th:if="${key2.count<=5*key}">
                                                     <li>
-                                                        <a class="parent" th:href="@{'/category/'+${lapt2.getName().toLowerCase()}}"
+                                                        <a class="parent"
+                                                           th:href="@{'/category/'+${lapt2.getName().toLowerCase()}}"
+                                                           th:onclick="@{'category(event,'+${c.getId()}+')'}"
                                                            th:text="${lapt2.getName()}"></a>
                                                     </li>
                                                     <li th:each="c2:${cate_all}"
                                                         th:if="${c2.getParentId() == lapt2.getId()}">
-                                                        <a th:href="@{'/category/'+${lapt2.getName().toLowerCase()}+'?brand='+${c2.getId()}}"  th:text="${c2.getName()}"></a>
+                                                        <a
+                                                                th:onclick="@{'category(event,'+${c.getId()}+')'}"
+                                                                th:href="@{'/category/'+${lapt2.getName().toLowerCase()}+'?brand='+${c2.getId()}}"
+                                                                th:text="${c2.getName()}"></a>
                                                     </li>
                                                 </div>
                                             </div>
                                             <div th:if="${key} > 1">
                                                 <div class="sub-li" th:each="lapt2, key2:${cate_mo}"
                                                      th:if="${key2.count<=5*key} and ${key2.count>(5*key)-(5*((key)-((key)-1)))}">
-                                                    <li><a class="parent" th:href="@{'/category/'+${lapt2.getName().toLowerCase()}}" th:text="${lapt2.getName()}">Dell</a>
+                                                    <li><a class="parent"
+                                                           th:href="@{'/category/'+${lapt2.getName().toLowerCase()}}"
+                                                           th:onclick="@{'category(event,'+${c.getId()}+')'}"
+                                                           th:text="${lapt2.getName()}">Dell</a>
                                                     </li>
                                                     <li th:each="c2:${cate_all}"
                                                         th:if="${c2.getParentId() == lapt2.getId()}">
-                                                        <a th:href="@{'/category/'+${lapt2.getName().toLowerCase()}+'?brand='+${c2.getId()}}"  th:text="${c2.getName()}"></a>
+                                                        <a th:href="@{'/category/'+${lapt2.getName().toLowerCase()}+'?brand='+${c2.getId()}}"
+                                                           th:onclick="@{'category(event,'+${c.getId()}+')'}"
+                                                           th:text="${c2.getName()}"></a>
                                                     </li>
                                                 </div>
                                             </div>
@@ -180,7 +216,14 @@
                         </ul>
                     </div>
                     <div class="search_box pull-right">
-                        <input type="text" placeholder="Tìm kiếm..."/>
+                        <input type="text" id="search" placeholder="Tìm kiếm..."/>
+                    </div>
+                    <div class="links">
+                        <div>
+
+
+
+                        </div>
                     </div>
                 </div>
             </div>

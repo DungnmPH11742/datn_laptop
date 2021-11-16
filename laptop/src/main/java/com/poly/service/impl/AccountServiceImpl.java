@@ -11,6 +11,7 @@ import com.poly.vo.AccountVO;
 import com.poly.vo.ProductsVO;
 import net.bytebuddy.utility.RandomString;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -20,9 +21,12 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -114,7 +118,20 @@ public class AccountServiceImpl implements AccountService {
         String verifyURL = siteURL + "/verify?token=" + account.getVerificationCode();
         content = content.replace("[[URL]]", verifyURL);
         helper.setText(content, true);
-        javaMailSender.send(message);
+        // inside your getSalesUserData() method
+        ExecutorService emailExecutor = Executors.newSingleThreadExecutor();
+        emailExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    javaMailSender.send(message);
+                } catch (Exception e) {
+                   System.out.println("error mail");
+                }
+            }
+        });
+        emailExecutor.shutdown(); // it is very important to shutdown your non-singleton ExecutorService.
+
     }
 
     @Override
@@ -160,8 +177,9 @@ public class AccountServiceImpl implements AccountService {
             long miliCurent = System.currentTimeMillis();
             Date date = account.getTimeToken();
             long diff = miliCurent - (date.getTime());
-            long minutes = (diff / 1000) / 60;
-            if(minutes > 1){
+            long seconds  = (diff / 1000) % 60;
+            System.out.println(seconds);
+            if(seconds  > 180){
                 return false;
             }
             else {

@@ -2,6 +2,7 @@ package com.poly.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.springframework.security.core.parameters.P;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,6 +12,11 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "products")
+@NamedStoredProcedureQuery(name = "filter_Sales",
+        procedureName = "filter_Sales",
+        resultClasses = Products.class
+
+)
 public class Products implements Serializable {
 
     private static final long serialVersionUID = 1L;

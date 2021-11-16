@@ -15,7 +15,15 @@ Create table account(
 	actived bit,
 )
 
+Create PROCEDURE  filter_Sales
+as
+Select * from products join sale_product on products.on_sale = sale_product.sale_code
+where sale_product.status like 1 and (products.on_sale is not null or on_sale not like ' ') and  GETDATE() between sale_product.date_on and sale_product.date_off and 
+Go
 
+exec filter_Sales
+Select * from products join sale_product on products.on_sale = sale_product.sale_code
+where sale_product.status like 1 and (products.on_sale is not null or on_sale not like ' ') and  GETDATE() between sale_product.date_on and sale_product.date_off
 /*------------------------------------------------------BẢNG ACCOUNT-----------------------------------------------------------------------------*/
 insert into account(full_name, phone, email,password,date_of_birth, actived)
 values ('Nam','0374563546','admin@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2010-09-08',null,null,1)
@@ -49,17 +57,25 @@ ALTER TABLE account_role ADD FOREIGN KEY (id_role) REFERENCES role(id);
 /*-------------------------------------------------BẢNG ACCOUNT_ROLE----------------------------------------------------------------------------------*/
 insert into account_role values (1,2), (2,1)
 /*-----------------------------------------------------------------------------------------------------------------------------------*/
-
-
+Select * from products join sale_product on products.on_sale = sale_product.sale_code
+where sale_product.status like 1 and (products.on_sale is not null or on_sale not like ' ') and  GETDATE() between sale_product.date_on and sale_product.date_off
+Select * from products join products_detail on products.id = products_detail.id
+where products_detail.hard_drive like '%SSD%'
+Select * from products_detail
 create table category(
 	id int identity(1,1) primary key,
 	name nvarchar(100) not null,
 	actived bit not null,
 	parent_id int -- khóa ngoại của bảng
 )
-
+Select * from products join category on products.id_category = category.id
+where category.parent_id =58
 /*-------------------------------------------------------BẢNG THỂ LOẠI----------------------------------------------------------------------------*/
+Select * from sale_product
+where  GETDATE() between date_on and date_off
+where status like 1
 Select * from category
+where parent_id =1 or id = 76
 insert into category(name,actived,parent_id) values 
 ('Laptop',1, null),
 /* Dell */
@@ -138,7 +154,9 @@ insert into category(name,actived,parent_id) values
 ('Lg',1, 1),
 ('Gram',1, 55)
 
-
+Select * from products join products_detail on products.id = products_detail.id
+where products_detail.vga like '%Intel Iris%'
+where products_detail.display_size like '%13.3%'
 /*------------------------ PC-------------------        */
 insert into category(name,actived,parent_id) values 
 ('PC Văn Phòng',1, null), --57
@@ -211,9 +229,9 @@ create table sale_product(
 )
 
 /*---------------------------------------------------BẢNG SALE--------------------------------------------------------------------------------*/
-Select * from sale_product
+Select CONVERT(nvarchar(50), date_on, 25) from sale_product
 insert into sale_product(sale_code, promotion_type,date_on,date_off,promotion,quantity,status) values 
-	('SL001', N'Giảm giác sốc','', '',10,null,1), 
+	('SL007', N'Giảm giác sốc','2021-10-14', '2021-10-15 23:59:59',10,null,0), 
 	('SL002', N'Dell cùng bạn vui đến trường','2021-10-01', '2021-10-15',10,300,1), 
 	('SL003', N'Chợ tết laptop - ngập tràn khuyến mãi','2021-11-01', '2021-11-18',20,500,1), 
 	('SL004', N'Tâm điểm khai trường – chọn quà chất tôi','2021-01-15', '2021-10-30',5,400,0), 
@@ -298,6 +316,9 @@ create table products_detail(
 	accessories_included ntext, --Phụ kiện đi kèm
 	see_more ntext, --Xem thêm
 )
+độ phân gảii loại pc,
+tần số quét loại pc
+cart đồ hoạ loại màn hình
 INSERT INTO dbo.[products_detail] VALUES 
 ('APH30021','Acer','Intel® Core™ i7-11800H (2.4Ghz/24MB cache)– CPU thế hệ 11 mới nhất','Đen','16GB DDR4 3200Mhz (2* 8GB)'
 ,'512GB SSD PCIe NVMe (nâng cấp tối đa 2TB SSD PCIe NVMe và 2TB HDD 2.5-inch 5400 RPM)'
