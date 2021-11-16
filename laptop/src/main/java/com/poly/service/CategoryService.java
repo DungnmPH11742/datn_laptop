@@ -1,5 +1,6 @@
 package com.poly.service;
 
+import com.poly.entity.Category;
 import com.poly.vo.CategoryVO;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.Optional;
 public interface CategoryService {
     List<CategoryVO> getList();
 
-    CategoryVO getOne(String id);
+    CategoryVO getOne(Integer id);
 
     CategoryVO create(CategoryVO vo);
 
@@ -19,4 +20,8 @@ public interface CategoryService {
     List<CategoryVO> getListPage(Optional<Integer> page, Optional<Integer> row);
 
     List<CategoryVO> getListByParent(Integer id);
+
+    CategoryVO findByName(String name);
+
+    List<CategoryVO> findAllById(Integer id);
 }

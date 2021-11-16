@@ -7,8 +7,10 @@ import com.poly.filter.ProductsSpecifications;
 import com.poly.repo.CategoryRepository;
 import com.poly.repo.ProductsRepository;
 import com.poly.service.ProductService;
+import com.poly.vo.CategoryVO;
 import com.poly.vo.ProductsVO;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
@@ -96,21 +98,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<Products> getListByPageNumber(int page, int limit, List<Products> lstProducts, String sortPrice) {
+    public Page<ProductsVO> getListByPageNumber(int page, int limit, List<ProductsVO> lstProductsVO, String sortPrice) {
         if (sortPrice.equals("asc")) {
-            Collections.sort(lstProducts, new Comparator<Products>() {
+            Collections.sort(lstProductsVO, new Comparator<ProductsVO>() {
                 @Override
-                public int compare(Products p1, Products p2) {
+                public int compare(ProductsVO p1, ProductsVO p2) {
                     return p1.getOutputPrice().compareTo(p2.getOutputPrice());
                 }
-
 
             });
         }
         if (sortPrice.equals("desc")) {
-            Collections.sort(lstProducts, new Comparator<Products>() {
+            Collections.sort(lstProductsVO, new Comparator<ProductsVO>() {
                 @Override
-                public int compare(Products p1, Products p2) {
+                public int compare(ProductsVO p1, ProductsVO p2) {
                     return p2.getOutputPrice().compareTo(p1.getOutputPrice());
                 }
 
@@ -121,32 +122,40 @@ public class ProductServiceImpl implements ProductService {
 
         Pageable pageable = PageRequest.of(page - 1, limit);
         final int start = (int) pageable.getOffset();
-        final int end = Math.min((start + pageable.getPageSize()), lstProducts.size());
-        Page page1 = new PageImpl<>(lstProducts.subList(start, end), pageable, lstProducts.size());
+        final int end = Math.min((start + pageable.getPageSize()), lstProductsVO.size());
+        Page page1 = new PageImpl<>(lstProductsVO.subList(start, end), pageable, lstProductsVO.size());
         return page1;
     }
 
 
     @Override
-    public List<Products> retrieveProducts(ProductSearchCriteria searchCriteria) {
+    public List<ProductsVO> retrieveProducts(ProductSearchCriteria searchCriteria) {
+        List<ProductsVO> productsVOList = new ArrayList<>();
+
         Specification<Products> productsFilterSpecification = ProductsSpecifications.createProductSpecification(searchCriteria);
-        return this.productsRepository.findAll(productsFilterSpecification);
+
+        this.productsRepository.findAll(productsFilterSpecification).forEach(products -> {
+            productsVOList.add(modelMapper.map(products, ProductsVO.class));
+        });
+
+        return productsVOList;
     }
 
     @Override
-    public Page<Products> findAllByNameLike(int page, int limit, String name, Integer cateParent) {
+    public Page<ProductsVO> findAllByNameLike(int page, int limit, String name, Integer cateParent) {
         System.err.println("name: " + name);
-        List<Products> result = null;
+        List<ProductsVO> result = null;
 
-        List<Products> lstProfucts = productsRepository.findAll();
-        Optional<Category> cate = categoryRepository.findById(cateParent);
-
-        result = (name.equals("")) ? lstProfucts.stream().filter(x -> x.getTypeOfItem() == cate.get().getParentId())
-                .collect(Collectors.toList()) : productsRepository.findAllByNameLike(name);
-        for (Products x : lstProfucts = lstProfucts.stream().filter(x -> x.getTypeOfItem() == cate.get().getParentId())
-                .collect(Collectors.toList())) {
-            System.err.println("teen sp laf: " + x.getName());
+        List<ProductsVO> lstProfuctsVO = convertToListDto(productsRepository.findAll());
+        List<ProductsVO> lstProfuctsVOFindByName = convertToListDto(productsRepository.findAllByNameLike(name));
+        CategoryVO categoryVO = new CategoryVO();
+        Optional<Category> optional = categoryRepository.findById(cateParent);
+        if (optional.isPresent()) {
+            Category category = optional.get();
+            BeanUtils.copyProperties(categoryVO, category);
         }
+        result = (name.equals("")) ? lstProfuctsVO.stream().filter(x -> x.getTypeOfItem() == categoryVO.getParentId())
+                .collect(Collectors.toList()) : lstProfuctsVOFindByName;
         Pageable pageable = PageRequest.of(page - 1, limit);
         final int start = (int) pageable.getOffset();
         final int end = Math.min((start + pageable.getPageSize()), result.size());
@@ -155,4 +164,46 @@ public class ProductServiceImpl implements ProductService {
         return pageProducts;
     }
 
+    @Override
+    public List<ProductsVO> getListProductByCodeSale() {
+        return convertToListDto(productsRepository.getListProductByCodeSale());
+    }
+
+    @Override
+    public List<ProductsVO> findAllByTypeOfItemAndCategory_ParentId(Integer type, Integer parentId) {
+        return convertToListDto(productsRepository.findAllByTypeOfItemAndCategory_ParentId(type, parentId));
+    }
+
+    @Override
+    public List<ProductsVO> findAllByTypeOfItemAndCategory_Id(Integer type, Integer idCate) {
+        return convertToListDto(productsRepository.findAllByTypeOfItemAndCategory_Id(type, idCate));
+    }
+
+    @Override
+    public List<ProductsVO> findAllByTypeOfItem(Integer id) {
+        return convertToListDto(productsRepository.findAllByTypeOfItem(id));
+    }
+
+    @Override
+    public List<ProductsVO> findAllByCategory_Id(Integer id) {
+        return convertToListDto(productsRepository.findAllByCategory_Id(id));
+    }
+
+    @Override
+    public List<ProductsVO> findAllByCategory_IdOrCategory_Id(Integer idCate, Integer idCate2) {
+        return convertToListDto(productsRepository.findAllByCategory_IdOrCategory_Id(idCate, idCate2));
+    }
+
+    private ProductsVO convertToDto(Products products) {
+        ProductsVO productsVO = modelMapper.map(products, ProductsVO.class);
+        return productsVO;
+    }
+
+    private List<ProductsVO> convertToListDto(List<Products> lstProducts) {
+        List<ProductsVO> vos = new ArrayList<>();
+        lstProducts.forEach(products -> {
+            vos.add(modelMapper.map(products, ProductsVO.class));
+        });
+        return vos;
+    }
 }

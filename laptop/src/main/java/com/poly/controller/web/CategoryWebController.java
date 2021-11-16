@@ -7,6 +7,8 @@ import com.poly.repo.CategoryRepository;
 import com.poly.repo.ProductsRepository;
 import com.poly.service.CategoryService;
 import com.poly.service.ProductService;
+import com.poly.vo.CategoryVO;
+import com.poly.vo.ProductsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -27,7 +29,7 @@ public class CategoryWebController {
     private ProductService productService;
 
     @Autowired
-    private ProductsRepository repository;
+    private ProductsRepository productsRepository;
 
     @Autowired
     private HeaderHelper headerHelper;
@@ -47,18 +49,18 @@ public class CategoryWebController {
                                             @PathVariable("nameBrand") String nameBrand,
                                             @RequestParam(value = "brand", defaultValue = "") String brand,
                                             Model model, @RequestParam(value = "sort", defaultValue = "asc") String sort) {
-        List<Products> productsList;
-        List<Products> productsListTotal;
-        Category category = categoryRepository.findByName(nameBrand);
-        Integer id = (brand != null && !brand.equals("")) ? categoryRepository.findById(Integer.parseInt(brand)).get().getId() : category.getId();
-        Integer idRoots = (category.getParentId() == null) ? category.getId() : category.getParentId();
-        List<Products> lstProducts = repository.findAllByTypeOfItemAndCategory_ParentId(idRoots, category.getId());
-        List<Category> lstCate = (category.getParentId() != null) ? categoryRepository.findAllByParentId(idRoots) : categoryRepository.findAllById(idRoots);
-        productsList = (lstCate.size() != 0) ? (category.getParentId() != null) ? ((lstProducts.size() != 0) ? repository.findAllByTypeOfItemAndCategory_ParentId(idRoots, category.getId()) : repository.findAllByCategory_Id(category.getId())) : repository.findAllByTypeOfItem(idRoots) : repository.findAllByTypeOfItemAndCategory_Id(idRoots, category.getId());
-        productsListTotal = (brand != null && !brand.equals("")) ? repository.findAllByCategory_IdOrCategory_Id(category.getId(), id) : productsList;
+        List<ProductsVO> productsList;
+        List<ProductsVO> productsListTotal;
+        CategoryVO categoryVO = categoryService.findByName(nameBrand);
+        Integer id = (brand != null && !brand.equals("")) ? categoryService.getOne(Integer.parseInt(brand)).getId() : categoryVO.getId();
+        Integer idRoots = (categoryVO.getParentId() == null) ? categoryVO.getId() : categoryVO.getParentId();
+        List<ProductsVO> lstProducts = productService.findAllByTypeOfItemAndCategory_ParentId(idRoots, categoryVO.getId());
+        List<CategoryVO> lstCate = (categoryVO.getParentId() != null) ? categoryService.getListByParent(idRoots) : categoryService.findAllById(idRoots);
+        productsList = (lstCate.size() != 0) ? (categoryVO.getParentId() != null) ? ((lstProducts.size() != 0) ? productService.findAllByTypeOfItemAndCategory_ParentId(idRoots, categoryVO.getId()) : productService.findAllByCategory_Id(categoryVO.getId())) : productService.findAllByTypeOfItem(idRoots) : productService.findAllByTypeOfItemAndCategory_Id(idRoots, categoryVO.getId());
+        productsListTotal = (brand != null && !brand.equals("")) ? productService.findAllByCategory_IdOrCategory_Id(categoryVO.getId(), id) : productsList;
 
-        Page<Products> page = productService.getListByPageNumber(pageNumber, 3, productsListTotal, sort);
-        List<Products> listProducts = page.getContent();
+        Page<ProductsVO> page = productService.getListByPageNumber(pageNumber, 3, productsListTotal, sort);
+        List<ProductsVO> listProducts = page.getContent();
 
         if (idRoots == 1) {
             model.addAttribute("cate_filter", categoryService.getListByParent(1));
