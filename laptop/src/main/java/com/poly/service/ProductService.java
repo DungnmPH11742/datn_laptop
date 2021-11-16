@@ -28,9 +28,23 @@ public interface ProductService {
 
     List<ProductsVO> getListByCodeSale(String code);
 
-    Page<Products> getListByPageNumber(int page, int limit, List<Products> lstProducts, String sortPrice);
+    Page<ProductsVO> getListByPageNumber(int page, int limit, List<ProductsVO> lstProductsVO, String sortPrice);
 
-    List<Products> retrieveProducts(ProductSearchCriteria searchCriteria);
+    List<ProductsVO> retrieveProducts(ProductSearchCriteria searchCriteria);
 
-    Page<Products> findAllByNameLike(int page, int limit, String name, Integer cateParent);
+    Page<ProductsVO> findAllByNameLike(int page, int limit, String name, Integer cateParent);
+
+    List<ProductsVO> getListProductByCodeSale();
+
+
+    List<ProductsVO> findAllByTypeOfItemAndCategory_ParentId(Integer type, Integer pantId);
+
+    List<ProductsVO> findAllByTypeOfItemAndCategory_Id(Integer type, Integer idCate);
+
+    List<ProductsVO> findAllByTypeOfItem(Integer id);
+
+    List<ProductsVO> findAllByCategory_Id(Integer id);
+
+    List<ProductsVO> findAllByCategory_IdOrCategory_Id(Integer idCate, Integer idCate2);
+
 }
