@@ -21,7 +21,7 @@ public class Blogs implements Serializable {
     @Column(name = "date_created", nullable = false)
     private Date dateCreated;
 
-    @Column(name = "img")
+    @Column(name = "img_url")
     private String img;
 
     //bi-directional many-to-one association to Account

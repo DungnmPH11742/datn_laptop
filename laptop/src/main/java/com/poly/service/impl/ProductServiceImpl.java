@@ -1,6 +1,8 @@
 package com.poly.service.impl;
 
 import com.poly.entity.Products;
+import com.poly.entity.ProductsDetail;
+import com.poly.repo.ProductsDetailRepository;
 import com.poly.repo.ProductsRepository;
 import com.poly.service.ProductService;
 import com.poly.vo.ProductsVO;
@@ -22,6 +24,9 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private ProductsDetailRepository productsDetailRepository;
+
     @Override
     public List<ProductsVO> getList() {
         List<ProductsVO> vos = new ArrayList<>();
@@ -34,20 +39,27 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductsVO getOne(String id) {
         Optional<Products> productsOptional = this.productsRepository.findById(id);
-        if (productsOptional.isPresent()){
+        Optional<ProductsDetail> optionalProductsDetail = this.productsDetailRepository.findById(id);
+        if (productsOptional.isPresent() && optionalProductsDetail.isPresent()){
+            productsOptional.get().setProductsDetail(optionalProductsDetail.get());
             return modelMapper.map(productsOptional.get(), ProductsVO.class);
         }else {
             return null;
         }
-
     }
 
     @Override
     public ProductsVO create(ProductsVO vo) {
         Products entity = this.modelMapper.map(vo,Products.class);
+        entity.getProductsDetail().setId(vo.getId());
+        ProductsDetail productsDetail = this.modelMapper.map(vo.getProductsDetail(),ProductsDetail.class);
         Optional<Products> productsOptional = this.productsRepository.findById(vo.getId());
-        if (!productsOptional.isPresent()){
+        Optional<ProductsDetail> optionalProductsDetail = this.productsDetailRepository.findById(vo.getId());
+        if (!productsOptional.isPresent() && !optionalProductsDetail.isPresent()){
+            productsDetail.setId(vo.getId());
             this.productsRepository.save(entity);
+            this.productsDetailRepository.save(productsDetail);
+            vo.getProductsDetail().setId(vo.getId());
             return vo;
         }else {
             return null;
@@ -58,22 +70,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductsVO update(ProductsVO vo) {
         Optional<Products> optionalProducts = this.productsRepository.findById(vo.getId());
-        if (optionalProducts.isPresent()){
+        Optional<ProductsDetail> optionalProductsDetail = this.productsDetailRepository.findById(vo.getId());
+        if (optionalProducts.isPresent() && optionalProductsDetail.isPresent()){
             Products products = optionalProducts.get();
-            if (vo.getDateOn() == null){
-                vo.setDateOn(products.getDateOn());
-            }
-            if (vo.getTypeOfItem() == null){
-                vo.setTypeOfItem(products.getTypeOfItem());
-            }
-            if (vo.getUnit() == null){
-                vo.setUnit(products.getUnit());
-            }
-            if (vo.getName() == null){
-                vo.setName(products.getName());
-            }
+            ProductsDetail productsDetail = optionalProductsDetail.get();
+            vo.getProductsDetail().setId(productsDetail.getId());
             BeanUtils.copyProperties(vo,products);
+            BeanUtils.copyProperties(vo.getProductsDetail(),productsDetail);
             this.productsRepository.save(products);
+            this.productsDetailRepository.save(productsDetail);
             return  vo;
         }else {
             return null;

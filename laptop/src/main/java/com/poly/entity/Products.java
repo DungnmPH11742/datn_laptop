@@ -83,7 +83,7 @@ public class Products implements Serializable {
 
     //bi-directional one-to-one association to ProductsDetail
     @JsonIgnore
-    @OneToOne(mappedBy="product")
+    @OneToOne(mappedBy="product", cascade = CascadeType.ALL)
     private ProductsDetail productsDetail;
 
     //bi-directional many-to-one association to ShipmentDetail

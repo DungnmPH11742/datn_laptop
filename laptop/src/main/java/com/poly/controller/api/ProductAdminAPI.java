@@ -1,7 +1,7 @@
-package com.poly.api;
+package com.poly.controller.api;
 
+import com.poly.repo.ProductsRepository;
 import com.poly.service.ProductService;
-import com.poly.service.impl.ProductServiceImpl;
 import com.poly.vo.ProductsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +15,9 @@ public class ProductAdminAPI {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private ProductsRepository productsRepository;
 
     @GetMapping(value = "/admin/product/getAll")
     public ResponseEntity<List<ProductsVO>> getListProduct(){
@@ -38,13 +41,18 @@ public class ProductAdminAPI {
 
     @PostMapping("/admin/store-product")
     public ResponseEntity<ProductsVO> save(@RequestBody ProductsVO productsVO){
-        ProductsVO vo = this.productService.create(productsVO);
-        if (vo != null){
-            return new ResponseEntity<ProductsVO>(vo,HttpStatus.OK);
+        if (productsVO.getProductsDetail() != null){
+            ProductsVO vo = this.productService.create(productsVO);
+            if (vo != null){
+                return ResponseEntity.ok(vo);
+            }else {
+                //Sản phẩm đã có trong csdl
+                return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+            }
         }else {
-            //Sản phẩm đã có trong csdl
-            return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+
     }
 
     @PutMapping(value = "/admin/update-product")

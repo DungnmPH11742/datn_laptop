@@ -1,6 +1,7 @@
 package com.poly.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -80,7 +81,7 @@ public class ProductsDetail implements Serializable {
     private String seeMore;
 
     //bi-directional one-to-one association to Product
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="id")
     private Products product;
 }
