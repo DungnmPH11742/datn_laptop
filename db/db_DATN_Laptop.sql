@@ -9,32 +9,21 @@ Create table account(
 	phone varchar(11),
 	email varchar(150),
 	password varchar(255),
+	img_url ntext,
 	date_of_birth date,
 	verification_code varchar(64),
 	time_token datetime,
 	actived bit,
 )
 
-<<<<<<< HEAD
-Create PROCEDURE  filter_Sales
-as
-Select * from products join sale_product on products.on_sale = sale_product.sale_code
-where sale_product.status like 1 and (products.on_sale is not null or on_sale not like ' ') and  GETDATE() between sale_product.date_on and sale_product.date_off and 
-Go
 
-exec filter_Sales
-Select * from products join sale_product on products.on_sale = sale_product.sale_code
-where sale_product.status like 1 and (products.on_sale is not null or on_sale not like ' ') and  GETDATE() between sale_product.date_on and sale_product.date_off
-=======
-
->>>>>>> main
 /*------------------------------------------------------BẢNG ACCOUNT-----------------------------------------------------------------------------*/
-insert into account(full_name, phone, email,password,date_of_birth, actived)
+insert into account(full_name, phone, email,password,date_of_birth, verification_code, time_token, actived)
 values ('Nam','0374563546','admin@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2010-09-08',null,null,1)
-insert into account(full_name, phone, email,password,date_of_birth, actived)
+insert into account(full_name, phone, email,password,date_of_birth, verification_code, time_token, actived)
 values ('Hằng','0374656354','user@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2003-06-02',null,null,1)
 /*-----------------------------------------------------------------------------------------------------------------------------------*/
-insert into account(full_name, phone, email,password,date_of_birth, actived)
+insert into account(full_name, phone, email,password,date_of_birth, verification_code, time_token, actived)
 values ('hu','0374656354','user@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2003-06-02',null,null,1)
 
 Create table role(
@@ -61,25 +50,17 @@ ALTER TABLE account_role ADD FOREIGN KEY (id_role) REFERENCES role(id);
 /*-------------------------------------------------BẢNG ACCOUNT_ROLE----------------------------------------------------------------------------------*/
 insert into account_role values (1,2), (2,1)
 /*-----------------------------------------------------------------------------------------------------------------------------------*/
-Select * from products join sale_product on products.on_sale = sale_product.sale_code
-where sale_product.status like 1 and (products.on_sale is not null or on_sale not like ' ') and  GETDATE() between sale_product.date_on and sale_product.date_off
-Select * from products join products_detail on products.id = products_detail.id
-where products_detail.hard_drive like '%SSD%'
-Select * from products_detail
+
+
 create table category(
 	id int identity(1,1) primary key,
 	name nvarchar(100) not null,
 	actived bit not null,
 	parent_id int -- khóa ngoại của bảng
 )
-Select * from products join category on products.id_category = category.id
-where category.parent_id =58
+
 /*-------------------------------------------------------BẢNG THỂ LOẠI----------------------------------------------------------------------------*/
-Select * from sale_product
-where  GETDATE() between date_on and date_off
-where status like 1
 Select * from category
-where parent_id =1 or id = 76
 insert into category(name,actived,parent_id) values 
 ('Laptop',1, null),
 /* Dell */
@@ -158,9 +139,7 @@ insert into category(name,actived,parent_id) values
 ('Lg',1, 1),
 ('Gram',1, 55)
 
-Select * from products join products_detail on products.id = products_detail.id
-where products_detail.vga like '%Intel Iris%'
-where products_detail.display_size like '%13.3%'
+
 /*------------------------ PC-------------------        */
 insert into category(name,actived,parent_id) values 
 ('PC Văn Phòng',1, null), --57
@@ -233,9 +212,9 @@ create table sale_product(
 )
 
 /*---------------------------------------------------BẢNG SALE--------------------------------------------------------------------------------*/
-Select CONVERT(nvarchar(50), date_on, 25) from sale_product
+Select * from sale_product
 insert into sale_product(sale_code, promotion_type,date_on,date_off,promotion,quantity,status) values 
-	('SL007', N'Giảm giác sốc','2021-10-14', '2021-10-15 23:59:59',10,null,0), 
+	('SL001', N'Giảm giác sốc','', '',10,null,1), 
 	('SL002', N'Dell cùng bạn vui đến trường','2021-10-01', '2021-10-15',10,300,1), 
 	('SL003', N'Chợ tết laptop - ngập tràn khuyến mãi','2021-11-01', '2021-11-18',20,500,1), 
 	('SL004', N'Tâm điểm khai trường – chọn quà chất tôi','2021-01-15', '2021-10-30',5,400,0), 
@@ -250,6 +229,7 @@ create table products(
 	date_on date not null,
 	id_category int not null,
 	type_of_item int not null,
+	img_url ntext,
 	input_price float,
 	output_price float,
 	quantity int,
@@ -270,26 +250,26 @@ ALTER TABLE products ADD FOREIGN KEY (on_sale) REFERENCES sale_product(sale_code
 /*-----------------------------------------------------------------BẢNG SẢN PHẨM------------------------------------------------------------------*/
 insert into products values
 	-- lap top
-	('MQD32SA', N'Macbook Air MQD32SA/A i5 5350U','2020-11-05',11, 1,19000000,23990000,40,1.35,'1 cái','2021','05-2021','SL001',1),
-	('DL3520I5', N'Dell Latitude 3520 Intel (Chính hãng)','2021-01-05',3, 1,12000000,15990000 ,80,1.79,'1 cái','2021','06-2021','SL001',1),
-	('APH30021', N'Acer Predator Helios 300 2021','2020-12-15', 21, 1,29000000,33990000 ,40,2.3,'1 cái','2021','08-2021','SL003',1),
-	('DV3400I5', N'Dell Vostro 14 3400 Intel gen 11 (Chính Hãng)','2020-11-05', 9, 1 ,15000000,18990000,35,1.64,'1 cái','2021','04-2021','SL003',1),
-	('LI314R5', N'Lenovo IdeaPad 3 14 (AMD Ryzen 5000)','2021-05-05', 26, 1,10000000,14290000,30,1.41,'1 cái','2021','06-2021','SL001',1),
-	('AS514', N'Acer Swift 5 14 (Chính hãng)','2021-05-05', 23, 1,22000000,26990000,20,1,'1 cái','2021','10-2021','SL005',1),
-	('LYS714ITL05',N'Laptop Lenovo Yoga Slim 7 14ITL05','2021-07-10', 24, 1,2300000,26490000,13,1.36,N'1 cái','2021','05-2021','SL003',1),
-	('HPZB15G5',N'Laptop Workstation HP Zbook 15 G5 3AX12AV','2021-10-15', 36, 1,43990000,43990000,10,2.6,N'1 cái','2021','10-2021',null,1),
-	('MBPR13MWP52',N'Apple Macbook Pro 13 Touchbar (MWP52)','2020-10-15',12, 1,21600000,23990000,30,1.4,N'1 cái','2020','08-2020',null,1),
+	('MQD32SA', N'Macbook Air MQD32SA/A i5 5350U','2020-11-05',11, 1, '',19000000,23990000,40,1.35,'1 cái','2021','05-2021','SL001',1),
+	('DL3520I5', N'Dell Latitude 3520 Intel (Chính hãng)','2021-01-05',3, 1, '',12000000,15990000 ,80,1.79,'1 cái','2021','06-2021','SL001',1),
+	('APH30021', N'Acer Predator Helios 300 2021','2020-12-15', 21, 1, '',29000000,33990000 ,40,2.3,'1 cái','2021','08-2021','SL003',1),
+	('DV3400I5', N'Dell Vostro 14 3400 Intel gen 11 (Chính Hãng)','2020-11-05', 9, 1, '' ,15000000,18990000,35,1.64,'1 cái','2021','04-2021','SL003',1),
+	('LI314R5', N'Lenovo IdeaPad 3 14 (AMD Ryzen 5000)','2021-05-05', 26, 1, '',10000000,14290000,30,1.41,'1 cái','2021','06-2021','SL001',1),
+	('AS514', N'Acer Swift 5 14 (Chính hãng)','2021-05-05', 23, 1, '',22000000,26990000,20,1,'1 cái','2021','10-2021','SL005',1),
+	('LYS714ITL05',N'Laptop Lenovo Yoga Slim 7 14ITL05','2021-07-10', 24, 1, '',2300000,26490000,13,1.36,N'1 cái','2021','05-2021','SL003',1),
+	('HPZB15G5',N'Laptop Workstation HP Zbook 15 G5 3AX12AV','2021-10-15', 36, 1, '',43990000,43990000,10,2.6,N'1 cái','2021','10-2021',null,1),
+	('MBPR13MWP52',N'Apple Macbook Pro 13 Touchbar (MWP52)','2020-10-15',12, 1, '',21600000,23990000,30,1.4,N'1 cái','2020','08-2020',null,1),
 	-- PC
-	('PCDOAIO7080',N'PC Dell OptiPlex All in One 7480','2021-09-30', 59, 57,29600000,30299000,5,5.94,N'1 cái','2021','05-2021',null,1),
-	('PCAPN608250U',N'PC Mini Asus PN60 i5-8250U','2021-10-15', 73, 57,7000000,8349000,5,0.7,N'1 cái','2021','10-2021','SL002',1),
-	('PCHP280G3SFF',N'PC HP 280 G3 SFF','2020-12-27',64, 57,8000000,8989000,13,5.94,N'1 cái','2021','08-2020','SL001',1),
+	('PCDOAIO7080',N'PC Dell OptiPlex All in One 7480','2021-09-30', 59, 57, '',29600000,30299000,5,5.94,N'1 cái','2021','05-2021',null,1),
+	('PCAPN608250U',N'PC Mini Asus PN60 i5-8250U','2021-10-15', 73, 57, '',7000000,8349000,5,0.7,N'1 cái','2021','10-2021','SL002',1),
+	('PCHP280G3SFF',N'PC HP 280 G3 SFF','2020-12-27',64, 57, '',8000000,8989000,13,5.94,N'1 cái','2021','08-2020','SL001',1),
 
 	--Màn hình
-	('MAVG240YS' ,N'Màn hình Acer VG240YS','2021-10-16', 82, 76,4000000,6259000,15,3.85,'1 cái','2020','2020-05-01','SL001',1),
-	('MATGVG249Q', N'Màn hình Asus TUF GAMING VG249Q','2021-09-26', 85,76,4500000,6390000,10,5.6,'1 cái','2021','2021-01-01','SL003',1),
-	('MDE2020H', N'Màn hình Dell E2020H','2021-04-12',79, 76,2399000,4399000,10,2.94,'1 cái','2021', '2021-01-01','SL003',1),
-	('MHM24F', N'Màn hình HP M24F','2021-05-15', 90, 76,3500000,4849000,5,2.5,'1 cái','2021', '2021-05-01','SL003',1),
-	('MHM27FW', N'Màn hình HP M27FW','2020-02-15',90, 76,4500000,6059000,10,2.5,'1 cái','2021', '2021-02-02','SL004',1);
+	('MAVG240YS' ,N'Màn hình Acer VG240YS','2021-10-16', 82, 76, '',4000000,6259000,15,3.85,'1 cái','2020','2020-05-01','SL001',1),
+	('MATGVG249Q', N'Màn hình Asus TUF GAMING VG249Q','2021-09-26', 85,76, '',4500000,6390000,10,5.6,'1 cái','2021','2021-01-01','SL003',1),
+	('MDE2020H', N'Màn hình Dell E2020H','2021-04-12',79, 76, '',2399000,4399000,10,2.94,'1 cái','2021', '2021-01-01','SL003',1),
+	('MHM24F', N'Màn hình HP M24F','2021-05-15', 90, 76, '',3500000,4849000,5,2.5,'1 cái','2021', '2021-05-01','SL003',1),
+	('MHM27FW', N'Màn hình HP M27FW','2020-02-15',90, 76, '',4500000,6059000,10,2.5,'1 cái','2021', '2021-02-02','SL004',1);
 /*-----------------------------------------------------------------------------------------------------------------------------------*/
 
 create table products_detail(
@@ -320,9 +300,7 @@ create table products_detail(
 	accessories_included ntext, --Phụ kiện đi kèm
 	see_more ntext, --Xem thêm
 )
-độ phân gảii loại pc,
-tần số quét loại pc
-cart đồ hoạ loại màn hình
+
 INSERT INTO dbo.[products_detail] VALUES 
 ('APH30021','Acer','Intel® Core™ i7-11800H (2.4Ghz/24MB cache)– CPU thế hệ 11 mới nhất','Đen','16GB DDR4 3200Mhz (2* 8GB)'
 ,'512GB SSD PCIe NVMe (nâng cấp tối đa 2TB SSD PCIe NVMe và 2TB HDD 2.5-inch 5400 RPM)'
@@ -384,17 +362,18 @@ ALTER TABLE products_detail ADD FOREIGN KEY (id) REFERENCES products(id);
 create table image_detail(
 	id int identity(1,1) primary key,
 	id_product varchar(25) not null,
-	name_path nvarchar(150) not null,
+	name_path ntext not null,
 )
 --Khóa ngoại ct hình ảnh N-1 sản phẩm
 ALTER TABLE image_detail ADD FOREIGN KEY (id_product) REFERENCES products(id);	
 
 --Tin tức
 create table blogs(
-	title nvarchar(255) primary key not null,
+	id  nvarchar(25) primary key not null,
+	title nvarchar(255) not null,
 	id_account int not null,
 	date_created date not null,
-	img nvarchar(150),
+	img_url ntext,
 )
 --Khóa ngoại blogs N-1
 ALTER TABLE blogs ADD FOREIGN KEY (id_account) REFERENCES account(id);
@@ -403,14 +382,15 @@ ALTER TABLE blogs ADD FOREIGN KEY (id_account) REFERENCES account(id);
 Create table description(
 	id int identity(1,1) primary key,
 	id_product varchar(25) not null,
-	id_blog nvarchar(255),
+	id_blog nvarchar(25),
+	img_url ntext,
 	title nvarchar(255),
 	content ntext,
 )
 --Khóa ngoại mô tả N-1 sản phẩm
 ALTER TABLE description ADD FOREIGN KEY (id_product) REFERENCES products(id);	
 
-ALTER TABLE description ADD FOREIGN KEY (id_blog) REFERENCES blogs(title);
+ALTER TABLE description ADD FOREIGN KEY (id_blog) REFERENCES blogs(id);
 
 --Phân lô hàng nhập
 create table imported_shipment( --Nếu giá tiền thay đổi thống kê tiền lãi lấy giá bán từng đợt nhập trừ đi giá nhập bên lô nhập)
@@ -440,7 +420,7 @@ ALTER TABLE shipment_detail ADD FOREIGN KEY (id_product) REFERENCES products(id)
 CREATE TABLE product_rating(
 	id_product varchar(25) not null,
 	id_account int not null,
-	image nvarchar(150),
+	img_url ntext,
 	star_rating int not null,
 	comment ntext,
 )
@@ -486,7 +466,7 @@ Create table orders( -- Trả hàng | Đổi hàng | Bảo hành
 	order_date date,
 	phone_number varchar(10) not null,
 	address nvarchar(60) not null,
-	quantity int not null,
+	--quantity int not null,
 	description ntext
 )
 --Khóa ngoại orders N-1 người dùng
@@ -501,6 +481,7 @@ Create table order_details(
 	price float not null,
 	quantity int not null,
 	completion_date date,--Đã nhận được hàng
+	payment_methods int,
 	received int, --0 chờ xác nhận | 1 Đang giao | 2 Đã giao | 3 Bảo hành | 4 Đổi hàng
 )
 

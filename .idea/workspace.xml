@@ -19,32 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f955a355-4ddb-4e78-9179-aaa469c6f652" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_joutvhu_spring_dynamic_jpa_2_3_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_12_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_freemarker_freemarker_2_3_31.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/laptop_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/laptop_war_exploded.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/datn_laptop.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/datn_laptop.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_jsr305_1_3_9.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_jsr305_3_0_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/db_DATN_Laptop.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db/db_DATN_Laptop.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/web/CategoryWebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/web/CategoryWebController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Products.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Products.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/SaleProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/SaleProduct.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/CategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/CategoryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ProductsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ProductsRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/AccountServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/ProductServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/validate/AccountValidate.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/validate/AccountValidate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/css/bootstrap.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/common/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/common/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/duong-test.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/duong-test.html" afterDir="false" />
-    </list>
+    <list default="true" id="f955a355-4ddb-4e78-9179-aaa469c6f652" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -82,7 +57,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../dattvph10333_java6_assignment" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../datn_laptop - Copy/laptop" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -169,7 +144,7 @@
       <workItem from="1636939512877" duration="5685000" />
       <workItem from="1636969428670" duration="4226000" />
       <workItem from="1636980473449" duration="10186000" />
-      <workItem from="1637027089908" duration="33946000" />
+      <workItem from="1637027089908" duration="35701000" />
     </task>
     <servers />
   </component>
@@ -193,54 +168,58 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="765" y="222" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1032@0.0.1920.1032" timestamp="1636297298787" />
+    <state x="643" y="440" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1637071321942">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="643" y="440" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1637071321941" />
     <state x="690" y="262" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1636654287280">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="690" y="262" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1636654287280" />
-    <state x="740" y="272" key="FileChooserDialogImpl" timestamp="1636966243019">
+    <state x="740" y="272" key="FileChooserDialogImpl" timestamp="1637071021828">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="740" y="272" key="FileChooserDialogImpl/0.0.1920.1032@0.0.1920.1032" timestamp="1636966243019" />
+    <state x="740" y="272" key="FileChooserDialogImpl/0.0.1920.1032@0.0.1920.1032" timestamp="1637071021828" />
     <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1635354572405" />
-    <state width="1877" height="236" key="GridCell.Tab.0.bottom" timestamp="1637070604504">
+    <state width="1877" height="236" key="GridCell.Tab.0.bottom" timestamp="1637072723042">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1877" height="236" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1637070604504" />
+    <state width="1877" height="236" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1637072723042" />
     <state width="1877" height="139" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1635362249248" />
-    <state width="1877" height="236" key="GridCell.Tab.0.center" timestamp="1637070604503">
+    <state width="1877" height="236" key="GridCell.Tab.0.center" timestamp="1637072723039">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1877" height="236" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1637070604503" />
+    <state width="1877" height="236" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1637072723039" />
     <state width="1877" height="139" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1635362249248" />
-    <state width="1877" height="236" key="GridCell.Tab.0.left" timestamp="1637070604503">
+    <state width="1877" height="236" key="GridCell.Tab.0.left" timestamp="1637072723037">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1877" height="236" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1637070604503" />
+    <state width="1877" height="236" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1637072723037" />
     <state width="1877" height="139" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1635362249248" />
-    <state width="1877" height="236" key="GridCell.Tab.0.right" timestamp="1637070604503">
+    <state width="1877" height="236" key="GridCell.Tab.0.right" timestamp="1637072723040">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1877" height="236" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1637070604503" />
+    <state width="1877" height="236" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1637072723040" />
     <state width="1877" height="139" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1635362249248" />
-    <state width="1877" height="236" key="GridCell.Tab.1.bottom" timestamp="1637070604504">
+    <state width="1877" height="236" key="GridCell.Tab.1.bottom" timestamp="1637072723046">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1877" height="236" key="GridCell.Tab.1.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1637070604504" />
+    <state width="1877" height="236" key="GridCell.Tab.1.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1637072723046" />
     <state width="1877" height="139" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1635362249248" />
-    <state width="1877" height="236" key="GridCell.Tab.1.center" timestamp="1637070604504">
+    <state width="1877" height="236" key="GridCell.Tab.1.center" timestamp="1637072723045">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1877" height="236" key="GridCell.Tab.1.center/0.0.1920.1032@0.0.1920.1032" timestamp="1637070604504" />
+    <state width="1877" height="236" key="GridCell.Tab.1.center/0.0.1920.1032@0.0.1920.1032" timestamp="1637072723045" />
     <state width="1877" height="139" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1635362249248" />
-    <state width="1877" height="236" key="GridCell.Tab.1.left" timestamp="1637070604504">
+    <state width="1877" height="236" key="GridCell.Tab.1.left" timestamp="1637072723044">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1877" height="236" key="GridCell.Tab.1.left/0.0.1920.1032@0.0.1920.1032" timestamp="1637070604504" />
+    <state width="1877" height="236" key="GridCell.Tab.1.left/0.0.1920.1032@0.0.1920.1032" timestamp="1637072723044" />
     <state width="1877" height="139" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1635362249248" />
-    <state width="1877" height="236" key="GridCell.Tab.1.right" timestamp="1637070604504">
+    <state width="1877" height="236" key="GridCell.Tab.1.right" timestamp="1637072723046">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1877" height="236" key="GridCell.Tab.1.right/0.0.1920.1032@0.0.1920.1032" timestamp="1637070604504" />
+    <state width="1877" height="236" key="GridCell.Tab.1.right/0.0.1920.1032@0.0.1920.1032" timestamp="1637072723046" />
     <state width="1877" height="139" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1635362249248" />
     <state width="1877" height="344" key="GridCell.Tab.2.bottom" timestamp="1636913693636">
       <screen x="0" y="0" width="1920" height="1032" />
@@ -287,10 +266,10 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="616" y="238" key="run.anything.popup/0.0.1920.1032@0.0.1920.1032" timestamp="1636913627237" />
-    <state x="623" y="223" width="672" height="678" key="search.everywhere.popup" timestamp="1636653799422">
+    <state x="623" y="223" width="672" height="678" key="search.everywhere.popup" timestamp="1637071522548">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="623" y="223" width="672" height="678" key="search.everywhere.popup/0.0.1920.1032@0.0.1920.1032" timestamp="1636653799422" />
+    <state x="623" y="223" width="672" height="678" key="search.everywhere.popup/0.0.1920.1032@0.0.1920.1032" timestamp="1637071522548" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/datn_laptop$LaptopApplication.ic" NAME="LaptopApplication Coverage Results" MODIFIED="1636193180015" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
