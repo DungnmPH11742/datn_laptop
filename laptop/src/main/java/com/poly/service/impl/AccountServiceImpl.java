@@ -66,18 +66,18 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void createAccountByRegister(AccountVO accountVO, String siteURL) throws UnsupportedEncodingException, MessagingException {
-            Account account = new Account() ;
-            account.setPassword(bCryptPasswordEncoder.encode(accountVO.getPassword()));
-            account.setFullName(accountVO.getFullName());
-            account.setEmail(accountVO.getEmail());
-            account.setPhone(accountVO.getPhone());
-            account.setActived(false);
-            account.setDateOfBirth(accountVO.getDateOfBirth());
-            String randomCode = RandomString.make(64);
-            account.setVerificationCode(randomCode);
-            account.setTimeToken(new Date());
-            repository.save(account);
-            sendVerificationEmail(account,siteURL);
+        Account account = new Account() ;
+        account.setPassword(bCryptPasswordEncoder.encode(accountVO.getPassword()));
+        account.setFullName(accountVO.getFullName());
+        account.setEmail(accountVO.getEmail());
+        account.setPhone(accountVO.getPhone());
+        account.setActived(false);
+        account.setDateOfBirth(accountVO.getDateOfBirth());
+        String randomCode = RandomString.make(64);
+        account.setVerificationCode(randomCode);
+        account.setTimeToken(new Date());
+        repository.save(account);
+        sendVerificationEmail(account,siteURL);
 
     }
     @Override
@@ -126,7 +126,7 @@ public class AccountServiceImpl implements AccountService {
                 try {
                     javaMailSender.send(message);
                 } catch (Exception e) {
-                   System.out.println("error mail");
+                    System.out.println("error mail");
                 }
             }
         });
@@ -177,9 +177,9 @@ public class AccountServiceImpl implements AccountService {
             long miliCurent = System.currentTimeMillis();
             Date date = account.getTimeToken();
             long diff = miliCurent - (date.getTime());
-            long seconds  = (diff / 1000) % 60;
+            long seconds  = (diff / 1000) ;
             System.out.println(seconds);
-            if(seconds  > 180){
+            if(seconds  > 3){
                 return false;
             }
             else {

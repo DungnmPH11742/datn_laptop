@@ -15,6 +15,7 @@ Create table account(
 	actived bit,
 )
 
+<<<<<<< HEAD
 Create PROCEDURE  filter_Sales
 as
 Select * from products join sale_product on products.on_sale = sale_product.sale_code
@@ -24,6 +25,9 @@ Go
 exec filter_Sales
 Select * from products join sale_product on products.on_sale = sale_product.sale_code
 where sale_product.status like 1 and (products.on_sale is not null or on_sale not like ' ') and  GETDATE() between sale_product.date_on and sale_product.date_off
+=======
+
+>>>>>>> main
 /*------------------------------------------------------BẢNG ACCOUNT-----------------------------------------------------------------------------*/
 insert into account(full_name, phone, email,password,date_of_birth, actived)
 values ('Nam','0374563546','admin@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2010-09-08',null,null,1)

@@ -1,4 +1,4 @@
-package com.poly.api;
+package com.poly.controller.api;
 
 import com.poly.entity.Category;
 import com.poly.entity.Products;
