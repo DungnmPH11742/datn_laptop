@@ -18,7 +18,6 @@ public class CompareHelper {
         List<ProductsVO> vos = new ArrayList<>();
         vos.add(this.getProductVo("p1"));
         vos.add(this.getProductVo("p2"));
-        sessionService.setAttribute("list_compare", vos);
         return vos;
     }
 

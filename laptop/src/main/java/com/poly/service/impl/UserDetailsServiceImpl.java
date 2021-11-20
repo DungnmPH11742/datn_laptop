@@ -36,6 +36,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("User " + userName + " was not found in the database");
         }
 
+
         // Khi đã có user rồi thì mình query xem user đó có những quyền gì (Admin hay User)
         // [ROLE_USER, ROLE_ADMIN,..]
         List<Role> roleNames = roleRepository.getRoleNames(appUser.getId());
@@ -58,6 +59,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 appUser.getPassword(), grantList);
         return userDetails;
     }
-
-
 }

@@ -1,5 +1,6 @@
 package com.poly.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -25,11 +26,13 @@ public class Description implements Serializable {
 
     //bi-directional many-to-one association to Blog
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name="id_blog")
     private Blogs blog;
 
     //bi-directional many-to-one association to Product
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name="id_product")
     private Products product;
 }

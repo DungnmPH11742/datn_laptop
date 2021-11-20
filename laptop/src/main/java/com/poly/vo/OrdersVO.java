@@ -10,7 +10,7 @@ public class OrdersVO implements Serializable {
 
     private Integer id;
 
-    private Integer idAccount;
+    private AccountVO accountVO;
 
     private Date orderDate;
 
@@ -21,5 +21,9 @@ public class OrdersVO implements Serializable {
     private Integer quantity;
 
     private String description;
+
+    private Integer paymentMethod;
+
+    private  OrderDetailsVO detailsVO;
 
 }

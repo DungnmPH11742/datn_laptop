@@ -1,13 +1,10 @@
 package com.poly.service.impl;
 
 import com.poly.entity.Category;
-import com.poly.entity.Products;
 import com.poly.repo.CategoryRepository;
 import com.poly.service.CategoryService;
 import com.poly.vo.CategoryVO;
-import com.poly.vo.ProductsVO;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +16,7 @@ import java.util.Optional;
 public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
-    private CategoryRepository categoryRepository;
+    private CategoryRepository repository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -27,15 +24,15 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<CategoryVO> getList() {
         List<CategoryVO> vos = new ArrayList<>();
-        categoryRepository.findAll().forEach(category -> {
+        repository.findAll().forEach(category -> {
             vos.add(modelMapper.map(category, CategoryVO.class));
         });
         return vos;
     }
 
     @Override
-    public CategoryVO getOne(Integer id) {
-        return convertCategoryToDtoById(id);
+    public CategoryVO getOne(String id) {
+        return null;
     }
 
     @Override
@@ -61,43 +58,9 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<CategoryVO> getListByParent(Integer id) {
         List<CategoryVO> vos = new ArrayList<>();
-        categoryRepository.getListByParent(id).forEach(category -> {
+        repository.getListByParent(id).forEach(category -> {
             vos.add(modelMapper.map(category, CategoryVO.class));
         });
         return vos;
-    }
-
-    @Override
-    public CategoryVO findByName(String name) {
-        return convertCategoryToDto(categoryRepository.findByName(name));
-    }
-
-    @Override
-    public List<CategoryVO> findAllById(Integer id) {
-        return convertListCategoryDto(categoryRepository.findAllById(id));
-    }
-
-    private CategoryVO convertCategoryToDto(Category category) {
-        CategoryVO categoryVO = modelMapper.map(category, CategoryVO.class);
-        return categoryVO;
-    }
-
-    private List<CategoryVO> convertListCategoryDto(List<Category> lstCategory) {
-        List<CategoryVO> vos = new ArrayList<>();
-        lstCategory.forEach(category -> {
-            vos.add(modelMapper.map(category, CategoryVO.class));
-        });
-        return vos;
-    }
-
-    public CategoryVO convertCategoryToDtoById(Integer id) {
-
-        CategoryVO categoryVO = new CategoryVO();
-        Optional<Category> optional = categoryRepository.findById(id);
-        if (optional.isPresent()) {
-            Category category = optional.get();
-            BeanUtils.copyProperties(categoryVO, category);
-        }
-        return categoryVO;
     }
 }

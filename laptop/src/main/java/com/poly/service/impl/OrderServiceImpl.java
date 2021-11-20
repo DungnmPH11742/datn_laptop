@@ -7,8 +7,7 @@ import com.poly.repo.CategoryRepository;
 import com.poly.repo.OrdersRepository;
 import com.poly.service.CategoryService;
 import com.poly.service.OrderService;
-import com.poly.vo.CategoryVO;
-import com.poly.vo.OrdersVO;
+import com.poly.vo.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,14 +33,40 @@ public class OrderServiceImpl implements OrderService {
         return vos;
     }
 
+
     @Override
-    public Orders saveOrders(Orders orders) {
-        return repository.save(orders);
+    public OrdersVO findidOrder(Integer id) {
+        Optional<Orders> orders = repository.findById(id);
+        if(!orders.isPresent()){
+            return null;
+        }
+        OrdersVO ordersVO = modelMapper.map(orders.get(),OrdersVO.class);
+        AccountVO accountVO = modelMapper.map(orders.get().getAccount(),AccountVO.class);
+        OrderDetailsVO orderDetailsVO = modelMapper.map(orders.get().getOrderDetails(),OrderDetailsVO.class);
+        ProductsVO productsVO = modelMapper.map(orders.get().getOrderDetails().getProduct(),ProductsVO.class);
+        if(orders.get().getOrderDetails().getVoucher()!= null){
+            VouchersVO vouchersVO = modelMapper.map(orders.get().getOrderDetails().getVoucher(),VouchersVO.class);
+        }
+
+        orderDetailsVO.setProductsVO(productsVO);
+        ordersVO.setAccountVO(accountVO);
+        ordersVO.setDetailsVO(orderDetailsVO);
+        return ordersVO;
     }
 
     @Override
-    public Orders updateOrders(Orders orders) {
-        return repository.save(orders);
+    public OrdersVO saveOrders(OrdersVO vo) {
+            Orders orders = modelMapper.map(vo,Orders.class);
+            repository.save(orders);
+            return vo;
+    }
+
+    @Override
+    public OrdersVO updateOrders(OrdersVO vo) {
+
+        Orders orders = modelMapper.map(vo,Orders.class);
+        repository.save(orders);
+        return vo;
     }
 
     @Override
@@ -50,8 +75,22 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Optional<Orders> findOrdersByAccount(Account account) {
-        return Optional.empty();
+    public List<OrdersVO> findOrdersByAccount(Integer idAccount) {
+        System.out.println(idAccount);
+        List<OrdersVO> listVO = new ArrayList<>();
+        if(!repository.findByIdAccount(idAccount).isEmpty()){
+            repository.findByIdAccount(idAccount).forEach(orders -> {
+                OrdersVO ordersVO = modelMapper.map(orders,OrdersVO.class);
+                AccountVO accountVO = modelMapper.map(orders.getAccount(),AccountVO.class);
+                OrderDetailsVO orderDetailsVO = modelMapper.map(orders.getOrderDetails(),OrderDetailsVO.class);
+                ProductsVO productsVO = modelMapper.map(orders.getOrderDetails().getProduct(),ProductsVO.class);
+                orderDetailsVO.setProductsVO(productsVO);
+                ordersVO.setAccountVO(accountVO);
+                ordersVO.setDetailsVO(orderDetailsVO);
+                listVO.add(ordersVO);
+            });
+        }
+        return listVO;
     }
 
 }
