@@ -31,6 +31,12 @@ public class Orders implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "payment_status")
+    private Integer paymentStatus;
+
+    @Column(name = "received")
+    private Integer received;
+
     //bi-directional many-to-one association to OrderDetail
     @OneToMany(mappedBy="order")
     private List<OrderDetails> orderDetails;

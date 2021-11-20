@@ -30,8 +30,8 @@ public class OrderDetails implements Serializable {
     @Column(name = "payment_methods")
     private Integer paymentMethods;
 
-    @Column(name = "received")
-    private Integer received;
+    @Column(name = "status")
+    private Integer status;
 
     //bi-directional many-to-one association to Order
     @ManyToOne

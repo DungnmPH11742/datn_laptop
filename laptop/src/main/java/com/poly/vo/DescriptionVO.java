@@ -9,7 +9,7 @@ public class DescriptionVO implements Serializable {
 
     private Integer id;
 
-    private Integer idProduct;
+    private String idProduct;
 
     private String idBlog;
 
