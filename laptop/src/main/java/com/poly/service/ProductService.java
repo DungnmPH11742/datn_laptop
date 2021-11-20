@@ -16,7 +16,7 @@ public interface ProductService {
 
     ProductsVO update(ProductsVO vo);
 
-    void delete(String id);
+    boolean delete(String id);
 
     List<ProductsVO> getListPage(Optional<Integer> page, Optional<Integer> row);
 

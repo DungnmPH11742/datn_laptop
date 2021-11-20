@@ -34,6 +34,9 @@ public class Account implements Serializable {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "img_url")
+    private String imgUrl;
+
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
 
@@ -41,17 +44,17 @@ public class Account implements Serializable {
     private Boolean actived;
 
     //từ đây, cả đăng kí t nữa nên cứ thêm vào
-//    @Column(name = "verification_code", length = 64)
-//    private String verificationCode;
-//    @Column(name = "time_token")
-//    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-//    private Date timeToken;
-//    //bi-directional many-to-one association to Blog
-//    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
-//    private List<Blogs> blogs;
-//    @Enumerated(EnumType.STRING)
-//    @Column(name = "auth_provider")
-//    private AuthenticationProvider authProvider;
+    @Column(name = "verification_code", length = 64)
+    private String verificationCode;
+    @Column(name = "time_token")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date timeToken;
+    //bi-directional many-to-one association to Blog
+    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
+    private List<Blogs> blogs;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "auth_provider")
+    private AuthenticationProvider authProvider;
 //    hết
 
 

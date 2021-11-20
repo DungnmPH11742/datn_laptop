@@ -1,6 +1,5 @@
 package com.poly.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -22,11 +21,10 @@ public class Blogs implements Serializable {
     @Column(name = "date_created", nullable = false)
     private Date dateCreated;
 
-    @Column(name = "img")
-    private String img;
+    @Column(name = "img_url")
+    private String imgUrl;
 
     //bi-directional many-to-one association to Account
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="id_account")
     private Account account;

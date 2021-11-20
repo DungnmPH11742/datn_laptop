@@ -1,6 +1,5 @@
 package com.poly.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -27,6 +26,9 @@ public class Products implements Serializable {
 
     @Column(name = "type_of_item", nullable = false)
     private Integer typeOfItem;
+
+    @Column(name = "img_url")
+    private String imgUrl;
 
     @Column(name = "input_price")
     private Float inputPrice;

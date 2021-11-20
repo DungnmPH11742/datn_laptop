@@ -86,8 +86,8 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void upadteCustomerAfterOAuthLoginSuccess(Account account, String name, AuthenticationProvider provider){
-//        account.setFullName(name);
-//        account.setAuthProvider(provider);
-//        repository.save(account);
+        account.setFullName(name);
+        account.setAuthProvider(provider);
+        repository.save(account);
     };
 }

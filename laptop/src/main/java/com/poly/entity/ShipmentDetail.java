@@ -1,6 +1,5 @@
 package com.poly.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -23,14 +22,12 @@ public class ShipmentDetail implements Serializable {
 
     @Id
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name="id_shipment")
     private ImportedShipment importedShipment;
 
 
     @Id
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name="id_product")
     private Products product;
 

@@ -2,6 +2,7 @@ package com.poly.vo;
 
 import lombok.Data;
 
+import javax.persistence.Column;
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -10,7 +11,7 @@ public class OrdersVO implements Serializable {
 
     private Integer id;
 
-    private AccountVO accountVO;
+    private Integer idAccount;
 
     private Date orderDate;
 
@@ -18,12 +19,10 @@ public class OrdersVO implements Serializable {
 
     private String address;
 
-    private Integer quantity;
-
     private String description;
 
-    private Integer paymentMethod;
+    private Integer paymentStatus;
 
-    private  OrderDetailsVO detailsVO;
+    private Integer received;
 
 }

@@ -10,11 +10,11 @@ public class OrderDetailsVO implements Serializable {
 
     private Integer id;
 
-    private OrdersVO ordersVO;
+    private Integer idOrder;
 
-    private ProductsVO productsVO;
+    private Integer idProduct;
 
-    private VouchersVO vouchersVO;
+    private String idVoucher;
 
     private Float price;
 
@@ -22,6 +22,8 @@ public class OrderDetailsVO implements Serializable {
 
     private Date completionDate;
 
-    private Integer received;
+    private Integer paymentMethods;
+
+    private Integer status;
 
 }

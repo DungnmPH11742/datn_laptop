@@ -20,8 +20,8 @@
 //    @Column(name = "id_account", nullable = false)
 //    private Integer idAccount;
 //
-//    @Column(name = "image")
-//    private String image;
+//    @Column(name = "img_url")
+//    private String imgUrl;
 //
 //    @Column(name = "star_rating", nullable = false)
 //    private Integer starRating;
