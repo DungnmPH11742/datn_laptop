@@ -25,42 +25,25 @@
                     <!--product-details-->
                     <div class="col-sm-5">
                         <div class="view-product">
-                            <img th:src="@{/user-st/images/product/{path}(path=${product.getId()+'.jpg'})}" alt="">
+                            <img id="img-note"
+                                 th:src="@{/user-st/images/product/{path}(path=${product.getId()+'.jpg'})}" alt="">
                         </div>
                         <div id="similar-product" class="carousel slide" data-ride="carousel">
 
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner">
                                 <div class="col-sm-12 img--detail">
-                                    <div class="col-sm-3"  th:onclick="@{'clickId('+${product.getName()}+')'}"
-                                         th:id="${product.getId()}">
+                                    <div class="col-sm-3 boder-img"  th:attr="onclick=|changeImgDetail('${product.getId()}')|" th:id="${product.getId()}">
+                                        <img th:id="${'img'+product.getId()}" th:src="@{/user-st/images/product/{path}(path=${product.getId()+'.jpg'})}" alt="">
+                                    </div>
+                                    <th:block th:each="img:${product.getImageDetails()}">
+                                        <div class="col-sm-3 boder-img" th:attr="onclick=|changeImgDetail('${img.getId()}')|"
+                                             th:id="${img.getId()}">
+                                            <img th:id="${'img'+img.getId()}"
+                                                 th:src="@{{path}(path=${img.getNamePath()})}" alt="">
+                                        </div>
+                                    </th:block>
 
-                                        <img th:id="${'abc' + product.getId()}"
-                                             th:src="@{/user-st/images/product/gram17-21-white-2.jpg}" alt="">
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <img th:src="@{/user-st/images/product/CPS-LG-Gram-17-41-2.jpg}" alt="">
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <img th:src="@{/user-st/images/product/CPS-LG-Gram-17-29-1.jpg}" alt="">
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <img th:src="@{/user-st/images/product/maxresdefault.jpg}" alt="">
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <img th:src="@{/user-st/images/product/17zd90p-g.ax71a5.png}" alt="">
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <img th:src="@{/user-st/images/product/dell-xps-17-9700-4-2351609_7102020.jpg}"
-                                             alt="">
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <img th:src="@{/user-st/images/product/dell-xps-17-9700-4-min.jpg}" alt="">
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <img th:src="@{/user-st/images/product/asus-vivobook-a415-thinkpro-1.jpg}"
-                                             alt="">
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -76,79 +59,41 @@
 										<span th:text="${#numbers.formatDecimal(product.getOutputPrice(), 1, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></span>
 										<div>
 											<label>Số lượng:</label>
-											<input type="number" value="3"/>
+											<input type="number" value="1" min="1", th:max="${product.getQuantity()}"/>
 										</div>
 									</span>
                                 <br>
-
-
                                 <th:block th:if="${product.getTypeOfItem()}==1"> <!-- Gộp sau  -->
-                                    <th:block th:if="${product.getProductsDetail().getCpu()}!=null"><p><b>Vi xử lý: </b>
-                                        [[${product.getProductsDetail().getCpu()}]]</p></th:block>
-                                    <th:block th:if="${product.getProductsDetail().getRam()} !=null"><p><b>RAM:</b>
-                                        [[${product.getProductsDetail().getRam()}]]</p></th:block>
-                                    <th:block th:if="${product.getProductsDetail().getHardDrive()} !=null"><p><b>Ổ
-                                        cứng: </b>[[${product.getProductsDetail().getHardDrive()}]]</p></th:block>
-                                    <th:block th:if="${product.getProductsDetail().getVga()} !=null"><p><b>Card đồ
-                                        họa: </b> [[${product.getProductsDetail().getVga()}]] </p></th:block>
-                                    <th:block th:if="${product.getProductsDetail().getDisplaySize()}!=null"><p><b>Màn
-                                        hình: </b> [[${product.getProductsDetail().getDisplaySize()}]]</p></th:block>
-                                    <th:block th:if="${product.getProductsDetail().getOperatingSystem()}!=null"><p><b>Hệ
-                                        điều hành: </b> [[${product.getProductsDetail().getOperatingSystem()}]]</p>
-                                    </th:block>
-                                    <th:block th:if="${product.getProductsDetail().getColor()}!=null"><p><b>Màu
-                                        sắc: </b>[[${product.getProductsDetail().getColor()}]]</p></th:block>
-                                    <p><b>Tình trạng: </b>
-                                        <th:block th:text="${product.getQuantity()>0?'Còn hàng':'Tạm hết'}"></th:block>
-                                    </p>
+                                    <th:block th:if="${product.getProductsDetail().getCpu()}!=null"><p><b>Vi xử lý: </b> [[${product.getProductsDetail().getCpu()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getRam()} !=null"><p><b>RAM:</b> [[${product.getProductsDetail().getRam()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getHardDrive()} !=null">  <p><b>Ổ cứng: </b>[[${product.getProductsDetail().getHardDrive()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getVga()} !=null"><p><b>Card đồ họa: </b> [[${product.getProductsDetail().getVga()}]] </p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getDisplaySize()}!=null"><p><b>Màn hình: </b> [[${product.getProductsDetail().getDisplaySize()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getOperatingSystem()}!=null"><p><b>Hệ điều hành: </b> [[${product.getProductsDetail().getOperatingSystem()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getColor()}!=null"><p><b>Màu sắc: </b>[[${product.getProductsDetail().getColor()}]]</p></th:block>
+                                    <p><b>Tình trạng: </b><th:block th:text="${product.getQuantity()>0?'Còn hàng':'Tạm hết'}"></th:block></p>
                                 </th:block>
                                 <th:block th:if="${product.getTypeOfItem()}==57"><!-- Gộp sau  -->
-                                    <th:block th:if="${product.getProductsDetail().getCpu()}!=null"><p><b>Vi xử lý: </b>
-                                        [[${product.getProductsDetail().getCpu()}]]</p></th:block>
-                                    <th:block th:if="${product.getProductsDetail().getRam()} !=null"><p><b>RAM:</b>
-                                        [[${product.getProductsDetail().getRam()}]]</p></th:block>
-                                    <th:block th:if="${product.getProductsDetail().getHardDrive()} !=null"><p>
-                                        <b>SSD: </b>[[${product.getProductsDetail().getHardDrive()}]]</p></th:block>
-                                    <th:block th:if="${product.getProductsDetail().getVga()} !=null"><p><b>Card đồ
-                                        họa: </b> [[${product.getProductsDetail().getVga()}]] </p></th:block>
-                                    <th:block th:if="${product.getProductsDetail().getDisplaySize()}!=null"><p><b>Màn
-                                        hình: </b> [[${product.getProductsDetail().getDisplaySize()}]]</p></th:block>
-                                    <th:block th:if="${product.getProductsDetail().getOperatingSystem()!=null}"><p><b>Hệ
-                                        điều hành: </b> [[${product.getProductsDetail().getOperatingSystem()}]]</p>
-                                    </th:block>
-                                    <th:block th:if="${product.getProductsDetail().getColor()}!=null"><p><b>Màu
-                                        sắc: </b>[[${product.getProductsDetail().getColor()}]]</p></th:block>
-                                    <th:block th:if="${product.getProductsDetail().getPower()}!=null"><p><b>Nguồn: </b>[[${product.getProductsDetail().getPower()}]]
-                                    </p></th:block>
-                                    <p><b>Tình trạng: </b>
-                                        <th:block th:text="${product.getQuantity()>0?'Còn hàng':'Tạm hết'}"></th:block>
-                                    </p>
+                                    <th:block th:if="${product.getProductsDetail().getCpu()}!=null"><p><b>Vi xử lý: </b> [[${product.getProductsDetail().getCpu()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getRam()} !=null"><p><b>RAM:</b> [[${product.getProductsDetail().getRam()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getHardDrive()} !=null">  <p><b>SSD: </b>[[${product.getProductsDetail().getHardDrive()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getVga()} !=null"><p><b>Card đồ họa: </b> [[${product.getProductsDetail().getVga()}]] </p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getDisplaySize()}!=null"><p><b>Màn hình: </b> [[${product.getProductsDetail().getDisplaySize()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getOperatingSystem()!=null}"><p><b>Hệ điều hành: </b> [[${product.getProductsDetail().getOperatingSystem()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getColor()}!=null"><p><b>Màu sắc: </b>[[${product.getProductsDetail().getColor()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getPower()}!=null"><p><b>Nguồn: </b>[[${product.getProductsDetail().getPower()}]]</p></th:block>
+                                    <p><b>Tình trạng: </b><th:block th:text="${product.getQuantity()>0?'Còn hàng':'Tạm hết'}"></th:block></p>
                                 </th:block>
                                 <th:block th:if="${product.getTypeOfItem()}==76"> <!-- Gộp sau  -->
-                                    <th:block th:if="${product.getProductsDetail().getDisplaySize()}!=null"><p><b>Kích
-                                        Thước Màn Hình: </b> [[${product.getProductsDetail().getDisplaySize()}]]</p>
-                                    </th:block>
-                                    <th:block th:if="${product.getProductsDetail().getBrightness()} !=null"><p><b>Độ
-                                        Sáng Màn Hình:</b> [[${product.getProductsDetail().getBrightness()}]]</p>
-                                    </th:block>
-                                    <th:block th:if="${product.getProductsDetail().getContrast()} !=null"><p><b>Tỉ Lệ
-                                        Tương Phản Động: </b>[[${product.getProductsDetail().getContrast()}]]</p>
-                                    </th:block>
-                                    <th:block th:if="${product.getProductsDetail().getResolution()} !=null"><p><b>Độ
-                                        Phân Giải Màn Hình: </b> [[${product.getProductsDetail().getResolution()}]] </p>
-                                    </th:block>
-                                    <th:block th:if="${product.getProductsDetail().getResponseTime()}!=null"><p><b>Thời
-                                        Gian Đáp Ứng : </b> [[${product.getProductsDetail().getResponseTime()}]]</p>
-                                    </th:block>
-                                    <th:block th:if="${product.getProductsDetail().getViewScreenshots()}!=null"><p><b>Góc
-                                        nhìn : </b> [[${product.getProductsDetail().getViewScreenshots()}]]</p>
-                                    </th:block>
-                                    <p><b>Tình trạng: </b>
-                                        <th:block th:text="${product.getQuantity()>0?'Còn hàng':'Tạm hết'}"></th:block>
-                                    </p>
+                                    <th:block th:if="${product.getProductsDetail().getDisplaySize()}!=null"><p><b>Kích Thước Màn Hình: </b> [[${product.getProductsDetail().getDisplaySize()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getBrightness()} !=null"><p><b>Độ Sáng Màn Hình:</b> [[${product.getProductsDetail().getBrightness()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getContrast()} !=null">  <p><b>Tỉ Lệ Tương Phản Động: </b>[[${product.getProductsDetail().getContrast()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getResolution()} !=null"><p><b>Độ Phân Giải Màn Hình: </b> [[${product.getProductsDetail().getResolution()}]] </p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getResponseTime()}!=null"><p><b>Thời Gian Đáp Ứng : </b> [[${product.getProductsDetail().getResponseTime()}]]</p></th:block>
+                                    <th:block th:if="${product.getProductsDetail().getViewScreenshots()}!=null"><p><b>Góc nhìn : </b> [[${product.getProductsDetail().getViewScreenshots()}]]</p></th:block>
+                                    <p><b>Tình trạng: </b><th:block th:text="${product.getQuantity()>0?'Còn hàng':'Tạm hết'}"></th:block></p>
                                 </th:block>
 
->>>>>>> Stashed changes
                                 <p><b>Trạng thái: </b>Mới</p>
                                 <!--                                <p><b>Thương hiệu: </b><th:block th:text="${product.getProductsDetail().getCpu()}"></th:block></p>-->
                                 <button type="button" class="btn btn-fefault cart">
@@ -212,7 +157,6 @@
                     <h3>Thông số kỹ thuật</h3>
                     <table class="table table-striped">
                         <tbody>
-
                         <th:block>
 
                             <tr th:if="${product.getProductsDetail().getProducer()!=null}">
@@ -233,7 +177,7 @@
                                 <td th:text="${product.getProductsDetail().getCpu()}"></td>
                             </tr>
 
-                            <tr th:if="${product.getProductsDetail().getCpu()!=null}">
+                            <tr  th:if="${product.getProductsDetail().getCpu()!=null}">
                                 <th scope="row">Ổ cứng</th>
                                 <td th:text="${product.getProductsDetail().getHardDrive()}"></td>
                             </tr>
@@ -310,7 +254,6 @@
                             </tr>
 
                         </th:block>
->>>>>>> Stashed changes
                         </tbody>
                     </table>
                 </div>
@@ -325,126 +268,22 @@
 
                     <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
-                            <div class="item active">
-                                <div class="col-sm-3">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="images/product/asus-vivobook-a415-thinkpro-1.jpg"
-                                                     alt=""/>
-                                                <h2>$56</h2>
-                                                <p>Easy Polo Black Edition</p>
-                                                <button type="button" class="btn btn-default add-to-cart"><i
-                                                        class="fa fa-shopping-cart"></i>Add to cart
-                                                </button>
-                                            </div>
-                                        </div>
+                            <th:block th:each="key:${#numbers.sequence( 1, (4*(related_products.size/4)<related_products.size ? (related_products.size/4)+1:related_products.size/4), 1)}">
+                                <div th:if="${key == 1}" class="item active">
+                                    <!---->
+                                    <div th:each="p, key2:${related_products}" th:if="${key2.count<=4}">
+                                        <div th:replace="~{common/list_product :: p_sale}"></div>
                                     </div>
+                                    <!---->
                                 </div>
-                                <div class="col-sm-3">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="images/product/CPS-LG-Gram-17-41-2.jpg" alt=""/>
-                                                <h2>$56</h2>
-                                                <p>Easy Polo Black Edition</p>
-                                                <button type="button" class="btn btn-default add-to-cart"><i
-                                                        class="fa fa-shopping-cart"></i>Add to cart
-                                                </button>
-                                            </div>
-                                        </div>
+                                <div th:if="${key > 1}" class="item">
+                                    <!---->
+                                    <div th:each="p, key2:${related_products}" th:if="${key2.count<=4*key} and ${key2.count> ((4*key)-4)}">
+                                        <div th:replace="~{common/list_product :: p_sale}"></div>
                                     </div>
+                                    <!---->
                                 </div>
-                                <div class="col-sm-3">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="images/product/maxresdefault.jpg" alt=""/>
-                                                <h2>$56</h2>
-                                                <p>Easy Polo Black Edition</p>
-                                                <button type="button" class="btn btn-default add-to-cart"><i
-                                                        class="fa fa-shopping-cart"></i>Add to cart
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="images/product/dell-xps-17-9700-4-2351609_7102020.jpg"
-                                                     alt=""/>
-                                                <h2>$56</h2>
-                                                <p>Easy Polo Black Edition</p>
-                                                <button type="button" class="btn btn-default add-to-cart"><i
-                                                        class="fa fa-shopping-cart"></i>Add to cart
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="col-sm-3">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="images/product/asus-vivobook-a415-thinkpro-1.jpg"
-                                                     alt=""/>
-                                                <h2>$56</h2>
-                                                <p>Easy Polo Black Edition</p>
-                                                <button type="button" class="btn btn-default add-to-cart"><i
-                                                        class="fa fa-shopping-cart"></i>Add to cart
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="images/product/CPS-LG-Gram-17-41-2.jpg" alt=""/>
-                                                <h2>$56</h2>
-                                                <p>Easy Polo Black Edition</p>
-                                                <button type="button" class="btn btn-default add-to-cart"><i
-                                                        class="fa fa-shopping-cart"></i>Add to cart
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="images/product/maxresdefault.jpg" alt=""/>
-                                                <h2>$56</h2>
-                                                <p>Easy Polo Black Edition</p>
-                                                <button type="button" class="btn btn-default add-to-cart"><i
-                                                        class="fa fa-shopping-cart"></i>Add to cart
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="images/product/dell-xps-17-9700-4-2351609_7102020.jpg"
-                                                     alt=""/>
-                                                <h2>$56</h2>
-                                                <p>Easy Polo Black Edition</p>
-                                                <button type="button" class="btn btn-default add-to-cart"><i
-                                                        class="fa fa-shopping-cart"></i>Add to cart
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </th:block>
                         </div>
                         <a class="left recommended-item-control" href="#recommended-item-carousel"
                            data-slide="prev">
@@ -543,20 +382,21 @@
 <!--/Footer-->
 
 
-<script src="js/jquery.js"></script>
-<script src="js/price-range.js"></script>
-<script src="js/jquery.scrollUp.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.prettyPhoto.js"></script>
-<script src="js/main.js"></script>
-<script >
-    const clickId=(id)=>{
-        console.log(id)
-        alert("Nghe "+id)
-    }
-    clickId(id)
+<!--Script-->
+<div th:replace="~{common/script_src :: script}"></div>
+<script>
+    const changeImgDetail = (id) => {
+        const src = document.getElementById(`img${id}`).src;
+        document.getElementById('img-note').src = src;
+        const tg = document.getElementsByClassName('boder-img')
+        for (let i=0; i<tg.length; i++) {
+            tg[i].style.border = "1px solid #ccc"
+        }
+        document.getElementById(id).style.border = "1px solid #0061ff"
 
+    }
 </script>
+<!--Script-->
 </body>
 
 </html>

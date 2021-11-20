@@ -1,5 +1,6 @@
 package com.poly.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -34,9 +35,12 @@ public class Orders implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "payment_method")
+    private Integer paymentMethod;
+
     //bi-directional many-to-one association to OrderDetail
-    @OneToMany(mappedBy="order")
-    private List<OrderDetails> orderDetails;
+    @OneToOne(mappedBy="order")
+    private OrderDetails orderDetails;
 
     //bi-directional many-to-one association to Account
     @ManyToOne(fetch = FetchType.EAGER)

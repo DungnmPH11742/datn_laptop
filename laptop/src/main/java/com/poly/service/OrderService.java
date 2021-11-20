@@ -14,9 +14,11 @@ import java.util.Optional;
 public interface OrderService {
     List<OrdersVO> getAllOrders();
 
-    Orders saveOrders(Orders orders);
+    OrdersVO findidOrder(Integer id);
 
-    Orders updateOrders(Orders orders);
+    OrdersVO saveOrders(OrdersVO orders);
+
+    OrdersVO updateOrders(OrdersVO orders);
      void deleteById(Integer id);
-     Optional<Orders> findOrdersByAccount(Account account);;
+     List<OrdersVO> findOrdersByAccount(Integer id);
 }

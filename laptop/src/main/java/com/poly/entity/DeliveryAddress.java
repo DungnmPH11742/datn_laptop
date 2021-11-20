@@ -1,5 +1,6 @@
 package com.poly.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -31,6 +32,7 @@ public class DeliveryAddress implements Serializable {
 
     //bi-directional many-to-one association to Account
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
     @JoinColumn(name="id_account")
     private Account account;
 }

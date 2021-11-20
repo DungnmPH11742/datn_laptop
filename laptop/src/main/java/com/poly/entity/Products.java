@@ -17,7 +17,6 @@ public class Products implements Serializable {
 
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     @Column(name = "name", nullable = false)
@@ -70,29 +69,24 @@ public class Products implements Serializable {
 //    private List<ProductRating> productRatings;
 
     //bi-directional many-to-one association to Category
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="id_category")
     private Category category;
 
     //bi-directional many-to-one association to SaleProduct
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="on_sale")
     private SaleProduct saleProduct;
 
     //bi-directional one-to-one association to ProductsDetail
-    @JsonIgnore
     @OneToOne(mappedBy="product")
     private ProductsDetail productsDetail;
 
     //bi-directional many-to-one association to ShipmentDetail
-    @JsonIgnore
     @OneToMany(mappedBy="product")
     private List<ShipmentDetail> shipmentDetails;
 
     //bi-directional many-to-one association to Voucher
-    @JsonIgnore
     @OneToMany(mappedBy="product")
     private List<Vouchers> vouchers;
 }

@@ -8,7 +8,7 @@
 <!--products base-->
 <div class="col-sm-3" th:fragment="products">
     <div class="product-image-wrapper">
-        <a  th:href="'/view?id='+${p.getId()}" class="single-products">
+        <a th:href="'/view?id='+${p.getId()}" class="single-products">
             <div class="productinfo">
                 <img class="anhSP" th:src="@{/user-st/images/product/{path}(path=${p.getId()+'.jpg'})}" alt="">
                 <div class="content--product">
@@ -20,7 +20,7 @@
                 <div>
                     <i class="fa fa-gift"></i><span style="margin-left: 5px;">Giảm giá</span>
                 </div>
-                <a href="#" class="btn btn-default add-to-cart">
+                <a th:attr="onclick=|addToCart('${p.getId()}')|" class="btn btn-default add-to-cart">
                     <i class="fa fa-shopping-cart"></i>
                 </a>
                 <a href="#" class="btn add-to-cart">
@@ -31,7 +31,6 @@
         </a>
     </div>
 </div>
-
 
 
 <!--products sale-->
@@ -45,15 +44,15 @@
                     <h4 class="price"
                         th:text="${#numbers.formatDecimal(p.getOutputPrice() * (100 - p.getSaleProduct().getPromotion())/100, 1, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></h4>
                     <s class="price"
-                        th:text="${#numbers.formatDecimal(p.getOutputPrice(), 1, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></s>
+                       th:text="${#numbers.formatDecimal(p.getOutputPrice(), 1, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></s>
                 </div>
                 <div>
                     <i class="fa fa-gift"></i><span style="margin-left: 5px;">Giảm giá</span>
                 </div>
-                <a href="#" class="btn btn-default add-to-cart">
+                <a th:attr="onclick=|addToCart('${p.getId()}')|" class="btn btn-default add-to-cart">
                     <i class="fa fa-shopping-cart"></i>
                 </a>
-                <a href="#" class="btn add-to-cart">
+                <a onclick="getCompareProduct()" class="btn add-to-cart">
                     <i class="fa fa-plus"></i>
                 </a>
             </div>
