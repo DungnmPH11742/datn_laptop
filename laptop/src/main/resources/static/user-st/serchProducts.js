@@ -1,98 +1,27 @@
-//}
-
-
 $(document).ready(function () {
 
-
     updatelisting(1);
-    $("#delFilter").on('click', function (event) {
-        event.preventDefault();
-        $('#formFilter').html(' ');
-        $('.pagination li').remove();
-        $("input:checkbox").attr("checked", false);
-        updatelisting(1);
-
-    })
-    $(".sortAsc").on('click', function (event) {
-        event.preventDefault();
-        $('#formFilter').html(' ');
-        $('.pagination li').remove();
-        $('.desc').prop("checked", false);
-        $('.asc').prop("checked", true);
-        updatelisting(1);
-
-    })
-
-    $(".sortDesc").on('click', function (event) {
-        event.preventDefault();
-        $('#formFilter').html(' ').fadeIn();
-        $('.pagination li').remove().fadeIn();
-        ;
-        $('.asc').prop("checked", false);
-        $('.desc').prop("checked", true);
-        updatelisting(1).fadeOut();
-        ;
-
-    })
-    const checkbox = $("input:checkbox");
-
-    checkbox.on('change', function (event) {
-        event.preventDefault();
-        $('#formFilter').html(' ');
-        $('.pagination li').remove();
-        updatelisting(1);
-    });
+    getCate();
 
     function updatelisting(currentPage) {
-        this.event.preventDefault()
-        var url = "http://localhost:8080/api/filter?numberPage=" + currentPage;
-        var c = new Array();
-        var d = new Array();
-        var a = new Array();
-        var f = new Array();
+        this.event.preventDefault();
+        var parameter = window.location.search;
+        var urlHostName = window.location.pathname;
+        var url = "http://localhost:8080/api/page/" + currentPage + urlHostName + parameter;
+        var sale = ($('#checkboxSale').is(":checked")) ? "true" : "false";
+        if (sale === "true") {
+            $("input:checkbox").attr("checked", false);
+            $("#checkboxSale").prop("checked", true);
+        }
+
         var min = new Array();
         var max = new Array();
 
-        var size = new Array();
-
-        var raito = new Array();
-
-        var scan = new Array();
-
-        var reso = new Array();
-
         var minM = new Array();
         var maxM = new Array();
-        var vgaCheck = new Array();
-        var sort0 = new Array();
-        $('[id="checkbox0"]').each(function (i, e) {
-            if ($(e).is(':checked')) {
-                sort0.push(e.value);
-            }
-            $("input:checkbox").on('click', function () {
-                var $box = $(this);
-                if ($box.is(":checked")) {
-                    var group = "input:checkbox[name='" + $box.attr("name") + "']";
-                    $(group).prop("checked", false);
-                    $box.prop("checked", true);
-                } else {
-                    $box.prop("checked", false);
-                }
-            });
-        })
-        $('[id="checkbox1"]').each(function (i, e) {
-            if ($(e).is(':checked')) {
-                c.push(e.value);
-            }
-        })
 
         $('[id="checkbox2"]').each(function (i, e) {
-
-
             if ($(e).is(':checked')) {
-
-                d.push(e.value);
-                console.log(e.value)
 
                 if (e.value === 'duoi_10_trieu') {
                     min.push(0)
@@ -132,116 +61,8 @@ $(document).ready(function () {
             });
         })
 
-
-        $('[id="checkbox3"]').each(function (i, e) {
-            if ($(e).is(':checked')) {
-                a.push(e.value);
-            }
-            $("input:checkbox").on('click', function () {
-                var $box = $(this);
-                if ($box.is(":checked")) {
-                    var group = "input:checkbox[name='" + $box.attr("name") + "']";
-                    $(group).prop("checked", false);
-                    $box.prop("checked", true);
-                } else {
-                    $box.prop("checked", false);
-                }
-            });
-        })
-        $('[id="checkbox4"]').each(function (i, e) {
-            if ($(e).is(':checked')) {
-                f.push(e.value);
-            }
-            $("input:checkbox").on('click', function () {
-                var $box = $(this);
-                if ($box.is(":checked")) {
-                    var group = "input:checkbox[name='" + $box.attr("name") + "']";
-                    $(group).prop("checked", false);
-                    $box.prop("checked", true);
-                } else {
-                    $box.prop("checked", false);
-                }
-            });
-        })
-        $('[id="checkbox5"]').each(function (i, e) {
-            if ($(e).is(':checked')) {
-                size.push(e.value);
-            }
-            $("input:checkbox").on('click', function () {
-                var $box = $(this);
-                if ($box.is(":checked")) {
-                    var group = "input:checkbox[name='" + $box.attr("name") + "']";
-                    $(group).prop("checked", false);
-                    $box.prop("checked", true);
-                } else {
-                    $box.prop("checked", false);
-                }
-            });
-        })
-        $('[id="checkbox6"]').each(function (i, e) {
-            if ($(e).is(':checked')) {
-                raito.push(e.value);
-            }
-            $("input:checkbox").on('click', function () {
-                var $box = $(this);
-                if ($box.is(":checked")) {
-                    var group = "input:checkbox[name='" + $box.attr("name") + "']";
-                    $(group).prop("checked", false);
-                    $box.prop("checked", true);
-                } else {
-                    $box.prop("checked", false);
-                }
-            });
-        })
-        $('[id="checkbox7"]').each(function (i, e) {
-            if ($(e).is(':checked')) {
-                scan.push(e.value);
-            }
-            $("input:checkbox").on('click', function () {
-                var $box = $(this);
-                if ($box.is(":checked")) {
-                    var group = "input:checkbox[name='" + $box.attr("name") + "']";
-                    $(group).prop("checked", false);
-                    $box.prop("checked", true);
-                } else {
-                    $box.prop("checked", false);
-                }
-            });
-        })
-        $('[id="checkbox8"]').each(function (i, e) {
-            if ($(e).is(':checked')) {
-                reso.push(e.value);
-            }
-            $("input:checkbox").on('click', function () {
-                var $box = $(this);
-                if ($box.is(":checked")) {
-                    var group = "input:checkbox[name='" + $box.attr("name") + "']";
-                    $(group).prop("checked", false);
-                    $box.prop("checked", true);
-                } else {
-                    $box.prop("checked", false);
-                }
-            });
-        })
-        $('[id="checkbox9"]').each(function (i, e) {
-            if ($(e).is(':checked')) {
-                vgaCheck.push(e.value);
-            }
-            $("input:checkbox").on('click', function () {
-                var $box = $(this);
-                if ($box.is(":checked")) {
-                    var group = "input:checkbox[name='" + $box.attr("name") + "']";
-                    $(group).prop("checked", false);
-                    $box.prop("checked", true);
-                } else {
-                    $box.prop("checked", false);
-                }
-            });
-        })
         $('[id="checkbox10"]').each(function (i, e) {
             if ($(e).is(':checked')) {
-                d.push(e.value);
-                console.log(e.value)
                 if (e.value === 'duoi_1kg') {
                     minM.push(0)
                     maxM.push(1)
@@ -279,33 +100,26 @@ $(document).ready(function () {
             });
         })
 
-        var sale = ($('#checkboxSale').is(":checked")) ? "true" : "false";
-
-        var category = c.toString();
-        var cateParent = $("#cate_item").val();
+        var category = get_filter('checkbox1').toString();
         var minPrice = min.toString();
         var maxPrice = max.toString();
-        var cpu = a.toString();
-        var ram = f.toString();
-        var displaySize = size.toString();
-        var screenRatio = raito.toString();
-        var scanFrequency = scan.toString();
-        var resolution = reso.toString()
-
+        var cpu = get_filterOne('checkbox3').toString();
+        var ram = get_filterOne('checkbox4').toString();
+        var displaySize = get_filterOne('checkbox5').toString();
+        var screenRatio = get_filterOne('checkbox6').toString();
+        var scanFrequency = get_filterOne('checkbox7').toString();
+        var resolution = get_filterOne('checkbox8').toString();
+        var vga = get_filterOne('checkbox9').toString();
         var minMass = minM.toString();
         var maxMass = maxM.toString();
-        var vga = vgaCheck.toString();
-        var sort1 = sort0.toString();
-
+        var sort1 = get_filterOne('checkbox0').toString();
         var data = {
             sort: sort1,
-            currentPage: currentPage,
             category: category,
             minPrice: (minPrice != null || !minPrice === ' ') ? minPrice : 0,
             maxPrice: (maxPrice != null || !maxPrice === ' ') ? maxPrice : 10000000000,
             cpu: cpu,
             ram: ram,
-            cateParent: cateParent,
             sale: sale,
             displaySize: displaySize,
             screenRatio: screenRatio,
@@ -316,26 +130,234 @@ $(document).ready(function () {
             maxMass: (maxMass != null || !maxMass === ' ') ? maxMass : 99,
 
         };
-
-
         $.get(
-            url,
-            data,
+            url, data,
             function (result) {
-
+                reset();
                 var totalElements = result.totalElements;
-                $('#totalElements').html('Đã thấy ' + totalElements + ' sản phẩm')
-                if (result.content.length === 0) {
+                var id = result.id;
+                if (id === 76) {
+                    $('#cpu').remove();
+                    $('#cdh').remove();
+                    $('#ram').remove();
+                }
+                if (id === 57) {
+                    $('#dpg').remove();
+                    $('#tsq').remove();
+                    $('#tlmh').remove();
+                }
+                $('#totalElements').html('Đã thấy ' + totalElements + ' sản phẩm');
+                if (result.data.length === 0) {
                     $('#emty').html("<h1 style='text-align: center'>Không có sản phẩm nào vui lòng chọn lại</h1>")
                 } else {
                     $('#emty').html('')
-
-                    $('.mainSca').remove()
-                    $.each(result.content, function (i, product) {
-
+                    $.each(result.data, function (i, p) {
                         var content = '<div class="col-sm-3">\n' +
                             '    <div class="product-image-wrapper">\n' +
-                            '        <a   class="single-products">\n' +
+                            '        <a href="/view?id=' + p.id + '"   class="single-products">\n' +
+                            '            <div class="productinfo">\n' +
+                            '                <img class="anhSP" src="/user-st/images/product/' + p.id + '.jpg" alt="">\n' +
+                            '                <div class="content--product">\n' +
+                            '                    <b >' + p.name + '</b>\n' +
+                            '                    <h4 class="price">' +
+                            (p.outputPrice).toLocaleString('vi', {style: 'currency', currency: 'VND'}) +
+                            '</h4>\n' +
+                            '                    <s>56.750.000 đ</s>\n' +
+                            '                </div>\n' +
+                            '                <div>\n' +
+                            '                    <i class="fa fa-gift"></i><span style="margin-left: 5px;">Giảm giá</span>\n' +
+                            '                </div>\n' +
+                            '                <a href="#" class="btn btn-default add-to-cart">\n' +
+                            '                    <i class="fa fa-shopping-cart"></i>\n' +
+                            '                </a>\n' +
+                            '                <a href="#" class="btn add-to-cart">\n' +
+                            '                    <i class="fa fa-plus"></i>\n' +
+                            '                </a>\n' +
+                            '            </div>\n' +
+                            '\n' +
+                            '        </a>\n' +
+                            '    </div>\n' +
+                            '</div>';
+
+                        $('#formFilter').append(content);
+
+                        $('#pagination-2').pagination({
+                            total: result.totalPages,
+                            current: currentPage,
+                            length: 24,
+                            size: 2,
+                            click: function (options, $target) {
+                                $('#formFilter').html(' ');
+                                $('.pagination li').remove();
+                                updatelisting(options.current);
+                            }
+                        });
+                    })
+
+                }
+            })
+
+
+    }
+
+    function reset() {
+        $('#formFilter').html(' ');
+        $('.pagination li').remove();
+    }
+
+    function seeMore(id) {
+        this.event.preventDefault()
+        var href = "http://localhost:8080/api/findTrademark/" + id;
+        $.get(href, function (result) {
+
+            $.each(result, function (i, category) {
+                if (i < 5) {
+                    var sp = '  <label class="check-list">' +
+                        ' <span class="text">' + category.name + '</span>\n' +
+                        '                                        <input class="br" type="checkbox" id="checkbox1" value="' + category.id + '">\n' +
+                        '                                        <span class="checkmark"></span>' +
+                        '</label>';
+                    $("#trademark").append(sp);
+
+                }
+
+
+            })
+
+            var seeMore = '  <a class="view-more" id="seeMore">\n' +
+                '                                        Xem thêm thương hiệu\n' +
+                '                                    </a>';
+            if (result.length > 5) {
+                $("#trademark").append(seeMore);
+            }
+            $("#seeMore").on('click', function () {
+                var href = "http://localhost:8080/api/findTrademark/" + id;
+                $.get(href, function (result) {
+                    $.each(result, function (i, category) {
+                        if (i >= 5) {
+                            var sp = '  <label class="check-list">' +
+                                ' <span class="text">' + category.name + '</span>\n' +
+                                '                                        <input class="br" type="checkbox" id="checkbox1" value="' + category.id + '">\n' +
+                                '                                        <span class="checkmark"></span>' +
+                                '</label>';
+
+                            $("#trademark").append(sp);
+                            $("#seeMore").hide();
+                            $("#seeMore").removeAttr('id')
+                        }
+
+                    })
+                    const checkbox = $("input:checkbox");
+
+                    checkbox.on('change', function (event) {
+                        event.preventDefault();
+                        updatelisting(1);
+                    });
+                })
+            })
+
+            const checkbox = $("input:checkbox");
+            checkbox.on('change', function (event) {
+                event.preventDefault();
+                updatelisting(1);
+            });
+
+        })
+    }
+
+    function getCate() {
+        this.event.preventDefault();
+        var hostName = window.location.pathname;
+        var href = "http://localhost:8080/api" + hostName;
+        $.get(href, function (result) {
+            console.log(result)
+            seeMore(result);
+        })
+    }
+
+    $("#delFilter").on('click', function (event) {
+        event.preventDefault();
+        $("input:checkbox").attr("checked", false);
+        updatelisting(1);
+
+    })
+    $(".sortAsc").on('click', function (event) {
+        event.preventDefault();
+        $('.desc').prop("checked", false);
+        $('.asc').prop("checked", true);
+        updatelisting(1);
+
+    })
+
+    $(".sortDesc").on('click', function (event) {
+        event.preventDefault();
+        $('.asc').prop("checked", false);
+        $('.desc').prop("checked", true);
+        updatelisting(1);
+
+
+    })
+
+
+    function get_filter(id_name) {
+        var filter = new Array();
+
+        $('[id="' + id_name + '"]').each(function (i, e) {
+            if ($(e).is(':checked')) {
+                filter.push($(this).val());
+            }
+
+        });
+        return filter;
+    }
+
+    function get_filterOne(id_name) {
+        var filter = new Array();
+
+        $('[id="' + id_name + '"]').each(function (i, e) {
+            if ($(e).is(':checked')) {
+                filter.push($(this).val());
+            }
+            $("input:checkbox").on('click', function () {
+                var $box = $(this);
+                if ($box.is(":checked")) {
+                    var group = "input:checkbox[name='" + $box.attr("name") + "']";
+                    $(group).prop("checked", false);
+                    $box.prop("checked", true);
+                } else {
+                    $box.prop("checked", false);
+                }
+            });
+        });
+        return filter;
+    }
+
+
+    var timeout = null;
+
+    function findName(numberPage) {
+
+        var search = $('#search').val();
+
+        //   clearTimeout(timeout);
+
+        var href = "http://localhost:8080/api/findId/" + numberPage + "?name=" + search;
+        $.get(href, function (result) {
+            reset();
+            var totalElements = result.totalElements;
+            $('#totalElements').html('Đã thấy ' + totalElements + ' sản phẩm')
+            if (search === "") {
+                $('#emty').html('')
+                updatelisting(1);
+            } else {
+                if (result.content.length === 0) {
+                    $('#emty').html("<h1 style='text-align: center'>Không có sản phẩm nào phù hợp theo tìm kiếm.</h1>")
+                } else {
+                    $('#emty').html('')
+                    $.each(result.content, function (i, product) {
+                        var content = '<div class="col-sm-3">\n' +
+                            '    <div class="product-image-wrapper">\n' +
+                            '        <a href="/view?id=' + product.id + '"   class="single-products">\n' +
                             '            <div class="productinfo">\n' +
                             '                <img class="anhSP" src="/user-st/images/product/' + product.id + '.jpg" alt="">\n' +
                             '                <div class="content--product">\n' +
@@ -363,103 +385,29 @@ $(document).ready(function () {
                         $('#formFilter').append(content);
                         $('#pagination-2').pagination({
                             total: result.totalPages,
-                            current: currentPage,
-                            length: 12,
+                            current: numberPage,
+                            length: 1,
                             size: 2,
                             click: function (options, $target) {
-                                $('#formFilter').html(' ').fadeIn();
-                                $('.pagination li').remove().fadeIn();
-                                ;
-                                updatelisting(options.current).fadeOut();
+                                reset();
+                                findName(options.current);
                             }
                         });
                     })
 
                 }
-
-            })
-
-
-    }
+            }
 
 
-    findName(1)
-    var timeout = null;
-
-    // Sự kiện keyup
-    function findName(numberPage) {
-        $(document).on('keyup', '#search', function (event) {
-            event.preventDefault();
-            clearTimeout(timeout);
-            timeout = setTimeout(function () {
-                var data = {
-                    name: $('#search').val(),
-                    cateParent: $("#cate_item").val(),
-                    numberPage: numberPage
-                };
-                var href = "http://localhost:8080/api/findId";
-                $.get(href, data, function (result) {
-                    $('#formFilter').html(' ').fadeIn();
-                    $('.pagination li').remove().fadeIn();
-                    var totalElements = result.totalElements;
-                    $('#totalElements').html('Đã thấy ' + totalElements + ' sản phẩm')
-                    if (result.content.length === 0) {
-                        $('#emty').html("<h1 style='text-align: center'>Không có sản phẩm nào vui lòng chọn lại</h1>")
-                    } else {
-                        $('#emty').html('')
-
-                        $('.mainSca').remove()
-                        $.each(result.content, function (i, product) {
-                            var totalElements = result.totalElements;
-                            var content = '<div class="col-sm-3">\n' +
-                                '    <div class="product-image-wrapper">\n' +
-                                '        <a   class="single-products">\n' +
-                                '            <div class="productinfo">\n' +
-                                '                <img class="anhSP" src="/user-st/images/product/' + product.id + '.jpg" alt="">\n' +
-                                '                <div class="content--product">\n' +
-                                '                    <b >' + product.name + '</b>\n' +
-                                '                    <h4 class="price">' +
-                                (product.outputPrice).toLocaleString('vi', {style: 'currency', currency: 'VND'}) +
-                                '</h4>\n' +
-                                '                    <s>56.750.000 đ</s>\n' +
-                                '                </div>\n' +
-                                '                <div>\n' +
-                                '                    <i class="fa fa-gift"></i><span style="margin-left: 5px;">Giảm giá</span>\n' +
-                                '                </div>\n' +
-                                '                <a href="#" class="btn btn-default add-to-cart">\n' +
-                                '                    <i class="fa fa-shopping-cart"></i>\n' +
-                                '                </a>\n' +
-                                '                <a href="#" class="btn add-to-cart">\n' +
-                                '                    <i class="fa fa-plus"></i>\n' +
-                                '                </a>\n' +
-                                '            </div>\n' +
-                                '\n' +
-                                '        </a>\n' +
-                                '    </div>\n' +
-                                '</div>';
-
-                            $('#formFilter').append(content);
-                            $('#example-2').pagination({
-                                total: result.totalPages,
-                                current: numberPage,
-                                length: 12,
-                                size: 2,
-                                click: function (options, $target) {
-                                    $('#formFilter').html(' ').fadeIn();
-                                    $('.pagination li').remove().fadeIn();
-                                    ;
-                                    updatelisting(options.current).fadeOut();
-                                }
-                            });
-
-                        })
-                    }
-
-
-                })
-
-
-            }, 500);
         })
+        
     }
+
+    $(document).on('input', '#search', function (event) {
+        event.preventDefault();
+        timeout = setTimeout(function () {
+            findName(1);
+        }, 250);
+    })
+
 })

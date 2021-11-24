@@ -23,5 +23,5 @@ public class ProductSearchCriteria {
     private Optional<Float> minMass;
     private Optional<Float> maxMass;
     private String vga;
-   // private String cpu;
+    private Integer searchId;
 }

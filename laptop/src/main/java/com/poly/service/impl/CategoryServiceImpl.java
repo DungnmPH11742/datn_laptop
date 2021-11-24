@@ -73,6 +73,15 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public List<CategoryVO> findAllByParentId(Integer id) {
+        List<CategoryVO> vos = new ArrayList<>();
+        categoryRepository.findAllByParentId(id).forEach(category -> {
+            vos.add(modelMapper.map(category, CategoryVO.class));
+        });
+        return vos;
+    }
+
+    @Override
     public List<CategoryVO> findAllById(Integer id) {
         return convertListCategoryDto(categoryRepository.findAllById(id));
     }
@@ -96,7 +105,7 @@ public class CategoryServiceImpl implements CategoryService {
         Optional<Category> optional = categoryRepository.findById(id);
         if (optional.isPresent()) {
             Category category = optional.get();
-            BeanUtils.copyProperties(categoryVO, category);
+          categoryVO =  modelMapper.map(category, CategoryVO.class);
         }
         return categoryVO;
     }

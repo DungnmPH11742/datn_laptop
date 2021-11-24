@@ -38,8 +38,8 @@ public interface ProductsRepository extends JpaRepository<Products, String>, Jpa
 
     List<Products> findAllByCategory_Id(Integer id);
 
-    @Query(value = "{call filter_Sales}", nativeQuery = true)
-    List<Products> getListProductByCodeSale();
+    @Query(value = "{call filter_Sales_Products(:page_id)}", nativeQuery = true)
+    List<Products> getListProductByCodeSale( @Param( "page_id" ) Integer parentId);
 
     List<Products> findByNameContainingAndTypeOfItem(String name, int type);
 

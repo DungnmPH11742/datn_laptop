@@ -8,10 +8,17 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 
 public final class ProductsSpecifications {
 
@@ -30,6 +37,7 @@ public final class ProductsSpecifications {
                                 .and(productResolution(searchCriteria.getResolution()))
                                 .and(massBetween(searchCriteria.getMinMass(), searchCriteria.getMaxMass()))
                                 .and(productVGA(searchCriteria.getVga()))
+
                         :
                         (outputPriceBetween(searchCriteria.getMinPrice(), searchCriteria.getMaxPrice()))
 
@@ -73,7 +81,7 @@ public final class ProductsSpecifications {
     public static Specification<Products> productCPU(String cpu) {
 
         return (root, query, builder) -> {
-            Join<Products, ProductsDetail> producJoin = root.join(Products_.productsDetail);
+            Join<Products, ProductsDetail> producJoin = root.join(Products_.productsDetail, JoinType.LEFT);
             return ObjectUtils.isEmpty(cpu) ? builder.conjunction() : builder.like(producJoin.get(ProductsDetail_.cpu), "%" + cpu + "%");
         };
     }
@@ -81,7 +89,7 @@ public final class ProductsSpecifications {
     public static Specification<Products> productDisplaySize(String displaySize) {
 
         return (root, query, builder) -> {
-            Join<Products, ProductsDetail> producJoin = root.join(Products_.productsDetail);
+            Join<Products, ProductsDetail> producJoin = root.join(Products_.productsDetail, JoinType.LEFT);
             return ObjectUtils.isEmpty(displaySize) ? builder.conjunction() : builder.like(producJoin.get(ProductsDetail_.displaySize), "%" + displaySize + "%");
         };
     }
@@ -89,14 +97,14 @@ public final class ProductsSpecifications {
     public static Specification<Products> productVGA(String vga) {
 
         return (root, query, builder) -> {
-            Join<Products, ProductsDetail> producJoin = root.join(Products_.productsDetail);
+            Join<Products, ProductsDetail> producJoin = root.join(Products_.productsDetail, JoinType.LEFT);
             return ObjectUtils.isEmpty(vga) ? builder.conjunction() : builder.like(producJoin.get(ProductsDetail_.vga), "%" + vga + "%");
         };
     }
 
     public static Specification<Products> productResolution(String resolution) {
         return (root, query, builder) -> {
-            Join<Products, ProductsDetail> producJoin = root.join(Products_.productsDetail);
+            Join<Products, ProductsDetail> producJoin = root.join(Products_.productsDetail, JoinType.LEFT);
             return ObjectUtils.isEmpty(resolution) ? builder.conjunction() : builder.like(producJoin.get(ProductsDetail_.resolution), "%" + resolution + "%");
         };
     }
@@ -104,7 +112,7 @@ public final class ProductsSpecifications {
     public static Specification<Products> productScanFrequency(String scanFrequency) {
 
         return (root, query, builder) -> {
-            Join<Products, ProductsDetail> producJoin = root.join(Products_.productsDetail);
+            Join<Products, ProductsDetail> producJoin = root.join(Products_.productsDetail, JoinType.LEFT);
             return ObjectUtils.isEmpty(scanFrequency) ? builder.conjunction() : builder.like(producJoin.get(ProductsDetail_.scanFrequency), "%" + scanFrequency + "%");
         };
     }
@@ -112,14 +120,14 @@ public final class ProductsSpecifications {
     public static Specification<Products> productScreenRatio(String screenRatio) {
 
         return (root, query, builder) -> {
-            Join<Products, ProductsDetail> producJoin = root.join(Products_.productsDetail);
+            Join<Products, ProductsDetail> producJoin = root.join(Products_.productsDetail, JoinType.LEFT);
             return ObjectUtils.isEmpty(screenRatio) ? builder.conjunction() : builder.like(producJoin.get(ProductsDetail_.screenRatio), "%" + screenRatio + "%");
         };
     }
 
     public static Specification<Products> productRAM(String ram) {
         return (root, query, builder) -> {
-            Join<Products, ProductsDetail> producJoin = root.join(Products_.productsDetail);
+            Join<Products, ProductsDetail> producJoin = root.join(Products_.productsDetail, JoinType.LEFT);
             return ObjectUtils.isEmpty(ram) ? builder.conjunction() : builder.like(producJoin.get("ram"), "%" + ram + "%");
         };
     }
@@ -127,7 +135,7 @@ public final class ProductsSpecifications {
     public static Specification<Products> productHardDrive(String hardDrive) {
 
         return (root, query, builder) -> {
-            Join<Products, ProductsDetail> producJoin = root.join(Products_.productsDetail);
+            Join<Products, ProductsDetail> producJoin = root.join(Products_.productsDetail, JoinType.LEFT);
             return ObjectUtils.isEmpty(hardDrive) ? builder.conjunction() : builder.like(producJoin.get(ProductsDetail_.hardDrive), "%" + hardDrive + "%");
         };
     }
@@ -152,6 +160,14 @@ public final class ProductsSpecifications {
             }).orElse(null);
         };
     }
-
+    public static Specification<Products> dayBetween(Integer id) {
+        EntityManager em = null;
+        return (root, query, builder) -> {
+            Query query1 = em.createNativeQuery("filter_Sales_Products",Products.class);
+            query1.setParameter(1, id);
+            List<Products> productsList = query1.getResultList();
+            return (javax.persistence.criteria.Predicate) productsList;
+        };
+    }
 
 }

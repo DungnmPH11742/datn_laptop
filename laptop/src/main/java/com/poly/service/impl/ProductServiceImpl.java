@@ -142,31 +142,31 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<ProductsVO> findAllByNameLike(int page, int limit, String name, Integer cateParent) {
+    public Page<ProductsVO> findAllByNameLike(int page, int limit, String name) {
         System.err.println("name: " + name);
         List<ProductsVO> result = null;
 
         List<ProductsVO> lstProfuctsVO = convertToListDto(productsRepository.findAll());
         List<ProductsVO> lstProfuctsVOFindByName = convertToListDto(productsRepository.findAllByNameLike(name));
         CategoryVO categoryVO = new CategoryVO();
-        Optional<Category> optional = categoryRepository.findById(cateParent);
-        if (optional.isPresent()) {
-            Category category = optional.get();
-            BeanUtils.copyProperties(categoryVO, category);
-        }
+       // Optional<Category> optional = categoryRepository.findById(cateParent);
+        //if (optional.isPresent()) {
+        //    Category category = optional.get();
+        //    BeanUtils.copyProperties(categoryVO, category);
+       // }
         result = (name.equals("")) ? lstProfuctsVO.stream().filter(x -> x.getTypeOfItem() == categoryVO.getParentId())
                 .collect(Collectors.toList()) : lstProfuctsVOFindByName;
         Pageable pageable = PageRequest.of(page - 1, limit);
         final int start = (int) pageable.getOffset();
         final int end = Math.min((start + pageable.getPageSize()), result.size());
-        Page pageProducts = new PageImpl<>(result.subList(start, end), pageable, result.size());
+        Page pageProducts = new PageImpl<>(lstProfuctsVOFindByName.subList(start, end), pageable, result.size());
 
         return pageProducts;
     }
 
     @Override
-    public List<ProductsVO> getListProductByCodeSale() {
-        return convertToListDto(productsRepository.getListProductByCodeSale());
+    public List<ProductsVO> getListProductByCodeSale(Integer parentId) {
+        return convertToListDto(productsRepository.getListProductByCodeSale(parentId));
     }
 
     @Override

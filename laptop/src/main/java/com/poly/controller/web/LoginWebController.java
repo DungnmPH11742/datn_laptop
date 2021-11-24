@@ -43,6 +43,7 @@ public class LoginWebController {
     public String loginPage(Model model) {
         return "user/login";
     }
+
     @GetMapping("/register")
     public String registerPage(Model model) {
         model.addAttribute("account", new AccountVO());
@@ -50,20 +51,19 @@ public class LoginWebController {
     }
 
     @PostMapping("/register")
-    public String processRegister( @ModelAttribute("account") @Valid AccountVO account, BindingResult bindingResult, HttpServletRequest request, RedirectAttributes redirectAttributes,Model model)
+    public String processRegister(@ModelAttribute("account") @Valid AccountVO account, BindingResult bindingResult, HttpServletRequest request, RedirectAttributes redirectAttributes, Model model)
             throws UnsupportedEncodingException, MessagingException {
         validate.validate(account, bindingResult);
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return "user/register";
         }
         Account accountRegister = service.findUserAccountByEmailFalse(account.getEmail());
-        if(accountRegister != null){
+        if (accountRegister != null) {
             Integer id = accountRegister.getId();
             account.setId(id);
-            service.updateAccountByRegister(account,getSiteURL(request));
-        }
-        else{
-            service.createAccountByRegister(account,getSiteURL(request));
+            service.updateAccountByRegister(account, getSiteURL(request));
+        } else {
+            service.createAccountByRegister(account, getSiteURL(request));
         }
 
         return "user/register_success";
@@ -82,6 +82,7 @@ public class LoginWebController {
             return "user/verify_fail";
         }
     }
+
     @GetMapping("/admin")
     public String admin() {
         return "admin";

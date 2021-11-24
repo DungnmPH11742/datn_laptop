@@ -20,9 +20,10 @@ public class ProductDetailController {
     private ProductService productService;
 
     @RequestMapping("/view")
-    public String viewProduct(@RequestParam("id") String id, Model model){
+    public String viewProduct(@RequestParam("id") String id, Model model) {
         ProductsVO productsVO = productService.getOne(id);
         headerHelper.setHeaderSession(model);
+        model.addAttribute("related_products", productService.getListByCate(productsVO.getCategory().getParentId()));
         model.addAttribute("product", productService.getOne(id));
         return "user/product-details";
     }

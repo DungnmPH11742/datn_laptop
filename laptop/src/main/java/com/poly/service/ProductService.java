@@ -32,9 +32,9 @@ public interface ProductService {
 
     List<ProductsVO> retrieveProducts(ProductSearchCriteria searchCriteria);
 
-    Page<ProductsVO> findAllByNameLike(int page, int limit, String name, Integer cateParent);
+    Page<ProductsVO> findAllByNameLike(int page, int limit, String name);
 
-    List<ProductsVO> getListProductByCodeSale();
+    List<ProductsVO> getListProductByCodeSale(Integer parentId);
 
 
     List<ProductsVO> findAllByTypeOfItemAndCategory_ParentId(Integer type, Integer pantId);
