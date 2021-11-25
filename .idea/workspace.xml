@@ -1,7 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
+    <list default="true" id="f955a355-4ddb-4e78-9179-aaa469c6f652" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/laptop_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/laptop_war_exploded.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/datn_laptop.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/datn_laptop.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/api/apiCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/api/apiCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/web/CategoryWebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/web/CategoryWebController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/web/CompareWebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/web/CompareWebController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/web/LoginWebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/web/LoginWebController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/web/ProductDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/web/ProductDetailController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Products.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Products.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/filter/ProductSearchCriteria.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/filter/ProductSearchCriteria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/filter/ProductsSpecifications.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/filter/ProductsSpecifications.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/CategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/CategoryRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ProductsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ProductsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/CategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/CategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/CategoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/ProductServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/serchProducts.js" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/serchProducts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/common/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/common/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/duong-test.html" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/duong-test.html" afterDir="false" />
+    </list>
+=======
     <list default="true" id="3fef64cb-f5c5-4396-941c-84abe1cd827f" name="Default Changelist" comment="" />
+>>>>>>> main
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -66,6 +92,52 @@
       <created>1636387331421</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
+<<<<<<< HEAD
+      <updated>1635437010203</updated>
+      <workItem from="1635437012157" duration="600000" />
+      <workItem from="1635445622154" duration="191000" />
+      <workItem from="1635689656047" duration="1136000" />
+      <workItem from="1635693140734" duration="5755000" />
+      <workItem from="1635775541873" duration="10509000" />
+      <workItem from="1635845181785" duration="2739000" />
+      <workItem from="1635848669365" duration="1258000" />
+      <workItem from="1635856912661" duration="15606000" />
+      <workItem from="1635874327021" duration="534000" />
+      <workItem from="1635903865595" duration="28000" />
+      <workItem from="1635907605135" duration="2954000" />
+      <workItem from="1635925405631" duration="5000" />
+      <workItem from="1635928464707" duration="284000" />
+      <workItem from="1635945571741" duration="12922000" />
+      <workItem from="1635989838556" duration="1643000" />
+      <workItem from="1636001562775" duration="2364000" />
+      <workItem from="1636018990380" duration="326000" />
+      <workItem from="1636030021529" duration="13631000" />
+      <workItem from="1636046040380" duration="4139000" />
+      <workItem from="1636075363368" duration="508000" />
+      <workItem from="1636090708135" duration="482000" />
+      <workItem from="1636114247348" duration="13003000" />
+      <workItem from="1636165472943" duration="33789000" />
+      <workItem from="1636251623195" duration="37193000" />
+      <workItem from="1636374851890" duration="2633000" />
+      <workItem from="1636380589337" duration="9597000" />
+      <workItem from="1636453768922" duration="613000" />
+      <workItem from="1636479672018" duration="922000" />
+      <workItem from="1636547126455" duration="11874000" />
+      <workItem from="1636565715459" duration="3000" />
+      <workItem from="1636594970683" duration="676000" />
+      <workItem from="1636617445850" duration="2406000" />
+      <workItem from="1636637900818" duration="10318000" />
+      <workItem from="1636708084734" duration="825000" />
+      <workItem from="1636788590183" duration="23351000" />
+      <workItem from="1636854808116" duration="43970000" />
+      <workItem from="1636913898393" duration="657000" />
+      <workItem from="1636939512877" duration="5685000" />
+      <workItem from="1636969428670" duration="4226000" />
+      <workItem from="1636980473449" duration="10186000" />
+      <workItem from="1637027089908" duration="35701000" />
+      <workItem from="1637592584240" duration="1254000" />
+      <workItem from="1637675624072" duration="4414000" />
+=======
       <updated>1636387331421</updated>
       <workItem from="1636387335868" duration="127000" />
       <workItem from="1636409497838" duration="7406000" />
@@ -89,6 +161,7 @@
       <workItem from="1637204689270" duration="2183000" />
       <workItem from="1637223451989" duration="588000" />
       <workItem from="1637411957546" duration="4509000" />
+>>>>>>> main
     </task>
     <servers />
   </component>
@@ -96,8 +169,17 @@
     <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
+<<<<<<< HEAD
+    <state x="520" y="114" key="#LaptopApplication" timestamp="1637675627085">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="520" y="114" key="#LaptopApplication/0.0.1920.1032@0.0.1920.1032" timestamp="1637675627085" />
+    <state x="765" y="222" key="#com.intellij.ide.util.MemberChooser" timestamp="1636297298787">
+      <screen x="0" y="0" width="1920" height="1032" />
+=======
     <state x="586" y="203" key="#Inspections" timestamp="1636885373926">
       <screen x="0" y="0" width="1920" height="1050" />
+>>>>>>> main
     </state>
     <state x="586" y="203" key="#Inspections/0.0.1920.1050@0.0.1920.1050" timestamp="1636885373926" />
     <state x="765" y="231" key="#com.intellij.ide.util.MemberChooser" timestamp="1636414226663">
@@ -111,6 +193,52 @@
     <state x="740" y="279" key="FileChooserDialogImpl" timestamp="1637208207461">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
+<<<<<<< HEAD
+    <state x="740" y="272" key="FileChooserDialogImpl/0.0.1920.1032@0.0.1920.1032" timestamp="1637071021828" />
+    <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1635354572405" />
+    <state width="702" height="109" key="GridCell.Tab.0.bottom" timestamp="1637695815040">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="702" height="109" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1637695815040" />
+    <state width="1877" height="139" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1635362249248" />
+    <state width="702" height="109" key="GridCell.Tab.0.center" timestamp="1637695815039">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="702" height="109" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1637695815039" />
+    <state width="1877" height="139" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1635362249248" />
+    <state width="702" height="109" key="GridCell.Tab.0.left" timestamp="1637695815039">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="702" height="109" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1637695815039" />
+    <state width="1877" height="139" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1635362249248" />
+    <state width="702" height="109" key="GridCell.Tab.0.right" timestamp="1637695815040">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="702" height="109" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1637695815040" />
+    <state width="1877" height="139" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1635362249248" />
+    <state width="702" height="109" key="GridCell.Tab.1.bottom" timestamp="1637695815040">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="702" height="109" key="GridCell.Tab.1.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1637695815040" />
+    <state width="1877" height="139" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1635362249248" />
+    <state width="702" height="109" key="GridCell.Tab.1.center" timestamp="1637695815040">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="702" height="109" key="GridCell.Tab.1.center/0.0.1920.1032@0.0.1920.1032" timestamp="1637695815040" />
+    <state width="1877" height="139" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1635362249248" />
+    <state width="702" height="109" key="GridCell.Tab.1.left" timestamp="1637695815040">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="702" height="109" key="GridCell.Tab.1.left/0.0.1920.1032@0.0.1920.1032" timestamp="1637695815040" />
+    <state width="1877" height="139" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1635362249248" />
+    <state width="702" height="109" key="GridCell.Tab.1.right" timestamp="1637695815040">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="702" height="109" key="GridCell.Tab.1.right/0.0.1920.1032@0.0.1920.1032" timestamp="1637695815040" />
+    <state width="1877" height="139" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1635362249248" />
+    <state width="1877" height="344" key="GridCell.Tab.2.bottom" timestamp="1636913693636">
+      <screen x="0" y="0" width="1920" height="1032" />
+=======
     <state x="740" y="279" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1637208207461" />
     <state width="1877" height="443" key="GridCell.Tab.0.bottom" timestamp="1637419980346">
       <screen x="0" y="0" width="1920" height="1050" />
@@ -146,6 +274,7 @@
     <state width="1877" height="443" key="GridCell.Tab.1.right/0.0.1920.1050@0.0.1920.1050" timestamp="1637419980346" />
     <state x="440" y="99" key="SettingsEditor" timestamp="1636387405640">
       <screen x="0" y="0" width="1920" height="1050" />
+>>>>>>> main
     </state>
     <state x="440" y="99" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1636387405640" />
     <state x="342" y="85" key="new project wizard" timestamp="1636941619944">
@@ -159,10 +288,52 @@
     <state x="616" y="243" key="run.anything.popup" timestamp="1636885814701">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
+<<<<<<< HEAD
+    <state width="1877" height="344" key="GridCell.Tab.2.right/0.0.1920.1032@0.0.1920.1032" timestamp="1636913693636" />
+    <state x="440" y="93" key="SettingsEditor" timestamp="1637675736818">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="440" y="93" key="SettingsEditor/0.0.1920.1032@0.0.1920.1032" timestamp="1637675736818" />
+    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1635354524304" />
+    <state x="566" y="126" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1636130705880">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="566" y="126" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1032@0.0.1920.1032" timestamp="1636130705880" />
+    <state x="769" y="429" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1637052442341">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="769" y="429" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1032@0.0.1920.1032" timestamp="1637052442341" />
+    <state x="666" y="118" width="587" height="795" key="find.popup" timestamp="1635847658247">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="666" y="118" width="587" height="795" key="find.popup/0.0.1920.1032@0.0.1920.1032" timestamp="1635847658247" />
+    <state x="342" y="176" key="new project wizard" timestamp="1636650726589">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="342" y="176" key="new project wizard/0.0.1920.1032@0.0.1920.1032" timestamp="1636650726589" />
+    <state x="736" y="274" key="refactoring.ChangeSignatureDialog" timestamp="1635848037592">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="736" y="274" key="refactoring.ChangeSignatureDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1635848037592" />
+    <state x="616" y="238" key="run.anything.popup" timestamp="1636913627237">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="616" y="238" key="run.anything.popup/0.0.1920.1032@0.0.1920.1032" timestamp="1636913627237" />
+    <state x="623" y="223" width="672" height="678" key="search.everywhere.popup" timestamp="1637071522548">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="623" y="223" width="672" height="678" key="search.everywhere.popup/0.0.1920.1032@0.0.1920.1032" timestamp="1637071522548" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/datn_laptop$LaptopApplication.ic" NAME="LaptopApplication Coverage Results" MODIFIED="1636193180015" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.poly.*</FILTER>
+    </SUITE>
+=======
     <state x="616" y="243" key="run.anything.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1636885814701" />
     <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1636879700823">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="623" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1636879700823" />
+>>>>>>> main
   </component>
 </project>

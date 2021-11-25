@@ -3,6 +3,7 @@ package com.poly.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
@@ -10,6 +11,13 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "products")
+@NamedStoredProcedureQuery(name = "filter_Sales_Products",
+        procedureName = "filter_Sales_Products",
+        resultClasses = {Products.class},
+        parameters={
+                @StoredProcedureParameter(name="@ParentId", type= Integer.class)}
+
+)
 public class Products implements Serializable {
 
     private static final long serialVersionUID = 1L;

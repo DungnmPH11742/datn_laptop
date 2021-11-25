@@ -1,6 +1,5 @@
 package com.poly.controller.api;
 
-import com.poly.repo.ProductsRepository;
 import com.poly.service.ProductService;
 import com.poly.vo.ProductsVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +16,6 @@ public class ProductAdminAPI {
 
     @Autowired
     private ProductService productService;
-
-    @Autowired
-    private ProductsRepository productsRepository;
 
     @GetMapping(value = "/product/find-all")
     public ResponseEntity<List<ProductsVO>> getListProduct() {
