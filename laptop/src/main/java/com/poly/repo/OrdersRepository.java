@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.repository.query.Param;
 
 import javax.persistence.criteria.Order;
 import java.util.List;
@@ -15,4 +16,7 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer>, JpaSpe
 
     @Query("select o from Orders o where o.account.id =?1")
     List<Orders> findByIdAccount(Integer idAccount);
+
+    @Query("select o  from Orders  o where o.orderCode =:code")
+    Orders getOrderByCode(@Param("code") String code);
 }

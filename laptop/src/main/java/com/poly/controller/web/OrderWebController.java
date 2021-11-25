@@ -41,6 +41,7 @@ public class OrderWebController {
 
     @RequestMapping("/cart")
     public String indexCart(Model model){
+
 //        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 //        List<OrderDetailsVO> list = new ArrayList<>();
 //        // Khi chưa đăng nhập

@@ -20,9 +20,9 @@ public class OrdersVO implements Serializable {
 
     private Integer quantity;
 
-    private String description;
+    private String orderCode;
 
-    private Integer paymentMethod;
+    private String description;
 
     private  OrderDetailsVO detailsVO;
 

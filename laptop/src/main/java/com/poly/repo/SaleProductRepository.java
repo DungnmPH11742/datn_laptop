@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EnableJpaRepositories
-public interface SaleProductRepository extends JpaRepository<SaleProduct, Integer>, JpaSpecificationExecutor<SaleProduct> {
+public interface SaleProductRepository extends JpaRepository<SaleProduct, String>, JpaSpecificationExecutor<SaleProduct> {
 
 }

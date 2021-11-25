@@ -6,6 +6,7 @@
         <exploded>true</exploded>
         <module>laptop</module>
         <packaging>war</packaging>
+        <unpackNestedArchives>false</unpackNestedArchives>
       </options>
     </properties>
     <root id="root">
@@ -92,6 +93,10 @@
           <element id="library" level="project" name="Maven: com.nimbusds:content-type:2.1" />
           <element id="library" level="project" name="Maven: com.nimbusds:lang-tag:1.5" />
           <element id="library" level="project" name="Maven: com.nimbusds:nimbus-jose-jwt:9.10.1" />
+          <element id="library" level="project" name="Maven: org.json:json:20160810" />
+          <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpclient:4.5.13" />
+          <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpcore:4.4.14" />
+          <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.15" />
         </element>
       </element>
       <element id="directory" name="META-INF">

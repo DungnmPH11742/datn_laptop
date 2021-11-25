@@ -9,6 +9,7 @@ import com.poly.service.CategoryService;
 import com.poly.service.OrderService;
 import com.poly.vo.*;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,14 +57,25 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrdersVO saveOrders(OrdersVO vo) {
-            Orders orders = modelMapper.map(vo,Orders.class);
-            repository.save(orders);
-            return vo;
+        Orders orders = modelMapper.map(vo,Orders.class);
+        repository.save(orders);
+        vo.setId(orders.getId());
+        return vo;
+    }
+
+    @Override
+    public OrdersVO getByOrderCode(String code) {
+        Orders orders = this.repository.getOrderByCode(code);
+        if (orders != null){
+            OrdersVO ordersVO = new OrdersVO();
+            modelMapper.map(orders,ordersVO);
+            return ordersVO;
+        }
+        return null;
     }
 
     @Override
     public OrdersVO updateOrders(OrdersVO vo) {
-
         Orders orders = modelMapper.map(vo,Orders.class);
         repository.save(orders);
         return vo;
@@ -76,7 +88,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrdersVO> findOrdersByAccount(Integer idAccount) {
-        System.out.println(idAccount);
         List<OrdersVO> listVO = new ArrayList<>();
         if(!repository.findByIdAccount(idAccount).isEmpty()){
             repository.findByIdAccount(idAccount).forEach(orders -> {

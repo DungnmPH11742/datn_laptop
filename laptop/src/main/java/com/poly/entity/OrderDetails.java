@@ -31,6 +31,9 @@ public class OrderDetails implements Serializable {
     @Column(name = "received")
     private Integer received;
 
+    @Column(name = "payment_methods")
+    private Integer paymentMethod;
+
     //bi-directional many-to-one association to Order
     @OneToOne
     @JoinColumn(name="id_order")
@@ -45,4 +48,6 @@ public class OrderDetails implements Serializable {
     @ManyToOne
     @JoinColumn(name="id_voucher")
     private Vouchers voucher;
+
+
 }

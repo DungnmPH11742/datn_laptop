@@ -27,6 +27,8 @@ public class ProductsVO implements Serializable {
 
     private String unit;
 
+    private String imgUrl;
+
     private String releaseDate;
 
     private String dateOfManufacture;

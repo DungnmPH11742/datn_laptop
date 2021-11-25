@@ -625,13 +625,19 @@
 
     // Thêm ào giỏ hàng
     function addToCart(id) {
+        let  data = {
+            'idProduct':id,
+            'quantityProduct':1,
+        };
         $.ajax({
-            type: "Get",
-            url:"/addcart",
-            data: {'id':id},
+            type: "POST",
+            url:"/addToCart",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            dataType: "JSON",
             success: function (data) {
 
-               alert("Thêm vào giỏ hàng thành công");
+               alert("Thêm vào giỏ hàng thành công và đang có "+data.totalItem+" Sản phẩm");
             },error: function () {
                 alert("Lỗi addToCart");
             }

@@ -29,14 +29,15 @@ public class Orders implements Serializable {
     @Column(name = "address", nullable = false)
     private String address;
 
-    @Column(name = "quantity", nullable = false)
-    private Integer quantity;
+    /*@Column(name = "quantity", nullable = false)
+    private Integer quantity;*/
 
     @Column(name = "description")
     private String description;
 
-    @Column(name = "payment_method")
-    private Integer paymentMethod;
+    @Column(name = "order_code")
+    private String orderCode;
+
 
     //bi-directional many-to-one association to OrderDetail
     @OneToOne(mappedBy="order")
