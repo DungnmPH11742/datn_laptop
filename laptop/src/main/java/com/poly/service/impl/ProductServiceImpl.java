@@ -12,16 +12,15 @@ import com.poly.vo.ProductsVO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -43,7 +42,6 @@ public class ProductServiceImpl implements ProductService {
         });
         return vos;
     }
-
 
     @Override
     public ProductsVO getOne(String id) {
@@ -71,6 +69,7 @@ public class ProductServiceImpl implements ProductService {
             this.productsRepository.save(entity);
             productsDetail.setId(vo.getId());
             this.productsDetailRepository.save(productsDetail);
+            vo.getProductsDetail().setId(vo.getId());
             return vo;
         } else {
             return null;
@@ -100,6 +99,7 @@ public class ProductServiceImpl implements ProductService {
     public boolean delete(String id) {
         Optional<Products> optionalProducts = this.productsRepository.findById(id);
         if (optionalProducts.isPresent()) {
+
             Products products = optionalProducts.get();
             products.setActive(false);
             this.productsRepository.save(products);
@@ -158,7 +158,7 @@ public class ProductServiceImpl implements ProductService {
         Pageable pageable = PageRequest.of(page - 1, limit);
         final int start = (int) pageable.getOffset();
         final int end = Math.min((start + pageable.getPageSize()), lstProductsVO.size());
-        Page page1 = new PageImpl<>(lstProductsVO.subList(start, end), pageable, lstProductsVO.size());
+        Page page1 = new PageImpl(lstProductsVO.subList(start, end), pageable, lstProductsVO.size());
         return page1;
     }
 

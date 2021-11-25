@@ -467,7 +467,9 @@ Create table orders( -- Trả hàng | Đổi hàng | Bảo hành
 	phone_number varchar(10) not null,
 	address nvarchar(60) not null,
 	--quantity int not null,
-	description ntext
+	description ntext,
+	payment_status bit,
+	received int, --0 chờ xác nhận | 1 Đang giao | 2 Đã giao | 3 Đã nhận được hàng | -1 Hủy | -2 giỏ hàng
 )
 --Khóa ngoại orders N-1 người dùng
 ALTER TABLE orders ADD FOREIGN KEY (id_account) REFERENCES account(id);
@@ -482,10 +484,10 @@ Create table order_details(
 	quantity int not null,
 	completion_date date,--Đã nhận được hàng
 	payment_methods int,
-	received int, --0 chờ xác nhận | 1 Đang giao | 2 Đã giao | 3 Bảo hành | 4 Đổi hàng
+	status int, --1 Bảo hành | -1 Đổi hàng | 2 Đã giao | 3 Bảo hành 
 )
 
---Khóa ngoại order_details 1-1 voucher | 1-1 order | 1-1 product
+--Khóa ngoại order_details 1-1 voucher | 1-N order | 1-1 product
 ALTER TABLE order_details ADD FOREIGN KEY (id_order) REFERENCES orders(id);
 
 ALTER TABLE order_details ADD FOREIGN KEY (id_product) REFERENCES products(id);

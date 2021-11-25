@@ -1,7 +1,6 @@
 package com.poly.entity;
 
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -24,11 +23,9 @@ public class SaleProduct implements Serializable {
     private String promotionType;
 
     @Column(name = "date_on", nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date dateOn;
 
     @Column(name = "date_off", nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date dateOff;
 
     @Column(name = "promotion", nullable = false)
@@ -41,6 +38,6 @@ public class SaleProduct implements Serializable {
     private Boolean status;
 
     //bi-directional many-to-one association to Product
-    @OneToMany(mappedBy = "saleProduct")
+    @OneToMany(mappedBy="saleProduct")
     private List<Products> products;
 }

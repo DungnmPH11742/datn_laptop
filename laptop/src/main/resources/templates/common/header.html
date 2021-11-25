@@ -90,8 +90,8 @@
                                                     <li th:each="c2:${cate_all}"
                                                         th:if="${c2.getParentId() == lapt2.getId()}">
                                                         <a
-                                                            th:href="@{'/category/'+${lapt2.getName().toLowerCase()}+'?brand='+${c2.getId()}}"
-                                                            th:text="${c2.getName()}"></a>
+                                                                th:href="@{'/category/'+${lapt2.getName().toLowerCase()}+'?brand='+${c2.getId()}}"
+                                                                th:text="${c2.getName()}"></a>
                                                     </li>
                                                 </div>
                                             </div>
@@ -106,8 +106,8 @@
                                                     <li th:each="c2:${cate_all}"
                                                         th:if="${c2.getParentId() == lapt2.getId()}">
                                                         <a
-                                                            th:href="@{'/category/'+${lapt2.getName().toLowerCase()}+'?brand='+${c2.getId()}}"
-                                                            th:text="${c2.getName()}"></a>
+                                                                th:href="@{'/category/'+${lapt2.getName().toLowerCase()}+'?brand='+${c2.getId()}}"
+                                                                th:text="${c2.getName()}"></a>
                                                     </li>
                                                 </div>
                                             </div>
@@ -186,7 +186,6 @@
                     </div>
                     <div class="links">
                         <div>
-
 
 
                         </div>

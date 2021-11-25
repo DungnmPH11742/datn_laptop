@@ -1,7 +1,6 @@
 package com.poly.entity;
 
 import lombok.Data;
-import org.springframework.security.core.parameters.P;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -35,6 +34,9 @@ public class Products implements Serializable {
 
     @Column(name = "type_of_item", nullable = false)
     private Integer typeOfItem;
+
+    @Column(name = "img_url")
+    private String imgUrl;
 
     @Column(name = "input_price")
     private Float inputPrice;

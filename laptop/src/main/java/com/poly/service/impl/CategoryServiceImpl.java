@@ -1,13 +1,10 @@
 package com.poly.service.impl;
 
 import com.poly.entity.Category;
-import com.poly.entity.Products;
 import com.poly.repo.CategoryRepository;
 import com.poly.service.CategoryService;
 import com.poly.vo.CategoryVO;
-import com.poly.vo.ProductsVO;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

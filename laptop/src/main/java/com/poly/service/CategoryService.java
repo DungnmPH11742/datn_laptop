@@ -1,6 +1,5 @@
 package com.poly.service;
 
-import com.poly.entity.Category;
 import com.poly.vo.CategoryVO;
 
 import java.util.List;
@@ -22,6 +21,8 @@ public interface CategoryService {
     List<CategoryVO> getListByParent(Integer id);
 
     CategoryVO findByName(String name);
+
     List<CategoryVO> findAllByParentId(Integer id);
+
     List<CategoryVO> findAllById(Integer id);
 }

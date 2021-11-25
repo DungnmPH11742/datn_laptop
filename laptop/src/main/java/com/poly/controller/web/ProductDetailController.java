@@ -27,4 +27,5 @@ public class ProductDetailController {
         model.addAttribute("product", productService.getOne(id));
         return "user/product-details";
     }
+
 }
