@@ -53,37 +53,35 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductsVO create(ProductsVO vo) {
-        Products entity = this.modelMapper.map(vo,Products.class);
-        entity.getProductsDetail().setId(vo.getId());
-        ProductsDetail productsDetail = this.modelMapper.map(vo.getProductsDetail(),ProductsDetail.class);
+        Products entity = this.modelMapper.map(vo, Products.class);
+        entity.setProductsDetail(null);
+        ProductsDetail productsDetail = this.modelMapper.map(vo.getProductsDetail(), ProductsDetail.class);
         Optional<Products> productsOptional = this.productsRepository.findById(vo.getId());
         Optional<ProductsDetail> optionalProductsDetail = this.productsDetailRepository.findById(vo.getId());
-        if (!productsOptional.isPresent() && !optionalProductsDetail.isPresent()){
-            productsDetail.setId(vo.getId());
+        if (!productsOptional.isPresent() && !optionalProductsDetail.isPresent()) {
             this.productsRepository.save(entity);
+            productsDetail.setId(vo.getId());
             this.productsDetailRepository.save(productsDetail);
-            vo.getProductsDetail().setId(vo.getId());
             return vo;
-        }else {
+        } else {
             return null;
         }
-
     }
 
     @Override
     public ProductsVO update(ProductsVO vo) {
         Optional<Products> optionalProducts = this.productsRepository.findById(vo.getId());
         Optional<ProductsDetail> optionalProductsDetail = this.productsDetailRepository.findById(vo.getId());
-        if (optionalProducts.isPresent() && optionalProductsDetail.isPresent()){
+        if (optionalProducts.isPresent() && optionalProductsDetail.isPresent()) {
             Products products = optionalProducts.get();
             ProductsDetail productsDetail = optionalProductsDetail.get();
             vo.getProductsDetail().setId(productsDetail.getId());
-            BeanUtils.copyProperties(vo,products);
-            BeanUtils.copyProperties(vo.getProductsDetail(),productsDetail);
+            BeanUtils.copyProperties(vo, products);
+            BeanUtils.copyProperties(vo.getProductsDetail(), productsDetail);
             this.productsRepository.save(products);
             this.productsDetailRepository.save(productsDetail);
-            return  vo;
-        }else {
+            return vo;
+        } else {
             return null;
         }
 
@@ -92,12 +90,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public boolean delete(String id) {
         Optional<Products> optionalProducts = this.productsRepository.findById(id);
-        if (optionalProducts.isPresent()){
+        if (optionalProducts.isPresent()) {
             Products products = optionalProducts.get();
             products.setActive(false);
             this.productsRepository.save(products);
             return true;
-        }else {
+        } else {
             return false;
         }
     }

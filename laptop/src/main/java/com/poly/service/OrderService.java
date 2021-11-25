@@ -17,6 +17,8 @@ public interface OrderService {
     Orders saveOrders(Orders orders);
 
     Orders updateOrders(Orders orders);
-     void deleteById(Integer id);
-     Optional<Orders> findOrdersByAccount(Account account);;
+
+    void deleteById(Integer id);
+
+    Optional<Orders> findOrdersByAccount(Account account);
 }

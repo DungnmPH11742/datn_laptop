@@ -30,6 +30,15 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public List<CategoryVO> getNodeCate() {
+        List<CategoryVO> vos = new ArrayList<>();
+        repository.findByParentIdIsNull().forEach(category -> {
+            vos.add(modelMapper.map(category, CategoryVO.class));
+        });
+        return vos;
+    }
+
+    @Override
     public CategoryVO getOne(String id) {
         return null;
     }

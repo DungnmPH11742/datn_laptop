@@ -18,9 +18,6 @@ public class ProductAdminAPI {
     @Autowired
     private ProductService productService;
 
-    @Autowired
-    private ProductsRepository productsRepository;
-
     @GetMapping(value = "/product/find-all")
     public ResponseEntity<List<ProductsVO>> getListProduct() {
         List<ProductsVO> voList = this.productService.getList();

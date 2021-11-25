@@ -13,4 +13,6 @@ public interface CategoryRepository extends JpaRepository<Category, Integer>, Jp
 
     @Query("select c from Category c where c.parentId =?1")
     List<Category> getListByParent(Integer id);
+
+    List<Category> findByParentIdIsNull();
 }

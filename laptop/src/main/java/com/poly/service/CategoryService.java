@@ -8,6 +8,8 @@ import java.util.Optional;
 public interface CategoryService {
     List<CategoryVO> getList();
 
+    List<CategoryVO> getNodeCate();
+
     CategoryVO getOne(String id);
 
     CategoryVO create(CategoryVO vo);
