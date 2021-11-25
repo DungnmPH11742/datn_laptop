@@ -1,24 +1,15 @@
 package com.poly.controller.web;
 
-import com.poly.entity.Category;
-import com.poly.entity.Products;
 import com.poly.helper.HeaderHelper;
 import com.poly.repo.CategoryRepository;
 import com.poly.repo.ProductsRepository;
 import com.poly.service.CategoryService;
 import com.poly.service.ProductService;
-import com.poly.vo.CategoryVO;
-import com.poly.vo.ProductsVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
 
 @Controller
 public class CategoryWebController {
@@ -38,7 +29,7 @@ public class CategoryWebController {
     private CategoryRepository categoryRepository;
 
     @GetMapping("/category/{nameBrand}")
-    public String getBrandCate(Model model,  @PathVariable("nameBrand") String nameBrand) {
+    public String getBrandCate(Model model, @PathVariable("nameBrand") String nameBrand) {
         headerHelper.setHeaderSession(model);
         return "user/duong-test";
     }

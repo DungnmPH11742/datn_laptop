@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 
 @RequestMapping("/api")
 @RestController
-public class apiCategory {
+public class ApiCategory {
     @Autowired
     private ProductService productService;
     @Autowired

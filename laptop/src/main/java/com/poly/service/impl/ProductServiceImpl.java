@@ -1,10 +1,10 @@
 package com.poly.service.impl;
 
-import com.poly.entity.Category;
 import com.poly.entity.Products;
+import com.poly.entity.ProductsDetail;
 import com.poly.filter.ProductSearchCriteria;
 import com.poly.filter.ProductsSpecifications;
-import com.poly.repo.CategoryRepository;
+import com.poly.repo.ProductsDetailRepository;
 import com.poly.repo.ProductsRepository;
 import com.poly.service.ProductService;
 import com.poly.vo.CategoryVO;
@@ -28,11 +28,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductsRepository productsRepository;
-    @Autowired
-    private CategoryRepository categoryRepository;
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private ProductsDetailRepository productsDetailRepository;
 
     @Override
     public List<ProductsVO> getList() {
@@ -61,17 +62,51 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductsVO create(ProductsVO vo) {
-        return null;
+        Products entity = this.modelMapper.map(vo, Products.class);
+        entity.setProductsDetail(null);
+        ProductsDetail productsDetail = this.modelMapper.map(vo.getProductsDetail(), ProductsDetail.class);
+        Optional<Products> productsOptional = this.productsRepository.findById(vo.getId());
+        Optional<ProductsDetail> optionalProductsDetail = this.productsDetailRepository.findById(vo.getId());
+        if (!productsOptional.isPresent() && !optionalProductsDetail.isPresent()) {
+            this.productsRepository.save(entity);
+            productsDetail.setId(vo.getId());
+            this.productsDetailRepository.save(productsDetail);
+            return vo;
+        } else {
+            return null;
+        }
     }
 
     @Override
     public ProductsVO update(ProductsVO vo) {
-        return null;
+        Optional<Products> optionalProducts = this.productsRepository.findById(vo.getId());
+        Optional<ProductsDetail> optionalProductsDetail = this.productsDetailRepository.findById(vo.getId());
+        if (optionalProducts.isPresent() && optionalProductsDetail.isPresent()) {
+            Products products = optionalProducts.get();
+            ProductsDetail productsDetail = optionalProductsDetail.get();
+            vo.getProductsDetail().setId(productsDetail.getId());
+            BeanUtils.copyProperties(vo, products);
+            BeanUtils.copyProperties(vo.getProductsDetail(), productsDetail);
+            this.productsRepository.save(products);
+            this.productsDetailRepository.save(productsDetail);
+            return vo;
+        } else {
+            return null;
+        }
+
     }
 
     @Override
-    public void delete(String id) {
-
+    public boolean delete(String id) {
+        Optional<Products> optionalProducts = this.productsRepository.findById(id);
+        if (optionalProducts.isPresent()) {
+            Products products = optionalProducts.get();
+            products.setActive(false);
+            this.productsRepository.save(products);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -149,11 +184,11 @@ public class ProductServiceImpl implements ProductService {
         List<ProductsVO> lstProfuctsVO = convertToListDto(productsRepository.findAll());
         List<ProductsVO> lstProfuctsVOFindByName = convertToListDto(productsRepository.findAllByNameLike(name));
         CategoryVO categoryVO = new CategoryVO();
-       // Optional<Category> optional = categoryRepository.findById(cateParent);
+        // Optional<Category> optional = categoryRepository.findById(cateParent);
         //if (optional.isPresent()) {
         //    Category category = optional.get();
         //    BeanUtils.copyProperties(categoryVO, category);
-       // }
+        // }
         result = (name.equals("")) ? lstProfuctsVO.stream().filter(x -> x.getTypeOfItem() == categoryVO.getParentId())
                 .collect(Collectors.toList()) : lstProfuctsVOFindByName;
         Pageable pageable = PageRequest.of(page - 1, limit);

@@ -17,7 +17,7 @@ public class ProductController {
     private ProductService productService;
 
     @RequestMapping("/find-by")
-    public ResponseEntity<List<ProductsVO>> findByNameContainingAndTypeOfItem(@RequestParam("name")String name, @RequestParam("type") int type) {
+    public ResponseEntity<List<ProductsVO>> findByNameContainingAndTypeOfItem(@RequestParam("name") String name, @RequestParam("type") int type) {
         productService.findByNameContainingAndTypeOfItem(name, type);
         return ResponseEntity.ok(productService.findByNameContainingAndTypeOfItem(name, type));
     }

@@ -29,18 +29,18 @@ public class CompareController {
     private ProductService productService;
 
     @RequestMapping("/add-compare")
-    public MessageHelper addCompareProduct(@RequestParam("id") String id){
+    public MessageHelper addCompareProduct(@RequestParam("id") String id) {
         return compareHelper.setProductVo(productService.getOne(id));
     }
 
     @RequestMapping("/get-compare")
-    public List<ProductsVO> getCompareProduct(){
+    public List<ProductsVO> getCompareProduct() {
         request.setAttribute("list_compare", compareHelper.getAllProductVo());
         return compareHelper.getAllProductVo();
     }
 
     @RequestMapping("/remove-compare")
-    public boolean removeCompare(@RequestParam("key")String key){
+    public boolean removeCompare(@RequestParam("key") String key) {
         return compareHelper.removeCompare(key);
     }
 
