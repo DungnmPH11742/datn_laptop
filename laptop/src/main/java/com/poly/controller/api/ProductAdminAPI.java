@@ -73,6 +73,7 @@ public class ProductAdminAPI {
         if (checkDelete) {
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
+            System.out.println();
             return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
         }
     }
