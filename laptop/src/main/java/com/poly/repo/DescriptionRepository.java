@@ -19,4 +19,5 @@ public interface DescriptionRepository extends JpaRepository<Description, Intege
 
     @Query("select d from Description d where d.id =:idDes")
     Description getOneDescription(@Param("idDes") Integer id);
+
 }

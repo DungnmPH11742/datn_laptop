@@ -11,7 +11,11 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+<<<<<<< HEAD
+      <module name="laptop" target="8" />
+=======
       <module name="laptop" target="15" />
+>>>>>>> main
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
