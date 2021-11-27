@@ -12,9 +12,9 @@
 <section>
     <div class="container">
         <div class="row">
+            <h3 style="padding-left: 15px">So sánh sản phẩm</h3>
             <div class="col-sm-12 padding-right">
                 <div class=" category-tab shop-details-tab">
-                    <h4>So sánh </h4>
                     <div class="col-sm-12 float-right">
                         <table>
                             <tbody>
@@ -73,7 +73,7 @@
     //Hàm render header compare
     const renderHeaderComp = (list) => {
         let img_compare, name_compare, price_compare, discount_compare = '';
-
+        console.log(list)
         for (let i = 0; i < list.length; i++) {
             if (list[i]?.id != undefined) {
                 img_compare += `<td class="col-sm-6" >
@@ -87,7 +87,7 @@
                 discount_compare += `<td><p style="color: red;">${(list[i]?.outputPrice - list[i]?.outputPrice * list[i]?.saleProduct?.promotion / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ' đ'}</p></td>`;
             } else {
                 img_compare += `<td class="col-sm-6">
-                                    <button type="button" class="btn" data-toggle="modal" id="compare_button" data-target=".bd-example-modal-lg" style="margin: 0 auto">
+                                    <button type="button" class="btn" data-toggle="modal" id="compare_button" data-target=".bd-example-modal-lg" style="margin: 0 auto" onclick="findByNameAndType('',${ list[0] != null ?list[0]?.typeOfItem: list[1]?.typeOfItem});">
                                         Thêm so sánh
                                     </button>
                                 </td>`;
@@ -364,7 +364,6 @@
     const onchangSearch = () => {
         let name = $('#search-p-compare').val();
         let type_of_item = $('#type_of_item').val();
-        findByNameAndType(name, type_of_item);
     }
 
     const focusHandler = () => {

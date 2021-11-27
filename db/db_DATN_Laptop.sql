@@ -225,6 +225,7 @@ insert into sale_product(sale_code, promotion_type,date_on,date_off,promotion,qu
 --Sản phẩm
 create table products(
 	id varchar(25) primary key, --Ảnh chính + list ảnh của image_detail 
+	id_acount int,
 	name nvarchar(100) not null,
 	date_on date not null,
 	id_category int not null,
@@ -244,6 +245,8 @@ create table products(
 
 --Khóa ngoại sản phẩm 1-1 danh mục | 1-1 sale - thay đổi được 
 ALTER TABLE products ADD FOREIGN KEY (id_category) REFERENCES category(id);	
+
+ALTER TABLE products ADD FOREIGN KEY (id_acount) REFERENCES account(id);	
 
 ALTER TABLE products ADD FOREIGN KEY (on_sale) REFERENCES sale_product(sale_code);	
 
