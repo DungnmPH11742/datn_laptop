@@ -30,7 +30,7 @@ public class OrderController {
     @Autowired
     private CookieService cookieService;
     @RequestMapping("/listorderaccount")
-    public List<OrdersVO> listAllByAccount(@RequestParam("id") Integer id){
+    public OrdersVO listAllByAccount(@RequestParam("id") String id){
         return orderService.findOrdersByAccount(id);
     }
 

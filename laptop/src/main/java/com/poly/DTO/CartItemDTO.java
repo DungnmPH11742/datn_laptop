@@ -15,11 +15,8 @@ public class CartItemDTO {
     //Giá chính của sản phẩm
     private Float priceUnit;
 
-    //Giá gốc của sản phẩm khi sale
+    //Giá của sản phẩm sau khi sale khi sale
     private Float priceSale;
-
-    //Giá Giảm bằng unitPrice - priceSale
-    private Float reducerdPrice;
 
     private Integer quantityProduct;
 

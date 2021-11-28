@@ -63,6 +63,7 @@ public class CheckOutController {
                 model.addAttribute("myCart",cartDTO);
             }
             model.addAttribute("address",new CheckOut());
+            System.out.println("Name: " + name);
             return "user/checkout";
         }else {
             return "redirect:/home";
@@ -85,7 +86,6 @@ public class CheckOutController {
             ordersVO.setOrderCode(codeOrder);
             ordersVO.setDescription(checkOut.getDescription());
             ordersVO.setPhoneNumber(checkOut.getPhone());
-            ordersVO.setQuantity(getTotalItem(request));
             this.orderService.saveOrders(ordersVO);
 
 
@@ -107,7 +107,7 @@ public class CheckOutController {
                 orderDetailsVO.setQuantity(c.getQuantityProduct());
                 orderDetailsVO.setCompletionDate(getDateNowSql());
                 orderDetailsVO.setPrice(c.getTotalPriceCartItem());
-                orderDetailsVO.setPaymentMethod(0);
+                orderDetailsVO.setPaymentMethods(0);
                 orderDetailsVO.setReceived(0);
                 this.orderDetailService.saveOderDetail(orderDetailsVO);
             }
@@ -192,15 +192,7 @@ public class CheckOutController {
         put("key2", "trMrHtvjo6myautxDUiAcYsVtaeQ8nhf");
         put("endpoint", "https://sandbox.zalopay.com.vn/v001/tpe/createorder");
     }};
-    public Integer getTotalItem(HttpServletRequest request){
-        HttpSession httpSession = request.getSession();
-        CartDTO cartDTO = null;
-        if (httpSession.getAttribute("myCart") != null){
-            cartDTO = (CartDTO) httpSession.getAttribute("myCart");
-            return cartDTO.getListCartItem().size();
-        }
-        return  0;
-    }
+
 
     /**
      * @throws ParseException

@@ -28,4 +28,9 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         orderDetailsVO.setId(orderDetails.getId());
         return orderDetailsVO;
     }
+
+    @Override
+    public void updateQuantityOrderDetail(Integer quan, Integer id) {
+        repository.updateQuantityOrderDetail(quan,id);
+    }
 }

@@ -4,13 +4,12 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 @Data
 public class OrdersVO implements Serializable {
 
     private Integer id;
-
-    private AccountVO accountVO;
 
     private Date orderDate;
 
@@ -18,12 +17,19 @@ public class OrdersVO implements Serializable {
 
     private String address;
 
-    private Integer quantity;
-
-    private String orderCode;
+//    @Column(name = "quantity", nullable = false)
+//    private Integer quantity;
 
     private String description;
 
-    private  OrderDetailsVO detailsVO;
+    private Integer paymentStatus;
+
+    private Integer received;
+
+    private String orderCode;
+
+    private List<OrderDetailsVO> orderDetailsVO;
+
+    private AccountVO accountVO;
 
 }

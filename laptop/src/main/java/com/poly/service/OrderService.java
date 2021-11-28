@@ -21,5 +21,5 @@ public interface OrderService {
     OrdersVO getByOrderCode(String code);
     OrdersVO updateOrders(OrdersVO orders);
      void deleteById(Integer id);
-     List<OrdersVO> findOrdersByAccount(Integer id);
+     OrdersVO findOrdersByAccount(String email);
 }

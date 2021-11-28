@@ -23,28 +23,32 @@ public class Orders implements Serializable {
     @Column(name = "order_date")
     private Date orderDate;
 
-    @Column(name = "phone_number", nullable = false)
+    @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "address", nullable = false)
+    @Column(name = "address")
     private String address;
 
-    /*@Column(name = "quantity", nullable = false)
-    private Integer quantity;*/
+//    @Column(name = "quantity", nullable = false)
+//    private Integer quantity;
 
     @Column(name = "description")
     private String description;
 
+    @Column(name = "payment_status")
+    private Integer paymentStatus;
+
+    @Column(name = "received")
+    private Integer received;
+    //bi-directional many-to-one association to OrderDetail
+    @OneToMany(mappedBy="order")
+    private List<OrderDetails> orderDetails;
+
     @Column(name = "order_code")
     private String orderCode;
 
-
-    //bi-directional many-to-one association to OrderDetail
-    @OneToOne(mappedBy="order")
-    private OrderDetails orderDetails;
-
     //bi-directional many-to-one association to Account
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name="id_account")
     private Account account;
 
