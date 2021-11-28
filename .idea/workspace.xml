@@ -1,220 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="f4d1b1a6-c209-4e31-8ce5-247a09a0329c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/laptop_war_exploded.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/db_DATN_Laptop.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db/db_DATN_Laptop.sql" afterDir="false" />
+    <list default="true" id="dca89e86-4d55-4d71-9275-c0eeaa35f16e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_15.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_13.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_14.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/laptop_war.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/laptop_war.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/laptop_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/laptop_war_exploded.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laptop/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/laptop/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/config/ModelMapperConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/config/SuccesHanler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/config/WebConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/config/WebSecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/ProductController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/TestController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/web/CategoryWebController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/web/HomeWebController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/web/LoginWebController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/controller/web/ProductDetailController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Account.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/AccountRole.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Blogs.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Category.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Contact.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/DeliveryAddress.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Description.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/ImageDetail.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/ImportedShipment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/OrderDetails.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Orders.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/ProductRating.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Products.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/ProductsDetail.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Role.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/SaleProduct.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/ShipmentDetail.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/entity/Vouchers.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/AccountRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/AccountRoleRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/BlogsRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/CategoryRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ContactRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/DeliveryAddressRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/DescriptionRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ImageDetailRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ImportedShipmentRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/OrderDetailsRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/OrdersRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ProductRatingRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ProductsDetailRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ProductsRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/RoleRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/SaleProductRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/ShipmentDetailRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/repo/VouchersRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/AccountService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/CategoryService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/OrderService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/ProductService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/RoleService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/AccountServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/CategoryServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/OrderServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/ProductServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/RoleServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/service/impl/UserDetailsServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/AccountRoleVO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/AccountVO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/BlogsVO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/CategoryVO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/ContactVO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/DeliveryAddressVO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/DescriptionVO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/ImageDetailVO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/ImportedShipmentVO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/OrderDetailsVO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/OrdersVO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/ProductRating.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/ProductsDetailVO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/ProductsVO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/RoleVO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/SaleProductVO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/ShipmentDetailVO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/VouchersVO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/java/com/poly/vo/response/ProductsReponseVO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/client/click.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/css/animate.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/css/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/css/font-awesome.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/css/main.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/css/prettyPhoto.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/css/price-range.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/css/responsive.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/fonts/FontAwesome.otf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/fonts/fontawesome-webfont.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/fonts/fontawesome-webfont.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/fonts/glyphicons-halflings-regular.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/fonts/glyphicons-halflings-regular.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/404/404.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/background-login-2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/background-login.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/blog/blog-one.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/blog/blog-three.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/blog/blog-two.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/blog/man-four.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/blog/man-one.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/blog/man-three.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/blog/man-two.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/blog/socials.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/cart/one.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/cart/three.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/cart/two.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/054a6729fd963535b664645a05631416.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/1(1).jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/asus-proart-studiobook-lineup.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/bg_border.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/gallery1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/gallery2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/gallery3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/gallery4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/girl1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/girl2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/girl3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/gram-14z90p-w-01-lg-gram-14.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/iframe1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/iframe2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/iframe3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/iframe4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/images.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/map.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/maxresdefault.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/new.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/partner1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/partner2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/partner3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/partner4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/pricing.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/product1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/product2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/product3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/product4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/product5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/product6.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/recommend1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/recommend2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/recommend3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/sale.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/searchicon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/home/shipping.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product-details/1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product-details/new.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product-details/rating.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product-details/share.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product-details/similar1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product-details/similar2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product-details/similar3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product/17zd90p-g.ax71a5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product/42380_pa32ucx_ha4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product/APH30021.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product/AS514.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product/CPS-LG-Gram-17-29-1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product/CPS-LG-Gram-17-41-2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product/DL3520I5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product/DV3400I5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product/HPZB15G5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product/LI314R5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product/LYS714ITL05.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product/MATGVG249Q.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product/MAVG240YS.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product/MBPR13MWP52.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product/MDE2020H.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product/MHM24F.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product/MHM27FW.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product/MQD32SA.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product/PCAPN608250U.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product/PCDOAIO7080.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product/PCHP280G3SFF.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product/asus-vivobook-a415-thinkpro-1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product/dell-xps-17-9700-4-2351609_7102020.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product/dell-xps-17-9700-4-min.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product/gram17-21-white-2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/product/maxresdefault.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/shop/advertisement.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/shop/product10.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/shop/product11.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/shop/product12.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/shop/product7.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/shop/product8.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/images/shop/product9.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/bootstrap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/contact.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/gmaps.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/html5shiv.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/jquery.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/jquery.prettyPhoto.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/jquery.scrollUp.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/static/user-st/js/price-range.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/admin.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/common/footer.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/common/header.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/common/link.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/common/list_product.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/home.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/home_test.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/404.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/blog-single.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/blog.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/cart.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/checkout.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/contact-us.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/product-details.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/sendemail.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/laptop/src/main/resources/templates/user/shop.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -224,39 +45,109 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="208lwwaxWXewibf259gKIGs2eRi" />
+  <component name="ProjectId" id="21S9eZLiDN09H1T1ip6njXLDAYg" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/laptop" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15429688" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RunManager">
+    <configuration name="LaptopApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="laptop" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.poly.LaptopApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f4d1b1a6-c209-4e31-8ce5-247a09a0329c" name="Default Changelist" comment="" />
-      <created>1635434337149</created>
+      <changelist id="dca89e86-4d55-4d71-9275-c0eeaa35f16e" name="Default Changelist" comment="" />
+      <created>1637923717391</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1635434337149</updated>
-      <workItem from="1635434339401" duration="37000" />
+      <updated>1637923717391</updated>
+      <workItem from="1637923719346" duration="2315000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
-    <state x="740" y="294" key="FileChooserDialogImpl" timestamp="1635434371981">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="740" y="279" key="FileChooserDialogImpl" timestamp="1637926766347">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="740" y="294" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1635434371981" />
+    <state x="740" y="279" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1637926766347" />
+    <state width="1877" height="285" key="GridCell.Tab.0.bottom" timestamp="1637926769137">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="285" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1637926769137" />
+    <state width="1877" height="285" key="GridCell.Tab.0.center" timestamp="1637926769137">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="285" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1637926769137" />
+    <state width="1877" height="285" key="GridCell.Tab.0.left" timestamp="1637926769137">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="285" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1637926769137" />
+    <state width="1877" height="285" key="GridCell.Tab.0.right" timestamp="1637926769137">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="285" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1637926769137" />
+    <state width="1877" height="285" key="GridCell.Tab.1.bottom" timestamp="1637926769137">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="285" key="GridCell.Tab.1.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1637926769137" />
+    <state width="1877" height="285" key="GridCell.Tab.1.center" timestamp="1637926769137">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="285" key="GridCell.Tab.1.center/0.0.1920.1050@0.0.1920.1050" timestamp="1637926769137" />
+    <state width="1877" height="285" key="GridCell.Tab.1.left" timestamp="1637926769137">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="285" key="GridCell.Tab.1.left/0.0.1920.1050@0.0.1920.1050" timestamp="1637926769137" />
+    <state width="1877" height="285" key="GridCell.Tab.1.right" timestamp="1637926769137">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="285" key="GridCell.Tab.1.right/0.0.1920.1050@0.0.1920.1050" timestamp="1637926769137" />
+    <state x="440" y="99" key="SettingsEditor" timestamp="1637924774680">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="440" y="99" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1637924774680" />
   </component>
 </project>
