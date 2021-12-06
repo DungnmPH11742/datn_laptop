@@ -22,4 +22,7 @@ public interface OrderService {
     OrdersVO updateOrders(OrdersVO orders);
      void deleteById(Integer id);
      List<OrdersVO> findOrdersByAccount(Integer id);
+
+     OrdersVO findOrdersByAccountCart(String email);
+    List<OrdersVO> findOrdersByAccountAndReceived(Integer id,Integer received);
 }

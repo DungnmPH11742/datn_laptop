@@ -76,6 +76,17 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public AccountVO findByEmailUser(String email) {
+        Account account = this.repository.findByEmail(email);
+        if (account != null){
+            AccountVO vo = this.modelMapper.map(account,AccountVO.class);
+            return vo;
+        }else {
+            return null;
+        }
+    }
+
+    @Override
     public void createNewCustomerAfterOAuthLoginSuccess(String email, String name, AuthenticationProvider provider){
         AccountVO accountVO = new AccountVO();
         accountVO.setEmail(email);

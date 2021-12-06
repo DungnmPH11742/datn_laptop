@@ -6,12 +6,12 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 @Data
 @Entity
 @Table(name = "order_details")
 public class OrderDetails implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -28,14 +28,13 @@ public class OrderDetails implements Serializable {
     @Column(name = "completion_date")
     private Date completionDate;
 
-    @Column(name = "received")
-    private Integer received;
 
-    @Column(name = "payment_methods")
-    private Integer paymentMethod;
+
+    @Column(name = "status")
+    private Integer status;
 
     //bi-directional many-to-one association to Order
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="id_order")
     private Orders order;
 
@@ -48,6 +47,4 @@ public class OrderDetails implements Serializable {
     @ManyToOne
     @JoinColumn(name="id_voucher")
     private Vouchers voucher;
-
-
 }

@@ -2652,33 +2652,23 @@ textarea {
 .status-login-by {
   display: flex;
 }
-.by-facebook {
+.by-google {
   margin-top: 30px;
-  padding: 12px 50px;
-  border-radius: 20px;
-  border: none;
-  background-color: #4267b2;
-}
-.by-facebook i {
-  color: #fff;
-}
-.by-twitter {
-  margin-top: 30px;
-  margin-left: 40px;
   padding: 12px 20px;
   border-radius: 20px;
   border: none;
   display: flex;
   color: #fff;
-  background-color: #1da1f2;
+  background-color: #0772b4;
 }
-.by-twitter i {
-  margin-top: 2px;
+.by-google i {
+  padding-right: 4px;
+  font-size: 18px;
 }
-.by-twitter .text-twitter {
-  margin-left: 18px;
+.by-google .text-twitter {
+  font-weight: 700;
+  letter-spacing: 0.7px;
 }
-
 .form-login {
   background-color: rgba(204, 204, 204, 0.356);
   height: 40em;

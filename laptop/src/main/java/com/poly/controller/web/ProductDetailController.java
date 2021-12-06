@@ -2,6 +2,7 @@ package com.poly.controller.web;
 
 import com.poly.service.CategoryService;
 import com.poly.service.ProductService;
+import com.poly.service.VouchersService;
 import com.poly.vo.ProductsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,8 @@ public class ProductDetailController {
     @Autowired
     private ProductService productService;
 
+
+
     @RequestMapping("/view")
     public String viewProduct(@RequestParam("id") String id, Model model){
         ProductsVO productsVO = productService.getOne(id);
@@ -32,5 +35,8 @@ public class ProductDetailController {
         System.out.println(productService.getListByCate(productsVO.getCategory().getParentId()).size());
         return "user/product-details";
     }
+
+
+
 
 }

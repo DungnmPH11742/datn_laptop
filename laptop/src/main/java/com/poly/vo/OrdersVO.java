@@ -4,26 +4,30 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 @Data
 public class OrdersVO implements Serializable {
 
     private Integer id;
 
-    private AccountVO accountVO;
+    private AccountVO account;
 
     private Date orderDate;
 
     private String phoneNumber;
 
-    private String address;
-
-    private Integer quantity;
-
     private String orderCode;
+
+    private String address;
 
     private String description;
 
-    private  OrderDetailsVO detailsVO;
+    private Boolean paymentStatus;
 
+    private Integer received;
+
+    private List<OrderDetailsVO> orderDetails;
+    private Integer paymentMethods;
+    private Float priceOrder;
 }

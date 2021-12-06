@@ -1,7 +1,9 @@
 package com.poly.service.impl;
 
 import com.poly.entity.Products;
+import com.poly.repo.CategoryRepository;
 import com.poly.repo.ProductsRepository;
+import com.poly.service.CategoryService;
 import com.poly.service.ProductService;
 import com.poly.vo.ProductsVO;
 import org.modelmapper.ModelMapper;
@@ -20,6 +22,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired private CategoryService categoryService;
 
     @Override
     public List<ProductsVO> getList() {
@@ -33,7 +36,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductsVO getOne(String id) {
         Products products = productsRepository.getById(id);
-        return modelMapper.map(products, ProductsVO.class);
+        ProductsVO vo = modelMapper.map(products, ProductsVO.class);
+        vo.setCategory(this.categoryService.getOne(products.getCategory().getId()));
+        return vo;
     }
 
     @Override

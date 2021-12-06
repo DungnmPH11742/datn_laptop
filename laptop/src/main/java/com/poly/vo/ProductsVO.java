@@ -17,6 +17,8 @@ public class ProductsVO implements Serializable {
 
     private Integer typeOfItem;
 
+    private String imgUrl;
+
     private Float inputPrice;
 
     private Float outputPrice;
@@ -26,8 +28,6 @@ public class ProductsVO implements Serializable {
     private Float mass;
 
     private String unit;
-
-    private String imgUrl;
 
     private String releaseDate;
 
@@ -42,5 +42,4 @@ public class ProductsVO implements Serializable {
     private CategoryVO category;
 
     private Boolean active;
-
 }

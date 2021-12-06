@@ -16,7 +16,7 @@ public class VouchersVO implements Serializable {
 
     private Integer idCategory;
 
-    private Integer idProduct;
+    private String idProduct;
 
     private String name;
 
