@@ -21,8 +21,14 @@ public class OrderDetailsVO implements Serializable {
 
     private Date completionDate;
 
+<<<<<<< HEAD
 
 
     private Integer status;
+=======
+    private Integer received;
+>>>>>>> 27f2e6e45a9b5994cd973e713bcb841756d5df06
+
+    private Integer paymentMethods;
 
 }

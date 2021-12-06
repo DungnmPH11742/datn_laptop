@@ -6,6 +6,7 @@ import com.poly.entity.Orders;
 import com.poly.repo.AccountRepository;
 import com.poly.repo.CategoryRepository;
 import com.poly.repo.OrdersRepository;
+import com.poly.service.AccountService;
 import com.poly.service.CategoryService;
 import com.poly.service.OrderService;
 import com.poly.service.ProductService;
@@ -25,6 +26,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrdersRepository repository;
+
     @Autowired
     private ModelMapper modelMapper;
     @Autowired
@@ -50,21 +52,35 @@ public class OrderServiceImpl implements OrderService {
         }
         OrdersVO ordersVO = modelMapper.map(orders.get(),OrdersVO.class);
         AccountVO accountVO = modelMapper.map(orders.get().getAccount(),AccountVO.class);
-        OrderDetailsVO orderDetailsVO = modelMapper.map(orders.get().getOrderDetails(),OrderDetailsVO.class);
-        ProductsVO productsVO = modelMapper.map(orders.get().getOrderDetails().getProduct(),ProductsVO.class);
-        if(orders.get().getOrderDetails().getVoucher()!= null){
-            VouchersVO vouchersVO = modelMapper.map(orders.get().getOrderDetails().getVoucher(),VouchersVO.class);
-        }
+        List<OrderDetailsVO> detailsVOList = new ArrayList<>();
+        orders.get().getOrderDetails().forEach(orderDetails -> {
 
-        orderDetailsVO.setProductsVO(productsVO);
+            OrderDetailsVO orderDetailsVO = modelMapper.map(orderDetails,OrderDetailsVO.class);
+
+            ProductsVO productsVO = modelMapper.map(orderDetails.getProduct(),ProductsVO.class);
+            if(orderDetails.getVoucher()!=null){
+                VouchersVO vouchersVO = modelMapper.map(orderDetails.getVoucher(),VouchersVO.class);
+            }
+            orderDetailsVO.setProductsVO(productsVO);
+            detailsVOList.add(orderDetailsVO);
+
+        });
+        ordersVO.setOrderDetailsVO(detailsVOList);
+
+
         ordersVO.setAccountVO(accountVO);
+<<<<<<< HEAD
         ordersVO.setDetailsVO(orderDetailsVO);*/
         return null;
+=======
+        return ordersVO;
+>>>>>>> 27f2e6e45a9b5994cd973e713bcb841756d5df06
     }
 
     @Override
     public OrdersVO saveOrders(OrdersVO vo) {
         Orders orders = modelMapper.map(vo,Orders.class);
+<<<<<<< HEAD
         Optional<Account> account = this.accountRepository.findById(vo.getAccount().getId());
         if (account.isPresent()){
             orders.setAccount(account.get());
@@ -73,6 +89,13 @@ public class OrderServiceImpl implements OrderService {
             return vo;
         }
         return null;
+=======
+        Account account = modelMapper.map(vo.getAccountVO(),Account.class);
+        orders.setAccount(account);
+        repository.save(orders);
+        vo.setId(orders.getId());
+        return vo;
+>>>>>>> 27f2e6e45a9b5994cd973e713bcb841756d5df06
     }
 
     @Override
@@ -103,6 +126,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+<<<<<<< HEAD
     public List<OrdersVO> findOrdersByAccount(Integer idAccount) {
         List<OrdersVO> listVO = new ArrayList<>();
         List<Orders> ordersList = this.repository.findByIdAccount(idAccount);
@@ -133,6 +157,38 @@ public class OrderServiceImpl implements OrderService {
             return listVO;
         }
         return null;
+=======
+    public OrdersVO findOrdersByAccount(String email) {
+        OrdersVO vo = new OrdersVO();
+        if(repository.findByEmailAccount(email) != null){
+           Orders  orders = repository.findByEmailAccount(email);
+           vo = modelMapper.map(orders,OrdersVO.class);
+            AccountVO accountVO = modelMapper.map(orders.getAccount(),AccountVO.class);
+            List<OrderDetailsVO> detailsVOList = new ArrayList<>();
+            orders.getOrderDetails().forEach(orderDetails -> {
+
+                OrderDetailsVO orderDetailsVO = modelMapper.map(orderDetails,OrderDetailsVO.class);
+                detailsVOList.add(orderDetailsVO);
+                ProductsVO productsVO = modelMapper.map(orderDetails.getProduct(),ProductsVO.class);
+                if(orderDetails.getProduct().getSaleProduct() != null){
+                    SaleProductVO saleProductVO = modelMapper.map(orderDetails.getProduct().getSaleProduct(),SaleProductVO.class);
+                    productsVO.setSaleProduct(saleProductVO);
+                }
+                if(orderDetails.getVoucher()!= null){
+
+                    VouchersVO vouchersVO = modelMapper.map(orderDetails.getVoucher(),VouchersVO.class);
+                    orderDetailsVO.setVouchersVO(vouchersVO);
+                }
+                orderDetailsVO.setProductsVO(productsVO);
+
+            });
+
+            vo.setAccountVO(accountVO);
+            vo.setOrderDetailsVO(detailsVOList);
+        }
+
+        return vo;
+>>>>>>> 27f2e6e45a9b5994cd973e713bcb841756d5df06
     }
     //Lấy ra thằng order Received -2 theo account
     @Override

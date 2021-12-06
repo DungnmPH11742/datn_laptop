@@ -14,9 +14,14 @@ import java.util.List;
 @EnableJpaRepositories
 public interface OrdersRepository extends JpaRepository<Orders, Integer>, JpaSpecificationExecutor<Orders> {
 
+<<<<<<< HEAD
     @Query("select o from Orders o where o.account.id =:idAccount")
 //    @Query(value = "select * from dbo.[orders] o where o.id_account =?1", nativeQuery = true)
     List<Orders> findByIdAccount(@Param("idAccount") Integer idAccount);
+=======
+    @Query("select o from Orders o where o.account.email =?1 and o.received = -2")
+    Orders findByEmailAccount(String email);
+>>>>>>> 27f2e6e45a9b5994cd973e713bcb841756d5df06
 
 
     @Query("select o from Orders o where o.account.email =?1 and o.received = -2")

@@ -6,6 +6,7 @@ import com.poly.repo.ProductsRepository;
 import com.poly.service.CategoryService;
 import com.poly.service.ProductService;
 import com.poly.vo.ProductsVO;
+import com.poly.vo.SaleProductVO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,9 +37,18 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductsVO getOne(String id) {
         Products products = productsRepository.getById(id);
+<<<<<<< HEAD
         ProductsVO vo = modelMapper.map(products, ProductsVO.class);
         vo.setCategory(this.categoryService.getOne(products.getCategory().getId()));
         return vo;
+=======
+        ProductsVO productsVO = modelMapper.map(products, ProductsVO.class);
+        if(products.getSaleProduct() != null){
+            SaleProductVO saleProductVO = modelMapper.map(products.getSaleProduct(),SaleProductVO.class);
+            productsVO.setSaleProduct(saleProductVO);
+        }
+        return productsVO;
+>>>>>>> 27f2e6e45a9b5994cd973e713bcb841756d5df06
     }
 
     @Override

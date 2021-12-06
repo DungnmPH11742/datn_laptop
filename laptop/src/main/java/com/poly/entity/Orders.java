@@ -28,10 +28,17 @@ public class Orders implements Serializable {
     @Column(name = "address")
     private String address;
 
+<<<<<<< HEAD
+=======
+//    @Column(name = "quantity", nullable = false)
+//    private Integer quantity;
+
+>>>>>>> 27f2e6e45a9b5994cd973e713bcb841756d5df06
     @Column(name = "description")
     private String description;
 
     @Column(name = "payment_status")
+<<<<<<< HEAD
     private Boolean paymentStatus;
 
     @Column(name = "payment_methods")
@@ -46,9 +53,21 @@ public class Orders implements Serializable {
     //bi-directional many-to-one association to OrderDetail
     @OneToMany(mappedBy="order")
     private List<OrderDetails> orderDetails;
+=======
+    private Integer paymentStatus;
+
+    @Column(name = "received")
+    private Integer received;
+    //bi-directional many-to-one association to OrderDetail
+    @OneToMany(mappedBy="order")
+    private List<OrderDetails> orderDetails;
+
+    @Column(name = "order_code")
+    private String orderCode;
+>>>>>>> 27f2e6e45a9b5994cd973e713bcb841756d5df06
 
     //bi-directional many-to-one association to Account
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name="id_account")
     private Account account;
 }

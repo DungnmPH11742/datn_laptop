@@ -80,6 +80,7 @@ public class CheckOutController {
                 model.addAttribute("myCart",cartDTO);
             }
             model.addAttribute("address",new CheckOut());
+<<<<<<< HEAD
             String url = "https://provinces.open-api.vn/api/?depth=1";
             List<HashMap<String,?>> countries = this.countriesService.getListCountries(url);
             model.addAttribute("countries",countries);
@@ -96,6 +97,9 @@ public class CheckOutController {
             }
             model.addAttribute("addressDefault",voDe);
             model.addAttribute("listAddress",addressVOList);
+=======
+            System.out.println("Name: " + name);
+>>>>>>> 27f2e6e45a9b5994cd973e713bcb841756d5df06
             return "user/checkout";
         }else {
             return "redirect:/login";
@@ -117,6 +121,7 @@ public class CheckOutController {
                 String name = auth.getName();
                 AccountVO accountVO = this.accountService.findByEmailUser(name);
 
+<<<<<<< HEAD
                 CheckOut checkOut = (CheckOut) httpSession.getAttribute("addressUser");
                 DeliveryAddressVO deliveryAddressVO = this.addressService.getAddressById(checkOut.getIdAddress());
                 OrdersVO ordersVO = this.checkoutService.addOrderVo(deliveryAddressVO,true,checkOut,cartDTO.getIdOrder(),this.checkoutService.getDateNowSql());
@@ -124,6 +129,14 @@ public class CheckOutController {
                 ordersVO.setPaymentMethods(1);
                 OrdersVO voOrder =this.orderService.updateOrders(ordersVO);
                 //Lưu vào order detail
+=======
+            //Chưa check trùng code order
+            String codeOrder = getRandomCodeOrder();
+            ordersVO.setOrderCode(codeOrder);
+            ordersVO.setDescription(checkOut.getDescription());
+            ordersVO.setPhoneNumber(checkOut.getPhone());
+            this.orderService.saveOrders(ordersVO);
+>>>>>>> 27f2e6e45a9b5994cd973e713bcb841756d5df06
 
                 List<CartItemDTO> cartItemDTOList = cartDTO.getListCartItem();
                 OrderDetailsVO orderDetailsVO = null;
@@ -149,6 +162,7 @@ public class CheckOutController {
                 httpSession.removeAttribute("myCart");
                 model.addAttribute("message","Thanh toán thành công");
             }
+<<<<<<< HEAD
         }else if(request.getParameter("code") != null) {
             String code = request.getParameter("code");
             String name = request.getParameter("name");
@@ -161,6 +175,23 @@ public class CheckOutController {
                 for (OrderDetailsVO deVo:detailsVO) {
                     priceTotaleCart+=deVo.getPrice();
                 }
+=======
+            List<CartItemDTO> cartItemDTOList = cartDTO.getListCartItem();
+            Integer idOrder= ordersVO.getId();
+            OrderDetailsVO orderDetailsVO = null;
+            ProductsVO productsVO = null;
+            for (CartItemDTO c:cartItemDTOList) {
+                orderDetailsVO = new OrderDetailsVO();
+                productsVO = this.productService.getOne(c.getIdProduct());
+                orderDetailsVO.setProductsVO(productsVO);
+                orderDetailsVO.setOrdersVO(ordersVO);
+                orderDetailsVO.setQuantity(c.getQuantityProduct());
+                orderDetailsVO.setCompletionDate(getDateNowSql());
+                orderDetailsVO.setPrice(c.getTotalPriceCartItem());
+                orderDetailsVO.setPaymentMethods(0);
+                orderDetailsVO.setReceived(0);
+                this.orderDetailService.saveOderDetail(orderDetailsVO);
+>>>>>>> 27f2e6e45a9b5994cd973e713bcb841756d5df06
             }
             model.addAttribute("totalPriceOrder",priceTotaleCart);
             model.addAttribute("message","Thanh toán thành công");
@@ -427,14 +458,6 @@ public class CheckOutController {
         put("endpoint", "https://sandbox.zalopay.com.vn/v001/tpe/createorder");
         put("endpointStatus","https://sandbox.zalopay.com.vn/v001/tpe/getstatusbyapptransid");
     }};
-    public Integer getTotalItem(HttpServletRequest request){
-        HttpSession httpSession = request.getSession();
-        CartDTO cartDTO = null;
-        if (httpSession.getAttribute("myCart") != null){
-            cartDTO = (CartDTO) httpSession.getAttribute("myCart");
-            return cartDTO.getListCartItem().size();
-        }
-        return  0;
-    }
+
 
 }

@@ -11,8 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 @EnableJpaRepositories
 public interface OrderDetailsRepository extends JpaRepository<OrderDetails, Integer>, JpaSpecificationExecutor<OrderDetails> {
+    @Transactional
+    @Modifying
+    @Query("update OrderDetails o set o.quantity=?1 where o.id =?2")
+    void updateQuantityOrderDetail(Integer quan,Integer id);
 
     @Query("select od from OrderDetails  od where od.order.id =:idOrder")
     List<OrderDetails> getOrderDetailsByOrder(@Param("idOrder") Integer idOder);
