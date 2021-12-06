@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface CategoryService {
     List<CategoryVO> getList();
 
-    CategoryVO getOne(String id);
+    CategoryVO getOne(Integer id);
 
     CategoryVO create(CategoryVO vo);
 

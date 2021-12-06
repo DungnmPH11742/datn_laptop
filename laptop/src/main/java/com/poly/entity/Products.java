@@ -11,8 +11,14 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "products")
-public class Products implements Serializable {
+@NamedStoredProcedureQuery(name = "filter_Sales_Products",
+        procedureName = "filter_Sales_Products",
+        resultClasses = {Products.class},
+        parameters={
+                @StoredProcedureParameter(name="@ParentId", type= Integer.class)}
 
+)
+public class Products implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id

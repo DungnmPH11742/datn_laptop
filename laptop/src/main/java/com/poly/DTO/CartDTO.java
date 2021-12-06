@@ -8,6 +8,7 @@ import java.util.List;
 @Data
 public class CartDTO {
 
+    private Integer idOrder;
     //Tổng tiền của giỏ hàng
     private Float totalPriceCart;
 

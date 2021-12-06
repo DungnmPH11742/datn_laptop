@@ -81,7 +81,7 @@ public class OrderController {
                 for (Cookie cookie:cookies){
                     System.out.println(cookie);
                     OrderDetailsVO detailsVO = new OrderDetailsVO();
-                    detailsVO.setProductsVO(productService.getOne(cookie.getName()));
+                    detailsVO.setProducts(productService.getOne(cookie.getName()));
                     detailsVO.setQuantity(Integer.parseInt(cookie.getValue()));
                     list.add(detailsVO);
                 }

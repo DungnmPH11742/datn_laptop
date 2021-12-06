@@ -14,481 +14,152 @@
 	<link th:href="@{/user-st/css/animate.css}" rel="stylesheet">
 	<link th:href="@{/user-st/css/cart.css}" rel="stylesheet">
 	<link th:href="@{/user-st/css/responsive.css}" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
-		integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
-		crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<!--[if lt IE 9]>
-	<script th:src="@{/user-st/js/html5shiv.js}"></script>
-	<script th:src="@{/user-st/js/respond.min.js}"></script>
-    <![endif]-->
-<!--	<link rel="shortcut icon" href="images/ico/favicon.ico">-->
-<!--	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">-->
-<!--	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">-->
-<!--	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">-->
-<!--	<link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">-->
+
 </head>
 <!--/head-->
 
 <body>
-	<header id="header">
-		<!--header-->
-		<div class="header_top">
-			<!--header_top-->
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="contactinfo">
-							<ul class="nav nav-pills">
-								<li><a href=""><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
-								<li><a href=""><i class="fa fa-envelope"></i> info@domain.com</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="social-icons pull-right">
-							<ul class="nav navbar-nav">
-								<li><a href=""><i class="fa fa-facebook"></i></a></li>
-								<li><a href=""><i class="fa fa-twitter"></i></a></li>
-								<li><a href=""><i class="fa fa-linkedin"></i></a></li>
-								<li><a href=""><i class="fa fa-dribbble"></i></a></li>
-								<li><a href=""><i class="fa fa-google-plus"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
+<!--/header-->
+<div th:replace="~{common/header :: headers}"></div>
+<!--/header-->
+
+
+<main class="container">
+	<section id="clearfix" >
+		<div class="cart_items" >
+			<div>
+				<ul class="breadcrumb pb-8 flex items-center space-x-2">
+					<li class="breadcrumb-item home">
+						<a href="#" class="nuxt-link-active" itemprop="item">Trang chủ</a>
+					</li>
+					<li class="breadcrumb-item font-semibold text-sm active">
+						<a href="#" aria-current="page"
+						   class="text-black flex items-center nuxt-link-exact-active nuxt-link-active"
+						   itemprop="item">
+							Giỏ hàng
+						</a>
+					</li>
+				</ul>
 			</div>
-		</div>
-		<!--/header_top-->
-
-		<div class="header-middle">
-			<!--header-middle-->
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4 clearfix">
-						<div class="logo pull-left">
-							<a href="index.html"><img src="images/home/logo.png" alt="" /></a>
-						</div>
-						<div class="btn-group pull-right clearfix">
-							<div class="btn-group">
-								<button type="button" class="btn btn-default dropdown-toggle usa"
-									data-toggle="dropdown">
-									USA
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-									<li><a href="">Canada</a></li>
-									<li><a href="">UK</a></li>
-								</ul>
-							</div>
-
-							<div class="btn-group">
-								<button type="button" class="btn btn-default dropdown-toggle usa"
-									data-toggle="dropdown">
-									DOLLAR
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-									<li><a href="">Canadian Dollar</a></li>
-									<li><a href="">Pound</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-8 clearfix">
-						<div class="shop-menu clearfix pull-right">
-							<ul class="nav navbar-nav">
-								<li><a href=""><i class="fa fa-user"></i> Account</a></li>
-								<li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
-								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-								<li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
+			<!--Title page-->
+			<h1>Giỏ Hàng</h1>
+			<div class="not-cart" th:if="${session.myCart == null}">
+				Bạn chưa có sản phẩm nào trong giỏ hàng
 			</div>
-		</div>
-		<!--/header-middle-->
-
-		<div class="header-bottom">
-			<!--header-bottom-->
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-9">
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle" data-toggle="collapse"
-								data-target=".navbar-collapse">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
-						</div>
-						<div class="mainmenu pull-left">
-							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="index.html">Home</a></li>
-								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
-									<ul role="menu" class="sub-menu">
-										<li><a href="shop.html">Products</a></li>
-										<li><a href="product-details.html">Product Details</a></li>
-										<li><a href="checkout.html">Checkout</a></li>
-										<li><a href="cart.html" class="active">Cart</a></li>
-										<li><a href="login.html">Login</a></li>
-									</ul>
-								</li>
-								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
-									<ul role="menu" class="sub-menu">
-										<li><a href="blog.html">Blog List</a></li>
-										<li><a href="blog-single.html">Blog Single</a></li>
-									</ul>
-								</li>
-								<li><a href="404.html">404</a></li>
-								<li><a href="contact-us.html">Contact</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div class="search_box pull-right">
-							<input type="text" placeholder="Search" />
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!--/header-bottom-->
-	</header>
-	<!--/header-->
-
-	<main class="container">
-		<section id="clearfix">
-			<div class="cart_items">
-				<div>
-					<ul class="breadcrumb pb-8 flex items-center space-x-2">
-						<li class="breadcrumb-item home">
-							<a href="#" class="nuxt-link-active" itemprop="item">Trang chủ</a>
-						</li>
-						<li class="breadcrumb-item font-semibold text-sm active">
-							<a href="#" aria-current="page"
-								class="text-black flex items-center nuxt-link-exact-active nuxt-link-active"
-								itemprop="item">
-								Giỏ hàng
+			<!--Form cart-->
+			<div class="row form-cart" th:if="${session.myCart != null}">
+				<div class="col-sm-9" >
+					<!--Header form cart-->
+					<div class="header-form-left">
+						<div class="cart-col-product"><span>Tất cả ([[${session.myCart.getListCartItem.size() > 0?session.myCart.getListCartItem.size():0}]] sản phẩm)</span></div>
+						<div class="cart-col-price">Đơn giá</div>
+						<div class="cart-col-quantity">Số lượng</div>
+						<div class="cart-col-total-price">Thành tiền</div>
+						<div class="cart-col-delete">
+							<a href="#" class="delete-all-item">
+								<i class="far fa-trash-alt"></i>
+								<span class="canh-bao">Xóa toàn bộ giỏ hàng</span>
 							</a>
-						</li>
-					</ul>
-				</div>
-				<!--Title page-->
-				<h1>Giỏ Hàng</h1>
 
-				<!--Form cart-->
-				<div class="row form-cart">
-					<div class="col-sm-9 ">
-						<!--Header form cart-->
-						<div class="header-form-left">
-							<div class="cart-col-product"><span>Tất cả (1 sản phẩm)</span></div>
-							<div class="cart-col-price">Đơn giá</div>
-							<div class="cart-col-quantity">Số lượng</div>
-							<div class="cart-col-total-price">Thành tiền</div>
+						</div>
+					</div>
+
+					<div class="list-product-cart" th:each="item : ${session.myCart.getListCartItem()}">
+
+						<!--Product 01-->
+						<div class="product-cart">
+							<div class="cart-col-product">
+								<div class="img-product-cart">
+									<a href="#"><img width="100%"
+													 th:src="${item.imgUrl==''?'/user-st/images/product/HPZB15G5.jpg':item.imgUrl}" alt=""></a>
+								</div>
+								<div class="info-product-cart">
+									<div class="name-product-cart">
+										[[${item.nameProduct}]]
+									</div>
+									<div class="more-product-cart">
+										<div class="cate-product">Hãng: <span th:text="${item.nameCate}"></span></div>
+										<div class="quantity-product">[[${item.quantityProduct}]]</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="cart-col-price">
+								<div class="price-unit">[[${#numbers.formatDecimal(item.priceSale, 1, 'DEFAULT', 0, 'DEFAULT')}]]đ</div>
+								<s class="price-sale">[[${#numbers.formatDecimal(item.priceUnit, 1, 'DEFAULT', 0, 'DEFAULT')}]]đ</s>
+							</div>
+
+							<!--quantity-->
+							<div class="cart-item__cell-quantity order" style="float: right;  margin-right: 75px;">
+								<div class="_16mL_A shopee-input-quantity">
+									<button class="_2KdYzP">
+										<svg enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0"
+											 class="shopee-svg-icon ">
+											<polygon points="4.5 4.5 3.5 4.5 0 4.5 0 5.5 3.5 5.5 4.5 5.5 10 5.5 10 4.5"></polygon>
+										</svg>
+									</button>
+									<input class="_2KdYzP iRO3yj abc" type="number" th:value="${item.quantityProduct}" min="1" max="12">
+									<button class="_2KdYzP">
+										<svg enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0"
+											 class="shopee-svg-icon icon-plus-sign">
+											<polygon	points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5"></polygon>
+										</svg>
+									</button>
+								</div>
+							</div>
+
+
+							<!--Thành tiền-->
+							<div class="cart-col-total-price">
+								100.000.000 đ
+							</div>
+
+							<!--Delete item-->
 							<div class="cart-col-delete">
-								<a href="#" class="delete-all-item">
+								<a href="#" class="delete-item">
 									<i class="far fa-trash-alt"></i>
-									<span class="canh-bao">Xóa toàn bộ giỏ hàng</span>
+									<span class="canh-bao">Xóa khỏi giỏ hàng</span>
 								</a>
-								
-							</div>
-						</div>
 
-						<div class="list-product-cart">
-
-							<!--Product 01-->
-							<div class="product-cart">
-								<div class="cart-col-product">
-									<div class="img-product-cart">
-										<a href="#"><img width="100%"
-												src="./images/product/asus-vivobook-a415-thinkpro-1.jpg" alt=""></a>
-									</div>
-									<div class="info-product-cart">
-										<div class="name-product-cart">
-											Chuột Gaming không dây D500 Dual Mode Bluetooth 5.0 & Wireless 2.4Ghz
-										</div>
-										<div class="more-product-cart">
-											<div class="cate-product">Hãng: <span>DELL</span></div>
-											<div class="quantity-product">x1</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="cart-col-price">
-									<div class="price-unit">120.000.000 đ</div>
-									<s class="price-sale">10.000.000 d</s>
-								</div>
-
-								<!--quantity-->
-								<div class="cart-col-quantity">
-									<span class="new-cart-quantity">
-										<a href="#" class="minor quantity-change" data-value="-1" title="tru"><i class="fas fa-minus"></i></a>
-										<input disabled class="buy-quantity quantity-change" value="1" size="5">
-										<a href="#" class="add quantity-change" data-value="1" title="them"><i class="fas fa-plus"></i></a>
-									</span>
-								</div>
-
-								<!--Thành tiền-->
-								<div class="cart-col-total-price">
-									100.000.000 đ
-								</div>
-
-								<!--Delete item-->
-								<div class="cart-col-delete">
-									<a href="#" class="delete-item">
-										<i class="far fa-trash-alt"></i>
-										<span class="canh-bao">Xóa khỏi giỏ hàng</span>
-									</a>
-									
-								</div>
-							</div>
-							<!--End product 01-->
-							<!--Product 2-->
-							<div class="product-cart">
-								<div class="cart-col-product">
-									<div class="img-product-cart">
-										<a href="#"><img width="100%" src="./images/product/asus-vivobook-a415-thinkpro-1.jpg" alt=""></a>
-									</div>
-									<div class="info-product-cart">
-										<div class="name-product-cart">
-											Dell XPS 17 9700 (Chính hãng - Intel gen 11)
-										</div>
-										<div class="more-product-cart">
-											<div class="cate-product">Hãng: <span>DELL</span></div>
-											<div class="quantity-product">x1</div>
-										</div>
-									</div>
-								</div>
-							
-								<div class="cart-col-price">
-									<div class="price-unit">120.000.000 đ</div>
-									<s class="price-sale">10.000.000 d</s>
-								</div>
-							
-								<!--quantity-->
-								<div class="cart-col-quantity">
-									<span class="new-cart-quantity">
-										<a href="#" class="minor quantity-change" data-value="-1" title="tru"><i class="fas fa-minus"></i></a>
-										<input disabled class="buy-quantity quantity-change" value="1" size="5">
-										<a href="#" class="add quantity-change" data-value="1" title="them"><i class="fas fa-plus"></i></a>
-									</span>
-								</div>
-							
-								<!--Thành tiền-->
-								<div class="cart-col-total-price">
-									100.000.000 đ
-								</div>
-							
-								<!--Delete item-->
-								<div class="cart-col-delete">
-									<a href="#" class="delete-item">
-										<i class="far fa-trash-alt"></i>
-										<span class="canh-bao">Xóa khỏi giỏ hàng</span>
-									</a>
-								</div>
-							</div>
-							<!--End product 2-->
-							
-
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div class="checkout-sidebar-right">
-							<div class="checkout-price-unit">
-								<div class="checkout-title-price-unit">Tạm tính:</div>
-								<div class="checkout-value-price-unit">20.000.000 đ</div>
-							</div>
-							<div class="checkout-price-total">
-								<div class="checkout-title-price-total">Thành tiền:</div>
-								<div class="checkout-value-price-total">20.000.000 đ</div>
-							</div>
-							<div class="checkout-btn">
-								<a href="#" class="checkout-btn-a">Tiến hành thanh toán</a>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</section>
-		<!--/#cart_items-->
-	</main>
-
-
-
-
-	<footer id="footer">
-		<!--Footer-->
-		<div class="footer-top">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-2">
-						<div class="companyinfo">
-							<h2><span>e</span>-shopper</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
+				<div class="col-sm-3">
+					<div class="checkout-sidebar-right">
+						<div class="checkout-price-unit">
+							<div class="checkout-title-price-unit">Tạm tính:</div>
+							<div class="checkout-value-price-unit">20.000.000 đ</div>
 						</div>
-					</div>
-					<div class="col-sm-7">
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="images/home/iframe1.png" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>Circle of Hands</p>
-								<h2>24 DEC 2014</h2>
-							</div>
+						<div class="checkout-price-total">
+							<div class="checkout-title-price-total">Thành tiền:</div>
+							<div class="checkout-value-price-total">20.000.000 đ</div>
 						</div>
-
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="images/home/iframe2.png" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>Circle of Hands</p>
-								<h2>24 DEC 2014</h2>
-							</div>
-						</div>
-
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="images/home/iframe3.png" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>Circle of Hands</p>
-								<h2>24 DEC 2014</h2>
-							</div>
-						</div>
-
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="images/home/iframe4.png" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>Circle of Hands</p>
-								<h2>24 DEC 2014</h2>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div class="address">
-							<img src="images/home/map.png" alt="" />
-							<p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
+						<div class="checkout-btn">
+							<a th:href="@{/checkout}" class="checkout-btn-a">Tiến hành thanh toán</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
-		<div class="footer-widget">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-2">
-						<div class="single-widget">
-							<h2>Service</h2>
-							<ul class="nav nav-pills nav-stacked">
-								<li><a href="">Online Help</a></li>
-								<li><a href="">Contact Us</a></li>
-								<li><a href="">Order Status</a></li>
-								<li><a href="">Change Location</a></li>
-								<li><a href="">FAQ’s</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-2">
-						<div class="single-widget">
-							<h2>Quock Shop</h2>
-							<ul class="nav nav-pills nav-stacked">
-								<li><a href="">T-Shirt</a></li>
-								<li><a href="">Mens</a></li>
-								<li><a href="">Womens</a></li>
-								<li><a href="">Gift Cards</a></li>
-								<li><a href="">Shoes</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-2">
-						<div class="single-widget">
-							<h2>Policies</h2>
-							<ul class="nav nav-pills nav-stacked">
-								<li><a href="">Terms of Use</a></li>
-								<li><a href="">Privecy Policy</a></li>
-								<li><a href="">Refund Policy</a></li>
-								<li><a href="">Billing System</a></li>
-								<li><a href="">Ticket System</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-2">
-						<div class="single-widget">
-							<h2>About Shopper</h2>
-							<ul class="nav nav-pills nav-stacked">
-								<li><a href="">Company Information</a></li>
-								<li><a href="">Careers</a></li>
-								<li><a href="">Store Location</a></li>
-								<li><a href="">Affillate Program</a></li>
-								<li><a href="">Copyright</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-3 col-sm-offset-1">
-						<div class="single-widget">
-							<h2>About Shopper</h2>
-							<form action="#" class="searchform">
-								<input type="text" placeholder="Your email address" />
-								<button type="submit" class="btn btn-default"><i
-										class="fa fa-arrow-circle-o-right"></i></button>
-								<p>Get the most recent updates from <br />our site and be updated your self...</p>
-							</form>
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</div>
-
-		<div class="footer-bottom">
-			<div class="container">
-				<div class="row">
-					<p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
-					<p class="pull-right">Designed by <span><a target="_blank"
-								href="http://www.themeum.com">Themeum</a></span></p>
-				</div>
-			</div>
-		</div>
-
-	</footer>
-	<!--/Footer-->
+	</section>
+	<!--/#cart_items-->
+</main>
 
 
 
-	<script th:src="@{/user-st/js/jquery.js}"></script>
-	<script th:src="@{/user-st/js/price-range.js}"></script>
-	<script th:src="@{/user-st/js/jquery.scrollUp.min.js}"></script>
-	<script th:src="@{/user-st/js/bootstrap.min.js}"></script>
-	<script th:src="@{/user-st/js/jquery.prettyPhoto.js}"></script>
-	<script th:src="@{/user-st/js/main.js}"></script>
+<!--/Footer-->
+<div th:replace="~{common/footer :: footers}"></div>
+<!--/Footer-->
+
+
+
+<script th:src="@{/user-st/js/jquery.js}"></script>
+<script th:src="@{/user-st/js/price-range.js}"></script>
+<script th:src="@{/user-st/js/jquery.scrollUp.min.js}"></script>
+<script th:src="@{/user-st/js/bootstrap.min.js}"></script>
+<script th:src="@{/user-st/js/jquery.prettyPhoto.js}"></script>
+<script th:src="@{/user-st/js/main.js}"></script>
 </body>
 
 </html>

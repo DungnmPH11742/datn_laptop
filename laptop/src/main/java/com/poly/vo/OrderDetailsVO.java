@@ -7,14 +7,13 @@ import java.sql.Date;
 
 @Data
 public class OrderDetailsVO implements Serializable {
-
     private Integer id;
 
-    private OrdersVO ordersVO;
+    private Integer idOrder;
 
-    private ProductsVO productsVO;
+    private ProductsVO products;
 
-    private VouchersVO vouchersVO;
+    private VouchersVO voucher;
 
     private Float price;
 
@@ -22,8 +21,8 @@ public class OrderDetailsVO implements Serializable {
 
     private Date completionDate;
 
-    private Integer paymentMethod;
 
-    private Integer received;
+
+    private Integer status;
 
 }

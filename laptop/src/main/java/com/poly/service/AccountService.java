@@ -20,6 +20,8 @@ public interface AccountService {
 
     Account findByEmail(String email);
 
+    AccountVO findByEmailUser(String email);
+
     public void createNewCustomerAfterOAuthLoginSuccess(String email, String name, AuthenticationProvider provider);
 
     public void upadteCustomerAfterOAuthLoginSuccess(Account account, String name, AuthenticationProvider provider);

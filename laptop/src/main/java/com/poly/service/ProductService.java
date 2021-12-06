@@ -10,14 +10,12 @@ public interface ProductService {
 
     ProductsVO getOne(String id);
 
-    List<ProductsVO> findByNameContainingAndTypeOfItem(String name, int type);
-
     ProductsVO create(ProductsVO vo);
 
     ProductsVO update(ProductsVO vo);
 
-    void delete(String id);
-
+    boolean delete(String id);
+    List<ProductsVO> findByNameContainingAndTypeOfItem(String name, int type);
     List<ProductsVO> getListPage(Optional<Integer> page, Optional<Integer> row);
 
     List<ProductsVO> getListByCate(Integer id);

@@ -20,4 +20,6 @@ public class LoginWebController {
     public String admin() {
         return "admin";
     }
+
+
 }

@@ -12,7 +12,6 @@ import java.util.List;
 @Entity
 @Table(name = "orders")
 public class Orders implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -23,29 +22,33 @@ public class Orders implements Serializable {
     @Column(name = "order_date")
     private Date orderDate;
 
-    @Column(name = "phone_number", nullable = false)
+    @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "address", nullable = false)
+    @Column(name = "address")
     private String address;
-
-    /*@Column(name = "quantity", nullable = false)
-    private Integer quantity;*/
 
     @Column(name = "description")
     private String description;
 
+    @Column(name = "payment_status")
+    private Boolean paymentStatus;
+
+    @Column(name = "payment_methods")
+    private Integer paymentMethods;
+
+    @Column(name = "received")
+    private Integer received;
+
     @Column(name = "order_code")
     private String orderCode;
 
-
     //bi-directional many-to-one association to OrderDetail
-    @OneToOne(mappedBy="order")
-    private OrderDetails orderDetails;
+    @OneToMany(mappedBy="order")
+    private List<OrderDetails> orderDetails;
 
     //bi-directional many-to-one association to Account
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="id_account")
     private Account account;
-
 }
