@@ -43,6 +43,10 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     }
 
     @Override
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> c2400cd1e734dc5f4f8d76a75ee825f00156bab2
     public OrderDetailsVO updateOrderDetail(OrderDetailsVO orderDetailsVO) {
         Optional<OrderDetails> orderDetails = this.repository.findById(orderDetailsVO.getId());
         if (orderDetails.isPresent()){
@@ -70,4 +74,12 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         repository.updateQuantityOrderDetail(quan,id);
     }
 
+<<<<<<< HEAD
+=======
+=======
+    public void updateQuantityOrderDetail(Integer quan, Integer id) {
+        repository.updateQuantityOrderDetail(quan,id);
+    }
+>>>>>>> 27f2e6e45a9b5994cd973e713bcb841756d5df06
+>>>>>>> c2400cd1e734dc5f4f8d76a75ee825f00156bab2
 }

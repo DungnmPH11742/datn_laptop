@@ -63,7 +63,7 @@ public class Account implements Serializable {
     private List<ImportedShipment> importedShipments;
 
     //bi-directional many-to-one association to Order
-    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
+    @OneToMany
     private List<Orders> orders;
 
     @ManyToMany

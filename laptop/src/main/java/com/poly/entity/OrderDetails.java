@@ -28,10 +28,25 @@ public class OrderDetails implements Serializable {
     @Column(name = "completion_date")
     private Date completionDate;
 
+<<<<<<< HEAD
 
 
     @Column(name = "status")
     private Integer status;
+=======
+<<<<<<< HEAD
+
+
+    @Column(name = "status")
+    private Integer status;
+=======
+    @Column(name = "payment_methods")
+    private Integer paymentMethods;
+
+    @Column(name = "status")
+    private  Integer status;
+>>>>>>> 27f2e6e45a9b5994cd973e713bcb841756d5df06
+>>>>>>> c2400cd1e734dc5f4f8d76a75ee825f00156bab2
 
     //bi-directional many-to-one association to Order
     @ManyToOne

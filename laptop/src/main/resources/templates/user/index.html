@@ -636,10 +636,9 @@
             data: JSON.stringify(data),
             dataType: "JSON",
             success: function (data) {
-
-               alert("Thêm vào giỏ hàng thành công và đang có "+data.totalItem+" Sản phẩm");
+               alert("Sản phẩm đã được thêm vào giỏ hàng");
             },error: function () {
-                alert("Lỗi addToCart");
+                alert("Không thêm được");
             }
         });
 

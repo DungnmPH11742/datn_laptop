@@ -21,8 +21,15 @@ public interface OrderService {
     OrdersVO getByOrderCode(String code);
     OrdersVO updateOrders(OrdersVO orders);
      void deleteById(Integer id);
+<<<<<<< HEAD
      List<OrdersVO> findOrdersByAccount(Integer id);
 
      OrdersVO findOrdersByAccountCart(String email);
     List<OrdersVO> findOrdersByAccountAndReceived(Integer id,Integer received);
+<<<<<<< HEAD
+=======
+=======
+     OrdersVO findOrdersByAccount(String email);
+>>>>>>> 27f2e6e45a9b5994cd973e713bcb841756d5df06
+>>>>>>> c2400cd1e734dc5f4f8d76a75ee825f00156bab2
 }

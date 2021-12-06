@@ -29,10 +29,17 @@ public class OrderWebController {
     @Autowired private ProductService productService;
     @Autowired private HeaderHelper headerHelper;
     @Autowired private AccountService accountService;
+<<<<<<< HEAD
 
     @RequestMapping("/order-detail/{id}")
     public String index(Model model, @PathVariable("id") String id){
 
+=======
+
+    @RequestMapping("/orderproductdetail")
+    public String index(Model model){
+
+>>>>>>> c2400cd1e734dc5f4f8d76a75ee825f00156bab2
         model.addAttribute("listoderproduct",orderService.findOrdersByAccount(1));
         return "user/order-detail-user";
     }

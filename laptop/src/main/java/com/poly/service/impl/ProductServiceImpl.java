@@ -1,13 +1,18 @@
 package com.poly.service.impl;
 
 import com.poly.entity.Products;
+<<<<<<< HEAD
 import com.poly.entity.ProductsDetail;
 import com.poly.repo.CategoryRepository;
 import com.poly.repo.ProductsDetailRepository;
+=======
+import com.poly.repo.CategoryRepository;
+>>>>>>> c2400cd1e734dc5f4f8d76a75ee825f00156bab2
 import com.poly.repo.ProductsRepository;
 import com.poly.service.CategoryService;
 import com.poly.service.ProductService;
 import com.poly.vo.ProductsVO;
+import com.poly.vo.SaleProductVO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +31,10 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ModelMapper modelMapper;
     @Autowired private CategoryService categoryService;
+<<<<<<< HEAD
     @Autowired private ProductsDetailRepository productsDetailRepository;
+=======
+>>>>>>> c2400cd1e734dc5f4f8d76a75ee825f00156bab2
 
     @Override
     public List<ProductsVO> getList() {
@@ -39,6 +47,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductsVO getOne(String id) {
+<<<<<<< HEAD
         Optional<Products> productsOptional = this.productsRepository.findById(id);
         Optional<ProductsDetail> optionalProductsDetail = this.productsDetailRepository.findById(id);
         if (productsOptional.isPresent() && optionalProductsDetail.isPresent()){
@@ -47,6 +56,21 @@ public class ProductServiceImpl implements ProductService {
         }else {
             return null;
         }
+=======
+        Products products = productsRepository.getById(id);
+<<<<<<< HEAD
+        ProductsVO vo = modelMapper.map(products, ProductsVO.class);
+        vo.setCategory(this.categoryService.getOne(products.getCategory().getId()));
+        return vo;
+=======
+        ProductsVO productsVO = modelMapper.map(products, ProductsVO.class);
+        if(products.getSaleProduct() != null){
+            SaleProductVO saleProductVO = modelMapper.map(products.getSaleProduct(),SaleProductVO.class);
+            productsVO.setSaleProduct(saleProductVO);
+        }
+        return productsVO;
+>>>>>>> 27f2e6e45a9b5994cd973e713bcb841756d5df06
+>>>>>>> c2400cd1e734dc5f4f8d76a75ee825f00156bab2
     }
 
     @Override

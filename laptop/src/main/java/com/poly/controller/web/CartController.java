@@ -40,8 +40,18 @@ public class CartController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         HttpSession session = request.getSession();
         List<CartItemDTO> list = new ArrayList<>();
+<<<<<<< HEAD
         CartDTO cartDTO = cartService.findCart();
         session.setAttribute("myCart",cartDTO);
+=======
+<<<<<<< HEAD
+        CartDTO cartDTO = cartService.findCart();
+        session.setAttribute("myCart",cartDTO);
+=======
+        list = cartService.findAllCart();
+
+>>>>>>> 27f2e6e45a9b5994cd973e713bcb841756d5df06
+>>>>>>> c2400cd1e734dc5f4f8d76a75ee825f00156bab2
         return "user/cart";
     }
 

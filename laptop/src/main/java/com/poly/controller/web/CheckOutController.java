@@ -80,6 +80,10 @@ public class CheckOutController {
                 model.addAttribute("myCart",cartDTO);
             }
             model.addAttribute("address",new CheckOut());
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> c2400cd1e734dc5f4f8d76a75ee825f00156bab2
             String url = "https://provinces.open-api.vn/api/?depth=1";
             List<HashMap<String,?>> countries = this.countriesService.getListCountries(url);
             model.addAttribute("countries",countries);
@@ -96,6 +100,12 @@ public class CheckOutController {
             }
             model.addAttribute("addressDefault",voDe);
             model.addAttribute("listAddress",addressVOList);
+<<<<<<< HEAD
+=======
+=======
+            System.out.println("Name: " + name);
+>>>>>>> 27f2e6e45a9b5994cd973e713bcb841756d5df06
+>>>>>>> c2400cd1e734dc5f4f8d76a75ee825f00156bab2
             return "user/checkout";
         }else {
             return "redirect:/login";
@@ -104,12 +114,16 @@ public class CheckOutController {
 
     @GetMapping(value = "/send-order")
     public String sendOrder(HttpServletRequest request, Model model) throws Exception{
+<<<<<<< HEAD
         HttpSession httpSession = request.getSession();
         String apptransid = (String) httpSession.getAttribute("apptransid");
+=======
+>>>>>>> c2400cd1e734dc5f4f8d76a75ee825f00156bab2
         JSONObject getStatusOrder = this.getStatusOrder(apptranid);
         System.out.println("APPPPP: "+apptranid);
         String returnCode = getStatusOrder.get("returncode").toString();
         headerHelper.setHeaderSession(model);
+<<<<<<< HEAD
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && !auth.getName().equals("anonymousUser")){
             if (Integer.parseInt(returnCode) == 1 && request.getParameter("code") == null){
@@ -252,6 +266,248 @@ public class CheckOutController {
         String addressDetail = request.getParameter("addressDetail").trim();
         String address = addressDetail+", "+ward+", "+distic+", "+city;
         addressVO.setAddress(address);
+=======
+
+        if (Integer.parseInt(returnCode) == 1){
+            HttpSession httpSession = request.getSession();
+            CartDTO cartDTO = this.checkoutService.getListCartFromSession(request);
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            if (cartDTO != null && auth != null && !auth.getName().equals("anonymousUser")){
+                String name = auth.getName();
+                AccountVO accountVO = this.accountService.findByEmailUser(name);
+
+<<<<<<< HEAD
+                CheckOut checkOut = (CheckOut) httpSession.getAttribute("addressUser");
+                DeliveryAddressVO deliveryAddressVO = this.addressService.getAddressById(checkOut.getIdAddress());
+                OrdersVO ordersVO = this.checkoutService.addOrderVo(deliveryAddressVO,true,checkOut,cartDTO.getIdOrder(),this.checkoutService.getDateNowSql());
+                ordersVO.setOrderCode(checkOut.getCode());
+                ordersVO.setPaymentMethods(1);
+                OrdersVO voOrder =this.orderService.updateOrders(ordersVO);
+                //Lưu vào order detail
+=======
+            //Chưa check trùng code order
+            String codeOrder = getRandomCodeOrder();
+            ordersVO.setOrderCode(codeOrder);
+            ordersVO.setDescription(checkOut.getDescription());
+            ordersVO.setPhoneNumber(checkOut.getPhone());
+            this.orderService.saveOrders(ordersVO);
+>>>>>>> 27f2e6e45a9b5994cd973e713bcb841756d5df06
+
+                List<CartItemDTO> cartItemDTOList = cartDTO.getListCartItem();
+                OrderDetailsVO orderDetailsVO = null;
+                ProductsVO productsVO = null;
+                for (CartItemDTO c:cartItemDTOList) {
+                    orderDetailsVO = new OrderDetailsVO();
+                    productsVO = this.productService.getOne(c.getIdProduct());
+                    orderDetailsVO.setId(c.getIdOrderDetail());
+                    orderDetailsVO.setProducts(productsVO);
+                    orderDetailsVO.setIdOrder(ordersVO.getId());
+                    orderDetailsVO.setQuantity(c.getQuantityProduct());
+//                    orderDetailsVO.setCompletionDate(getDateNowSql());
+                    orderDetailsVO.setPrice(c.getTotalPriceCartItem());
+                    orderDetailsVO.setStatus(0);
+                    this.orderDetailService.saveOderDetail(orderDetailsVO);
+                }
+                System.out.println("Thành công");
+                model.addAttribute("totalPriceOrder",cartDTO.getTotalPriceCart());
+                System.out.println("VO oreder zalo: "+voOrder);
+                model.addAttribute("order",voOrder);
+                model.addAttribute("nameUser",deliveryAddressVO.getName());
+
+                httpSession.removeAttribute("myCart");
+                model.addAttribute("message","Thanh toán thành công");
+            }
+<<<<<<< HEAD
+        }else if(request.getParameter("code") != null) {
+            String code = request.getParameter("code");
+            String name = request.getParameter("name");
+            OrdersVO vo = this.orderService.getByOrderCode(code);
+            List<OrderDetailsVO> detailsVO = this.orderDetailService.getOrderDetailByIdOrder(vo.getId());
+            model.addAttribute("order",vo);
+            model.addAttribute("nameUser",name);
+            Float priceTotaleCart = new Float(0);
+            if (detailsVO.isEmpty() || detailsVO != null){
+                for (OrderDetailsVO deVo:detailsVO) {
+                    priceTotaleCart+=deVo.getPrice();
+                }
+=======
+            List<CartItemDTO> cartItemDTOList = cartDTO.getListCartItem();
+            Integer idOrder= ordersVO.getId();
+            OrderDetailsVO orderDetailsVO = null;
+            ProductsVO productsVO = null;
+            for (CartItemDTO c:cartItemDTOList) {
+                orderDetailsVO = new OrderDetailsVO();
+                productsVO = this.productService.getOne(c.getIdProduct());
+                orderDetailsVO.setProductsVO(productsVO);
+                orderDetailsVO.setOrdersVO(ordersVO);
+                orderDetailsVO.setQuantity(c.getQuantityProduct());
+                orderDetailsVO.setCompletionDate(getDateNowSql());
+                orderDetailsVO.setPrice(c.getTotalPriceCartItem());
+                orderDetailsVO.setPaymentMethods(0);
+                orderDetailsVO.setReceived(0);
+                this.orderDetailService.saveOderDetail(orderDetailsVO);
+>>>>>>> 27f2e6e45a9b5994cd973e713bcb841756d5df06
+            }
+            model.addAttribute("totalPriceOrder",priceTotaleCart);
+            model.addAttribute("message","Thanh toán thành công");
+        }else {
+            //Nếu return code = -217 thì do thẻ bị đánh cắp hoặc mất thẻ
+            //Nếu return code = -319 do settimeout
+            //Nếu return code = -63 do thẻ hết tiền
+            model.addAttribute("messageError","Lỗi thanh toán");
+        }
+
+        return "user/send-order";
+    }
+
+    @RequestMapping(value = "/checkout", method = RequestMethod.POST)
+    public String checkOut(@ModelAttribute CheckOut checkOut, HttpServletRequest request) throws ParseException, Exception{
+        Boolean checked = false;
+        if (request.getParameter("idAddress").equals("") || request.getParameter("idAddress") == null){
+            return "redirect:/checkout?error="+true;
+        }
+        checkOut.setIdAddress(Integer.parseInt(request.getParameter("idAddress")));
+>>>>>>> c2400cd1e734dc5f4f8d76a75ee825f00156bab2
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && !auth.getName().equals("anonymousUser")) {
+            String name = auth.getName();
+            AccountVO accountVO = this.accountService.findByEmailUser(name);
+<<<<<<< HEAD
+            if (accountVO != null){
+                addressVO.setIdAccount(accountVO.getId());
+                if (addressVO.getId() == null){
+                    this.addressService.save(addressVO);
+                }else {
+                    this.addressService.update(addressVO);
+                }
+            }
+=======
+            if (checkOut.getPayment() == 1){
+                //Lưu vào Orders
+                CartDTO cartDTO = this.checkoutService.getListCartFromSession(request);
+                HttpSession httpSession = request.getSession();
+                List<CartItemDTO> cartItemDTOList = cartDTO.getListCartItem();
+
+                DeliveryAddressVO deliveryAddressVO = this.addressService.getAddressById(checkOut.getIdAddress());
+                OrdersVO ordersVO = this.checkoutService.addOrderVo(deliveryAddressVO,false,checkOut,cartDTO.getIdOrder(),this.checkoutService.getDateNowSql());
+                ordersVO.setPaymentMethods(0);
+                this.orderService.updateOrders(ordersVO);
+
+                //Lưu vào order detail
+
+                OrderDetailsVO orderDetailsVO = null;
+                ProductsVO productsVO = null;
+                for (CartItemDTO c:cartItemDTOList) {
+                    orderDetailsVO = new OrderDetailsVO();
+                    productsVO = this.productService.getOne(c.getIdProduct());
+                    orderDetailsVO.setId(c.getIdOrderDetail());
+                    orderDetailsVO.setProducts(productsVO);
+                    orderDetailsVO.setIdOrder(ordersVO.getId());
+                    orderDetailsVO.setQuantity(c.getQuantityProduct());
+//                    orderDetailsVO.setCompletionDate(getDateNowSql());
+                    orderDetailsVO.setPrice(c.getTotalPriceCartItem());
+                    orderDetailsVO.setStatus(0);
+                    this.orderDetailService.updateOrderDetail(orderDetailsVO);
+                }
+                httpSession.removeAttribute("myCart");
+                return "redirect:/send-order?code="+ordersVO.getOrderCode()+"&name="+deliveryAddressVO.getName();
+            }else if (checkOut.getPayment() == 2){
+                HttpSession httpSession = request.getSession();
+                CartDTO cartDTO = null;
+                if (httpSession.getAttribute("myCart") != null){
+                    cartDTO = (CartDTO) httpSession.getAttribute("myCart");
+                }
+                if (httpSession.getAttribute("addressUser") != null){
+                    httpSession.removeAttribute("addressUser");
+                }
+                String randomCode = this.checkoutService.getRandomCodeOrder();
+                if (this.orderService.getByOrderCode(randomCode) != null){
+                    randomCode = this.checkoutService.getRandomCodeOrder();
+                }
+                checkOut.setCode(randomCode);
+                httpSession.setAttribute("addressUser",checkOut);
+                JSONObject result = this.createOrder(request,checkOut,cartDTO,randomCode);
+                String returnCode = result.get("returncode").toString();
+                if (Integer.parseInt(returnCode) == 1){
+                    System.out.println("Create order ZaloPay success");
+                }
+                return "redirect:"+result.get("orderurl");
+            }
+        }else {
+            return "redirect:/home";
+>>>>>>> c2400cd1e734dc5f4f8d76a75ee825f00156bab2
+        }
+        return "redirect:/checkout";
+    }
+
+
+<<<<<<< HEAD
+
+    @PostMapping(value = "/ajax/voucher")
+    public ResponseEntity<Map<String,Object>> getVoucher(HttpServletRequest request){
+        String voucher = request.getParameter("voucher");
+        CartDTO cartDTO = this.checkoutService.getListCartFromSession(request);
+        List<CartItemDTO> cartItemSession = cartDTO.getListCartItem();
+        VouchersVO vouchersVO = null;
+        for (CartItemDTO vo:cartItemSession) {
+            vouchersVO = this.vouchersService.getVoucherTrue(voucher,vo.getIdProduct());
+        }
+        if (vouchersVO != null){
+            System.out.println(vouchersVO.getIdProduct());
+            System.out.println(vouchersVO.getId());
+            System.out.println(vouchersVO.getEndDate());
+        }
+        Map<String,Object> map = new HashMap<>();
+        return ResponseEntity.ok(map);
+    }
+    //Xóa địa chỉ
+    @PostMapping(value = "/ajax/delete-address")
+    public ResponseEntity<Map<String,Object>> deleteAddress(HttpServletRequest request){
+        String idAddress = request.getParameter("idAddress");
+        DeliveryAddressVO vo = this.addressService.delete(Integer.parseInt(idAddress));
+        Map<String,Object> map = new HashMap<>();
+        if (vo != null){
+            map.put("code",200);
+            map.put("data",vo);
+        }
+        return ResponseEntity.ok(map);
+    }
+
+    @PostMapping(value = "/ajax/city")
+    public ResponseEntity<List<HashMap<String,?>>> post(HttpServletRequest request, Model model) throws JsonProcessingException {
+        String code = request.getParameter("code");
+        String url = "https://provinces.open-api.vn/api/?depth=2";
+        List<HashMap<String,?>> mapListDistric = this.countriesService.getDistric(Integer.parseInt(code),url);
+        return ResponseEntity.ok(mapListDistric);
+    }
+    @PostMapping(value = "/ajax/getAddress")
+    public ResponseEntity<Map<String,Object>> getAddressById(HttpServletRequest request){
+        String idAddress = request.getParameter("idAddress");
+        DeliveryAddressVO vo = this.addressService.getAddressById(Integer.parseInt(idAddress));
+        Map<String,Object> getAddress = new HashMap<>();
+        if (vo != null){
+            getAddress.put("address",vo);
+        }
+
+        return ResponseEntity.ok(getAddress);
+    }
+    @PostMapping(value = "/ajax/wards")
+    public ResponseEntity<List<HashMap<String,?>>> getWards(HttpServletRequest request,Model model) throws JsonProcessingException {
+        String code = request.getParameter("code");
+        String keyCity = request.getParameter("city");
+        String url = "https://provinces.open-api.vn/api/?depth=3";
+        List<HashMap<String,?>> mapListWards = this.countriesService.getWards(Integer.parseInt(code),url, Integer.parseInt(keyCity));
+        return ResponseEntity.ok(mapListWards);
+=======
+    //Thêm mới địa chỉ và sửa địa chỉ
+    @PostMapping(value = "/add-address")
+    public String addNewAddress(@ModelAttribute DeliveryAddressVO addressVO, HttpServletRequest request){
+        String city = request.getParameter("city");
+        String distic = request.getParameter("distric");
+        String ward = request.getParameter("ward");
+        String addressDetail = request.getParameter("addressDetail").trim();
+        String address = addressDetail+", "+ward+", "+distic+", "+city;
+        addressVO.setAddress(address);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && !auth.getName().equals("anonymousUser")) {
             String name = auth.getName();
@@ -266,10 +522,13 @@ public class CheckOutController {
             }
         }
         return "redirect:/checkout";
+>>>>>>> c2400cd1e734dc5f4f8d76a75ee825f00156bab2
     }
 
 
 
+<<<<<<< HEAD
+=======
     @PostMapping(value = "/ajax/voucher")
     public ResponseEntity<Map<String,Object>> getVoucher(HttpServletRequest request){
         String voucher = request.getParameter("voucher");
@@ -329,6 +588,7 @@ public class CheckOutController {
 
 
 
+>>>>>>> c2400cd1e734dc5f4f8d76a75ee825f00156bab2
     private JSONObject createOrder(HttpServletRequest request, CheckOut checkOut, CartDTO cartDTO,String random) throws Exception{
         final Map embeddata = new HashMap(){{
             put("merchantinfo", "embeddata123");
@@ -367,11 +627,14 @@ public class CheckOutController {
         for (Map.Entry<String, Object> e : order.entrySet()) {
             params.add(new BasicNameValuePair(e.getKey(), e.getValue().toString()));
         }
+<<<<<<< HEAD
        /* HttpSession session = request.getSession();
         if (session.getAttribute("apptransid") != null){
             session.removeAttribute("apptransid");
         }
         session.setAttribute("apptransid",order.get("apptransid").toString());*/
+=======
+>>>>>>> c2400cd1e734dc5f4f8d76a75ee825f00156bab2
         apptranid = order.get("apptransid").toString();
         // Content-Type: application/x-www-form-urlencoded
         post.setEntity(new UrlEncodedFormEntity(params));
@@ -432,6 +695,7 @@ public class CheckOutController {
         put("endpoint", "https://sandbox.zalopay.com.vn/v001/tpe/createorder");
         put("endpointStatus","https://sandbox.zalopay.com.vn/v001/tpe/getstatusbyapptransid");
     }};
+<<<<<<< HEAD
     public Integer getTotalItem(HttpServletRequest request){
         HttpSession httpSession = request.getSession();
         CartDTO cartDTO = null;
@@ -441,5 +705,8 @@ public class CheckOutController {
         }
         return  0;
     }
+=======
+
+>>>>>>> c2400cd1e734dc5f4f8d76a75ee825f00156bab2
 
 }
