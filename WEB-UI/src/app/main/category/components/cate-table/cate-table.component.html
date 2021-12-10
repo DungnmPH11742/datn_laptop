@@ -1,0 +1,30 @@
+<nz-table #basicTable [nzData]="listOfData" [nzPageSize]="pageSize" [(nzPageIndex)]="page">
+  <thead>
+    <tr>
+      <th>Stt</th>
+      <th>Id danh mục</th>
+      <th>Tên danh mục</th>
+      <th>Danh mục cha</th>
+      <th>Trạng thái</th>
+      <th>Thao tác</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of basicTable.data; let i = index">
+      <td>{{ page == 1 ? i + 1 : page * pageSize - pageSize + i + 1 }}</td>
+      <td>{{ data.id }}</td>
+      <td>{{ data.name }}</td>
+      <td>{{ data.parentId }}</td>
+      <td>
+        <nz-switch [ngModel]="data.actived" nzCheckedChildren="on" nzUnCheckedChildren="off"> </nz-switch>
+      </td>
+      <td>
+        <a><i nz-icon nzType="edit" nzTheme="outline"></i></a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a>
+          <i nz-icon nzType="delete" nzTheme="outline"></i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

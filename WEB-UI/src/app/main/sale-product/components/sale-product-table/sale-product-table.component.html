@@ -1,0 +1,39 @@
+<nz-table #basicTable  [nzData] = "listSale" [nzPageSize]="pageSize" [(nzPageIndex)]="page">
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th>Sale code</th>
+        <th>Ngày bắt đầu</th>
+        <th>Ngày kết thúc</th>
+        <th>Loại khuyến mãi</th>
+        <th>Khuyến mãi</th>
+        <th>Số lượng</th>
+        <th>Trạng thái</th>
+        <th>Thao tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data; let i = index">
+        <td>{{ page == 1 ? i + 1: page*pageSize - pageSize + i + 1}}</td>
+        <td>{{data.saleCode}}</td>
+        <td>{{data.dateOn}}</td>
+        <td>{{data.dateOff}}</td>
+        <td>{{data.promotionType}}</td>
+        <td>{{data.promotion}}</td>
+        <td>{{data.quantity}}</td>
+        <td>
+            <nz-switch [ngModel] = "data.status"  nzCheckedChildren="on" nzUnCheckedChildren="off" (ngModelChange) = "changeStatus(data)"> </nz-switch>
+        </td>
+          <td>
+            <a><i nz-icon nzType="edit" nzTheme="outline" (click)="parent.showSaleDetail(data)"></i></a>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a>
+              <i nz-icon nzType="delete" nzTheme="outline" (click)="delete(data.saleCode)"></i>
+            </a>
+          </td>
+      </tr>
+      
+
+    </tbody>
+  </nz-table>
+  

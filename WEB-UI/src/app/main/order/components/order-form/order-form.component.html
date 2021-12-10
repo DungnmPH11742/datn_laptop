@@ -1,0 +1,214 @@
+<!-- Thông tin chi tiết đơn hàng -->
+<nz-card style="float: left; width: 25%; margin-right: 0.5%">
+  <h4>Danh sách sản phẩm</h4>
+  <nz-space nzDirection="vertical" style="width: 100%">
+    <nz-card *ngFor="let data of order.orderDetails" style="width: 100%">
+      <div style="float: left; cursor: pointer" (click)="showOrderDetial(data)">
+        <img nz-image width="25%" height="auto" [nzSrc]="data.product.imgUrl" alt="" style="float: left" />
+        <div style="margin-left: 30%; width: 100%">
+          <h5>{{ data.product.name }}</h5>
+          <p>{{ data.product.outputPrice | number: '.' }} <u>đ</u></p>
+        </div>
+      </div>
+    </nz-card>
+  </nz-space>
+</nz-card>
+
+<!-- Thông tin đơn hàng -->
+<nz-card style="float: right; width: 74.5%">
+  <h4>Đơn hàng</h4>
+  <nz-space nzDirection="vertical" style="width: 100%" class="form-order-admin">
+    <nz-card style="width: 100%"
+      nzTitle="Cửa hàng máy tính King Of Computer | Số 5 114 Thái Hà, Đống Đa, Hà Nội | 0343367899">
+      <form nz-form [nzLayout]="'inline'">
+        <nz-form-item nz-col nzSpan="24" style="width: 100%" class="row--order">
+          <nz-row>
+            <nz-form-control nzSpan="6" style="width: 100%; padding-right: 30px">
+              <nz-form-label>Mã đơn hàng</nz-form-label>
+              <input nz-input [value]="order.orderCode" class="color-group" readonly />
+            </nz-form-control>
+
+            <nz-form-control nzSpan="6" style="width: 100%; padding-right: 30px">
+              <nz-form-label>Người nhận</nz-form-label>
+              <input nz-input [value]="order.address.split('-')[0]" readonly />
+            </nz-form-control>
+
+            <nz-form-control nzSpan="6" style="width: 100%; padding-right: 30px">
+              <nz-form-label>Số điện thoại</nz-form-label>
+              <input nz-input [value]="order.phoneNumber" readonly />
+            </nz-form-control>
+
+            <nz-form-control nzSpan="6" style="width: 100%">
+              <nz-form-label>Phương thức thanh toán</nz-form-label>
+              <nz-select name="paymentMethod" nzShowSearch nzAllowClear [(ngModel)]="order.paymentMethods" readonly>
+                <nz-option *ngFor="let pm of commonOrder.paymentMethod" [nzLabel]="pm.value" [nzValue]="pm.key">
+                </nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-row>
+        </nz-form-item>
+      </form>
+      <nz-form-item nz-form [nzLayout]="'inline'" nz-col nzSpan="24" class="row--order">
+        <nz-form-control style="padding-right: 30px" nzSpan="12">
+          <nz-form-label>Địa chỉ</nz-form-label>
+          <input nz-input [value]="order.address.split('-')[1]" readonly />
+        </nz-form-control>
+
+        <nz-form-control style="padding-right: 30px" nzSpan="6">
+          <nz-form-label>Quận/Huyện</nz-form-label>
+          <input nz-input [value]="order.address.split(',')[order.address.split(',').length - 2]" readonly />
+        </nz-form-control>
+
+        <nz-form-control nzSpan="6">
+          <nz-form-label>Tỉnh/Thành phố</nz-form-label>
+          <input nz-input [value]="order.address.split(',')[order.address.split(',').length - 1]" readonly />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item nz-col nzSpan="24" class="row--order">
+        <nz-form-control>
+          <nz-form-label>Ghi chú</nz-form-label>
+          <textarea nz-input [value]="order.description" readonly></textarea>
+        </nz-form-control>
+      </nz-form-item>
+
+      <div nz-form [nzLayout]="'inline'" class="row--order">
+        <nz-form-control nzSpan="4" style="float: left">
+          <nz-form-label>Phương thức vận chuyển</nz-form-label>
+          <input nz-input value="Giao hàng tiết kiệm" nzBorderless nzSpan="6" readonly />
+        </nz-form-control>
+        <nz-form-control nzSpan="4" style="float: left">
+          <nz-form-label>Mã vận đơn</nz-form-label>
+          <input nz-input class="color-group" value="0847726445" nzBorderless nzSpan="6" readonly />
+        </nz-form-control>
+
+        <nz-form-control nzSpan="4" style="float: left">
+          <nz-form-label>Mã khuyến mại</nz-form-label>
+          <input nz-input value="490.000 đ" nzBorderless nzSpan="6" readonly />
+        </nz-form-control>
+
+        <nz-form-control nzSpan="4" style="float: left">
+          <nz-form-label>Phí vận chuyển</nz-form-label>
+          <input nz-input value="35.000 đ" nzBorderless nzSpan="6" readonly />
+        </nz-form-control>
+
+        <nz-form-control nzSpan="4" style="float: left">
+          <nz-form-label>Tổng tiền</nz-form-label>
+          <input readonly nz-input class="total-price"
+            value="{{ commonOrder.getTotal(order.orderDetails) | number: '.' }} đ" nzBorderless nzSpan="6" />
+        </nz-form-control>
+
+        <nz-form-control nzSpan="4">
+          <nz-form-label>Trạng thái thanh toán</nz-form-label>
+          <input nz-input [value]="order.paymentStatus ? 'Đã thanh toán' : 'Chưa thanh toán'"
+            [style]="!order.paymentStatus ? 'color: #ffc107' : 'color: #52C41A'" nzBorderless readonly />
+        </nz-form-control>
+      </div>
+      <div nz-form [nzLayout]="'inline'" class="row--order">
+        <nz-form-control nzSpan="4" style="float: right">
+          <nz-form-label>Ngày đặt hàng</nz-form-label>
+          <input nz-input [value]="order.orderDate" nzBorderless readonly />
+        </nz-form-control>
+
+        <nz-form-control nzSpan="4" style="float: right" *ngIf="order.received != -1">
+          <nz-form-label>Xác thực đơn hàng</nz-form-label>
+          <br />
+          <div *ngIf="order.received == 0" (click)="confirmOrder(order)">
+            <label style="color: #ffc107" nz-checkbox> Chờ xác thực </label>
+          </div>
+
+          <div *ngIf="order.received != 0 && order.received != -2">
+            <div style="color: #52c41a"> <i nz-icon nzType="check" nzTheme="outline"></i> Đã xác thực </div>
+          </div>
+        </nz-form-control>
+
+        <nz-form-control nzSpan="4" style="float: right" *ngIf="order.received > 0">
+          <nz-form-label>Người xác thực</nz-form-label>
+          <input nz-input [value]="order.authenticator" nzBorderless readonly />
+        </nz-form-control>
+
+        <nz-form-control nzSpan="4" style="float: right">
+          <nz-form-label>Trạng thái đơn hàng</nz-form-label>
+          <br />
+          <div *ngIf="order.received != 0 && order.received != -2">
+            <div [style]="commonOrder.getReceivedOrder(order.received).style">
+              <i nz-icon [nzType]="commonOrder.getReceivedOrder(order.received).icon" nzTheme="outline"></i>
+              {{ commonOrder.getReceivedOrder(order.received).value }}
+            </div>
+          </div>
+        </nz-form-control>
+
+        <nz-form-control nzSpan="4" style="float: right">
+          <nz-form-label>Ngày hoàn thành</nz-form-label>
+          <input nz-input [value]="order.completionDate" nzBorderless readonly />
+        </nz-form-control>
+      </div>
+    </nz-card>
+    <nz-card *ngIf="orderDetail != undefined">
+      <form nz-form [nzLayout]="'inline'">
+        <nz-form-item nz-col nzSpan="24" style="width: 100%" class="row--order">
+          <nz-row>
+            <nz-form-control nzSpan="3" style="width: 100%; padding-right: 30px">
+              <nz-form-label>Mã sản phẩm</nz-form-label>
+              <input nz-input [value]="orderDetail.product.id" nzBorderless readonly />
+            </nz-form-control>
+
+            <nz-form-control nzSpan="10" style="width: 100%; padding-right: 30px">
+              <nz-form-label>Tên sản phẩm</nz-form-label>
+              <input nz-input [value]="orderDetail.product.name" nzBorderless />
+            </nz-form-control>
+
+            <nz-form-control nzSpan="3" style="width: 100%; padding-right: 30px">
+              <nz-form-label>Giá bán</nz-form-label>
+              <input nz-input value="{{ orderDetail.price | number: '.' }} đ" nzBorderless readonly />
+            </nz-form-control>
+
+            <nz-form-control nzSpan="6" style="width: 100%; padding-right: 30px">
+              <nz-form-label>Giá bán</nz-form-label>
+              <input nz-input value="{{ orderDetail.price | number: '.' }} đ" nzBorderless readonly />
+            </nz-form-control>
+
+            <nz-form-control nzSpan="2" style="width: 100%">
+              <nz-form-label>Số lượng</nz-form-label>
+              <input nz-input [value]="orderDetail.quantity" nzBorderless readonly />
+            </nz-form-control>
+          </nz-row>
+        </nz-form-item>
+        <nz-form-item nz-col nzSpan="24" style="width: 100%" class="row--order">
+          <nz-row>
+            <nz-form-control nzSpan="3" style="width: 100%; padding-right: 30px">
+              <nz-form-label>Đổi trả</nz-form-label>
+              <input nz-input value="{{ getReturnDateProduct(order.completionDate).value }}"
+                [style]="getReturnDateProduct(order.completionDate).style" nzBorderless readonly />
+            </nz-form-control>
+
+            <nz-form-control nzSpan="10" style="width: 100%; padding-right: 30px">
+              <nz-form-label>Thời hạn bảo hành</nz-form-label>
+              <input nz-input [value]="insuranceDate" nzBorderless readonly />
+            </nz-form-control>
+
+            <nz-form-control nzSpan="5" style="width: 100%; padding-right: 30px">
+              <nz-form-label>Trạng thái sản phẩm</nz-form-label>
+              <input nz-input *ngIf="orderDetail.status != 1"
+                [value]="orderDetail.status == 0 ? 'Đã giao hàng' : orderDetail.status == 1 ? 'Bảo hành' : 'Đổi hàng'"
+                [style]="orderDetail.status == 0 ? 'color: #52C41A' : orderDetail.status == 1 ? 'color: #ffc107' : 'color: #FF4D4F'"
+                nzBorderless readonly />
+
+              <a *ngIf="orderDetail.status == 1" nz-button nzType="link"
+                (mouseenter)="lable_button = 'Hoàn thành'; icon_lable = 'check'"
+                (mouseleave)="lable_button = 'Đang bảo hành'; icon_lable = 'setting'"
+                (click)="changeOrderDetail(order, orderDetail)">
+                <i nz-icon [nzType]="icon_lable" nzTheme="outline"></i> {{ lable_button }}
+              </a>
+            </nz-form-control>
+          </nz-row>
+        </nz-form-item>
+      </form>
+    </nz-card>
+  </nz-space>
+  <!-- Button -->
+  <br />
+  <div style="float: right">
+    <button nz-button (click)="parent.tab = 0">Quay lại</button>
+  </div>
+</nz-card>

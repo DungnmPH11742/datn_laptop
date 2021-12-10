@@ -1,0 +1,41 @@
+<nz-card>
+  <nz-table #rowSelectionTable nzShowSizeChanger #basicTable [nzData]="listOfData" [nzPageSize]="pageSize"
+    [(nzPageIndex)]="page">
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th>Mã đơn hàng</th>
+        <th>Người mua</th>
+        <th>Ngày mua</th>
+        <th>Tổng tiền</th>
+        <th>Trạng thái thanh toán</th>
+        <th>Trạng thái</th>
+        <th>Thao tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data; let i = index" style="cursor: pointer">
+        <td>{{ page == 1 ? i + 1 : page * pageSize - pageSize + i + 1 }}</td>
+        <td>{{ data.orderCode }}</td>
+        <td>{{ data.address.split('-')[0] }}</td>
+        <td>{{ data.orderDate }}</td>
+        <td style="color: rgb(223, 28, 28)">{{ commonOrder.getTotal(data.orderDetails) | number: '.' }} đ</td>
+        <td [style]="data.paymentStatus ? 'color: #52C41A' : 'color: #ffc107'">
+          {{ data.paymentStatus ? 'Đã thanh toán' : 'Chưa thanh toán' }}
+        </td>
+        <td [style]="commonOrder.getReceivedOrder(data.received).style">
+          <div *ngIf="data.received > 0">
+            <i nz-icon [nzType]="commonOrder.getReceivedOrder(data.received).icon" nzTheme="outline"></i>
+            {{ commonOrder.getReceivedOrder(data.received).value }}
+          </div>
+          <div *ngIf="data.received == 0" (click)="parent.confirmOrder(data)">
+            <label style="color: #ffc107" nz-checkbox (change)="parent.confirmOrder(data)"> Chờ xác thực </label>
+          </div>
+        </td>
+        <td>
+          <a><i nz-icon nzType="edit" (click)="parent.showDetail(data)" nzTheme="outline"></i></a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-card>

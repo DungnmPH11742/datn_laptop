@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<tr>-->
+<!--    <th scope="row">Hãng sản xuất</th>-->
+<!--    <td></td>-->
+<!--    <td></td>-->
+<!--</tr>-->
+
+<!--<tr>-->
+<!--    <th scope="row">Tên máy</th>-->
+<!--    <td th:text="${session.p1.getName()}"></td>-->
+<!--    <td th:if="${session.p2.getName()!=null}" th:text="${session.p2.getName()}"></td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--    <th scope="row">Màu sắc</th>-->
+<!--    <td th:text="${session.p1.getProductsDetail().getColor()}"></td>-->
+<!--    <td th:text="${session.p1.getProductsDetail().getColor()}"></td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--    <th scope="row">Bộ vi xử lý</th>-->
+<!--    <td th:text="${session.p1.getProductsDetail().getCpu()}"></td>-->
+<!--    <td th:if="${session.p2.getCpu()!=null}" th:text="${session.p2.getProductsDetail().getCpu()}"></td>-->
+<!--</tr>-->
+
+<!--<tr th:if="${session.p1.getProductsDetail().getHardDrive()!=null}">-->
+<!--    <th scope="row">Ổ cứng</th>-->
+<!--    <td th:text="${session.p1.getProductsDetail().getHardDrive()}"></td>-->
+<!--    <td th:if="${session.p2.getHardDrive()!=null}" th:text="${session.p2.getProductsDetail().getHardDrive()}"></td>-->
+<!--</tr>-->
+<!--<tr th:if="${session.p1.getProductsDetail().getWebcam()!=null}">-->
+<!--    <th scope="row">Webcam</th>-->
+<!--    <td th:text="${session.p1.getProductsDetail().getWebcam()}"></td>-->
+<!--    <td th:if="${session.p2.getWebcam()!=null}" th:text="${session.p2.getProductsDetail().getWebcam()}"></td>-->
+<!--</tr>-->
+<!--<tr th:if="${session.p1.getProductsDetail().getVga()!=null}">-->
+<!--    <th scope="row">Card đồ họa</th>-->
+<!--    <td th:text="${session.p1.getProductsDetail().getVga()}"></td>-->
+<!--    <td th:if="${session.p2.getVga()!=null}" th:text="${session.p2.getProductsDetail().getVga()}"></td>-->
+<!--</tr>-->
+<!--<tr th:if="${session.p1.getMass()!=null}">-->
+<!--    <th scope="row">Khối lượng</th>-->
+<!--    <td> [[${session.p1.getMass()}]] kg</td>-->
+<!--    <td th:if="${session.p2.getMass()!=null}"> [[${session.p2.getMass()}]] kg</td>-->
+<!--</tr>-->
+<!--<tr th:if="${session.p1.getReleaseDate()!=null}">-->
+<!--    <th scope="row">Ngày phát hành</th>-->
+<!--    <td>[[${session.p1.getReleaseDate()}]]</td>-->
+<!--</tr>-->
+<!--<tr th:if="${session.p1.getProductsDetail().getOperatingSystem()!=null}">-->
+<!--    <th scope="row">Hệ điều hành</th>-->
+<!--    <td>[[${session.p1.getProductsDetail().getOperatingSystem()}]]</td>-->
+<!--</tr>-->
+<!--<tr th:if="${session.p1.getProductsDetail().getPower()!=null}">-->
+<!--    <th scope="row">Nguồn</th>-->
+<!--    <td>[[${session.p1.getProductsDetail().getPower()}]]</td>-->
+<!--</tr>-->
+<!--<tr th:if="${session.p1.getProductsDetail().getScanFrequency()!=null}">-->
+<!--    <th scope="row">Tần số quét</th>-->
+<!--    <td>[[${session.p1.getProductsDetail().getScanFrequency()}]]</td>-->
+<!--</tr>-->
+<!--<tr th:if="${session.p1.getProductsDetail().getBackgroundPanels()!=null}">-->
+<!--    <th scope="row">Tấm nền</th>-->
+<!--    <td>[[${session.p1.getProductsDetail().getBackgroundPanels()}]]</td>-->
+<!--</tr>-->
+
+<!--<tr th:if="${session.p1.getProductsDetail().getContrast()!=null}">-->
+<!--    <th scope="row">Độ tương phản</th>-->
+<!--    <td>[[${session.p1.getProductsDetail().getContrast()}]]</td>-->
+<!--</tr>-->
+
+<!--<tr th:if="${session.p1.getProductsDetail().getResponseTime()!=null}">-->
+<!--    <th scope="row">Thời gian phản hồi</th>-->
+<!--    <td>[[${session.p1.getProductsDetail().getResponseTime()}]]</td>-->
+<!--</tr>-->
+<!--<tr th:if="${session.p1.getProductsDetail().getViewScreenshots()!=null}">-->
+<!--    <th scope="row">Góc nhìn</th>-->
+<!--    <td>[[${session.p1.getProductsDetail().getViewScreenshots()}]]</td>-->
+<!--</tr>-->
+
+<!--<tr th:if="${session.p1.getProductsDetail().getDisplaySize()!=null}">-->
+<!--    <th scope="row">Kích thước màn hình</th>-->
+<!--    <td>[[${session.p1.getProductsDetail().getDisplaySize()}]]</td>-->
+<!--</tr>-->
+
+<!--<tr th:if="${session.p1.getProductsDetail().getScreenRatio()!=null}">-->
+<!--    <th scope="row">Tỉ lệ màn hình</th>-->
+<!--    <td> [[${session.p1.getProductsDetail().getScreenRatio()}]]</td>-->
+<!--</tr>-->
+
+<!--<tr th:if="${session.p1.getProductsDetail().getBrightness()!=null}">-->
+<!--    <th scope="row">Độ sáng</th>-->
+<!--    <td>[[${session.p1.getProductsDetail().getBrightness()}]]</td>-->
+<!--</tr>-->
+
+<!--<tr th:if="${session.p1.getProductsDetail().getWarrantyPeriod()!=null}">-->
+<!--    <th scope="row">Thời gian bảo hành</th>-->
+<!--    <td>[[${session.p1.getProductsDetail().getWarrantyPeriod()}]]</td>-->
+<!--</tr>-->
+
+<!--<tr th:if="${session.p1.getProductsDetail().getAccessoriesIncluded()!=null}">-->
+<!--    <th scope="row">Phụ kiện đi kèm</th>-->
+<!--    <td>[[${session.p1.getProductsDetail().getAccessoriesIncluded()}]]</td>-->
+</body>
+</html>

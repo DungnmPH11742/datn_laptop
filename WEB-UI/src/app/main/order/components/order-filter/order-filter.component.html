@@ -1,0 +1,45 @@
+<nz-card>
+  <div nz-row nzJustify="space-between">
+    <b>Bộ lọc</b>
+    <button nz-button (click)="parent.showFilter()" nzType="text"> <i nz-icon nzType="close-circle"
+        nzTheme="outline"></i> </button>
+  </div>
+
+  <hr />
+  <form nz-form nz-row>
+    <nz-form-item style="width: 100%">
+      <nz-form-control [nzSpan]="24">
+        <nz-form-label nzFor="">Thời gian đặt hàng</nz-form-label>
+        <nz-date-picker nzMode="month" style="width: 100%"></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item style="width: 100%">
+      <nz-form-control [nzSpan]="24">
+        <nz-form-label nzFor="">Trạng thái thanh toán</nz-form-label>
+        <nz-select nzAllowClear nzShowSearch style="width: 100%" nzPlaceHolder="--Chọn loại thanh toán--">
+          <nz-option nzValue="0" nzLabel="Chưa thanh toán"></nz-option>
+          <nz-option nzValue="1" nzLabel="Đã thanh toán"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item style="width: 100%">
+      <nz-form-control [nzSpan]="24">
+        <nz-form-label nzFor="taxCode">Trạng thái</nz-form-label>
+        <nz-select nzAllowClear nzShowSearch nzPlaceHolder="--Chọn trạng thái--" style="width: 100%">
+          <nz-option nzValue="-1" nzLabel="Hủy"></nz-option>
+          <nz-option nzValue="0" nzLabel="Chờ xác thực"></nz-option>
+          <nz-option nzValue="1" nzLabel="Đang giao"></nz-option>
+          <nz-option nzValue="2" nzLabel="Đã giao"></nz-option>
+          <nz-option nzValue="3" nzLabel="Hoàn thành"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  <div>
+    <hr />
+    <button nz-button nzType="default" nzType="primary">Bỏ lọc</button>
+    <button nz-button nzType="default" nzType="primary">Áp dụng</button>
+  </div>
+</nz-card>

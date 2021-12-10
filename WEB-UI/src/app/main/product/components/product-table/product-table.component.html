@@ -1,0 +1,42 @@
+<nz-table #basicTable [nzData]="listOfData" [nzPageSize]="pageSize" [(nzPageIndex)]="page">
+  <thead>
+    <tr>
+      <th>STT</th>
+      <th>Mã sản phẩm</th>
+      <th>Tên sản phẩm</th>
+      <th>Ngày thêm</th>
+      <th>Loại SP</th>
+      <th>Giá nhập</th>
+      <th>Giá bán</th>
+      <th>Số lượng</th>
+      <th>Khối lượng</th>
+      <th>DVT</th>
+      <th>Năm phát hành</th>
+      <th>Trạng thái</th>
+      <th>Thao tác</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of basicTable.data; let i = index">
+      <td>{{ page == 1 ? i + 1 : page * pageSize - pageSize + i + 1 }}</td>
+      <td>{{ data.id }}</td>
+      <td>{{ data.name }}</td>
+      <td>{{ data.dateOn }}</td>
+      <td>{{ data.typeOfItem == 1 ? 'Laptop' : data.typeOfItem == 57 ? 'PC' : 'Màn hình' }}</td>
+      <td>{{ data.inputPrice }}</td>
+      <td>{{ data.outputPrice }}</td>
+      <td>{{ data.quantity }}</td>
+      <td>{{ data.mass }}</td>
+      <td>{{ data.unit }}</td>
+      <td>{{ data.releaseDate }}</td>
+      <td>{{ data.active }}</td>
+      <td>
+        <a><i nz-icon nzType="edit" nzTheme="outline" (click)="parent.showDetail(data)"></i></a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a>
+          <i nz-icon nzType="delete" nzTheme="outline"></i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

@@ -1,0 +1,76 @@
+<nz-card>
+    <form nz-form nz-row [formGroup] ="form">
+      <nz-form-item nz-col nzSpan="6">
+        <nz-form-label [nzSpan]="8" nzFor="employeeCode">Sale code </nz-form-label>
+        <nz-form-control [nzSpan]="20">
+          <input class="rounded-lg" nz-input readonly name="employeeCode" type="text"  formControlName="saleCode"/>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item nz-col nzSpan="6">
+        <nz-form-label [nzSpan]="12" nzFor="approver" nzRequired>Ngày bắt đầu </nz-form-label>
+        <nz-form-control [nzSpan]="20">
+          <nz-date-picker
+            style="width: 100%"
+            
+            nzPlaceHolder="Ngày bắt đầu"
+            formControlName="dateOn"
+          ></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+      <!--  -->
+      <nz-form-item nz-col nzSpan="6">
+        <nz-form-label [nzSpan]="12" nzFor="approver" nzRequired>Ngày Kết thúc </nz-form-label>
+        <nz-form-control [nzSpan]="20">
+          <nz-date-picker
+            style="width: 100%"                
+            formControlName = "dateOff"                                     
+            nzPlaceHolder="Ngày bắt đầu"
+          ></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+        <!--  -->
+        <nz-form-item nz-col nzSpan="6">
+          <nz-form-label [nzSpan]="8" nzFor="status">Trạng thái</nz-form-label>
+          <nz-form-control [nzSpan]="20">
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Trạng thái" formControlName="status">
+              <nz-option nzLabel="Hoạt động" nzValue="1"></nz-option>
+              <nz-option nzLabel="Không hoạt động" nzValue="0"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+
+      <nz-form-item nz-col nzSpan="6">
+        <nz-form-label [nzSpan]="8" nzFor="department">Khuyến mãi(%) </nz-form-label>
+        <nz-form-control [nzSpan]="20">
+          <input nz-input class="rounded-lg" min="0" max="100" formControlName="promotion" name="promotion"  type="number"  id="promotion"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item nz-col nzSpan="6">
+        <nz-form-label [nzSpan]="8" nzFor="title">Số lượng</nz-form-label>
+        <nz-form-control [nzSpan]="20">
+          <input nz-input class="rounded-lg" min="1"  name="quantity" type="number" id="quantity" formControlName ="quantity"/>
+        </nz-form-control>
+      </nz-form-item>
+  
+      
+      <nz-form-item nz-col nzSpan="12">
+        <nz-form-label nzRequired [nzSpan]="12" nzFor="promotionType">Mô tả</nz-form-label>
+        <nz-form-control [nzSpan]="22" >
+          <textarea
+            class="rounded-lg"
+            formControlName="promotionType"
+            nz-input
+            maxlength="255"
+            minlength="5"
+            [nzAutosize]="{ minRows: 1, maxRows: 3 }"
+          ></textarea>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+    <div class="text-center">
+      <button nz-button class="rounded-lg" nzType="primary" (click)="createSale()">Tạo đơn</button>
+      <button nz-button class="rounded-lg" (click) = "cancelSale()">Hủy</button>
+    </div>
+  </nz-card>
+  

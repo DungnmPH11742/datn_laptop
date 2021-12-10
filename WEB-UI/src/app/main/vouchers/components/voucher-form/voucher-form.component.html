@@ -1,0 +1,99 @@
+<nz-card>
+    <form nz-form nz-row>
+      <nz-form-item nz-col nzSpan="8">
+        <nz-form-label [nzSpan]="8" nzFor="employeeCode">Id </nz-form-label>
+        <nz-form-control [nzSpan]="20">
+          <input class="rounded-lg" nz-input readonly name="employeeCode" type="text" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <!--  -->
+      <nz-form-item nz-col nzSpan="8">
+        <nz-form-label [nzSpan]="8" nzFor="status">Danh mục</nz-form-label>
+        <nz-form-control [nzSpan]="20">
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Trạng thái">
+            <nz-option nzLabel="Hoạt động" nzValue="1"></nz-option>
+            <nz-option nzLabel="Không hoạt động" nzValue="0"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item nz-col nzSpan="8">
+          <nz-form-label [nzSpan]="8" nzFor="status">Sản phẩm</nz-form-label>
+          <nz-form-control [nzSpan]="20">
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Trạng thái">
+              <nz-option nzLabel="Hoạt động" nzValue="1"></nz-option>
+              <nz-option nzLabel="Không hoạt động" nzValue="0"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item nz-col nzSpan="8">
+            <nz-form-label [nzSpan]="8" nzFor="department">Tên </nz-form-label>
+            <nz-form-control [nzSpan]="20">
+              <input nz-input class="rounded-lg" min="0" max="100"  name="promotion"  type="number"  id="promotion"/>
+            </nz-form-control>
+          </nz-form-item>
+
+        <nz-form-item nz-col nzSpan="8">
+            <nz-form-label [nzSpan]="8" nzFor="title">Số lượng</nz-form-label>
+            <nz-form-control [nzSpan]="20">
+              <input nz-input class="rounded-lg" min="1"  name="quantity" type="number" id="quantity"/>
+            </nz-form-control>
+          </nz-form-item>
+    
+        <nz-form-item nz-col nzSpan="8">
+          <nz-form-label [nzSpan]="8" nzFor="department">Khuyến mãi(%) </nz-form-label>
+          <nz-form-control [nzSpan]="20">
+            <input nz-input class="rounded-lg" min="0" max="100"  name="promotion"  type="number"  id="promotion"/>
+          </nz-form-control>
+        </nz-form-item>
+        
+      <nz-form-item nz-col nzSpan="8">
+        <nz-form-label [nzSpan]="12" nzFor="approver" nzRequired>Ngày bắt đầu </nz-form-label>
+        <nz-form-control [nzSpan]="20">
+          <nz-date-picker
+            style="width: 100%"
+            
+            nzPlaceHolder="Ngày bắt đầu"
+          ></nz-date-picker>
+        </nz-form-control>
+        <br>
+        <nz-form-label [nzSpan]="12" nzFor="approver" nzRequired>Ngày Kết thúc </nz-form-label>
+        <nz-form-control [nzSpan]="20">
+          <nz-date-picker
+            style="width: 100%"                                             
+            nzPlaceHolder="Ngày bắt đầu"
+          ></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+      <!--  -->
+      <!-- <nz-form-item nz-col nzSpan="8">
+        <nz-form-label [nzSpan]="12" nzFor="approver" nzRequired>Ngày Kết thúc </nz-form-label>
+        <nz-form-control [nzSpan]="20">
+          <nz-date-picker
+            style="width: 100%"                                             
+            nzPlaceHolder="Ngày bắt đầu"
+          ></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item> -->
+      
+      <nz-form-item nz-col nzSpan="16">
+        <nz-form-label nzRequired [nzSpan]="12" nzFor="promotionType">Mô tả</nz-form-label>
+        <nz-form-control [nzSpan]="22" >
+          <textarea
+            class="rounded-lg"
+            nz-input
+            maxlength="255"
+            minlength="5"
+            [nzAutosize]="{ minRows: 5, maxRows: 5 }"
+          ></textarea>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+    <div class="text-center">
+      <button nz-button class="rounded-lg" nzType="primary">Tạo đơn</button>
+      <button nz-button class="rounded-lg">Hủy</button>
+    </div>
+  </nz-card>
+  

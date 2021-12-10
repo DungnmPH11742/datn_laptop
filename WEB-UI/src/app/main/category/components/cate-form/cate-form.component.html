@@ -1,0 +1,35 @@
+<form nz-form [formGroup]="form">
+  <nz-card>
+    <nz-form-item nz-col nzSpan="24">
+      <nz-row>
+        <nz-form-control [nzSpan]="6">
+          <nz-form-label nzRequired nzFor="id">Id</nz-form-label>
+          <input formControlName="id" nz-input placeholder="LT01..." />
+        </nz-form-control>
+
+        <nz-form-control [nzSpan]="6" nz-col>
+          <nz-form-label nzRequired nzFor="name">Tên danh mục</nz-form-label>
+          <input nz-input formControlName="name" placeholder="Laptop..." />
+        </nz-form-control>
+
+        <nz-form-control [nzSpan]="6">
+          <nz-form-label nzFor="parentId">Danh mục cha</nz-form-label>
+          <input nz-input formControlName="parentId" placeholder="Dell.." />
+        </nz-form-control>
+
+        <nz-form-control [nzSpan]="6">
+          <nz-form-label nzFor="actived">Trạng thái</nz-form-label>
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Trạng thái" formControlName="actived">
+            <nz-option nzLabel="Hoạt động" nzValue="true"></nz-option>
+            <nz-option nzLabel="Không hoạt động" nzValue="false"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-row>
+    </nz-form-item>
+
+    <nz-form-control style="float: right">
+      <button nz-button>Hủy</button>
+      <button nz-button nzType="primary">Lưu</button>
+    </nz-form-control>
+  </nz-card>
+</form>

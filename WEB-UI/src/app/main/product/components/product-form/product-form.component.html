@@ -1,0 +1,268 @@
+<!-- Thông tin sản phẩm -->
+<form nz-form [formGroup]="form">
+  <nz-card>
+    <div>
+      <b> <i nz-icon nzType="plus" nzTheme="outline"></i> Thông tin sản phẩm </b>
+    </div>
+    <hr />
+    <div class="content-p">
+      <div class="img-left">
+        <div nzFlex="300px">
+          <div class="upload-btn-wrapper">
+            <div class="boder-upload center">
+              <i nz-icon *ngIf="img == ''" nzType="upload" nzTheme="outline"></i>
+              <img nz-image class="img-default" *ngIf="img != ''" [nzSrc]="img" alt="imgUrl" />
+            </div>
+            <input type="file" name="myfile" formControlName="imgUrl" (change)="selectFile($event)"
+              accept="image/gif, image/jpeg, image/png" />
+          </div>
+        </div>
+      </div>
+      <div class="right-content">
+        <nz-form-item nz-col nzSpan="24">
+          <input type="hidden" formControlName="id" />
+          <nz-row>
+            <nz-form-control [nzSpan]="4">
+              <nz-form-label nzRequired nzFor="id">Mã sản phẩm</nz-form-label>
+              <input nz-input formControlName="id" placeholder="Nhập mã sản phẩm" />
+            </nz-form-control>
+            <nz-form-control [nzSpan]="15">
+              <nz-form-label nzRequired nzFor="name">Tên sản phẩm</nz-form-label>
+              <input nz-input formControlName="name" placeholder="Nhập tên sản phẩm" />
+            </nz-form-control>
+            <nz-form-control [nzSpan]="5">
+              <nz-form-label nzFor="dateOn">Ngày thêm</nz-form-label>
+              <nz-date-picker formControlName="dateOn" [nzDisabled]="true" style="width: 100%"
+                [nzFormat]="prodService.dateFormat">
+              </nz-date-picker>
+            </nz-form-control>
+          </nz-row>
+        </nz-form-item>
+        <!-- Tầng 2 -->
+        <nz-form-item nz-col nzSpan="24">
+          <nz-row>
+            <nz-form-control [nzSpan]="2">
+              <nz-form-label nzRequired nzFor="quantity">Số lượng</nz-form-label>
+              <nz-input-number formControlName="quantity" [nzMin]="1" [nzStep]="1" style="width: 85%">
+              </nz-input-number>
+            </nz-form-control>
+            <nz-form-control [nzSpan]="1" style="margin: auto 50px auto 5px">
+              <nz-form-label nzRequired nzFor="quantity">ĐVT</nz-form-label>
+              <input nz-input formControlName="unit" placeholder="Chiếc" style="width: 140%" />
+            </nz-form-control>
+            <nz-form-control nz-col [nzSpan]="3">
+              <nz-form-label nzRequired nzFor="inputPrice">Khối lượng</nz-form-label>
+              <nz-input-number formControlName="mass" [nzMin]="0" step="{0.1}" [nzFormatter]="formatterMass"
+                style="width: 100%">
+              </nz-input-number>
+            </nz-form-control>
+            <nz-form-control [nzSpan]="3">
+              <nz-form-label nzRequired nzFor="outputPrice">Giá bán</nz-form-label>
+              <nz-input-number formControlName="outputPrice" [nzMin]="0" [nzStep]="1000"
+                [nzFormatter]="formatterPercent" style="width: 100%">
+              </nz-input-number>
+            </nz-form-control>
+            <nz-form-control [nzSpan]="4">
+              <nz-form-label nzRequired nzFor="outputPrice">Giá bán</nz-form-label>
+              <nz-input-number formControlName="outputPrice" [nzMin]="0" [nzStep]="1000"
+                [nzFormatter]="formatterPercent" style="width: 100%"></nz-input-number>
+            </nz-form-control>
+            <nz-form-control [nzSpan]="5">
+              <nz-form-label nzRequired nzFor="typeOfItem">Loại sản phẩm</nz-form-label>
+              <nz-select nzAllowClear formControlName="typeOfItem" nzShowSearch nzPlaceHolder="Chọn loại sản phẩm"
+                (ngModelChange)="getListCate(); getListNodeCate()">
+                <nz-option *ngFor="let c of nodeCate" [nzValue]="c.id" [nzLabel]="c.name"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-row>
+        </nz-form-item>
+        <nz-form-item nz-col nzSpan="24">
+          <nz-row>
+            <nz-form-control [nzSpan]="4">
+              <nz-form-label nzFor="releaseDate">Năm phát hành</nz-form-label>
+              <nz-date-picker nzMode="year" formControlName="releaseDate" nzPlaceHolder="Chọn năm" style="width: 100%">
+              </nz-date-picker>
+            </nz-form-control>
+            <nz-form-control nz-col [nzSpan]="6">
+              <nz-form-label nzFor="dateOfManufacture">Ngày sản xuất</nz-form-label>
+              <nz-date-picker [nzFormat]="prodService.dateFormat" formControlName="dateOfManufacture"
+                nzPlaceHolder="Chọn ngày sản xuất" style="width: 100%"></nz-date-picker>
+            </nz-form-control>
+            <nz-form-control [nzSpan]="6">
+              <nz-form-label nzFor="saleProduct">Khuyến mãi</nz-form-label>
+              <nz-select formControlName="saleProduct" nzShowSearch nzPlaceHolder="Lựa chọn khuyến mãi">
+                <nz-option *ngFor="let s of listSale" [nzValue]="s" [nzLabel]="s.promotionType"></nz-option>
+              </nz-select>
+            </nz-form-control>
+            <nz-form-control [nzSpan]="5">
+              <nz-form-label nzFor="active">Danh mục</nz-form-label>
+              <nz-tree-select [nzNodes]="nodeCateList" nzVirtualHeight="250px" nzShowSearch
+                nzPlaceHolder="Chọn danh mục" formControlName="category">
+              </nz-tree-select>
+            </nz-form-control>
+          </nz-row>
+        </nz-form-item>
+      </div>
+    </div>
+  </nz-card>
+  <!-- Chi tiết sản phẩm -->
+  <nz-card>
+    <div>
+      <b> <i nz-icon nzType="plus" nzTheme="outline"></i> Chi tiết sản phẩm </b>
+    </div>
+    <hr />
+    <fieldset formGroupName="productsDetail">
+      <nz-form-item nz-col nzSpan="24">
+        <nz-row>
+          <nz-form-control [nzSpan]="8">
+            <nz-form-label nzFor="producer">Nhà phát hành</nz-form-label>
+            <nz-select nzAllowClear formControlName="producer" nzShowSearch nzPlaceHolder="Chọn nhà phát hành">
+              <nz-option *ngFor="let c of listCate" [nzValue]="c.name.split(' ')[c.name.split(' ').length - 1]"
+                [nzLabel]="c.name.split(' ')[c.name.split(' ').length - 1]"></nz-option>
+            </nz-select>
+          </nz-form-control>
+          <nz-form-control nz-col [nzSpan]="8">
+            <nz-form-label nzFor="cpu">Bộ xử lý</nz-form-label>
+            <nz-tree-select [nzNodes]="commonP.nodeCpu" nzVirtualHeight="250px" nzShowSearch nzPlaceHolder="Chọn CPU"
+              formControlName="cpu">
+            </nz-tree-select>
+          </nz-form-control>
+          <nz-form-control [nzSpan]="8">
+            <nz-form-label nzFor="color">Màu sắc</nz-form-label>
+            <nz-select nzAllowClear formControlName="color" nzShowSearch nzPlaceHolder="Chọn màu sản phẩm">
+              <nz-option *ngFor="let c of commonP.getListColor()" [nzValue]="c" [nzLabel]="c"></nz-option>
+            </nz-select>
+          </nz-form-control>
+          <nz-form-control [nzSpan]="8">
+            <nz-form-label nzFor="ram">Ram</nz-form-label>
+            <nz-tree-select [nzNodes]="commonP.nodeRam" nzVirtualHeight="250px" nzShowSearch nzPlaceHolder="Chọn Ram"
+              formControlName="ram">
+            </nz-tree-select>
+          </nz-form-control>
+        </nz-row>
+      </nz-form-item>
+      <nz-form-item nz-col nzSpan="24">
+        <nz-row>
+          <nz-form-control [nzSpan]="8">
+            <nz-form-label nzFor="hardDrive">Ổ cứng</nz-form-label>
+            <nz-select nzAllowClear formControlName="hardDrive" nzShowSearch nzPlaceHolder="Chọn ổ cứng">
+              <nz-option-group nzLabel="HDD">
+                <nz-option *ngFor="let c of commonP.getListHard().HDD" [nzValue]="c" [nzLabel]="c"></nz-option>
+              </nz-option-group>
+              <nz-option-group nzLabel="SSD">
+                <nz-option *ngFor="let c of commonP.getListHard().SSD" [nzValue]="c" [nzLabel]="c"></nz-option>
+              </nz-option-group>
+            </nz-select>
+          </nz-form-control>
+          <nz-form-control nz-col [nzSpan]="8">
+            <nz-form-label nzFor="webcam">Webcam</nz-form-label>
+            <input nz-input formControlName="webcam" placeholder="Nhập thông tin Webcam" />
+          </nz-form-control>
+          <nz-form-control [nzSpan]="8">
+            <nz-form-label nzFor="vga">Card đồ họa</nz-form-label>
+            <nz-tree-select [nzNodes]="commonP.nodeVga" nzVirtualHeight="250px" nzShowSearch nzPlaceHolder="Chọn Vga"
+              formControlName="vga">
+            </nz-tree-select>
+          </nz-form-control>
+          <nz-form-control [nzSpan]="8">
+            <nz-form-label nzFor="operatingSystem">Hệ điều hành</nz-form-label>
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Chọn hdh" formControlName="operatingSystem">
+              <nz-option nzCustomContent nzLabel="Windows" nzValue="windows"> Windows </nz-option>
+              <nz-option nzCustomContent nzLabel="Mac" nzValue="mac"> Mac </nz-option>
+              <nz-option nzCustomContent nzLabel="Android" nzValue="android"> Android </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-row>
+      </nz-form-item>
+      <nz-form-item nz-col nzSpan="24">
+        <nz-row>
+          <nz-form-control [nzSpan]="8">
+            <nz-form-label nzFor="power">Nguồn</nz-form-label>
+            <input nz-input formControlName="power" placeholder="Nhập thông tin nguồn" />
+          </nz-form-control>
+          <nz-form-control nz-col [nzSpan]="8">
+            <nz-form-label nzFor="displaySize">Kích thước màn hình</nz-form-label>
+            <nz-tree-select [nzNodes]="commonP.nodeScreenSize" nzVirtualHeight="250px" nzShowSearch
+              nzPlaceHolder="Chọn kích thước màn hình" formControlName="displaySize">
+            </nz-tree-select>
+          </nz-form-control>
+          <nz-form-control [nzSpan]="8">
+            <nz-form-label nzFor="screenRatio">Tỉ lệ màn hình</nz-form-label>
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Tỉ lệ màn hình" formControlName="screenRatio">
+              <nz-option *ngFor="let c of commonP.ListScreenRatio()" [nzValue]="c" [nzLabel]="c"> </nz-option>
+            </nz-select>
+          </nz-form-control>
+          <nz-form-control [nzSpan]="8">
+            <nz-form-label nzFor="scanFrequency">Tần số quét</nz-form-label>
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Chọn tần số quét" formControlName="scanFrequency">
+              <nz-option *ngFor="let c of commonP.listScanFrequency" [nzValue]="c" [nzLabel]="c"> </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-row>
+      </nz-form-item>
+      <nz-form-item nz-col nzSpan="24">
+        <nz-row>
+          <nz-form-control [nzSpan]="8">
+            <nz-form-label nzFor="backgroundPanels">Tấm nền</nz-form-label>
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Chọn tấm nền" formControlName="backgroundPanels">
+              <nz-option *ngFor="let c of commonP.listBackgroundPanels" [nzValue]="c" [nzLabel]="c"> </nz-option>
+            </nz-select>
+          </nz-form-control>
+          <nz-form-control nz-col [nzSpan]="8">
+            <nz-form-label nzFor="displaySize">Kích thước màn hình</nz-form-label>
+            <!-- <input nz-input formControlName="displaySize" /> -->
+          </nz-form-control>
+          <nz-form-control [nzSpan]="8">
+            <nz-form-label nzFor="contrast">Độ tương phản</nz-form-label>
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Lựa chọn độ tương phản" formControlName="contrast">
+              <nz-option *ngFor="let c of commonP.listContrast" [nzValue]="c" [nzLabel]="c"> </nz-option>
+            </nz-select>
+          </nz-form-control>
+          <nz-form-control [nzSpan]="8">
+            <nz-form-label nzFor="responseTime">Thời gian phản hồi</nz-form-label>
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Thời gian phản hồi màn hình"
+              formControlName="responseTime">
+              <nz-option *ngFor="let c of commonP.listResponseTime" [nzValue]="c" [nzLabel]="c"> </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-row>
+      </nz-form-item>
+      <nz-form-item nz-col nzSpan="24">
+        <nz-row>
+          <nz-form-control [nzSpan]="8">
+            <nz-form-label nzFor="brightness">Độ sáng</nz-form-label>
+            <input nz-input formControlName="brightness" placeholder="Nhập vào độ sáng màn hình" />
+          </nz-form-control>
+          <nz-form-control nz-col [nzSpan]="8">
+            <nz-form-label nzFor="viewScreenshots">Góc nhìn</nz-form-label>
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Lựa chọn góc nhìn" formControlName="viewScreenshots">
+              <nz-option *ngFor="let c of commonP.listViewScreenshots" [nzValue]="c" [nzLabel]="c"> </nz-option>
+            </nz-select>
+          </nz-form-control>
+          <nz-form-control [nzSpan]="8">
+            <nz-form-label nzFor="warrantyPeriod">Thời gian bảo hành</nz-form-label>
+            <nz-input-number formControlName="warrantyPeriod" [nzMin]="0" [nzMax]="100" [nzStep]="3"
+              [nzFormatter]="formatterWarranty" style="width: 100%"></nz-input-number>
+          </nz-form-control>
+          <nz-form-control [nzSpan]="8">
+            <nz-form-label nzFor="accessoriesIncluded">Phụ kiện đi kèm</nz-form-label>
+            <input nz-input formControlName="accessoriesIncluded" />
+          </nz-form-control>
+        </nz-row>
+      </nz-form-item>
+      <nz-form-item nz-col nzSpan="24">
+        <nz-row>
+          <nz-form-control>
+            <nz-form-label nzFor="seeMore">Thông tin thêm</nz-form-label>
+            <textarea nz-input formControlName="seeMore" placeholder="Thông tin thêm..."></textarea>
+          </nz-form-control>
+        </nz-row>
+      </nz-form-item>
+    </fieldset>
+
+    <nz-form-control style="float: right">
+      <button nz-button>Hủy</button>
+      <button nz-button nzType="primary" (click)="submitForm()" [disabled]="!form.valid">Lưu</button>
+    </nz-form-control>
+  </nz-card>
+</form>

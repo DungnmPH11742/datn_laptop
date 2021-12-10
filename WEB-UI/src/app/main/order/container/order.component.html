@@ -1,0 +1,34 @@
+<page-header [breadcrumb]="breadcrumb">
+  <ng-template #breadcrumb>
+    <nz-breadcrumb>
+      <nz-breadcrumb-item><a [routerLink]="['/dashboard']">Quản lý</a></nz-breadcrumb-item>
+    </nz-breadcrumb>
+  </ng-template>
+</page-header>
+<!-- <app-order-form></app-order-form> -->
+
+<nz-tabset [nzSelectedIndex]="tab">
+  <nz-tab nzTitle="Đơn hàng" (nzClick)="tab = 0">
+    <nz-card>
+      <button nz-button (click)="showFilter()"><i nz-icon nzType="filter" nzTheme="outline"></i></button>
+    </nz-card>
+    <div nz-row *ngIf="filter">
+      <div nz-col nzSpan="19">
+        <app-order-table></app-order-table>
+      </div>
+      <div nz-col nzSpan="5" style="padding-left: 1%">
+        <nz-card>
+          <app-order-filter></app-order-filter>
+        </nz-card>
+      </div>
+    </div>
+    <div *ngIf="!filter">
+      <nz-card>
+        <app-order-table></app-order-table>
+      </nz-card>
+    </div>
+  </nz-tab>
+  <nz-tab nzTitle="Chi tiết đơn hàng" nzDisabled>
+    <app-order-form (mySubmit)="getListOrder()"></app-order-form>
+  </nz-tab>
+</nz-tabset>
