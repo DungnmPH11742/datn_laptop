@@ -13,34 +13,20 @@ public class ProductsVO implements Serializable {
 
     private String name;
 
-    private Date dateOn;
+    private String company;
 
-    private Integer typeOfItem;
-
-    private String imgUrl;
-
-    private Float inputPrice;
-
-    private Float outputPrice;
-
-    private Integer quantity;
-
-    private Float mass;
+    private String typeOfItem;
 
     private String unit;
 
-    private String releaseDate;
+    private String releaseYear;
 
-    private String dateOfManufacture;
+    private List<ProductsDetailVO> productsDetails;
 
-    private SaleProductVO saleProduct;
-
-    private ProductsDetailVO productsDetail;
-
-    private List<ImageDetailVO> imageDetails;
+    private List<DescriptionVO> descriptions;
 
     private CategoryVO category;
 
-    private Boolean active;
+    private int active;
 
 }

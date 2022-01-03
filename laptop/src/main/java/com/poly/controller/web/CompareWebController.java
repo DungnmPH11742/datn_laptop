@@ -4,6 +4,7 @@ import com.poly.helper.CompareHelper;
 import com.poly.helper.HeaderHelper;
 import com.poly.service.SessionService;
 import com.poly.vo.ProductsVO;
+import com.poly.vo.response.ProductsReponseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +24,7 @@ public class CompareWebController {
     @RequestMapping("/compare")
     public String viewCompare(Model model) {
         boolean check = false;
-        List<ProductsVO> vos = compareHelper.getAllProductVo();
+        List<ProductsReponseVO> vos = compareHelper.getAllProductVo();
         for (int i = 0; i < vos.size(); i++) {
             if(vos.get(i) != null){
                 check = true;

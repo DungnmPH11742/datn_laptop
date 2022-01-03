@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Shop | E-Shopper</title>
+    <link th:href="@{/user-st/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/font-awesome.min.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/prettyPhoto.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/price-range.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/animate.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/send-order.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/responsive.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/main.css}" rel="stylesheet">
+
+    <link th:href="@{/user-st/css/order.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+          integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script th:src="@{/user-st/js/html5shiv.js}"></script>
+    <script th:src="@{/user-st/js/respond.min.js}"></script>
+
+</head>
+<!--/head-->
+
+<body>
+    <!--header-->
+    <div th:replace="~{common/header :: headers}"></div>
+    <!--/header-->
+
+    <main id="main" class="main-order">
+        <section class="container clearfix">
+            <div>
+                <div>
+                    <ul class="breadcrumb pb-8 flex items-center space-x-2">
+                        <li class="breadcrumb-item home">
+                            <a href="#" class="nuxt-link-active" itemprop="item">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item font-semibold text-sm active">
+                            <a href="#" aria-current="page" class="text-black flex items-center nuxt-link-exact-active nuxt-link-active" itemprop="item">
+                                Đơn hàng
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <section class="clearfix">
+                    <div class="account-information">
+                        <div class="account-information_left">
+                            <div class="info-user-header">
+                                <img th:src="@{/user-st/images/icon-tk-2021.png}" alt="taikhoan" width="100%" class="loading">
+                                <div class="info-user-header-detail">
+                                    <span class="title-user">Tài khoản của</span>
+                                    <span class="name-user" th:text="${account.getFullName()}"></span>
+                                </div>
+                            </div>
+                            <ul class="menu-nav">
+                                <li >
+                                    <a th:href="@{/view-account}" class="link-account">
+                                        <i class="far fa-user-circle"></i>
+                                        <span>Tài Khoản</span>
+                                    </a>
+                                </li>
+                                <li class="active">
+                                    <a th:href="@{/list-order}" class="link-order">
+                                        <i class="far fa-list-alt"></i>
+                                        <span>Danh sách đơn hàng</span>
+                                    </a>
+                                </li>
+                                <li >
+                                    <a th:href="@{/list-address}" class="link-account">
+                                        <i class="far fa-address-card"></i>
+                                        <span>Quản lý địa chỉ</span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a th:href="@{/view-change-password}" class="link-change-password">
+                                        <i class="fas fa-lock"></i>
+                                        <span>Thay đổi mật khẩu</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="order-user-history">
+                            <div class="history-order">
+                                <div class="header-history-order">
+                                    <h2 class="title_cate">
+                                        <span>Đơn hàng của tôi</span>
+                                    </h2>
+                                </div>
+                                <div class="list-status">
+                                    <a th:href="@{/list-order}" class="link-status active" th:if="${(param.status==null)}">Tất cả</a>
+                                    <a th:href="@{/list-order}" class="link-status" th:if="${(param.status!=null)}">Tất cả</a>
+                                    <a th:href="@{/list-order(status=0)}" class="link-status" th:if="${#httpServletRequest.getParameter('status')!='0'}">Chờ xác nhận</a>
+                                    <a th:href="@{/list-order(status=0)}" class="link-status active" th:if="${#httpServletRequest.getParameter('status')=='0'}">Chờ xác nhận</a>
+                                    <a th:href="@{/list-order(status=1)}" class="link-status" th:if="${#httpServletRequest.getParameter('status')!='1'}">Đang giao </a>
+                                    <a th:href="@{/list-order(status=1)}" class="link-status active" th:if="${#httpServletRequest.getParameter('status')=='1'}">Đang giao </a>
+                                    <a th:href="@{/list-order(status=2)}" class="link-status" th:if="${#httpServletRequest.getParameter('status')!='2'}">Đã giao</a>
+                                    <a th:href="@{/list-order(status=2)}" class="link-status active" th:if="${#httpServletRequest.getParameter('status')=='2'}">Đã giao</a>
+                                    <a th:href="@{/list-order(status=3)}" class="link-status" th:if="${#httpServletRequest.getParameter('status')!='3'}">Đã nhận hàng</a>
+                                    <a th:href="@{/list-order(status=3)}" class="link-status active" th:if="${#httpServletRequest.getParameter('status')=='3'}">Đã nhận hàng</a>
+                                    <a th:href="@{/list-order(status=-1)}" class="link-status" th:if="${#httpServletRequest.getParameter('status')!='-1'}">Đã hủy</a>
+                                    <a th:href="@{/list-order(status=-1)}" class="link-status active" th:if="${#httpServletRequest.getParameter('status')=='-1'}">Đã hủy</a>
+                                </div>
+                                <div class="title-total-order">
+                                    <p>Tổng giá trị <strong th:text="${#numbers.formatDecimal(totalOrder, 1, 'DEFAULT', 0, 'DEFAULT')}+' đ/'+${countOrder}"></strong> đơn hàng</p>
+                                </div>
+                        
+                                <div class="table-history-order">
+                                    <table class="table table-default">
+                                        <thead>
+                                            <tr>
+                                                <th><strong>Đơn hàng</strong></th>
+                                                <th><strong>Thời gian mua</strong></th>
+                                                <th><strong>Sản phẩm</strong></th>
+                                                <th class="th-status" th:if="${(param.status==null)}"><span class="order-stt" >Tất cả</span></th>
+                                                <th class="th-status" th:if="${#httpServletRequest.getParameter('status')=='0'}"><span class="order-stt" >Chờ xác nhận</span></th>
+                                                <th class="th-status" th:if="${#httpServletRequest.getParameter('status')=='1'}"><span class="order-stt" >Đang giao</span></th>
+                                                <th class="th-status" th:if="${#httpServletRequest.getParameter('status')=='2'}"><span class="order-stt" >Đã giao</span></th>
+                                                <th class="th-status" th:if="${#httpServletRequest.getParameter('status')=='3'}"><span class="order-stt" >Đã nhận hàng</span></th>
+                                                <th class="th-status" th:if="${#httpServletRequest.getParameter('status')=='-1'}"><span class="order-stt" >Hủy hàng</span></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody >
+                                        <th:block th:each="item:${listOrder}">
+                                            <!--Product number one-->
+                                            <tr>
+                                                <td th:text="${item.getOrderCode()}"></td>
+                                                <td th:text="${item.getOrderDate()}"></td>
+                                                <td colspan="2" >
+                                                    <div class="product-my-order" th:each="orderDetail:${item.getOrderDetails()}">
+                                                        <div class="info-product">
+                                                            <div class="img-product">
+                                                                <img th:src="${orderDetail.getProduct().getImgUrl()}"  alt="" width="100%">
+                                                            </div>
+                                                            <div class="product-detail">
+                                                                <div class="name-product">
+                                                                    <b th:text="${orderDetail.getProduct().getName()}"></b>
+                                                                </div>
+                                                                <div class="more-detail-product">
+<!--                                                                    +${orderDetail.getProducts().getCategory().getName()}-->
+                                                                    <div class="phan-loai" th:text="'Phân loại: '+${orderDetail.getProduct().getCategory().getName()}"></div>
+                                                                    <div class="quantity-detail" th:text="'x'+${orderDetail.getQuantity()}"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <span class="pro-price" th:text="${#numbers.formatDecimal(orderDetail.getPrice(), 1, 'DEFAULT', 0, 'DEFAULT')}+' đ'"></span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4">
+                                                    <div class="total-price-order">
+                                                        Tổng tiền: <span th:text="${#numbers.formatDecimal(item.getPriceOrder(), 1, 'DEFAULT', 0, 'DEFAULT')}+' đ'"></span>
+                                                    </div>
+                                                    <div class="group-btn-order">
+                                                        <a th:if="${item.getReceived()==0}" class="btn btn-cancel-order" href="javascript:;" th:attr="data-cancel=${item.getId()}"  type="button" >Hủy hàng</a>
+                                                        <a class="btn btn-buy-again" th:if="${item.getReceived()==-1}" type="button" th:href="@{/home}">Mua lại</a>
+                                                        <a class="btn btn-order-detail" type="button" th:href="@{'/order-detail/'+${item.getId()}}">Chi tiết đơn hàng</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!--End product number one-->
+                                        </th:block>
+                                        </tbody>
+                                    </table>
+                                    <div class="pagination-order" th:if="${totalPage>1}">
+                                        <ul id="pagination" >
+                                            <li th:if="${#httpServletRequest.getParameter('status') != null and currentPage != 1}" >
+                                                <a class="" th:href="@{/list-order(status=${param.status},page=${currentPage - 1})}">«</a>
+                                            </li>
+                                            <li th:if="${#httpServletRequest.getParameter('status') == null and currentPage != 1}" >
+                                                <a class="" th:href="@{/list-order(page=${currentPage - 1})}">«</a>
+                                            </li>
+                                            <th:block th:each="i:${#numbers.sequence(1,totalPage)}">
+                                                <li th:if="${#httpServletRequest.getParameter('status') != null}">
+                                                    <a th:if="${ currentPage != i}" th:href="@{/list-order(status=${param.status},page=${i})}">[[${i}]]</a>
+                                                    <a class="active" th:unless="${ currentPage != i}" th:href="@{/list-order(status=${param.status},page=${i})}">[[${i}]]</a>
+                                                </li>
+                                                <li th:if="${#httpServletRequest.getParameter('status') == null}">
+                                                    <a th:if="${ currentPage != i}" th:href="@{/list-order(page=${i})}">[[${i}]]</a>
+                                                    <a class="active" th:unless="${currentPage != i}" th:href="@{/list-order(page=${i})}">[[${i}]]</a>
+                                                </li>
+                                            </th:block>
+                                            <li th:if="${#httpServletRequest.getParameter('status') != null and currentPage < totalPage}">
+                                                <a th:href="@{/list-order(status=${param.status},page=${currentPage + 1})}">»</a>
+                                            </li>
+                                            <li th:if="${#httpServletRequest.getParameter('status') == null and currentPage < totalPage}">
+                                                <a th:href="@{/list-order(page=${currentPage+1})}">»</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+    <div id="myModal" class="modal-order">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">Thông báo !! <span class="close">&times;</span></div>
+            <p>Do đơn hàng này đã được <span class="thanh-toan">Thanh toán</span> xin vui lòng liên hệ với chúng tôi theo số điện thoại
+                <span class="phone">0362015907</span> để được giải quyết !! CẢM ƠN !</p>
+        </div>
+    </div>
+    <div class="popup-cancel-order">
+        <div class="h-pop">
+            <span class="txt">Hủy đơn hàng</span>
+            <span class="h-pop-close"><i class="fas fa-times"></i></span>
+        </div>
+        <div class="ct-pop">
+            <input type="hidden" id="js-delete-order-id">
+            <p>Bạn có muốn đơn hàng này không?</p>
+            <div class="h-pop-action">
+                <a href="javascript:;"  class="h-pop-not-order">Không</a>
+                <a href="javascript:;"  class="h-pop-ok-order">Đồng ý</a>
+            </div>
+        </div>
+    </div>
+    <div class="bg-h-pop" ></div>
+    <!--/Footer-->
+    <div th:replace="~{common/footer :: footers}"></div>
+    <!--/Footer-->
+    <script th:src="@{/user-st/js/jquery.js}"></script>
+    <script th:src="@{/user-st/js/price-range.js}"></script>
+    <script th:src="@{/user-st/js/jquery.scrollUp.min.js}"></script>
+    <script th:src="@{/user-st/js/bootstrap.min.js}"></script>
+    <script th:src="@{/user-st/js/jquery.prettyPhoto.js}"></script>
+    <script th:src="@{/user-st/js/main.js}"></script>
+    <script th:src="@{/user-st/js/manager.js}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Shop | Tìm kiếm</title>
+    <th:block th:replace="~{common/link :: link}"></th:block>
+    <link th:href="@{/user-st/css/duongtest.css}" rel="stylesheet">
+</head>
+<!--/head-->
+
+<body>
+<div th:replace="~{common/header :: headers}"></div>
+
+<!-- <section id="advertisement">
+    <div class="container">
+        <img src="images/shop/advertisement.jpg" alt="" />
+    </div>
+</section> -->
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 padding-right">
+                <div class="features_items col_right">
+                    <!--features_items-->
+
+                    <div class="sort-fillter">
+
+                        <div class="sort-fillter__left">
+                            <strong>Sắp xếp theo:</strong>&ensp;
+                            <span style="cursor: pointer" class="sortAsc"> Giá tăng dần</span>
+                            <input class="asc" style="visibility: hidden" type="checkbox" id="checkbox0" value="asc"
+                                   name="fooby[0][]">
+                            <span style="cursor: pointer" class="sortDesc">Giá giảm dần </span>
+                            <input class="desc" style="visibility: hidden" type="checkbox" id="checkbox0" value="desc"
+                                   name="fooby[0][]">
+                        </div>
+
+                    </div>
+                    <div id="emty">
+
+                    </div>
+                    <div id="formFilter">
+
+                    </div>
+
+
+
+                </div>
+
+
+                <div id="pagination">
+                    <ul id="pagination-2" class="pagination"></ul>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</section>
+<div id="compare">
+
+</div>
+<div th:replace="~{common/footer :: footers}"></div>
+<!--/Footer-->
+<script th:src="@{/user-st/js/jquery.js}"></script>
+<script th:src="@{/user-st/js/price-range.js}"></script>
+<script th:src="@{/user-st/js/jquery.scrollUp.min.js}"></script>
+<script th:src="@{/user-st/js/bootstrap.min.js}"></script>
+<script th:src="@{/user-st/js/jquery.prettyPhoto.js}"></script>
+<script th:src="@{/user-st/js/main.js}"></script>
+<script th:src="@{/user-st/js/duongtest.js}"></script>
+<script th:src="@{/user-st/search.js}"></script>
+<script th:src="@{/user-st/pagination.js}"></script>
+<script th:src="@{/user-st/js/compare.js}"></script>
+</body>
+
+</html>

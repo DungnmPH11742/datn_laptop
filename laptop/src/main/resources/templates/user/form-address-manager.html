@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Shop | King Of Computer</title>
+    <link th:href="@{/user-st/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/prettyPhoto.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/price-range.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/animate.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/responsive.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+          integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script th:src="@{/user-st/js/html5shiv.js}"></script>
+    <script th:src="@{/user-st/js/respond.min.js}"></script>
+    <link th:href="@{/user-st/css/manager.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/main.css}" rel="stylesheet">
+
+</head>
+<!--/head-->
+
+<body>
+
+<!--header-->
+<div th:replace="~{common/header :: headers}"></div>
+<!--/header-->
+
+
+<main id="main" class="main-order">
+    <section class="container clearfix">
+        <div>
+            <!--Title breadcrumb-->
+            <div>
+                <ul class="breadcrumb pb-8 flex items-center space-x-2">
+                    <li class="breadcrumb-item home">
+                        <a href="#" class="nuxt-link-active" itemprop="item">Trang chủ</a>
+                    </li>
+                    <li class="breadcrumb-item font-semibold text-sm active">
+                        <a href="#" aria-current="page"
+                           class="text-black flex items-center nuxt-link-exact-active nuxt-link-active"
+                           itemprop="item">
+                            Thông tin tài khoản
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <section class="clearfix">
+                <div class="account-information">
+                    <!--Side bar manager-->
+                    <div class="account-information_left">
+                        <div class="info-user-header">
+                            <img th:src="@{/user-st/images/icon-tk-2021.png}" alt="taikhoan" width="100%" class="loading">
+                            <div class="info-user-header-detail">
+                                <span class="title-user">Tài khoản của</span>
+                                <span class="name-user" th:text="${account.getFullName()}"></span>
+                            </div>
+                        </div>
+                        <ul class="menu-nav">
+                            <li >
+                                <a th:href="@{/view-account}" class="link-account">
+                                    <i class="far fa-user-circle"></i>
+                                    <span>Tài Khoản</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/list-order}" class="link-order">
+                                    <i class="far fa-list-alt"></i>
+                                    <span>Danh sách đơn hàng</span>
+                                </a>
+                            </li>
+                            <li class="active">
+                                <a th:href="@{/list-address}" class="link-account">
+                                    <i class="far fa-address-card"></i>
+                                    <span>Quản lý địa chỉ</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a th:href="@{/view-change-password}" class="link-change-password">
+                                    <i class="fas fa-lock"></i>
+                                    <span>Thay đổi mật khẩu</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="right-manager">
+                        <div class="info-user">
+                            <div class="header-info-user">
+                                <h2 class="title-form">
+                                    <span th:if="${address == null}">Thêm mới địa chỉ</span>
+                                    <span th:unless="${address == null}">Sửa mới địa chỉ</span>
+                                </h2>
+                            </div>
+                            <form method="post" id="form-address" th:action="@{/save-update-address}">
+                            <div class="form-manager-address">
+                                <input th:if="${address == null}" name="idaddress" type="hidden">
+                                <input th:unless="${address == null}" th:value="${address.getId()}" name="idaddress" type="hidden">
+                                <div class="item-form">
+                                    <label>Họ và tên</label>
+                                    <div class="item-form-input">
+                                        <input th:if="${address == null}" type="text" name="username" class="inputText" placeholder="Họ và tên">
+                                        <input th:unless="${address == null}" th:value="${address.getName()}" type="text" name="username" class="inputText" placeholder="Họ và tên">
+                                    </div>
+                                </div>
+
+                                <div class="item-form">
+                                    <label>Số điện thoại</label>
+                                    <div class="item-form-input">
+                                        <input th:if="${address == null}" type="text" name="userphone" class="inputText" placeholder="Số điện thoại">
+                                        <input th:unless="${address == null}" th:value="${address.getPhone()}" type="text" name="userphone" class="inputText" placeholder="Số điện thoại">
+                                    </div>
+                                </div>
+
+                                <div class="item-form number-home">
+                                    <label>Đường / Số nhà</label>
+                                    <div class="item-form-input">
+                                        <input th:if="${country == null}" type="text" name="numberhome" class="inputText">
+                                        <input th:unless="${country == null}" th:value="${country.getSoNha()}" type="text" name="numberhome" class="inputText">
+                                    </div>
+                                </div>
+                                <div class="item-form">
+                                    <label>Tỉnh / Thành phố</label>
+                                    <div class="item-form-select">
+                                        <div class="select-style">
+                                            <select th:if="${country == null}" class="placeholder" name="city" id="city">
+                                                <option value disabled selected>Tỉnh/Thành phố</option>
+                                                <th:block th:each="item:${countries}">
+                                                    <option th:value="${item.get('code')}" th:text="${item.get('name')}"></option>
+                                                </th:block>
+                                            </select>
+                                            <select class="placeholder" th:unless="${country == null}" th:value="${country.getCity()}" name="city" id="city">
+                                                <option value disabled selected>Tỉnh/Thành phố</option>
+                                                <th:block th:each="item:${countries}">
+                                                    <option th:selected="${item.get('code') == country.getCity()}" th:value="${item.get('code')}" th:text="${item.get('name')}"></option>
+                                                </th:block>
+                                            </select>
+                                            <input th:if="${country == null}" name="cityname" id="name-city" type="hidden">
+                                            <input th:unless="${country == null}" th:value="${country.getNameCity()}" name="cityname" id="name-city" type="hidden">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item-form">
+                                    <label>Quận / Huyện</label>
+                                    <div class="item-form-select">
+                                        <div class="select-style">
+                                            <select th:if="${country == null}" class="placeholder" name="district" id="district">
+                                                <option value disabled selected>Quận/Huyện</option>
+                                            </select>
+                                            <select th:unless="${country == null}" class="placeholder" name="district" id="district">
+                                                <option value disabled selected>Quận/Huyện</option>
+                                                <th:block th:each="item:${listDistrict}">
+                                                    <option th:selected="${item.get('code') == country.getDistrict()}" th:value="${item.get('code')}" th:text="${item.get('name')}"></option>
+                                                </th:block>
+                                            </select>
+                                            <input th:if="${country == null}" name="districtname" id="name-district" type="hidden">
+                                            <input th:unless="${country == null}" th:value="${country.getNameDistrict()}" name="districtname" id="name-district" type="hidden">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item-form">
+                                    <label>Phường / Xã</label>
+                                    <div class="item-form-select">
+                                        <div class="select-style">
+                                            <select th:if="${country == null}" class="placeholder" name="wards" id="wards">
+                                                <option value disabled selected>Phường/Xã</option>
+                                            </select>
+                                            <select th:unless="${country == null}" class="placeholder" name="wards" id="wards">
+                                                <option value disabled selected>Phường/Xã</option>
+                                                <th:block th:each="item:${listWard}">
+                                                    <option th:selected="${item.get('code') == country.getWard()}" th:value="${item.get('code')}" th:text="${item.get('name')}"></option>
+                                                </th:block>
+                                            </select>
+                                            <input th:if="${country == null}" name="wardsname" id="name-wards" type="hidden">
+                                            <input th:unless="${country == null}" th:value="${country.getNameWard()}" name="wardsname" id="name-wards" type="hidden">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item-form item-checkbox">
+                                    <label></label>
+                                    <lable class="lable-check-default">
+                                        <input th:if="${address == null}" type="checkbox" name="setdefault"  class="checkbox-default" >
+                                        <th:block th:unless="${address == null}">
+                                            <input th:if="${address.getSetAsDefault()}" checked type="checkbox" name="setdefault"  class="checkbox-default" >
+                                            <input th:unless="${address.getSetAsDefault()}" type="checkbox" name="setdefault"  class="checkbox-default" >
+                                        </th:block>
+                                        <span class="theme-checkbox"></span>
+                                        <span>Đặt làm địa chỉ mặt định</span>
+                                    </lable>
+                                </div>
+                            </div>
+                            <div class="btn-submit-form">
+                                <button type="submit" id="btn-submit-address" class="btn btn-submit">Lưu thông tin</button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                </div>
+            </section>
+        </div>
+    </section>
+</main>
+
+<!--/Footer-->
+<div th:replace="~{common/footer :: footers}"></div>
+<!--/Footer-->
+<script th:src="@{/user-st/js/jquery.js}"></script>
+<script th:src="@{/user-st/js/price-range.js}"></script>
+<script th:src="@{/user-st/js/jquery.scrollUp.min.js}"></script>
+<script th:src="@{/user-st/js/bootstrap.min.js}"></script>
+<script th:src="@{/user-st/js/jquery.prettyPhoto.js}"></script>
+<script th:src="@{/user-st/js/main.js}"></script>
+<script th:src="@{/user-st/js/manager.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+</body>
+
+</html>

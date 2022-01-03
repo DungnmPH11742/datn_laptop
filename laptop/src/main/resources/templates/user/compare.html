@@ -78,16 +78,16 @@
             if (list[i]?.id != undefined) {
                 img_compare += `<td class="col-sm-6" >
                                 <img class="col-sm-11 align-self-center" th:id="img_p+${i + 1}"
-                                     src="/user-st/images/product/${list[i]?.id}.jpg"
+                                     src="${list[i]?.productsDetail?.imgUrl}"
                                      alt="">
-                                     ${list[0]?.id != undefined && list[1]?.id != undefined?`<i class="fa fa-times-circle" onclick="remove('p${i + 1}')"></i>`: ''}
+                                     ${list[0]?.id != undefined && list[1]?.id != undefined ? `<i class="fa fa-times-circle" onclick="remove('p${i + 1}')"></i>` : ''}
                             </td>`;
                 name_compare += `<td>${list[i]?.name}</td>`;
-                price_compare += `<td><s>${list[i]?.outputPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ' đ'}</s></td>`;
-                discount_compare += `<td><p style="color: red;">${(list[i]?.outputPrice - list[i]?.outputPrice * list[i]?.saleProduct?.promotion / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ' đ'}</p></td>`;
+                price_compare += `<td><s>${list[i]?.productsDetail?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ' đ'}</s></td>`;
+                discount_compare += `<td><p style="color: red;">${(list[i]?.productsDetail?.price - list[i]?.productsDetail?.price * list[i]?.productsDetail?.saleProduct?.promotion / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ' đ'}</p></td>`;
             } else {
                 img_compare += `<td class="col-sm-6">
-                                    <button type="button" class="btn" data-toggle="modal" id="compare_button" data-target=".bd-example-modal-lg" style="margin: 0 auto" onclick="findByNameAndType('',${ list[0] != null ?list[0]?.typeOfItem: list[1]?.typeOfItem});">
+                                    <button type="button" class="btn" data-toggle="modal" id="compare_button" data-target=".bd-example-modal-lg" style="margin: 0 auto" onclick="findByNameAndType('','${list[0] != null ? list[0]?.typeOfItem : list[1]?.typeOfItem}')">
                                         Thêm so sánh
                                     </button>
                                 </td>`;
@@ -113,14 +113,14 @@
     //Hàm render thông số chi tiết sản phẩm
     const renderCompareDetail = (list) => {
         var html = '';
-        let producer = ``;
-        if (list[0]?.productsDetail?.producer != null || list[1]?.productsDetail?.producer != null) {
+        let company = ``;
+        if (list[0]?.company != null || list[1]?.company != null) {
             for (let i = 0; i < list.length; i++) {
-                producer += `<span class="col-sm-6">${list[i]?.productsDetail?.producer != undefined ? list[i]?.productsDetail?.producer : ''}</span>`;
+                company += `<span class="col-sm-6">${list[i]?.company != undefined ? list[i]?.company : ''}</span>`;
             }
             html += `<p class="col-sm-12 row-title" scope="row">Hãng sản xuất</p>
                     <div class="row-content">
-                        ${producer}
+                        ${company}
                     </div>`;
         }
 
@@ -190,36 +190,36 @@
                     </div>`;
         }
 
-        let mass = ``;
-        if (list[0]?.productsDetail?.mass != null || list[1]?.productsDetail?.mass != null) {
+        let dimensions = ``;
+        if (list[0]?.productsDetail?.dimensions != null || list[1]?.productsDetail?.dimensions != null) {
             for (let i = 0; i < list.length; i++) {
-                vga += `<span class="col-sm-6">${list[i]?.productsDetail?.mass != undefined ? list[i]?.productsDetail?.mass : ''}</span>`;
+                vga += `<span class="col-sm-6">${list[i]?.productsDetail?.dimensions != undefined ? list[i]?.productsDetail?.dimensions : ''}</span>`;
             }
             html += `<p class="col-sm-12 row-title" scope="row">Khối lượng</p>
                     <div class="row-content">
-                        ${mass}
+                        ${dimensions}
                     </div>`;
         }
 
-        let releaseDate = ``;
-        if (list[0]?.productsDetail?.releaseDate != null || list[1]?.productsDetail?.releaseDate != null) {
+        let releaseYear = ``;
+        if (list[0]?.releaseYear != null || list[1]?.releaseYear != null) {
             for (let i = 0; i < list.length; i++) {
-                releaseDate += `<span class="col-sm-6">${list[i]?.productsDetail?.releaseDate != undefined ? list[i]?.productsDetail?.releaseDate : ''}</span>`;
+                releaseYear += `<span class="col-sm-6">${list[i]?.releaseYear != undefined ? list[i]?.releaseYear : ''}</span>`;
             }
-            html += `<p class="col-sm-12 row-title" scope="row">Ngày phát hành</p>
+            html += `<p class="col-sm-12 row-title" scope="row">Năm phát hành</p>
                     <div class="row-content">
-                        ${releaseDate}
+                        ${releaseYear}
                     </div>`;
         }
 
-        let operatingSystem = ``;
-        if (list[0]?.productsDetail?.operatingSystem != null || list[1]?.productsDetail?.operatingSystem != null) {
+        let os = ``;
+        if (list[0]?.productsDetail?.os != null || list[1]?.productsDetail?.os != null) {
             for (let i = 0; i < list.length; i++) {
-                operatingSystem += `<span class="col-sm-6">${list[i]?.productsDetail?.operatingSystem != undefined ? list[i]?.productsDetail?.operatingSystem : ''}</span>`;
+                os += `<span class="col-sm-6">${list[i]?.productsDetail?.os != undefined ? list[i]?.productsDetail?.os : ''}</span>`;
             }
             html += `<p class="col-sm-12 row-title" scope="row">Hệ điều hành</p>
                     <div class="row-content">
-                        ${operatingSystem}
+                        ${os}
                     </div>`;
         }
 
@@ -317,11 +317,12 @@
             for (let i = 0; i < list.length; i++) {
                 brightness += `<span class="col-sm-6">${list[i]?.productsDetail?.brightness != undefined ? list[i]?.productsDetail?.brightness : ''}</span>`;
             }
-            // html += `<p class="col-sm-12 row-title" scope="row">Độ sáng</p>
-            //         <div class="row-content">
-            //             ${brightness}
-            //         </div> <hr>`;
+            /*html += `<p class="col-sm-12 row-title" scope="row">Độ sáng</p>
+                    <div class="row-content">
+                        ${brightness}
+                    </div> <hr>`;*/
         }
+
         html += `<div class="row-content">
                     ${scanFrequency}
                     ${backgroundPanels}
@@ -333,6 +334,29 @@
                     ${brightness}
                 </div>`
         //
+
+
+        let connectivity = ``;
+        if (list[0]?.productsDetail?.connectivity != null || list[1]?.productsDetail?.connectivity != null) {
+            for (let i = 0; i < list.length; i++) {
+                brightness += `<span class="col-sm-6">${list[i]?.productsDetail?.connectivity != undefined ? list[i]?.productsDetail?.connectivity : ''}</span>`;
+            }
+            html += `<p class="col-sm-12 row-title" scope="row">Kết nối</p>
+                    <div class="row-content">
+                        ${connectivity}
+                    </div> <hr>`;
+        }
+
+        let battery = ``;
+        if (list[0]?.productsDetail?.battery != null || list[1]?.productsDetail?.battery != null) {
+            for (let i = 0; i < list.length; i++) {
+                brightness += `<span class="col-sm-6">${list[i]?.productsDetail?.battery != undefined ? list[i]?.productsDetail?.battery : ''}</span>`;
+            }
+            html += `<p class="col-sm-12 row-title" scope="row">Pin</p>
+                    <div class="row-content">
+                        ${battery}
+                    </div> <hr>`;
+        }
 
         let warrantyPeriod = ``;
         if (list[0]?.productsDetail?.warrantyPeriod != null || list[1]?.productsDetail?.warrantyPeriod != null) {
@@ -360,10 +384,11 @@
         $('#content--compare').append(html);
     }
 
-    // var list_compare: ko.observableArray([{'name':'Nguyễn Mạnh Dũng'}]);
+    // var list_compare
     const onchangSearch = () => {
         let name = $('#search-p-compare').val();
         let type_of_item = $('#type_of_item').val();
+        findByNameAndType(name, type_of_item)
     }
 
     const focusHandler = () => {
@@ -385,15 +410,15 @@
                             <tr>
                                 <th class="col-sm-3">
                                     <img class="col-sm-12 align-self-center p" id="p1"
-                                        src="/user-st/images/product/${data[i]?.id}.jpg"
+                                        src="${data[i]?.productsDetail?.imgUrl}"
                                         alt="">
                                 </th>
                                 <th class="col-sm-6">
                                     <h5>${data[i]?.name}</h5>
-                                    <p style="color: red;">${(data[i]?.outputPrice - data[i]?.outputPrice * data[i]?.saleProduct?.promotion / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</p>
+                                    <p style="color: red;">${(data[i]?.productsDetail?.price - data[i]?.productsDetail?.price * data[i]?.productsDetail?.saleProduct?.promotion / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</p>
                                 </th>
                                 <th class="col-sm-3">
-                                    <a style="cursor: pointer" onclick="addCompareProduct('${data[i]?.id}');">Thêm so sánh</a>
+                                    <a style="cursor: pointer" onclick="addCompareProduct('${data[i]?.productsDetail?.sku}');">Thêm so sánh</a>
                                 </th>
                             </tr>`;
                     console.log(``)
@@ -430,7 +455,18 @@
             url: "/add-compare",
             data: {'id': id},
             success: function (data) {
-                callListCompare();
+                if (data.key !== '003') {
+                    callListCompare();
+                }
+                $("#notification-compare").append(`<div class="alert ${data.key === '000' ? 'alert-success' : 'alert-warning'} alert-dismissible">
+                                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                            <strong>${data.key === '000' ? 'Thành công' : 'Thất bại'}!</strong>
+                                                            <p>${data.message}</p>
+                                                       </div>`);
+                setTimeout(function () {
+                        $('.alert').fadeOut('slow');
+                    }, 3000
+                );
             },
             error: function () {
                 alert("Lỗi rồi")

@@ -35,9 +35,9 @@ public class SaleProduct implements Serializable {
     private Integer quantity;
 
     @Column(name = "status")
-    private Boolean status;
+    private int status;
 
     //bi-directional many-to-one association to Product
     @OneToMany(mappedBy="saleProduct")
-    private List<Products> products;
+    private List<ProductsDetail> products;
 }

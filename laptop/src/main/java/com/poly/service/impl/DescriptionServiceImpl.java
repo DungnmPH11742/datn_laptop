@@ -99,10 +99,14 @@ public class DescriptionServiceImpl implements DescriptionService {
     public DescriptionVO create(DescriptionVO vo) {
         Optional<Products> products = this.productsRepository.findById(vo.getIdProduct());
         Optional<Blogs> optionalBlogs = this.blogsRepository.findById(vo.getIdBlog());
-        if (products.isPresent() && optionalBlogs.isPresent()) {
-            Description description = new Description();
-            description.setProduct(products.get());
-            description.setBlog(optionalBlogs.get());
+        Description description = new Description();
+        if (products.isPresent() || optionalBlogs.isPresent()) {
+            if (products.isPresent()) {
+                description.setProduct(products.get());
+            } else if (optionalBlogs.isPresent()) {
+                description.setBlog(optionalBlogs.get());
+
+            }
             BeanUtils.copyProperties(vo, description);
             this.descriptionRepository.save(description);
             vo.setId(description.getId());

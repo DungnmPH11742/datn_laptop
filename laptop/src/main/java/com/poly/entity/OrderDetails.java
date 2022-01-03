@@ -18,20 +18,20 @@ public class OrderDetails implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "price", nullable = false)
-    private Float price;
+    @Column(name = "product_price", nullable = false)
+    private Float productPrice;
+
+    @Column(name = "into_money", nullable = false)
+    private Float intoMoney;
 
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
-    @Column(name = "completion_date")
-    private Date completionDate;
-
-    @Column(name = "payment_methods")
-    private Integer paymentMethods;
-
     @Column(name = "status")
     private Integer status;
+
+    @Column(name = "serial_number")
+    private String serialNumber;
 
     //bi-directional many-to-one association to Order
     @ManyToOne
@@ -42,9 +42,4 @@ public class OrderDetails implements Serializable {
     @ManyToOne
     @JoinColumn(name="id_product")
     private Products product;
-
-    //bi-directional many-to-one association to Voucher
-    @ManyToOne
-    @JoinColumn(name="id_voucher")
-    private Vouchers voucher;
 }

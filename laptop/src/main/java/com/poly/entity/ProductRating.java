@@ -1,32 +1,42 @@
-//package com.poly.entity;
-//
-//import lombok.Data;
-//
-//import javax.persistence.Column;
-//import javax.persistence.Entity;
-//import javax.persistence.Table;
-//import java.io.Serializable;
-//
-//@Data
-//@Entity
-//@Table(name = "product_rating")
-//public class ProductRating implements Serializable {
-//
-//    private static final long serialVersionUID = 1L;
-//
-//    @Column(name = "id_product", nullable = false)
-//    private Integer idProduct;
-//
-//    @Column(name = "id_account", nullable = false)
-//    private Integer idAccount;
-//
-//    @Column(name = "img_url")
-//    private String imgUrl;
-//
-//    @Column(name = "star_rating", nullable = false)
-//    private Integer starRating;
-//
-//    @Column(name = "comment")
-//    private String comment;
-//
-//}
+package com.poly.entity;
+
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
+
+@Data
+@Entity
+@Table(name = "product_rating")
+public class ProductRating implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    private String comment;
+
+    @Column(name = "img_url")
+    private String imgUrl;
+
+    @Column(name = "star_rating")
+    private Double starRating;
+
+    @Column(name = "start_comment")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date startComment;
+
+    @ManyToOne
+    @JoinColumn(name = "id_account")
+    private Account account;
+
+    @ManyToOne
+    @JoinColumn(name = "id_product")
+    private Products product;
+
+
+}

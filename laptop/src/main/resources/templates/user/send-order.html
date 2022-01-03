@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Cart | E-Shopper</title>
+    <link th:href="@{/user-st/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/font-awesome.min.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/prettyPhoto.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/price-range.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/animate.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/send-order.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/responsive.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/main.css}" rel="stylesheet">
+
+    <link th:href="@{/user-st/css/order.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+          integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script th:src="@{/user-st/js/html5shiv.js}"></script>
+    <script th:src="@{/user-st/js/respond.min.js}"></script>
+</head>
+<!--/head-->
+
+<body>
+<div th:replace="~{common/header :: headers}"></div>
+<!--/header-->
+
+<section>
+    <div class="container">
+        <div class="form-main">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="img-cart-send">
+                        <img th:src="@{/user-st/images/cart/tk-shopping-img.png}" width="100%" alt="">
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                    <div class="form-send-order" th:if="${order == null || messageError != null}">
+                        <div class="title-send-order">
+                            Đã có lỗi xảy ra !!!
+                        </div>
+                        <div class="title-error-payment">
+                            Đã có lỗi xảy ra trong quá trình thanh toán vui lòng kiểm tra lại. Vì thế
+                            đơn hàng của bạn chưa được xác nhận. Hãy chọn hình thức thanh toán khác hoặc
+                            bạn có thể thanh toán lại.
+                        </div>
+
+
+                        <div class="continue-shopping">
+                            <a href="#"> <i class="fas fa-shopping-cart"></i> Về giỏ hàng</a>
+                        </div>
+                    </div>
+                    <div class="form-send-order" th:each="item:${order}" th:if="${order != null}">
+                        <div class="title-send-order">
+                            Cảm ơn bạn đã mua hàng tại King of computer
+                        </div>
+                        <div class="code-order">
+                            <p class="title-code-order">
+                                Mã số đơn hàng của bạn:
+                            </p>
+                            <div class="value-code-order">
+                                #[[${item.getOrderCode()}]]
+                            </div>
+                        </div>
+                        <p class="description-send-order">
+                            Đơn hàng <span class="d-code">#[[${item.getOrderCode()}]]</span> của bạn đã được tiếp nhận. Chúng tôi sẽ gọi cho bạn vào số điện thoại
+                            <span class="d-email" th:text="${item.getPhoneNumber()}"></span> Sớm nhất. Chúng tôi xin hân hạnh được phục vụ.
+                        </p>
+                        <div class="address-user-order">
+                            <div class="name-user">
+                                <p class="user-title">Khách hàng:</p>
+                                <p class="user-value" th:text="${nameUser}"></p>
+                            </div>
+                            <div class="address-user">
+                                <p class="user-title">Địa chỉ khách hàng:</p>
+                                <p class="user-value" th:text="${item.getAddress()}"></p>
+                            </div>
+                            <div class="phone-user">
+                                <p class="user-title">Số điện thoại:</p>
+                                <p class="user-value" th:text="${item.getPhoneNumber()}"></p>
+                            </div>
+                        </div>
+                        <div class="detail-total-cart">
+                            <div class="title-total-cart">
+                                Tổng tiền:
+                            </div>
+                            <div class="value-total-cart" th:text="${#numbers.formatDecimal(totalPriceOrder, 1, 'DEFAULT', 0, 'DEFAULT')}+'đ'">
+
+                            </div>
+                        </div>
+                        <div class="continue-shopping">
+                            <a th:href="@{/home}"> <i class="fas fa-shopping-cart"></i>  Tiếp tục mua sắm</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div th:replace="~{common/footer :: footers}"></div>
+<!--/Footer-->
+
+
+
+<script th:src="@{/user-st/js/jquery.js}"></script>
+<script th:src="@{/user-st/js/price-range.js}"></script>
+<script th:src="@{/user-st/js/jquery.scrollUp.min.js}"></script>
+<script th:src="@{/user-st/js/bootstrap.min.js}"></script>
+<script th:src="@{/user-st/js/jquery.prettyPhoto.js}"></script>
+<script th:src="@{/user-st/js/main.js}"></script>
+</body>
+
+</html>

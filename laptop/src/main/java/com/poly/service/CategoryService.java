@@ -16,9 +16,15 @@ public interface CategoryService {
 
     CategoryVO update(CategoryVO vo);
 
-    void delete(String id);
+    boolean delete(String id);
 
     List<CategoryVO> getListPage(Optional<Integer> page, Optional<Integer> row);
 
-    List<CategoryVO> getListByParent(Integer id);
+    List<CategoryVO> getListByParent(String id);
+
+    CategoryVO findByName(String name);
+
+    List<CategoryVO> findAllByParentId(String id);
+
+    List<CategoryVO> findAllById(String id);
 }

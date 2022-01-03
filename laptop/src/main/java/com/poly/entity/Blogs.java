@@ -15,6 +15,9 @@ public class Blogs implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(name = "id", nullable = false)
+    private String id;
+
     @Column(name = "title", nullable = false)
     private String title;
 
@@ -23,6 +26,12 @@ public class Blogs implements Serializable {
 
     @Column(name = "img_url")
     private String imgUrl;
+
+    @Column(name = "description_short")
+    private String descriptionShort;
+
+    @Column(name = "is_hot")
+    private Boolean isHot;
 
     //bi-directional many-to-one association to Account
     @ManyToOne(fetch = FetchType.EAGER)

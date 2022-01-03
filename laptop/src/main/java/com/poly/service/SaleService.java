@@ -11,5 +11,5 @@ public interface SaleService {
 
     SaleProductVO update(SaleProductVO saleProductVO);
 
-    boolean delete(Integer id);
+    boolean updateStatusSale(String saleCode);
 }

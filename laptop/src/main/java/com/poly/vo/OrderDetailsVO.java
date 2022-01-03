@@ -12,17 +12,15 @@ public class OrderDetailsVO implements Serializable {
 
     private Integer idOrder;
 
-    private Integer idProduct;
+    private ProductsVO product;
 
-    private String idVoucher;
+    private VouchersVO voucher;
 
     private Float price;
 
     private Integer quantity;
 
-    private Date completionDate;
-
-    private Integer paymentMethods;
+    private String serialNumber;
 
     private Integer status;
 

@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 
 
 @RestController
+@CrossOrigin("http://localhost:4200")
 public class FileController {
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 
@@ -31,8 +32,8 @@ public class FileController {
     public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
         String fileName = fileStorageService.storeFile(file);
 
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
+        String fileViewUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/viewFile/")
                 .path(fileName)
                 .toUriString();
 
@@ -42,7 +43,7 @@ public class FileController {
 
         UploadFileResponse uploadFileResponse = new UploadFileResponse();
         uploadFileResponse.setFileName(fileName);
-        uploadFileResponse.setFileDownloadUri(fileDownloadUri);
+        uploadFileResponse.setFileViewUri(fileViewUri);
         uploadFileResponse.setFileType(fileContentType);
         uploadFileResponse.setSize(fileSize);
 
@@ -61,27 +62,26 @@ public class FileController {
     }
 
     @GetMapping("/downloadFile/{fileName:.+}")
-    public void downloadFile(@PathVariable String fileName, HttpServletRequest request) {
+    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
         // Load file as Resource
         Resource resource = fileStorageService.loadFileAsResource(fileName);
-        System.out.println(resource);
         // Try to determine file's content type
-//        String contentType = null;
-//        try {
-//            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
-//        } catch (IOException ex) {
-//            logger.info("Could not determine file type.");
-//        }
-//
-//        // Fallback to the default content type if type could not be determined
-//        if(contentType == null) {
-//            contentType = "application/octet-stream";
-//        }
-//
-//        return ResponseEntity.ok()
-//                .contentType(MediaType.parseMediaType(contentType))
-//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-//                .body(resource);
+        String contentType = null;
+            try {
+                contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+            } catch (IOException ex) {
+                logger.info("Could not determine file type.");
+            }
+
+//         Fallback to the default content type if type could not be determined
+        if(contentType == null) {
+            contentType = "application/octet-stream";
+        }
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                .body(resource);
     }
 
     @GetMapping("/viewFile/{fileName:.+}")
@@ -104,7 +104,6 @@ public class FileController {
 
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(contentType))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                 .body(resource);
     }
 }

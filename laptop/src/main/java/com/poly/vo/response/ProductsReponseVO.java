@@ -1,10 +1,14 @@
 package com.poly.vo.response;
 
+import com.poly.vo.CategoryVO;
+import com.poly.vo.DescriptionVO;
+import com.poly.vo.ProductsDetailVO;
 import com.poly.vo.SaleProductVO;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 @Data
 public class ProductsReponseVO implements Serializable {
@@ -13,27 +17,20 @@ public class ProductsReponseVO implements Serializable {
 
     private String name;
 
-    private Date dateOn;
+    private String company;
 
-    private Integer typeOfItem;
-
-    private Integer idCategory;
-
-    private Float inputPrice;
-
-    private Float outputPrice;
-
-    private Integer quantity;
-
-    private Float mass;
+    private String typeOfItem;
 
     private String unit;
 
-    private String releaseDate;
+    private String releaseYear;
 
-    private String dateOfManufacture;
+    private List<DescriptionVO> descriptions;
 
-    private SaleProductVO saleProduct;
+    private CategoryVO category;
 
-    private Boolean active;
+    private int active;
+
+    private ProductsDetailVO productsDetail;
+
 }
