@@ -35,10 +35,6 @@ public class Products implements Serializable {
     @Column(name = "active")
     private int active;
 
-    //bi-directional many-to-one association to Description
-    @OneToMany(mappedBy="product")
-    private List<Description> descriptions;
-
     //bi-directional many-to-one association to OrderDetail
     @OneToMany(mappedBy="product")
     private List<OrderDetails> orderDetails;

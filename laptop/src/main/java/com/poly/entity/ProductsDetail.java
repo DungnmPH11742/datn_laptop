@@ -114,4 +114,8 @@ public class ProductsDetail implements Serializable {
     @ManyToOne
     @JoinColumn(name="on_sale")
     private SaleProduct saleProduct;
+
+    //bi-directional many-to-one association to Description
+    @OneToMany(mappedBy="productsDetail")
+    private List<Description> descriptions;
 }

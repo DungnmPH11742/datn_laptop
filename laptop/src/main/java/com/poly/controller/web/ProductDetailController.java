@@ -63,7 +63,7 @@ public class ProductDetailController {
         headerHelper.setHeaderSession(model);
         model.addAttribute("related_products", productService.getListByCate(productsVO.getCategory().getParentId()));
         model.addAttribute("product", productService.getOne(id));
-        model.addAttribute("description_p", descriptionService.getDescriptionByProduct(id));
+        model.addAttribute("description_p", descriptionService.getDescriptionBySku(sku));
         model.addAttribute("pd", productDetailService.findBySku(sku));
         return "user/product-details";
     }

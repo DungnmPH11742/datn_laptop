@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ImageDetailService {
 
-    List<ImageDetailVO> findByProductId(String id);
+    List<ImageDetailVO> findByProductSku(String sku);
 
     ImageDetailVO save(ImageDetailVO vo);
 

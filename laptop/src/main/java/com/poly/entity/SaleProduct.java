@@ -39,5 +39,5 @@ public class SaleProduct implements Serializable {
 
     //bi-directional many-to-one association to Product
     @OneToMany(mappedBy="saleProduct")
-    private List<ProductsDetail> products;
+    private List<ProductsDetail> productsDetails;
 }

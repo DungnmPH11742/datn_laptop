@@ -23,8 +23,6 @@ public class ProductsVO implements Serializable {
 
     private List<ProductsDetailVO> productsDetails;
 
-    private List<DescriptionVO> descriptions;
-
     private CategoryVO category;
 
     private int active;

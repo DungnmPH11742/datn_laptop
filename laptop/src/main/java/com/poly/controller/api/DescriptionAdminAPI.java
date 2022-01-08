@@ -17,10 +17,10 @@ public class DescriptionAdminAPI {
     @Autowired
     private DescriptionService descriptionService;
 
-    @GetMapping(value = "/description-product/{idProduct}")
-    public ResponseEntity<List<DescriptionVO>> getByProduct(@PathVariable("idProduct") String id) {
+    @GetMapping(value = "/description-product/{sku}")
+    public ResponseEntity<List<DescriptionVO>> getByProduct(@PathVariable("sku") String sku) {
         try {
-            List<DescriptionVO> listVo = this.descriptionService.getDescriptionByProduct(id);
+            List<DescriptionVO> listVo = this.descriptionService.getDescriptionBySku(sku);
             if (listVo != null) {
                 return ResponseEntity.ok(listVo);
             } else {
@@ -61,7 +61,6 @@ public class DescriptionAdminAPI {
     @PostMapping(value = "/description/save")
     public ResponseEntity<DescriptionVO> createDescription(@RequestBody DescriptionVO descriptionVO) {
         try {
-            System.err.println("Ỏ");
             DescriptionVO descriptionVO1 = this.descriptionService.create(descriptionVO);
             if (descriptionVO1 == null) {
                 System.err.println(descriptionVO);

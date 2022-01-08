@@ -35,7 +35,7 @@ public class ProductDetailServiceImpl implements ProductDetailService {
     @Override
     public ProductsDetailVO findBySku(String sku) {
         ProductsDetail detail = repository.findBySkuAndStatusNot(sku, -1);
-        ProductsDetailVO vo =modelMapper.map(detail, ProductsDetailVO.class);
+        ProductsDetailVO vo = modelMapper.map(detail, ProductsDetailVO.class);
         vo.setIdProduct(detail.getProduct().getId());
         return vo;
     }
@@ -45,7 +45,7 @@ public class ProductDetailServiceImpl implements ProductDetailService {
         ProductsDetail detail = modelMapper.map(vo, ProductsDetail.class);
         detail.setProduct(productsRepository.findProductsById(vo.getIdProduct()));
         detail = repository.save(detail);
-        vo =modelMapper.map(detail, ProductsDetailVO.class);
+        vo = modelMapper.map(detail, ProductsDetailVO.class);
         vo.setIdProduct(detail.getProduct().getId());
         return vo;
     }

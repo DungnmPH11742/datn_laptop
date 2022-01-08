@@ -1,12 +1,7 @@
 package com.poly.vo;
 
-import com.poly.entity.ImageDetail;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
@@ -72,8 +67,10 @@ public class ProductsDetailVO implements Serializable {
 
     private String seeMore;
 
-    private List<ImageDetail> imageDetails;
+    private List<ImageDetailVO> imageDetails;
 
     private SaleProductVO saleProduct;
+
+    private int status;
 
 }

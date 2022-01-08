@@ -12,7 +12,7 @@ import java.util.List;
 @EnableJpaRepositories
 public interface DescriptionRepository extends JpaRepository<Description, Integer>, JpaSpecificationExecutor<Description> {
 
-    List<Description> getDescriptionByProductId(String id);
+    List<Description> getDescriptionByProductsDetailSku(String sku);
 
     @Query("select d from Description d where d.blog.title =?1")
     List<Description> getDescriptionByBlogId(String id);

@@ -24,9 +24,9 @@ public class SaleServiceImpl implements SaleService {
     @Override
     public List<SaleProductVO> findAll() {
         List<SaleProductVO> vos = new ArrayList<>();
-        saleProductRepository.findAll().forEach(saleProduct -> {
+/*        saleProductRepository.findAll().forEach(saleProduct -> {
             vos.add(modelMapper.map(saleProduct, SaleProductVO.class));
-        });
+        });*/
         return vos;
     }
 
