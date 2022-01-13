@@ -1,11 +1,10 @@
-package com.poly.vo;
+package com.poly.vo.response;
 
+import com.poly.vo.VouchersVO;
 import lombok.Data;
 
-import java.io.Serializable;
-
 @Data
-public class OrderDetailsVO implements Serializable {
+public class OrderDetailResponseVO {
 
     private Integer id;
 
@@ -21,7 +20,7 @@ public class OrderDetailsVO implements Serializable {
 
     private Integer idOrder;
 
-    private ProductsDetailVO productsDetailVO;
+    private ProductsReponseVO productsReponse;
 
     private VouchersVO voucher;
 

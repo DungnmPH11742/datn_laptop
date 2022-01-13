@@ -86,7 +86,7 @@ public class ApiRateStar {
 
         boolean booleanOrder = false;
 
-        for (Orders orders : ordersList) {
+        /*for (Orders orders : ordersList) {
             if (orderDetailsRepository.findByOrder_IdAndProduct_Id(orders.getId(), productId) != null) {
                 booleanOrder = true;
                 break;
@@ -103,7 +103,7 @@ public class ApiRateStar {
             }
 
             return starRatingNotNullAccout(productId, total, count, null);
-        }
+        }*/
 
         return starRatingNotAccout(productId, total, count);
     }
@@ -172,7 +172,7 @@ public class ApiRateStar {
         //   OrderDetails orderDetails = new OrderDetails();
         boolean booleanOrder = false;
 
-        for (Orders orders : ordersList) {
+        /*for (Orders orders : ordersList) {
             if (orderDetailsRepository.findByOrder_IdAndProduct_Id(orders.getId(), productId) != null) {
                 booleanOrder = true;
                 //  orderDetails = orderDetailsRepository.findByOrder_IdAndProduct_Id(orders.getId(), productId);
@@ -180,7 +180,7 @@ public class ApiRateStar {
             } else {
                 booleanOrder = false;
             }
-        }
+        }*/
 
         if (booleanOrder == true) {
             ProductRating productRating = productRatingService.findProductRatingByAccountAndProduct(auth.getName(), productId);
@@ -242,7 +242,7 @@ public class ApiRateStar {
 
         boolean booleanOrder = false;
 
-        for (Orders orders : ordersList) {
+        /*for (Orders orders : ordersList) {
             if (orderDetailsRepository.findByOrder_IdAndProduct_Id(orders.getId(), productId) != null) {
                 booleanOrder = true;
                 //  orderDetails = orderDetailsRepository.findByOrder_IdAndProduct_Id(orders.getId(), productId);
@@ -250,7 +250,7 @@ public class ApiRateStar {
             } else {
                 booleanOrder = false;
             }
-        }
+        }*/
 
         if (booleanOrder == true) {
             ProductRating productRating = productRatingService.findProductRatingByAccountAndProduct(auth.getName(), productId);
@@ -298,7 +298,7 @@ public class ApiRateStar {
         //   OrderDetails orderDetails = new OrderDetails();
         boolean booleanOrder = false;
 
-        for (Orders orders : ordersList) {
+        /*for (Orders orders : ordersList) {
             if (orderDetailsRepository.findByOrder_IdAndProduct_Id(orders.getId(), productId) != null) {
                 booleanOrder = true;
                 //  orderDetails = orderDetailsRepository.findByOrder_IdAndProduct_Id(orders.getId(), productId);
@@ -306,7 +306,7 @@ public class ApiRateStar {
             } else {
                 booleanOrder = false;
             }
-        }
+        }*/
 
         if (booleanOrder == true) {
             ProductRating productRating = productRatingService.findProductRatingByAccountAndProduct(auth.getName(), productId);

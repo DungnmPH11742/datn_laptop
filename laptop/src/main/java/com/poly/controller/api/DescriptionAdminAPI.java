@@ -63,14 +63,11 @@ public class DescriptionAdminAPI {
         try {
             DescriptionVO descriptionVO1 = this.descriptionService.create(descriptionVO);
             if (descriptionVO1 == null) {
-                System.err.println(descriptionVO);
                 return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
             } else {
-                System.err.println(1);
                 return ResponseEntity.ok(descriptionVO);
             }
         } catch (Exception e) {
-            System.err.println(0);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

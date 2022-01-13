@@ -1,6 +1,6 @@
-function addToCart(id) {
+function addToCart(sku) {
     let data = {
-        'idProduct': id,
+        'sku': sku,
         'quantityProduct': 1,
     };
     $.ajax({

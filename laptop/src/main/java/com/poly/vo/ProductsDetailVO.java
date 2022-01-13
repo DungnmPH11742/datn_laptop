@@ -73,4 +73,7 @@ public class ProductsDetailVO implements Serializable {
 
     private int status;
 
+    private OrderDetailsVO orderDetails;
+
+
 }

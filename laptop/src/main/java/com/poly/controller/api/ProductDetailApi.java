@@ -19,6 +19,11 @@ public class ProductDetailApi {
         return ResponseEntity.ok(detailService.findBySkuProduct(sku));
     }
 
+    @GetMapping("/find-detail-by-sku/{sku}")
+    public ResponseEntity<ProductsDetailVO> findDetailBySku(@PathVariable("sku") String sku) {
+        return ResponseEntity.ok(detailService.findBySku(sku));
+    }
+
     @PostMapping("/save-p-detail")
     public ResponseEntity<ProductsDetailVO> create(@RequestBody ProductsDetailVO vo) {
         return ResponseEntity.ok(detailService.save(vo));

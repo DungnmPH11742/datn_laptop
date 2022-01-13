@@ -118,4 +118,8 @@ public class ProductsDetail implements Serializable {
     //bi-directional many-to-one association to Description
     @OneToMany(mappedBy="productsDetail")
     private List<Description> descriptions;
+
+    //bi-directional many-to-one association to OrderDetail
+    @OneToMany(mappedBy="productsDetail")
+    private List<OrderDetails> orderDetails;
 }

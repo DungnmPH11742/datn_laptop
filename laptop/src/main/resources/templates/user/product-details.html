@@ -191,7 +191,7 @@
                                 <p><b>Trạng thái: </b>Mới</p>
                                 <!--                                <p><b>Thương hiệu: </b><th:block th:text="${pd.getCpu()}"></th:block></p>-->
                                 <button type="button" class="btn btn-fefault cart link-add-to-cart"
-                                        th:attr="onclick=|addToCart('${product.getId()}')|">
+                                        th:attr="onclick=|addToCart('${pd.getSku()}')|">
                                     <i class="fa fa-shopping-cart"></i>
                                     Thêm vào giỏ hàng
                                 </button>

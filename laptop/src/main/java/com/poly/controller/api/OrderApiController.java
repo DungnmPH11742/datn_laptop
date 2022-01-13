@@ -2,6 +2,7 @@ package com.poly.controller.api;
 
 import com.poly.service.OrderService;
 import com.poly.vo.OrdersVO;
+import com.poly.vo.response.OrderResponseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class OrderApiController {
     private OrderService orderService;
 
     @GetMapping("/list-order/{received}")
-    public ResponseEntity<List<OrdersVO>> findAllOrders(@PathVariable("received") Integer received){
+    public ResponseEntity<List<OrderResponseVO>> findAllOrders(@PathVariable("received") Integer received){
         return ResponseEntity.ok(orderService.findAllOrdersByReceived(received));
     }
 

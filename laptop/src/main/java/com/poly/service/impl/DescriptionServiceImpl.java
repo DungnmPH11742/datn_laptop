@@ -110,7 +110,6 @@ public class DescriptionServiceImpl implements DescriptionService {
                 description.setProductsDetail(productsDetail.get());
             } else if (optionalBlogs.isPresent()) {
                 description.setBlog(optionalBlogs.get());
-
             }
             BeanUtils.copyProperties(vo, description);
             this.descriptionRepository.save(description);

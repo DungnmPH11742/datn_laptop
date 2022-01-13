@@ -3,6 +3,7 @@ package com.poly.service.impl;
 import com.poly.entity.Products;
 import com.poly.filter.ProductSearchCriteria;
 import com.poly.filter.ProductsSpecifications;
+import com.poly.repo.ProductsDetailRepository;
 import com.poly.repo.ProductsRepository;
 import com.poly.service.ProductService;
 import com.poly.vo.ProductsDetailVO;
@@ -27,6 +28,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductsRepository productsRepository;
+
+    @Autowired
+    private ProductsDetailRepository detailRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -79,6 +83,13 @@ public class ProductServiceImpl implements ProductService {
             return vo;
         }
         return null;
+    }
+
+    @Override
+    public ProductsReponseVO getProductBySku(String sku) {
+        ProductsReponseVO reponseVO = modelMapper.map(productsRepository.findProductsBySku(sku), ProductsReponseVO.class);
+        reponseVO.setProductsDetail(modelMapper.map(detailRepository.findBySkuAndStatusNot(sku, -1), ProductsDetailVO.class));
+        return reponseVO;
     }
 
     @Override

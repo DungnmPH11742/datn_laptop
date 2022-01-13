@@ -2,6 +2,7 @@ package com.poly.service.impl;
 
 import com.poly.DTO.CartDTO;
 import com.poly.DTO.CartItemDTO;
+import com.poly.entity.ProductsDetail;
 import com.poly.service.*;
 import com.poly.vo.*;
 import org.modelmapper.ModelMapper;
@@ -29,25 +30,32 @@ public class CartServiceImpl implements CartService {
     private ProductService productService;
 
     @Autowired
+    private ProductDetailService productDetailService;
+
+    @Autowired
     private AccountService accountService;
 
     @Autowired
     private OrderService orderService;
 
     @Autowired
-    private OrderDetailService detailService;
+    private OrderDetailService orderDetailService;
 
     @Autowired
     private SaleProductService saleProductService;
+
     @Autowired
     private ModelMapper modelMapper;
-    @Override
-    public Map<String, Object> addTocart(CartItemDTO cartItemDTO) {
-        float sumPrice = 0;
+
+
+    public Map<String,Object> addTocart(CartItemDTO cartItemDTO){
+        System.out.println("cap nhat");
+        Map<String, Object> map = new HashMap<>();
+        CartDTO cartDTO = new CartDTO();
         Boolean isExits = false;
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Map<String,Object> map = new HashMap<>();
-        CartDTO cartDTO= null;
+        // Giá cả sản phẩm sắp thêm
+
         if(session.getAttribute("myCart") !=null){
             // Lấy ra danh sách giỏ hàng CartItem từ session
             cartDTO = (CartDTO) session.getAttribute("myCart");
@@ -55,120 +63,123 @@ public class CartServiceImpl implements CartService {
             cartDTO = new CartDTO();
             session.setAttribute("myCart",cartDTO);
         }
+        // Lấy thông tin sản phẩm
+        ProductsDetailVO productsDetailVO = productDetailService.findBySku(cartItemDTO.getSku());
+        ProductsVO productsVO = productService.getOne(productsDetailVO.getIdProduct());
 
-
-        ProductsVO productsVO = productService.getOne(cartItemDTO.getIdProduct());
+        float price = 0;
+        if(productsDetailVO.getSaleProduct()!=null){
+            price = cartItemDTO.getQuantityProduct() * (productsDetailVO.getSaleProduct().getPromotion() / 100 * productsDetailVO.getPrice());
+        }else{
+            price = cartItemDTO.getQuantityProduct() * productsDetailVO.getPrice();
+        }
+        System.out.println("Price: " + price);
+        // Duyệt For tìm kiếm sản phẩm trong giỏ hàng
         for(CartItemDTO cartItemDTO1: cartDTO.getListCartItem()){
-            // Nếu đã tồn tại sản phẩm trong giỏ hàng
-            if(cartItemDTO1.getIdProduct().equals(cartItemDTO.getIdProduct())){
-                //
+            // Nếu sản phẩm đã có
+            if(cartItemDTO.getSku().equalsIgnoreCase(cartItemDTO1.getSku())){
                 isExits = true;
-                System.out.println("Sản phẩm trùng");
-//                System.out.println((cartDTO.getTotalPrice()+(cartItemDTO.getQuantityProduct() + cartItemDTO1.getQuantityProduct())*cartItemDTO1.getPriceSale()));
-                System.out.println(cartItemDTO.getQuantityProduct());
-                System.out.println(cartItemDTO1.getQuantityProduct());
-                System.out.println(cartItemDTO1.getPriceSale());
-                System.out.println(cartDTO.getTotalPrice());
-                System.out.println(cartDTO);
-                /*if ((cartItemDTO.getQuantityProduct()+cartItemDTO1.getQuantityProduct())> productsVO.getQuantity()){
+                if(cartItemDTO1.getQuantityProduct() + cartItemDTO.getQuantityProduct() > productsDetailVO.getQuantity()){
                     System.out.println("Số lượng vượt quá giới hạn");
                     map.put("message","Số lượng vượt quá giới hạn");
-                }else if(cartDTO.getTotalPrice()+(cartItemDTO.getQuantityProduct()*cartItemDTO1.getPriceSale())> 150000000){
-
-                    System.out.println("Tổng tiền vượt quá giới hạn: " + (cartDTO.getTotalPrice()+(cartItemDTO.getQuantityProduct() + cartItemDTO1.getQuantityProduct())*cartItemDTO1.getPriceSale()));
+                }else if(cartDTO.getTotalPrice() + price > 150000000){
+                    System.out.println("Tổng tiền vượt quá giới hạn: " + (cartDTO.getTotalPrice() + price));
                     map.put("message","Tổng tiền vượt quá giới hạn");
                 }else{
-
                     System.out.println("Sản phẩm trùng ngon");
+                    // Số lượng sản phẩm
                     Integer quan = cartItemDTO1.getQuantityProduct() + cartItemDTO.getQuantityProduct();
-                    cartItemDTO1.setQuantityProduct(quan);
-                    // Nếu đã đăng nhập
+                    // Cập nhật số lượng sản phẩm trong giỏ hàng
                     if(auth == null || auth.getPrincipal().equals("anonymousUser")){
-
+                        cartItemDTO1.setQuantityProduct(quan);
                     }else{
                         System.out.println("Đã đăng nhập + đã có sản phẩm + update");
-                        detailService.updateQuantityOrderDetail(quan, cartItemDTO1.getIdOrderDetail());
+                        orderDetailService.updateQuantityOrderDetail(quan, cartItemDTO1.getIdOrderDetail());
+                        cartItemDTO1.setQuantityProduct(cartItemDTO1.getQuantityProduct()+cartItemDTO.getQuantityProduct());
                     }
+                    // Tổng toàn bộ tiền
+                    cartDTO.setTotalPrice((float) (Math.round(cartDTO.getTotalPrice()) + Math.round(price)));
+                    // Tiền sản phẩm
                     cartItemDTO1.setTotalPriceCartItem(cartItemDTO1.getQuantityProduct() * cartItemDTO1.getPriceSale());
-
+                    // Hiển thị trên giao diện
+                    map.put("totalPrice",cartItemDTO1.getTotalPriceCartItem());
+                    map.put("sumPrice",cartDTO.getTotalPrice());
                     map.put("message","Cập nhật thành công");
 
-                }*/
-                map.put("totalPrice",cartItemDTO1.getTotalPriceCartItem());
-
+                }
             }
-            sumPrice += cartItemDTO1.getPriceSale() * cartItemDTO1.getQuantityProduct();
         }
-        map.put("sumPrice",sumPrice);
-        cartDTO.setTotalPrice(sumPrice);
-        // Nếu sản phẩm chưa có trong giỏ hàng
-        /*if(!isExits){
-            System.out.println("Sản phẩm chưa có");
-            cartItemDTO.setIdProduct(productsVO.getId());
-            cartItemDTO.setNameProduct(productsVO.getName());
-            cartItemDTO.setImgUrl(productsVO.getImgUrl());
-            // Nếu có sale
-            Float priceUnit = productsVO.getOutputPrice();
-            cartItemDTO.setPriceUnit(priceUnit);
-            if(productsVO.getSaleProduct()!= null){
-                SaleProductVO saleProductVO = this.saleProductService.getSaleProduct(productsVO.getSaleProduct().getSaleCode());
-                Float priceSale = productsVO.getOutputPrice() * (100-productsVO.getSaleProduct().getPromotion())/100;
-                cartItemDTO.setPriceSale(priceSale);
-            }else {
-                cartItemDTO.setPriceSale(productsVO.getOutputPrice());
-            }
 
-            cartItemDTO.setTotalPriceCartItem(cartItemDTO.getPriceSale()*cartItemDTO.getQuantityProduct());
-            cartDTO.getListCartItem().add(cartItemDTO);
-            cartDTO.setTotalPrice(cartItemDTO.getPriceSale()*cartItemDTO.getQuantityProduct());
-            if(auth == null || auth.getPrincipal().equals("anonymousUser")) {
-            }else{
-                //
-                System.out.println("Sản phẩm chưa có khi đã đăng nhập");
-                OrdersVO ordersVO = new OrdersVO();
-                if(orderService.findOrdersByAccountCart(auth.getName()) != null){
-                    ordersVO = orderService.findOrdersByAccountCart(auth.getName());
-                    System.out.println("Chưa tồn tại order");
+        if (!isExits){
+            // Khi chưa đăng nhâp
+            if(auth == null || auth.getPrincipal().equals("anonymousUser")){
+
+                cartItemDTO.setNameProduct(productService.getOne(productsDetailVO.getIdProduct()).getName());
+                cartItemDTO.setNameCate(productService.getOne(productsDetailVO.getIdProduct()).getCategory().getName());
+                cartItemDTO.setImgUrl(productsDetailVO.getImgUrl());
+                cartItemDTO.setPriceUnit(productsDetailVO.getPrice());
+                cartItemDTO.setQuantity(productsDetailVO.getQuantity());
+                price = 0;
+                if(productsDetailVO.getSaleProduct() != null){
+                    price += productsDetailVO.getPrice() - ( productsDetailVO.getPrice()/100 * productsDetailVO.getSaleProduct().getPromotion());
                 }else{
+                    price += productsDetailVO.getPrice();
+                }
+                cartItemDTO.setPriceSale(price);
+                cartItemDTO.setTotalPriceCartItem(cartItemDTO.getQuantityProduct() * cartItemDTO.getPriceSale());
+                cartDTO.getListCartItem().add(cartItemDTO);
+                map.put("totalPrice",cartItemDTO.getTotalPriceCartItem());
+                // Set lại tổng tiền sau khi thêm vào giỏ hàng
+                cartDTO.setTotalPrice(cartDTO.getTotalPrice() + cartItemDTO.getTotalPriceCartItem());
+                map.put("sumPrice",cartDTO.getTotalPrice());
+            }else{
+                // Khi đã đăng nhập
+                OrdersVO ordersVO = new OrdersVO();
+                OrderDetailsVO orderDetailsVO = new OrderDetailsVO();
+                if(orderService.findOrdersByAccountCart(auth.getName()) ==null){
                     AccountVO  accountVO = modelMapper.map(accountService.findByEmailUser(auth.getName()),AccountVO.class);
                     ordersVO.setAccount(accountVO);
                     ordersVO.setReceived(-2);
                     ordersVO = orderService.saveOrders(ordersVO);
-                    System.out.println("Lấy order Vừa tạo:  ");
-                }
-                OrderDetailsVO detailsVO = new OrderDetailsVO();
-                detailsVO.setIdOrder(ordersVO.getId());
-                detailsVO.setQuantity(cartItemDTO.getQuantityProduct());
-                detailsVO.setProduct(productsVO);
-
-                float price = 0;
-                if(productsVO.getSaleProduct()!= null){
-                    price += productsVO.getOutputPrice() -( productsVO.getOutputPrice()/100 * productsVO.getSaleProduct().getPromotion() );
                 }else{
-                    price += productsVO.getOutputPrice();
+                    ordersVO = orderService.findOrdersByAccountCart(auth.getName());
                 }
-                detailsVO.setPrice(price);
-            }
-            map.put("message","Cập nhật thành công");
-        }*/
+// Thêm vào db
+                // Order
+                orderDetailsVO.setIdOrder(ordersVO.getId());
+                // số lượng
+                orderDetailsVO.setQuantity(cartItemDTO.getQuantityProduct());
+                orderDetailsVO.setProductsDetailVO(productsDetailVO);
+                orderDetailsVO.setStatus(-2);
+                orderDetailsVO = orderDetailService.saveOderDetail(orderDetailsVO);
+                System.out.println("Cap nhat db thanh cong");
 
-        map.put("code",200);
-        session.setAttribute("myCart",cartDTO);
+
+            }
+            map.put("message","Thêm thành công");
+
+        }
+
         map.put("totalItem",cartDTO.getListCartItem().size());
+        map.put("code",200);
         return map;
     }
 
+
     @Override
     public CartDTO findCart() {
+        System.out.println("findCart");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        HttpSession session = request.getSession();
+        float totalPrice = 0;
+//        HttpSession session = request.getSession();
         if(auth == null || auth.getPrincipal().equals("anonymousUser")){
             CartDTO cartDTO = (CartDTO) session.getAttribute("myCart");
-            float totalPrice = 0;
+
             if(cartDTO !=null){
                 for (CartItemDTO dto: cartDTO.getListCartItem()){
-//                    dto.setQuantity(productService.getOne(dto.getIdProduct()).getQuantity());
-                    totalPrice += dto.getQuantityProduct() * dto.getPriceSale();
+
+                    totalPrice += Math.round(dto.getQuantityProduct()) * Math.round(dto.getPriceSale());
+                    System.out.println("T : " + totalPrice);
                 }
                 cartDTO.setTotalPrice(totalPrice);
             }
@@ -177,38 +188,39 @@ public class CartServiceImpl implements CartService {
             List<CartItemDTO> list = new ArrayList<>();
             OrdersVO ordersVO = orderService.findOrdersByAccountCart(auth.getName());
 
-            /*if (ordersVO != null){
+            if (ordersVO != null){
 
                 CartDTO cartDTO = new CartDTO();
                 ordersVO.getOrderDetails().forEach(vo -> {
+                    ProductsDetailVO productsDetailVO = productDetailService.findBySku(vo.getProductsDetailVO().getSku());
                     CartItemDTO cartItemDTO = new CartItemDTO();
-                    cartItemDTO.setIdProduct(vo.getProduct().getId());
-                    cartItemDTO.setNameProduct(vo.getProduct().getName());
-                    cartItemDTO.setNameCate(vo.getProduct().getCategory().getName());
-                    cartItemDTO.setImgUrl(vo.getProduct().getImgUrl());
+                    cartItemDTO.setSku(vo.getProductsDetailVO().getSku());
+                    cartItemDTO.setNameProduct(productService.getOne(productsDetailVO.getIdProduct()).getName());
+                    cartItemDTO.setNameCate(productService.getOne(productsDetailVO.getIdProduct()).getCategory().getName());
+                    cartItemDTO.setImgUrl(productsDetailVO.getImgUrl());
                     cartItemDTO.setQuantityProduct(vo.getQuantity());
-                    cartItemDTO.setPriceUnit(vo.getProduct().getOutputPrice());
+                    cartItemDTO.setPriceUnit(productsDetailVO.getPrice());
                     cartItemDTO.setIdOrderDetail(vo.getId());
-                    cartItemDTO.setQuantity(vo.getProduct().getQuantity());
+                    cartItemDTO.setQuantity(productsDetailVO.getQuantity());
                     float price = 0;
-                    if(vo.getProduct().getSaleProduct() != null){
-                        price += vo.getProduct().getOutputPrice() - ( vo.getProduct().getOutputPrice()/100 * vo.getProduct().getSaleProduct().getPromotion());
+                    if(productsDetailVO.getSaleProduct() != null){
+                        price += productsDetailVO.getPrice() - ( productsDetailVO.getPrice()/100 * productsDetailVO.getSaleProduct().getPromotion());
                     }else{
-                        price += vo.getProduct().getOutputPrice();
+                        price += productsDetailVO.getPrice();
                     }
                     cartItemDTO.setPriceSale(price);
+                    System.out.println("price: " + price);
                     cartItemDTO.setTotalPriceCartItem(cartItemDTO.getQuantityProduct() * cartItemDTO.getPriceSale());
                     list.add(cartItemDTO);
                 });
                 float totalPriceOrder = 0;
                 float totalPriceUnitOrder = 0;
                 // Hiếu tạo
-                float totalPrice = 0;
                 for (CartItemDTO dto:list) {
                     totalPriceOrder+=dto.getTotalPriceCartItem();
                     totalPriceUnitOrder+=dto.getPriceUnit();
                     // Hiếu
-                    totalPrice += dto.getQuantityProduct() * dto.getPriceSale();
+                    totalPrice += Math.round(dto.getQuantityProduct()) * Math.round(dto.getPriceSale());
                 }
                 cartDTO.setTotalPrice(totalPrice);
                 cartDTO.setTotalPriceCart(totalPriceOrder);
@@ -217,7 +229,7 @@ public class CartServiceImpl implements CartService {
                 cartDTO.setListCartItem(list);
                 session.setAttribute("myCart",cartDTO);
                 return cartDTO;
-            }*/
+            }
         }
         return null;
     }
@@ -234,6 +246,7 @@ public class CartServiceImpl implements CartService {
                 CartDTO dto = (CartDTO) session.getAttribute("myCart");
                 OrdersVO ordersVO = new OrdersVO();
                 // Nếu User đăng nhập đã có dữ liệu trong giỏ hàng
+                System.out.println("Email: " + auth.getName());
                 if(orderService.findOrdersByAccountCart(auth.getName()) != null){
                     ordersVO = orderService.findOrdersByAccountCart(auth.getName());
                 }else{
@@ -247,20 +260,22 @@ public class CartServiceImpl implements CartService {
                 // Nếu sản phẩm đã tồn tại trong giỏ hàng
                 for (CartItemDTO  itemDTO : dto.getListCartItem()){
                     Boolean checked = false;
-                    for (OrderDetailsVO vo: ordersVO.getOrderDetails()){
-                        // Nếu sản phẩm đã có trong database
-                        if(vo.getProduct().getId().equals(itemDTO.getIdProduct())){
-                            checked = true;
-                            detailService.updateQuantityOrderDetail(vo.getQuantity() + itemDTO.getQuantityProduct(),vo.getId());
+                    if(ordersVO.getOrderDetails()!=null){
+                        for (OrderDetailsVO vo: ordersVO.getOrderDetails()){
+                            // Nếu sản phẩm đã có trong database
+                            if(vo.getProductsDetailVO().getSku().equals(itemDTO.getSku())){
+                                checked = true;
+                                orderDetailService.updateQuantityOrderDetail(vo.getQuantity() + itemDTO.getQuantityProduct(),vo.getId());
+                            }
                         }
                     }
+
                     if(!checked){
                         OrderDetailsVO detailsVO = new OrderDetailsVO();
                         detailsVO.setQuantity(itemDTO.getQuantityProduct());
                         detailsVO.setIdOrder(ordersVO.getId());
-                        detailsVO.setPrice(itemDTO.getPriceSale());
-                        detailsVO.setProduct(productService.getOne(itemDTO.getIdProduct()));
-                        detailsVO = detailService.saveOderDetail(detailsVO);
+                        detailsVO.setProductsDetailVO(productDetailService.findBySku(itemDTO.getSku()));
+                        detailsVO = orderDetailService.saveOderDetail(detailsVO);
                     }
                 }
             }

@@ -33,7 +33,6 @@ public class CartController {
 
     @GetMapping(value = "/cart")
     public String cartIndex(Model model, HttpServletRequest request){
-        System.out.println("haha");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         session = request.getSession();
         List<CartItemDTO> list = new ArrayList<>();
@@ -46,7 +45,6 @@ public class CartController {
     @ResponseBody
     @PutMapping(value = "/addToCart")
     public ResponseEntity<Map<String,Object>> addToCart(@RequestBody CartItemDTO cartItemDTO, HttpServletRequest request){
-
         Map<String,Object> map = cartService.addTocart(cartItemDTO);
         return ResponseEntity.ok(map);
     }

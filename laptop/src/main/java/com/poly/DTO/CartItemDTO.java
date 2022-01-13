@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class CartItemDTO {
 
-    private String idProduct;
+    private String sku;
 
     private String nameProduct;
 

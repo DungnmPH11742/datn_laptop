@@ -14,7 +14,7 @@
                 <div class="content--product">
                     <b th:text="${p.getName()}"></b>
                     <h4 class="price"
-                                                        th:text="${p.productsDetail.saleProduct != null ? #numbers.formatDecimal(p.productsDetail.price * (100 - p.productsDetail.saleProduct.promotion)/100, 1, 'DEFAULT', 0, 'DEFAULT'):#numbers.formatDecimal(p.productsDetail.price, 1, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></h4>
+                        th:text="${p.productsDetail.saleProduct != null ? #numbers.formatDecimal(p.productsDetail.price * (100 - p.productsDetail.saleProduct.promotion)/100, 1, 'DEFAULT', 0, 'DEFAULT'):#numbers.formatDecimal(p.productsDetail.price, 1, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></h4>
                     <s th:if="${p.productsDetail.saleProduct != null}" class="price"
                        th:text="${#numbers.formatDecimal(p.productsDetail.price, 1, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></s>
                 </div>
@@ -50,7 +50,7 @@
                 <div>
                     <i class="fa fa-gift"></i><span style="margin-left: 5px;">Giảm giá</span>
                 </div>
-                <a th:attr="onclick=|addToCart('${p.getId()}')|" class="btn btn-default add-to-cart">
+                <a th:attr="onclick=|addToCart('${p.getProductsDetail().getSku()}')|" class="btn btn-default add-to-cart">
                     <i class="fa fa-shopping-cart"></i>
                 </a>
                 <a th:attr="onclick=|addCompareProduct('${p.getProductsDetail().getSku()}')|"  class="btn add-to-cart">

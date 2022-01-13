@@ -70,7 +70,7 @@
 						</div>
 					</div>
 
-					<div class="list-product-cart" th:id="pro + ${item.idProduct}" th:each="item : ${session.myCart.getListCartItem()}">
+					<div class="list-product-cart" th:id="pro + ${item.sku}" th:each="item : ${session.myCart.getListCartItem()}">
 
 						<!--Product 01-->
 						<div class="product-cart"  >
@@ -90,23 +90,23 @@
 							</div>
 
 							<div class="cart-col-price">
-								<div class="price-unit" th:id="ps + ${item.idProduct}">[[${#numbers.formatDecimal(item.priceSale, 1, 'DEFAULT', 0, 'DEFAULT')}]]đ</div>
+								<div class="price-unit" th:id="ps + ${item.sku}">[[${#numbers.formatDecimal(item.priceSale, 1, 'DEFAULT', 0, 'DEFAULT')}]]đ</div>
 								<s class="price-sale">[[${#numbers.formatDecimal(item.priceUnit, 1, 'DEFAULT', 0, 'DEFAULT')}]]đ</s>
 							</div>
 
 							<!--quantity-->
 							<div class="cart-item__cell-quantity order" style="float: right;  margin-right: 75px;">
 								<div class="_16mL_A shopee-input-quantity">
-							<!--Giảm số lượng-->
-									<button class="_2KdYzP" th:attr="onclick=|minusQty('${item.idProduct}')|">
+									<!--Giảm số lượng-->
+									<button class="_2KdYzP" th:attr="onclick=|minusQty('${item.sku}')|">
 										<svg enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0"
 											 class="shopee-svg-icon ">
 											<polygon points="4.5 4.5 3.5 4.5 0 4.5 0 5.5 3.5 5.5 4.5 5.5 10 5.5 10 4.5"></polygon>
 										</svg>
 									</button>
-									<input class="_2KdYzP iRO3yj abc" type="number" th:id="${item.idProduct}" th:value="${item.quantityProduct}" min="1" th:max="${item.quantity}">
-							<!--Tăng số lượng-->
-									<button class="_2KdYzP" th:attr="onclick=|plusQty('${item.idProduct}','${item.quantity}')|" >
+									<input class="_2KdYzP iRO3yj abc" type="number" th:id="${item.sku}" th:value="${item.quantityProduct}" min="1" th:max="${item.quantity}">
+									<!--Tăng số lượng-->
+									<button class="_2KdYzP" th:attr="onclick=|plusQty('${item.sku}','${item.quantity}')|" >
 										<svg enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0"
 											 class="shopee-svg-icon icon-plus-sign">
 											<polygon	points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5"></polygon>
@@ -117,13 +117,13 @@
 
 
 							<!--Thành tiền-->
-							<div class="cart-col-total-price" th:id="tt + ${item.idProduct}">
+							<div class="cart-col-total-price" th:id="tt + ${item.sku}">
 								[[${#numbers.formatDecimal(item.totalPriceCartItem, 1, 'DEFAULT', 0, 'DEFAULT')}]]đ
 							</div>
 
 							<!--Delete item-->
 							<div>
-								<button th:attr="onclick=|deleteO('${item.idProduct}','${item.idOrderDetail}')|">Xóa</button>
+								<button th:attr="onclick=|deleteO('${item.sku}','${item.idOrderDetail}')|">Xóa</button>
 							</div>
 						</div>
 
@@ -132,10 +132,10 @@
 				</div>
 				<div class="col-sm-3">
 					<div class="checkout-sidebar-right">
-<!--						<div class="checkout-price-unit">-->
-<!--							<div class="checkout-title-price-unit">Tạm tính:</div>-->
-<!--							<div class="checkout-value-price-unit">20.000.000 đ</div>-->
-<!--						</div>-->
+						<!--						<div class="checkout-price-unit">-->
+						<!--							<div class="checkout-title-price-unit">Tạm tính:</div>-->
+						<!--							<div class="checkout-value-price-unit">20.000.000 đ</div>-->
+						<!--						</div>-->
 						<div class="checkout-price-total">
 							<div class="checkout-title-price-total">Thành tiền:</div>
 							<div class="checkout-value-price-total" id="sumprice">[[${#numbers.formatDecimal(session.myCart.totalPrice, 1, 'DEFAULT', 0, 'DEFAULT')}]]đ</div>
@@ -169,15 +169,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
 <script>
 
-	function plusQty(idPro,quanti){
-		let qty = $('#'+idPro).val();
+	function plusQty(sku,quanti){
+		let qty = $('#'+sku).val();
 		if(qty< quanti){
 			qty = parseInt(qty);
 			qty++;
-			$('#'+idPro).val(qty);
+			$('#'+sku).val(qty);
 			// Ajax
 			let  data = {
-				'idProduct':idPro,
+				'sku':sku,
 				'quantityProduct':1,
 			};
 			$.ajax({
@@ -199,8 +199,8 @@
 					$('#hienThiSoLuong').html('');
 					$('#hienThiSoLuong').append(`${data.totalItem}`);
 					//
-					$('#tt' + idPro).html('');
-					$('#tt' + idPro).append(totalPrice);
+					$('#tt' + sku).html('');
+					$('#tt' + sku).append(totalPrice);
 
 					$('#sumprice').html('');
 					$('#sumprice').append(sumprice);
@@ -215,15 +215,15 @@
 
 	}
 
-	function minusQty(idPro){
-		let qty = $('#'+idPro).val();
-		if(qty>1){
+	function minusQty(sku){
+		let qty = $('#'+sku).val();
+		if(qty> 1){
 			qty = parseInt(qty);
 			qty--;
-			$('#'+idPro).val(qty);
+			$('#'+sku).val(qty);
 			// Ajax
 			let  data = {
-				'idProduct':idPro,
+				'sku':sku,
 				'quantityProduct':-1,
 			};
 			$.ajax({
@@ -233,16 +233,20 @@
 				data: JSON.stringify(data),
 				dataType: "JSON",
 				success: function (data) {
-					let totalPrice = `
-						${data.totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ
-					`;
+					console.log(`${data.message}`);
+
 					let sumprice = `
 						${data.sumPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ
 					`;
+					let totalPrice = `
+						${data.totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ
+					`;
 
+					$('#hienThiSoLuong').html('');
+					$('#hienThiSoLuong').append(`${data.totalItem}`);
 					//
-					$('#tt' + idPro).html('');
-					$('#tt' + idPro).append(totalPrice);
+					$('#tt' + sku).html('');
+					$('#tt' + sku).append(totalPrice);
 
 					$('#sumprice').html('');
 					$('#sumprice').append(sumprice);
@@ -256,11 +260,11 @@
 		}
 	}
 
-	function deleteO(idpro, iddetail) {
-		$("#pro" + idpro).remove();
+	function deleteO(sku, iddetail) {
+		$("#pro" + sku).remove();
 
 		let  data = {
-			'idProduct':idpro,
+			'sku':sku,
 			'idOrderDetail': iddetail,
 		};
 		$.ajax({

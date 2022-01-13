@@ -135,17 +135,17 @@ public class CheckOutController {
                     ProductsVO productsVO = null;
                     for (CartItemDTO c : cartItemDTOList) {
                         orderDetailsVO = new OrderDetailsVO();
-                        productsVO = this.productService.getOne(c.getIdProduct());
+//                        productsVO = this.productService.getOne(c.getIdProduct());
                         /*productsVO.setQuantity(productsVO.getQuantity() - c.getQuantityProduct());
                         if (productsVO.getQuantity() == 0) {
                             productsVO.setActive(false);
                         }*/
 //                        this.productService.update(productsVO);
                         orderDetailsVO.setId(c.getIdOrderDetail());
-                        orderDetailsVO.setProduct(productsVO);
+//                        orderDetailsVO.setProduct(productsVO);
                         orderDetailsVO.setIdOrder(ordersVO.getId());
                         orderDetailsVO.setQuantity(c.getQuantityProduct());
-                        orderDetailsVO.setPrice(c.getTotalPriceCartItem());
+//                        orderDetailsVO.setPrice(c.getTotalPriceCartItem());
                         orderDetailsVO.setStatus(0);
                         this.orderDetailService.saveOderDetail(orderDetailsVO);
                     }
@@ -162,7 +162,7 @@ public class CheckOutController {
                 Float priceTotaleCart = new Float(0);
                 if (detailsVO.isEmpty() || detailsVO != null) {
                     for (OrderDetailsVO deVo : detailsVO) {
-                        priceTotaleCart += deVo.getPrice();
+//                        priceTotaleCart += deVo.getPrice();
                     }
                 }
                 Integer nameInt = vo.getAddress().lastIndexOf('-');
@@ -214,17 +214,17 @@ public class CheckOutController {
                 ProductsVO productsVO = null;
                 for (CartItemDTO c : cartItemDTOList) {
                     orderDetailsVO = new OrderDetailsVO();
-                    productsVO = this.productService.getProductById(c.getIdProduct());
+//                    productsVO = this.productService.getProductById(c.getIdProduct());
                     /*productsVO.setQuantity(productsVO.getQuantity() - c.getQuantityProduct());
                     if (productsVO.getQuantity() == 0) {
                         productsVO.setActive(false);
                     }*/
 //                    this.productService.update(productsVO);
                     orderDetailsVO.setId(c.getIdOrderDetail());
-                    orderDetailsVO.setProduct(productsVO);
+//                    orderDetailsVO.setProduct(productsVO);
                     orderDetailsVO.setIdOrder(ordersVO.getId());
                     orderDetailsVO.setQuantity(c.getQuantityProduct());
-                    orderDetailsVO.setPrice(c.getTotalPriceCartItem());
+//                    orderDetailsVO.setPrice(c.getTotalPriceCartItem());
                     orderDetailsVO.setStatus(0);
                     this.orderDetailService.updateOrderDetail(orderDetailsVO);
                 }
@@ -293,7 +293,7 @@ public class CheckOutController {
         List<CartItemDTO> cartItemSession = cartDTO.getListCartItem();
         VouchersVO vouchersVO = null;
         for (CartItemDTO vo : cartItemSession) {
-            vouchersVO = this.vouchersService.getVoucherTrue(voucher, vo.getIdProduct());
+//            vouchersVO = this.vouchersService.getVoucherTrue(voucher, vo.getIdProduct());
         }
         if (vouchersVO != null) {
             System.out.println(vouchersVO.getIdProduct());

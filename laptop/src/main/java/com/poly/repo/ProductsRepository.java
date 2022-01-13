@@ -28,6 +28,9 @@ public interface ProductsRepository extends JpaRepository<Products, String>, Jpa
     @Query("SELECT m FROM Products m WHERE m.name LIKE %:name% ")
     List<Products> findAllByNameLikeHome(@Param("name") String name);
 
+    @Query("SELECT p.product FROM ProductsDetail p WHERE p.sku=?1 and p.status <> -1")
+    Products findProductsBySku(String sku);
+
 //    @Query("select p from Products p where p.saleProduct.saleCode=:code")
 //    List<Products> getListByCodeSale(@Param("code") String code);
 

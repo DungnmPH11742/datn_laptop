@@ -709,9 +709,9 @@
 <script th:src="@{/user-st/filterHome.js}"></script>
 <script type="text/javascript">
     // Thêm vào giỏ hàng
-    function addToCart(id) {
+    function addToCart(sku) {
         let data = {
-            'idProduct': id,
+            'sku': sku,
             'quantityProduct': 1,
         };
         $.ajax({

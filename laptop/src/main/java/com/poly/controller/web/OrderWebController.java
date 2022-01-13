@@ -49,7 +49,7 @@ public class OrderWebController {
                 float totalPrice = 0;
                 float totalPriceOutPut = 0;
                 for (OrderDetailsVO x:ordersVO.getOrderDetails()) {
-                    totalPrice += x.getPrice();
+//                    totalPrice += x.getPrice();
                 }
                 for (int i=0;i<ordersVO.getOrderDetails().size();i++) {
 //                    totalPriceOutPut+=ordersVO.getOrderDetails().get(i).getProduct().getOutputPrice();

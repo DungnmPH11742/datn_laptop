@@ -4,6 +4,8 @@ import com.poly.entity.Account;
 import com.poly.entity.Role;
 import com.poly.repo.AccountRepository;
 import com.poly.repo.RoleRepository;
+import com.poly.service.SessionService;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,13 +18,19 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+    private Account account = new Account();
+
     @Autowired
     private AccountRepository accountRepository;
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private SessionService sessionService;
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
@@ -45,6 +53,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         UserDetails userDetails = new User(appUser.getEmail(),
                 appUser.getPassword(), grantList);
+        account = appUser;
         return userDetails;
     }
 }

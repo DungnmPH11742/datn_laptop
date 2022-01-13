@@ -1,15 +1,11 @@
 package com.poly.service;
 
-import com.poly.entity.Account;
-import com.poly.entity.Category;
-import com.poly.entity.Orders;
-import com.poly.vo.CategoryVO;
 import com.poly.vo.OrdersVO;
+import com.poly.vo.response.OrderResponseVO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Service
 public interface OrderService {
@@ -37,5 +33,5 @@ public interface OrderService {
 
     Map<String,Object> getOrderByReceivedPaging(Integer idAccount,Integer received,int page,int size);
 
-    List<OrdersVO> findAllOrdersByReceived(Integer received);
+    List<OrderResponseVO> findAllOrdersByReceived(Integer received);
 }

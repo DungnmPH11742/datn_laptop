@@ -18,6 +18,8 @@ public interface ProductService {
 
     ProductsVO getProductById(String id);
 
+    ProductsReponseVO getProductBySku(String sku);
+
     List<ProductsVO> findByNameContainingAndTypeOfItem(String name, String type);
 
     ProductsVO create(ProductRequestVO vo);

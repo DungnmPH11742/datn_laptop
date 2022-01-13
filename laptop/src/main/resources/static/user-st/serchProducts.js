@@ -219,10 +219,10 @@ $(document).ready(function () {
                         }
 
 
-                        content += '                <a href="#" class="btn btn-default add-to-cart" onClick="addToCart(\'' + p.id + '\')">\n' +
+                        content += '                <a href="#" class="btn btn-default add-to-cart" onClick="addToCart(\'' + p.sku + '\')">\n' +
                             '                    <i class="fa fa-shopping-cart"></i>\n' +
                             '                </a>\n' +
-                            '                <a href="#" class="btn add-to-cart" onClick="addCompareProduct(\''+p.id+ '\')">\n' +
+                            '                <a href="#" class="btn add-to-cart" onClick="addCompareProduct(\''+p.sku+ '\')">\n' +
                             '                    <i class="fa fa-plus"></i>\n' +
                             '                </a>\n' +
                             '            </div>\n' +
@@ -454,9 +454,9 @@ $(document).ready(function () {
     }
 })
 
-function addToCart(id) {
+function addToCart(sku) {
     let data = {
-        'idProduct': id,
+        'sku': sku,
         'quantityProduct': 1,
     };
     $.ajax({

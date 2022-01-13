@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
 
 @Data
 @Entity
@@ -18,13 +17,13 @@ public class OrderDetails implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "product_price", nullable = false)
-    private Float productPrice;
+    @Column(name = "product_dt_price")
+    private Float productDtPrice;
 
-    @Column(name = "into_money", nullable = false)
+    @Column(name = "into_money")
     private Float intoMoney;
 
-    @Column(name = "quantity", nullable = false)
+    @Column(name = "quantity")
     private Integer quantity;
 
     @Column(name = "status")
@@ -40,6 +39,10 @@ public class OrderDetails implements Serializable {
 
     //bi-directional many-to-one association to Product
     @ManyToOne
-    @JoinColumn(name="id_product")
-    private Products product;
+    @JoinColumn(name="sku")
+    private ProductsDetail productsDetail;
+
+    @ManyToOne
+    @JoinColumn(name = "id_voucher")
+    private Vouchers vouchers;
 }
