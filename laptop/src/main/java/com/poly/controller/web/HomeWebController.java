@@ -19,14 +19,11 @@ public class HomeWebController {
     @Autowired
     private HeaderHelper headerHelper;
 
-    @Autowired
-    private ProductDetailService productDetailService;
-
     RestTemplate restTemplate = new RestTemplate();
 
     @GetMapping("/home")
     public String userInfo(Model model) {
-        model.addAttribute("list_product", productService.findAllSku());
+        model.addAttribute("list_product", productService.findAllSkuActive());
         model.addAttribute("list_sale", productService.getListByCodeSale("SL001"));
         headerHelper.setHeaderSession(model);
         ResponseEntity<Object[]> result

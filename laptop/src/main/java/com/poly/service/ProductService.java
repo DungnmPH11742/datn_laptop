@@ -1,6 +1,5 @@
 package com.poly.service;
 
-import com.poly.filter.ProductSearchCriteria;
 import com.poly.vo.ProductsVO;
 import com.poly.vo.request.ProductRequestVO;
 import com.poly.vo.response.ProductsReponseVO;
@@ -14,6 +13,8 @@ public interface ProductService {
 
     List<ProductsReponseVO> findAllSku();
 
+    List<ProductsReponseVO> findAllSkuActive();
+
     ProductsVO getOne(String id);
 
     ProductsVO getProductById(String id);
@@ -21,6 +22,8 @@ public interface ProductService {
     ProductsReponseVO getProductBySku(String sku);
 
     List<ProductsVO> findByNameContainingAndTypeOfItem(String name, String type);
+
+    List<ProductsReponseVO> findByNameContainingAndTypeOfItemAndSku(String name, String type);
 
     ProductsVO create(ProductRequestVO vo);
 
@@ -34,7 +37,7 @@ public interface ProductService {
 
     List<ProductsVO> getListByCodeSale(String code);
 
-    Page<ProductsVO> getListByPageNumber(int page, int limit, List<ProductsVO> lstProductsVO, String sortPrice);
+    /*Page<ProductsVO> getListByPageNumber(int page, int limit, List<ProductsVO> lstProductsVO, String sortPrice);
 
     List<ProductsVO> retrieveProducts(ProductSearchCriteria searchCriteria);
 
@@ -53,5 +56,5 @@ public interface ProductService {
 
     List<ProductsVO> findAllByCategory_IdOrCategory_Id(String idCate, String idCate2);
 
-    List<ProductsVO> findAllByNameLikeHome(String name);
+    List<ProductsVO> findAllByNameLikeHome(String name);*/
 }

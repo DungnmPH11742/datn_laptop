@@ -1,6 +1,51 @@
 @import url(https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 @import url(http://fonts.googleapis.com/css?family=Calibri:400,300,700);
 
+
+.text-body-main {
+    --text-opacity: 1;
+    /* color: #161616; */
+    color: rgba(22,22,22,var(--text-opacity));
+
+}
+.mb-4 {
+    margin-top: -5rem;
+    margin-bottom: 5rem;
+}
+
+.leading-5 {
+    line-height: 1.25rem;
+}
+
+.text-sm {
+    font-size: 1.4rem;
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.flex {
+    display: flex;
+}
+
+.space-x-3 > :not(template) ~ :not(template) {
+    --space-x-reverse: 0;
+    margin-right: calc(0.75rem * var(--space-x-reverse));
+    margin-left: calc(0.75rem * (1 - var(--space-x-reverse)));
+}
+
+.text-gray-100 {
+    --text-opacity: 1;
+    color: #e3e7ef;
+    color: rgba(227, 231, 239, var(--text-opacity));
+}
+
+
 fieldset,
 label {
     margin: 0;

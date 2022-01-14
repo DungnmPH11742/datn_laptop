@@ -3,166 +3,242 @@ package com.poly.filter;
 import com.poly.entity.Category;
 import com.poly.entity.Products;
 import com.poly.entity.ProductsDetail;
+import com.poly.entity.SaleProduct;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import javax.persistence.criteria.*;
+import java.text.MessageFormat;
+import java.util.*;
 
 public final class ProductsSpecifications {
 
-    public static Specification<Products> createProductSpecification(ProductSearchCriteria searchCriteria) {
+    public static Specification<ProductsDetail> createProductSpecification(ProductSearchCriteria searchCriteria) {
         return
-                (categoryId(searchCriteria.getCategory()) != null)
-                        ?
-                        (categoryIn(searchCriteria.getCategory()))
-                                .or(categoryId(searchCriteria.getCategory()))
-                                .and(outputPriceBetween(searchCriteria.getMinPrice(), searchCriteria.getMaxPrice()))
-                                .and(productCPU(searchCriteria.getCpu()))
-                                .and(productRAM(searchCriteria.getRam()))
-                                .and(productDisplaySize(searchCriteria.getDisplaySize()))
-                                .and(productScanFrequency(searchCriteria.getScanFrequency()))
-                                .and(productScreenRatio(searchCriteria.getScreenRatio()))
-                                .and(productResolution(searchCriteria.getResolution()))
-                                .and(massBetween(searchCriteria.getMinMass(), searchCriteria.getMaxMass()))
-                                .and(productVGA(searchCriteria.getVga()))
-
-                        :
-                        (outputPriceBetween(searchCriteria.getMinPrice(), searchCriteria.getMaxPrice()))
-
-                                .and(productCPU(searchCriteria.getCpu()))
-                                .and(productRAM(searchCriteria.getRam()))
-                                .and(productDisplaySize(searchCriteria.getDisplaySize()))
-                                .and(productScanFrequency(searchCriteria.getScanFrequency()))
-                                .and(productScreenRatio(searchCriteria.getScreenRatio()))
-                                .and(productResolution(searchCriteria.getResolution()))
-                                .and(massBetween(searchCriteria.getMinMass(), searchCriteria.getMaxMass()))
-                                .and(productVGA(searchCriteria.getVga()))
+                (categoryIn(searchCriteria.getCategory()))
+                        .or(categoryId(searchCriteria.getCategory()))
+                        .and(onStatus())
+                        .and(productSale(searchCriteria.getStatus()))
+                        .and(outputPriceBetween(searchCriteria.getMapPrice()))
+                        .and(productCPU(searchCriteria.getCpu()))
+                        .and(productRAM(searchCriteria.getRam()))
+                        //.and(productHardDrive(searchCriteria.getHardDrive()))
+                        .and(productDisplaySize(searchCriteria.getDisplaySize()))
+                        .and(productScanFrequency(searchCriteria.getScanFrequency()))
+                        .and(productScreenRatio(searchCriteria.getScreenRatio()))
+                        .and(productResolution(searchCriteria.getResolution()))
+                        .and(productVGA(searchCriteria.getVga()))
+                        .and(productSearch(searchCriteria.getName()))
                 ;
-
-
     }
 
-    public static Specification<Products> categoryId(Set<String> categories) {
-
-        if (CollectionUtils.isEmpty(categories)) {
-            return null;
-        }
-
+    public static Specification<ProductsDetail> categoryId(Set<String> categories) {
         return (root, query, builder) -> {
-            Join<Products, Category> categoryJoin = root.join(Products_.category);
-            return categoryJoin.get("id").in(categories);
+            Join<ProductsDetail, Products> productsJoin = root.join(ProductsDetail_.product);
+            Join<Category, Products> cateJoin = productsJoin.join(Products_.category);
+            query.distinct(true);
+            builder.equal(root.get("status"), 1);
+            return ObjectUtils.isEmpty(categories) ? builder.conjunction() : cateJoin.get("id").in(categories);
         };
     }
 
-    public static Specification<Products> categoryIn(Set<String> categories) {
-
-        if (CollectionUtils.isEmpty(categories)) {
-            return null;
-        }
-
+    public static Specification<ProductsDetail> productSale(String sale) {
         return (root, query, builder) -> {
-            Join<Products, Category> categoryJoin = root.join(Products_.category);
-            return categoryJoin.get(Category_.parentId).in(categories);
+            query.distinct(true);
+            if (sale.equals("true")) {
+                Join<SaleProduct, ProductsDetail> saleJoin = root.join(ProductsDetail_.saleProduct);
+                Path<Date> dateOnPath = saleJoin.get(SaleProducts_.dateOn);
+                Path<Date> dateOffPath = saleJoin.get(SaleProducts_.dateOff);
+                Predicate startsAfterBegin = builder.lessThanOrEqualTo(dateOnPath, builder.currentDate());
+                Predicate endsBeforeEnd = builder.greaterThanOrEqualTo(dateOffPath, builder.currentDate());
+                Predicate status = builder.equal(saleJoin.get(SaleProducts_.status), 1);
+                Predicate isContained = builder.and(status, startsAfterBegin, endsBeforeEnd);
+                return ObjectUtils.isEmpty(sale) ? builder.conjunction() : isContained;
+            } else {
+                return builder.conjunction();
+            }
         };
     }
 
-    public static Specification<Products> productCPU(String cpu) {
-
+    public static Specification<ProductsDetail> categoryIn(Set<String> categories) {
         return (root, query, builder) -> {
-            Join<Products, ProductsDetail> producJoin = root.join(Products_.productsDetail, JoinType.LEFT);
-            return ObjectUtils.isEmpty(cpu) ? builder.conjunction() : builder.like(producJoin.get(ProductsDetail_.cpu), "%" + cpu + "%");
+            Join<ProductsDetail, Products> productsJoin = root.join(ProductsDetail_.product);
+            Join<Category, Products> cateJoin = productsJoin.join(Products_.category);
+            query.distinct(true);
+            return ObjectUtils.isEmpty(categories) ? builder.conjunction() : cateJoin.get(Category_.parentId).in(categories);
         };
     }
 
-    public static Specification<Products> productDisplaySize(String displaySize) {
-
+    public static Specification<ProductsDetail> onStatus() {
         return (root, query, builder) -> {
-            Join<Products, ProductsDetail> producJoin = root.join(Products_.productsDetail, JoinType.LEFT);
-            return ObjectUtils.isEmpty(displaySize) ? builder.conjunction() : builder.like(producJoin.get(ProductsDetail_.displaySize), "%" + displaySize + "%");
+            query.distinct(true);
+            return builder.equal(root.get(ProductsDetail_.status), 1);
         };
     }
 
-    public static Specification<Products> productVGA(String vga) {
+    public static Specification<ProductsDetail> productCPU(Set<String> cpu) {
 
         return (root, query, builder) -> {
-            Join<Products, ProductsDetail> producJoin = root.join(Products_.productsDetail, JoinType.LEFT);
-            return ObjectUtils.isEmpty(vga) ? builder.conjunction() : builder.like(producJoin.get(ProductsDetail_.vga), "%" + vga + "%");
+
+            List<Predicate> predicates = new ArrayList<>();
+            query.distinct(true);
+            Predicate predicate = builder.conjunction();
+            for (String c : cpu) {
+                predicate = builder.or(builder.like(root.get(ProductsDetail_.cpu),
+                        contains(c)));
+
+                predicates.add(predicate);
+            }
+            Predicate[] p = new Predicate[predicates.size()];
+
+            return ObjectUtils.isEmpty(cpu) ? builder.conjunction() : builder.or(predicates.toArray(p));
+
+            // }
         };
     }
 
-    public static Specification<Products> productResolution(String resolution) {
+    public static Specification<ProductsDetail> productRAM(Set<String> ram) {
         return (root, query, builder) -> {
-            Join<Products, ProductsDetail> producJoin = root.join(Products_.productsDetail, JoinType.LEFT);
-            return ObjectUtils.isEmpty(resolution) ? builder.conjunction() : builder.like(producJoin.get(ProductsDetail_.resolution), "%" + resolution + "%");
+            List<Predicate> predicates = new ArrayList<>();
+            query.distinct(true);
+            Predicate predicate = builder.conjunction();
+            for (String c : ram) {
+                predicate = builder.or(builder.like(root.get(ProductsDetail_.ram),
+                        contains(c)));
+                predicates.add(predicate);
+            }
+            Predicate[] p = new Predicate[predicates.size()];
+            return ObjectUtils.isEmpty(ram) ? builder.conjunction() : builder.or(predicates.toArray(p));
         };
     }
 
-    public static Specification<Products> productScanFrequency(String scanFrequency) {
-
+    public static Specification<ProductsDetail> productDisplaySize(Set<String> displaySize) {
         return (root, query, builder) -> {
-            Join<Products, ProductsDetail> producJoin = root.join(Products_.productsDetail, JoinType.LEFT);
-            return ObjectUtils.isEmpty(scanFrequency) ? builder.conjunction() : builder.like(producJoin.get(ProductsDetail_.scanFrequency), "%" + scanFrequency + "%");
+            List<Predicate> predicates = new ArrayList<>();
+            query.distinct(true);
+            Predicate predicate = builder.conjunction();
+            for (String c : displaySize) {
+                predicate = builder.or(builder.like(root.get(ProductsDetail_.displaySize),
+                        contains(c)));
+                predicates.add(predicate);
+            }
+            Predicate[] p = new Predicate[predicates.size()];
+
+            return ObjectUtils.isEmpty(displaySize) ? builder.conjunction() : builder.or(predicates.toArray(p));
+
+        };
+
+    }
+
+    public static Specification<ProductsDetail> productVGA(Set<String> vga) {
+        return (root, query, builder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+            query.distinct(true);
+            Predicate predicate = builder.conjunction();
+            for (String c : vga) {
+                predicate = builder.or(builder.like(root.get(ProductsDetail_.vga),
+                        contains(c)));
+
+                predicates.add(predicate);
+            }
+            Predicate[] p = new Predicate[predicates.size()];
+
+            return ObjectUtils.isEmpty(vga) ? builder.conjunction() : builder.or(predicates.toArray(p));
+        };
+
+    }
+
+    public static Specification<ProductsDetail> productResolution(Set<String> resolution) {
+        return (root, query, builder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+            query.distinct(true);
+            Predicate predicate = builder.conjunction();
+            for (String c : resolution) {
+                predicate = builder.or(builder.like(root.get(ProductsDetail_.resolution),
+                        contains(c)));
+
+                predicates.add(predicate);
+            }
+            Predicate[] p = new Predicate[predicates.size()];
+
+            return ObjectUtils.isEmpty(resolution) ? builder.conjunction() : builder.or(predicates.toArray(p));
         };
     }
 
-    public static Specification<Products> productScreenRatio(String screenRatio) {
-
+    public static Specification<ProductsDetail> productScanFrequency(Set<String> scanFrequency) {
         return (root, query, builder) -> {
-            Join<Products, ProductsDetail> producJoin = root.join(Products_.productsDetail, JoinType.LEFT);
-            return ObjectUtils.isEmpty(screenRatio) ? builder.conjunction() : builder.like(producJoin.get(ProductsDetail_.screenRatio), "%" + screenRatio + "%");
+
+            List<Predicate> predicates = new ArrayList<>();
+            query.distinct(true);
+            Predicate predicate = builder.conjunction();
+            for (String c : scanFrequency) {
+                predicate = builder.or(builder.like(root.get(ProductsDetail_.scanFrequency),
+                        contains(c)));
+
+                predicates.add(predicate);
+            }
+            Predicate[] p = new Predicate[predicates.size()];
+
+            return ObjectUtils.isEmpty(scanFrequency) ? builder.conjunction() : builder.or(predicates.toArray(p));
         };
     }
 
-    public static Specification<Products> productRAM(String ram) {
+    public static Specification<ProductsDetail> productScreenRatio(Set<String> screenRatio) {
         return (root, query, builder) -> {
-            Join<Products, ProductsDetail> producJoin = root.join(Products_.productsDetail, JoinType.LEFT);
-            return ObjectUtils.isEmpty(ram) ? builder.conjunction() : builder.like(producJoin.get("ram"), "%" + ram + "%");
+            List<Predicate> predicates = new ArrayList<>();
+            query.distinct(true);
+            Predicate predicate = builder.conjunction();
+            for (String c : screenRatio) {
+                predicate = builder.or(builder.like(root.get(ProductsDetail_.screenRatio),
+                        contains(c)));
+                predicates.add(predicate);
+            }
+            Predicate[] p = new Predicate[predicates.size()];
+            return ObjectUtils.isEmpty(screenRatio) ? builder.conjunction() : builder.or(predicates.toArray(p));
         };
     }
 
-    public static Specification<Products> productHardDrive(String hardDrive) {
+//    public static Specification<ProductsDetail> productHardDrive(Set<String> hardDrive) {
+//        return (root, query, builder) -> {
+//            List<Predicate> predicates = new ArrayList<>();
+//            query.distinct(true);
+//            Predicate predicate = builder.conjunction();
+//            for (String c : hardDrive) {
+//                predicate = builder.or(builder.like(root.get(ProductsDetail_.hardDrive),
+//                        contains(c)));
+//                predicates.add(predicate);
+//            }
+//            Predicate[] p = new Predicate[predicates.size()];
+//            return ObjectUtils.isEmpty(hardDrive) ? builder.conjunction() : builder.or(predicates.toArray(p));
+//        };
+//    }
 
+    public static Specification<ProductsDetail> productSearch(String search) {
         return (root, query, builder) -> {
-            Join<Products, ProductsDetail> producJoin = root.join(Products_.productsDetail, JoinType.LEFT);
-            return ObjectUtils.isEmpty(hardDrive) ? builder.conjunction() : builder.like(producJoin.get(ProductsDetail_.hardDrive), "%" + hardDrive + "%");
+            Join<ProductsDetail, Products> productsJoin = root.join(ProductsDetail_.product);
+            query.distinct(true);
+            Predicate predicateName = builder.or(builder.like(productsJoin.get(Products_.name),
+                    contains(search)));
+            return ((ObjectUtils.isEmpty(search))) ? builder.conjunction() : builder.and(predicateName);
         };
     }
 
-    public static Specification<Products> outputPriceBetween(Optional<Float> minPrice, Optional<Float> maxPrice) {
-
+    public static Specification<ProductsDetail> outputPriceBetween(Map<Float, Float> mapPrice) {
         return (root, query, builder) -> {
-            return minPrice.map(min -> {
-                return maxPrice.map(max -> builder.between(root.get(Products_.outputPrice), min, max)
-                ).orElse(null);
-            }).orElse(null);
+            query.distinct(true);
+            List<Predicate> predicates = new ArrayList<>();
+            Predicate predicate = builder.conjunction();
+            for (Float key : mapPrice.keySet()) {
+                predicate = builder.or(builder.between(root.get(ProductsDetail_.price), key, mapPrice.get(key)));
+                predicates.add(predicate);
+            }
+            Predicate[] p = new Predicate[predicates.size()];
+            return (ObjectUtils.isEmpty(mapPrice)) ? builder.conjunction() : builder.or(predicates.toArray(p));
         };
     }
 
-
-    public static Specification<Products> massBetween(Optional<Float> minMass, Optional<Float> maxMass) {
-
-        return (root, query, builder) -> {
-            return minMass.map(min -> {
-                return maxMass.map(max -> builder.between(root.get(ProductsDetail_.mass), min, max)
-                ).orElse(null);
-            }).orElse(null);
-        };
-    }
-    public static Specification<Products> dayBetween(Integer id) {
-        EntityManager em = null;
-        return (root, query, builder) -> {
-            Query query1 = em.createNativeQuery("filter_Sales_Products", Products.class);
-            query1.setParameter(1, id);
-            List<Products> productsList = query1.getResultList();
-            return (javax.persistence.criteria.Predicate) productsList;
-        };
+    private static String contains(String expression) {
+        return MessageFormat.format("%{0}%", expression);
     }
 
 }

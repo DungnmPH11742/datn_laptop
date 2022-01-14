@@ -12,10 +12,11 @@ public class ProductRatingVO implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer id;
     private AccountVO account;
-    private ProductsVO product;
     private String comment;
     private String imgUrl;
     private Double starRating;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date startComment;
+
+    private ProductsDetailVO productsDetail;
 }

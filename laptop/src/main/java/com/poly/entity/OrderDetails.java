@@ -41,8 +41,4 @@ public class OrderDetails implements Serializable {
     @ManyToOne
     @JoinColumn(name="sku")
     private ProductsDetail productsDetail;
-
-    @ManyToOne
-    @JoinColumn(name = "id_voucher")
-    private Vouchers vouchers;
 }

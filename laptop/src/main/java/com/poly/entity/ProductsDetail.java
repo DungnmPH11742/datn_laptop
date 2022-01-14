@@ -119,6 +119,9 @@ public class ProductsDetail implements Serializable {
     @OneToMany(mappedBy="productsDetail")
     private List<Description> descriptions;
 
+    @OneToMany(mappedBy="productsDetail")
+    private List<ProductRating> productRatings;
+
     //bi-directional many-to-one association to OrderDetail
     @OneToMany(mappedBy="productsDetail")
     private List<OrderDetails> orderDetails;

@@ -400,7 +400,7 @@
     function findByNameAndType(name, type) {
         $.ajax({
             type: "Get",
-            url: "/find-by",
+            url: "/find-by-p-sku",
             data: {'name': name, 'type': type},
             success: function (data) {
                 console.log(data);
@@ -410,15 +410,18 @@
                             <tr>
                                 <th class="col-sm-3">
                                     <img class="col-sm-12 align-self-center p" id="p1"
-                                        src="${data[i]?.productsDetail?.imgUrl}"
+                                        src="${data[i].productsDetail.imgUrl}"
                                         alt="">
                                 </th>
                                 <th class="col-sm-6">
                                     <h5>${data[i]?.name}</h5>
-                                    <p style="color: red;">${(data[i]?.productsDetail?.price - data[i]?.productsDetail?.price * data[i]?.productsDetail?.saleProduct?.promotion / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</p>
+                                    ${data[i]?.productsDetail?.saleProduct != null ? `
+                            <p style="color: red;">${(data[i]?.productsDetail?.price - data[i]?.productsDetail?.price * data[i]?.productsDetail?.saleProduct?.promotion / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</p>` :
+                        `<span>${data[i]?.productsDetail?.price.toString().replace(/\\B(?=(\\d{3})+(?!\\d))/g, ".")} đ</span>`}
+                            ${data[i]?.productsDetail?.saleProduct != null ? `<s>${data[i]?.productsDetail?.price.toString().replace(/\\B(?=(\\d{3})+(?!\\d))/g, ".")} đ</s>` : ''}
                                 </th>
                                 <th class="col-sm-3">
-                                    <a style="cursor: pointer" onclick="addCompareProduct('${data[i]?.productsDetail?.sku}');">Thêm so sánh</a>
+                                    <a style="cursor: pointer" onclick="addCompareProduct('${data[i]?.productsDetail?.sku}')">Thêm so sánh</a>
                                 </th>
                             </tr>`;
                     console.log(``)
@@ -447,17 +450,17 @@
     }
 
     //Thêm vào so sánh
-    function addCompareProduct(id) {
-        $('#myModal').modal('hide');
-        $('#searchProducts').html('');
+    function addCompareProduct(sku) {
         $.ajax({
             type: "Get",
             url: "/add-compare",
-            data: {'id': id},
+            data: {'sku': sku},
             success: function (data) {
-                if (data.key !== '003') {
-                    callListCompare();
+                if(data.key != '003') {
+                    $("#myModal").modal('hide');
                 }
+                callListCompare();
+                // }
                 $("#notification-compare").append(`<div class="alert ${data.key === '000' ? 'alert-success' : 'alert-warning'} alert-dismissible">
                                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                                             <strong>${data.key === '000' ? 'Thành công' : 'Thất bại'}!</strong>
@@ -468,8 +471,8 @@
                     }, 3000
                 );
             },
-            error: function () {
-                alert("Lỗi rồi")
+            error: function (e) {
+                console.log(e);
             }
         });
     }

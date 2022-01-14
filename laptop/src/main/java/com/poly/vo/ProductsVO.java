@@ -1,5 +1,6 @@
 package com.poly.vo;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -21,7 +22,10 @@ public class ProductsVO implements Serializable {
 
     private String releaseYear;
 
+    @JsonManagedReference
     private List<ProductsDetailVO> productsDetails;
+
+    private List<DescriptionVO> descriptions;
 
     private CategoryVO category;
 

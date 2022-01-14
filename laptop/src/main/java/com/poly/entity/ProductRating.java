@@ -35,8 +35,6 @@ public class ProductRating implements Serializable {
     private Account account;
 
     @ManyToOne
-    @JoinColumn(name = "id_product")
-    private Products product;
-
-
+    @JoinColumn(name = "sku_product")
+    private ProductsDetail productsDetail;
 }

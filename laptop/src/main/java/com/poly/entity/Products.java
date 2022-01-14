@@ -35,10 +35,6 @@ public class Products implements Serializable {
     @Column(name = "active")
     private int active;
 
-    //bi-directional many-to-one association to ProductRating
-//    @OneToMany(mappedBy="product")
-//    private List<ProductRating> productRatings;
-
     //bi-directional many-to-one association to Category
     @ManyToOne
     @JoinColumn(name="id_category")

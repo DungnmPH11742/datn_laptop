@@ -1,6 +1,8 @@
 package com.poly.DTO;
 
 import com.poly.entity.Role;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +13,8 @@ import java.util.Collections;
 @RestController
 @CrossOrigin("http://localhost:4200/")
 public class TestTiThoiController {
+    @Autowired
+    private ModelMapper modelMapper;
 
     private TestTiThoi testTiThoi = new TestTiThoi();
     private TestTiThoi testTiThoiOld = new TestTiThoi();
@@ -19,8 +23,7 @@ public class TestTiThoiController {
     @GetMapping("/abc")
     public TestTiThoi abc() {
         testTiThoi.getRoles().add(new Role(1, "abc"));
-        role.setId(testTiThoi.getRoles().get(0).getId());
-        role.setRoleName(testTiThoi.getRoles().get(0).getRoleName());
+        role = modelMapper.map(testTiThoi.getRoles().get(0), Role.class);
         testTiThoiOld.setRoles(new ArrayList<>(Collections.singleton(role)));
         return testTiThoiOld;
     }

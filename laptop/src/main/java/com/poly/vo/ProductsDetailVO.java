@@ -1,17 +1,24 @@
 package com.poly.vo;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
+import org.springframework.data.annotation.Transient;
 
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductsDetailVO implements Serializable {
 
     private String sku;
-
+    @Transient
     private String idProduct;
+    @Transient
+    private String nameProduct;
 
     private Date dateOn;
 
@@ -57,7 +64,7 @@ public class ProductsDetailVO implements Serializable {
 
     private String viewScreenshots;
 
-    private String connectivity;
+    private List<String> connectivitys;
 
     private String battery;
 
@@ -74,6 +81,12 @@ public class ProductsDetailVO implements Serializable {
     private int status;
 
     private OrderDetailsVO orderDetails;
+
+    @JsonBackReference
+    private ProductsVO product;
+
+    @Transient
+    private String typeOfItem;
 
 
 }

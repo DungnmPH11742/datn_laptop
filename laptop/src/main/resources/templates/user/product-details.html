@@ -92,9 +92,12 @@
                                     </fieldset>
                                     <span class="myratings"></span>
                                 </div>
-                                <p style="margin-top: 30px">Mã SP:
-                                    <span id="idProduct">[[${product.getId}]]</span>
-                                </p>
+                                <div class="flex items-center mb-4 space-x-3 text-sm font-semibold leading-5 text-body-main">
+                                    <span class="mpn" id="idProduct">MPN: [[${product.getId()}]]</span>
+                                    <span class="text-gray-100">|</span>
+                                    <span>SKU: </span>
+                                    <span id="skuProduct">[[${pd.getSku()}]] </span>
+                                </div>
                                 <div id="information-short-product">
                                     <span>
 										<span th:text="${pd.saleProduct != null ?
@@ -469,22 +472,28 @@
                     <fieldset>
                         <div class="row">
                             <div class="col-sm-3 col-lg-2 hidden-xs">
-                                <th:block th:if="${user!=null}">
-                                    <h4>[[${user}]]</h4>
-                                </th:block>
-                                <th:block th:unless="${user!=null}">
+
+                                <th:block th:if="${user == null}">
                                     <a href="/login">Đăng nhập</a>
                                 </th:block>
 
-                                <th:block th:if="${img!=null}">
-                                    <img class="img-responsive" style="width: 60px; height: 60px" th:src="${img}"
-                                         alt="">
+
+                                <th:block th:unless="${user==null}">
+                                    <th:block th:if="${img!=null}">
+                                        <img class="img-responsive"
+                                             style="width: 70px; height: 70px; margin-top: 20px; display: flex;object-fit: cover;"
+                                             th:src="${img}"
+                                             alt="">
+                                    </th:block>
+
+                                    <th:block th:unless="${img!=null}">
+                                        <img class="img-responsive"
+                                             style="width: 70px; height: 70px; margin-top: 20px; display: flex;object-fit: cover;"
+                                             src='http://hinhdep.com.vn/wp-content/uploads/2012/10/cuhanh.jpg' alt="">
+                                    </th:block>
                                 </th:block>
 
-                                <th:block th:unless="${img!=null}">
-                                    <img class="img-responsive" style="width: 60px; height: 60px;border-radius: 50%"
-                                         src='http://hinhdep.com.vn/wp-content/uploads/2012/10/cuhanh.jpg' alt="">
-                                </th:block>
+
                             </div>
 
                             <div class="form-group col-xs-12 col-sm-9 col-lg-10">
@@ -503,7 +512,7 @@
 
                 <div id="totalComment"></div>
                 <div id="showComment">
-                    <!-- COMMENT 1 - START -->
+                    <!-- COMMENT -->
 
                 </div>
                 <div class="alert alert-info" id="alert" style="text-align: center">
@@ -623,7 +632,7 @@
             <br>`
         //Mô tả laptop
         const informationLaptop =
-            `${data.cpu == '' || data.cpu == null? '' : `<p><b>Vi xử lý: </b>${data.cpu}</p>`}
+            `${data.cpu == '' || data.cpu == null ? '' : `<p><b>Vi xử lý: </b>${data.cpu}</p>`}
             ${data.ram == '' || data.ram == null ? '' : `<p><b>RAM:</b>${data.ram}</p>`}
             ${data.hardDrive == '' || data.hardDrive == null ? '' : `<p><b>Ổ cứng: </b>${data.hardDrive}</p>`}
             ${data.vga == '' || data.vga == null ? '' : `<p><b>Card đồ họa: </b> ${data.vga} </p>`}
@@ -633,7 +642,7 @@
 
         //mô tả PC
         const informationPC =
-            `${data.cpu == '' || data.cpu == null? '' : `<p><b>Vi xử lý: </b>${data.cpu}</p>`}
+            `${data.cpu == '' || data.cpu == null ? '' : `<p><b>Vi xử lý: </b>${data.cpu}</p>`}
             ${data.ram == '' || data.ram == null ? '' : `<p><b>RAM:</b>${data.ram}</p>`}
             ${data.hardDrive == '' || data.hardDrive == null ? '' : `<p><b>Ổ cứng: </b>${data.hardDrive}</p>`}
             ${data.vga == '' || data.vga == null ? '' : `<p><b>Card đồ họa: </b> ${data.vga} </p>`}
@@ -644,7 +653,7 @@
 
         //mô tả màn hình
         const informationMonitor =
-            `${data.displaySize == '' || data.displaySize == null? '' : `<p><b>Kích thước màn hình: </b>${data.displaySize}</p>`}
+            `${data.displaySize == '' || data.displaySize == null ? '' : `<p><b>Kích thước màn hình: </b>${data.displaySize}</p>`}
             ${data.brightness == '' || data.brightness == null ? '' : `<p><b>Độ sáng:</b>${data.brightness}</p>`}
             ${data.contrast == '' || data.contrast == null ? '' : `<p><b>Tỉ lệ tương phản: </b>${data.contrast}</p>`}
             ${data.resolution == '' || data.resolution == null ? '' : `<p><b>Độ phân giải: </b> ${data.resolution} </p>`}

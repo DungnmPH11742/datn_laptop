@@ -9,9 +9,14 @@ import java.util.List;
 
 public interface ProductRatingService {
     ProductRatingVO getOne(Integer id);
-    List<ProductRatingVO> findAllByProduct_Id(String id);
-    ProductRating findProductRatingByAccountAndProduct(String email, String productId);
+
+    List<ProductRatingVO> findAllByProductsDetail_Sku(String id);
+
+    ProductRating findProductRatingByAccountAndProductDetail(String email, String sku);
+
     ProductRatingVO create(ProductRatingVO vo);
+
     ProductRatingVO update(ProductRatingVO vo);
-    Page<ProductRatingVO> getAllProductRatingVOByPageNumber(int page, int limit,String id);
+
+    Page<ProductRatingVO> getAllProductRatingVOByPageNumber(int page, int limit, String id);
 }

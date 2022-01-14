@@ -20,9 +20,7 @@ public interface OrderDetailsRepository extends JpaRepository<OrderDetails, Inte
     @Transactional
     @Modifying
     @Query("update OrderDetails o set o.quantity=?1 where o.id =?2")
-    void updateQuantityOrderDetail(Integer quan,Integer id);
+    void updateQuantityOrderDetail(Integer quan, Integer id);
 
-//    OrderDetails findByOrder_IdAndProduct_Id(Integer id, String idProduct);
-//
-//    OrderDetails findByOrOrderIdAndProductId(Integer id, String idProduct);
+    OrderDetails findByOrder_IdAndProductsDetail_Sku(Integer id, String idSku);
 }

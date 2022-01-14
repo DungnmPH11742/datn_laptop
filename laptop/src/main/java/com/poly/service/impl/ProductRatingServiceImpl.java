@@ -52,26 +52,28 @@ public class ProductRatingServiceImpl implements ProductRatingService {
         }
         return productRatingVO;
     }
+
     public List<ProductRatingVO> convertListProductRatingToDtoById(String id) {
         List<ProductRatingVO> vos = new ArrayList<>();
-        productRatingRepository.findAllByProduct_Id(id).forEach(productRating -> {
+        productRatingRepository.findAllByProductsDetail_Sku(id).forEach(productRating -> {
             vos.add(modelMapper.map(productRating, ProductRatingVO.class));
         });
         return vos;
     }
+
     @Override
     public ProductRatingVO getOne(Integer id) {
         return convertProductRatingToDtoById(id);
     }
 
     @Override
-    public List<ProductRatingVO> findAllByProduct_Id(String id) {
+    public List<ProductRatingVO> findAllByProductsDetail_Sku(String id) {
         return convertListProductRatingToDtoById(id);
     }
 
     @Override
-    public ProductRating findProductRatingByAccountAndProduct(String email, String productId) {
-        return  productRatingRepository.findByAccount_EmailAndProduct_Id(email, productId);
+    public ProductRating findProductRatingByAccountAndProductDetail(String email, String sku) {
+        return productRatingRepository.findByAccount_EmailAndProductsDetail_Sku(email, sku);
     }
 
     @Override
@@ -85,12 +87,13 @@ public class ProductRatingServiceImpl implements ProductRatingService {
     }
 
     @Override
-    public Page<ProductRatingVO> getAllProductRatingVOByPageNumber(int page, int limit,String id) {
-        List<ProductRatingVO> lstProductRatingVO = convertListProductRatingDto(productRatingRepository.findAllByProduct_Id(id));
+    public Page<ProductRatingVO> getAllProductRatingVOByPageNumber(int page, int limit, String id) {
+        List<ProductRatingVO> lstProductRatingVO = convertListProductRatingDto(productRatingRepository.findAllByProductsDetail_Sku(id));
 
-        lstProductRatingVO =  lstProductRatingVO.stream().filter(x -> x.getComment()!=null).collect(Collectors.toList());
+        lstProductRatingVO = lstProductRatingVO.stream().filter(x -> x.getComment() != null).collect(Collectors.toList());
         Collections.sort(lstProductRatingVO, new Comparator<ProductRatingVO>() {
             DateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
             @Override
             public int compare(ProductRatingVO p1, ProductRatingVO p2) {
                 return f.format(p2.getStartComment()).compareTo(f.format(p1.getStartComment()));

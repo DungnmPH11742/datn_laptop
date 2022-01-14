@@ -143,10 +143,10 @@ public class OrderServiceImpl implements OrderService {
         Optional<Orders> orders = this.repository.findById(vo.getId());
         vo.setAccount(modelMapper.map(orders.get().getAccount(),AccountVO.class));
         if (orders.isPresent()){
-            modelMapper.map(vo,orders.get());
             if(vo.getReceived() == 1) {
                 vo.setAuthenticator(detailsService.getAccount().getFullName());
             }
+            modelMapper.map(vo,orders.get());
             repository.save(orders.get());
             return vo;
         }
@@ -211,10 +211,6 @@ public class OrderServiceImpl implements OrderService {
                 if(orderDetails.getProductsDetail().getSaleProduct() != null){
                     SaleProductVO saleProductVO = modelMapper.map(orderDetails.getProductsDetail().getSaleProduct(),SaleProductVO.class);
                     productsDetailVO.setSaleProduct(saleProductVO);
-                }
-                if(orderDetails.getVouchers()!= null){
-                    VouchersVO vouchersVO = modelMapper.map(orderDetails.getVouchers(),VouchersVO.class);
-                    orderDetailsVO.setVoucher(vouchersVO);
                 }
                 orderDetailsVO.setProductsDetailVO(productsDetailVO);
             });

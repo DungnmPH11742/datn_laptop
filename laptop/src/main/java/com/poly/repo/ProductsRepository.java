@@ -18,6 +18,8 @@ public interface ProductsRepository extends JpaRepository<Products, String>, Jpa
 
     List<Products> findAllByActiveNot(int active);
 
+    List<Products> findByActive(int active);
+
     @Query(value = "SELECT * FROM ( SELECT * , ROW_NUMBER() OVER (ORDER BY id) AS RowNum FROM products  where type_of_item =?1) AS MyDerivedTable WHERE MyDerivedTable.RowNum BETWEEN 1 AND 12",
             nativeQuery = true)
     List<Products> getListByCate(String idCate);
@@ -35,6 +37,8 @@ public interface ProductsRepository extends JpaRepository<Products, String>, Jpa
 //    List<Products> getListByCodeSale(@Param("code") String code);
 
     List<Products> findByNameContainingAndTypeOfItem(String name, String type);
+
+    List<Products> findByNameContainingAndActiveAndTypeOfItem(String name, int active, String type);
 
     List<Products> findByNameContaining(String name);
 

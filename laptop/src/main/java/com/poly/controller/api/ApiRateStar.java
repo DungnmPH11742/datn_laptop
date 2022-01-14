@@ -1,19 +1,18 @@
 package com.poly.controller.api;
 
-import com.poly.entity.*;
+import com.poly.entity.Orders;
+import com.poly.entity.ProductRating;
 import com.poly.repo.OrderDetailsRepository;
 import com.poly.repo.OrdersRepository;
-import com.poly.repo.ProductRatingRepository;
 import com.poly.service.AccountService;
-import com.poly.service.ContactService;
+import com.poly.service.ProductDetailService;
 import com.poly.service.ProductRatingService;
 import com.poly.service.ProductService;
 import com.poly.vo.AccountVO;
-import com.poly.vo.ContactVO;
 import com.poly.vo.ProductRatingVO;
+import com.poly.vo.ProductsDetailVO;
 import com.poly.vo.ProductsVO;
 import com.poly.vo.response.ReponseObjectRate;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
@@ -37,11 +36,12 @@ public class ApiRateStar {
     private AccountService accountService;
     @Autowired
     private ProductService productService;
-
+    @Autowired
+    private ProductDetailService productDetailService;
 
     public ReponseObjectRate starRatingNotAccout(String productId, Double total, Integer count) {
         ReponseObjectRate reponseObjectRate = new ReponseObjectRate();
-        List<ProductRatingVO> productRatingVOList = productRatingService.findAllByProduct_Id(productId);
+        List<ProductRatingVO> productRatingVOList = productRatingService.findAllByProductsDetail_Sku(productId);
         for (ProductRatingVO x : productRatingVOList) {
             System.err.println(x.getStarRating());
             total += x.getStarRating();
@@ -55,7 +55,7 @@ public class ApiRateStar {
     public ReponseObjectRate starRatingNotNullAccout(String productId, Double total, Integer count, Double starTextAccount) {
         ReponseObjectRate reponseObjectRate = new ReponseObjectRate();
 
-        List<ProductRatingVO> productRatingVOList = productRatingService.findAllByProduct_Id(productId);
+        List<ProductRatingVO> productRatingVOList = productRatingService.findAllByProductsDetail_Sku(productId);
         for (ProductRatingVO x : productRatingVOList) {
             System.err.println(x.getStarRating());
             total += x.getStarRating();
@@ -86,8 +86,8 @@ public class ApiRateStar {
 
         boolean booleanOrder = false;
 
-        /*for (Orders orders : ordersList) {
-            if (orderDetailsRepository.findByOrder_IdAndProduct_Id(orders.getId(), productId) != null) {
+        for (Orders orders : ordersList) {
+            if (orderDetailsRepository.findByOrder_IdAndProductsDetail_Sku(orders.getId(), productId) != null) {
                 booleanOrder = true;
                 break;
             } else {
@@ -95,16 +95,13 @@ public class ApiRateStar {
             }
         }
         if (booleanOrder == true) {
-            ProductRating productRating = productRatingService.findProductRatingByAccountAndProduct(auth.getName(), productId);
-
+            ProductRating productRating = productRatingService.findProductRatingByAccountAndProductDetail(auth.getName(), productId);
             if (productRating != null) {
                 Double star = productRating.getStarRating();
                 return starRatingNotNullAccout(productId, total, count, star);
             }
-
             return starRatingNotNullAccout(productId, total, count, null);
-        }*/
-
+        }
         return starRatingNotAccout(productId, total, count);
     }
 
@@ -112,7 +109,7 @@ public class ApiRateStar {
     public ReponseObjectRate starRatingNotAccoutPost(String productId, Double total, Integer count, String message, String errors) {
         ReponseObjectRate reponseObjectRate = new ReponseObjectRate();
 
-        List<ProductRatingVO> productRatingVOList = productRatingService.findAllByProduct_Id(productId);
+        List<ProductRatingVO> productRatingVOList = productRatingService.findAllByProductsDetail_Sku(productId);
         for (ProductRatingVO x : productRatingVOList) {
             total += x.getStarRating();
             count++;
@@ -126,7 +123,7 @@ public class ApiRateStar {
 
     public ReponseObjectRate starRatingNotNullAccoutPost(String productId, Double total, Integer count, Double starTextAccount, String message, String errors, ProductRatingVO productRatingVO) {
         ReponseObjectRate reponseObjectRate = new ReponseObjectRate();
-        List<ProductRatingVO> productRatingVOList = productRatingService.findAllByProduct_Id(productId);
+        List<ProductRatingVO> productRatingVOList = productRatingService.findAllByProductsDetail_Sku(productId);
 
         for (ProductRatingVO x : productRatingVOList) {
             total += x.getStarRating();
@@ -169,23 +166,20 @@ public class ApiRateStar {
         }
 
         ProductRatingVO productRatingVO = new ProductRatingVO();
-        //   OrderDetails orderDetails = new OrderDetails();
         boolean booleanOrder = false;
-
-        /*for (Orders orders : ordersList) {
-            if (orderDetailsRepository.findByOrder_IdAndProduct_Id(orders.getId(), productId) != null) {
+        for (Orders orders : ordersList) {
+            if (orderDetailsRepository.findByOrder_IdAndProductsDetail_Sku(orders.getId(), productId) != null) {
                 booleanOrder = true;
-                //  orderDetails = orderDetailsRepository.findByOrder_IdAndProduct_Id(orders.getId(), productId);
                 break;
             } else {
                 booleanOrder = false;
             }
-        }*/
+        }
 
         if (booleanOrder == true) {
-            ProductRating productRating = productRatingService.findProductRatingByAccountAndProduct(auth.getName(), productId);
+            ProductRating productRating = productRatingService.findProductRatingByAccountAndProductDetail(auth.getName(), productId);
             AccountVO accountVO = accountService.findByEmailVO(auth.getName());
-            ProductsVO productsVO = productService.getOne(productId);
+            ProductsDetailVO productsVO = productDetailService.getOne(productId);
             productRatingVO.setStartComment(new Date());
             message = "Cám ơn bạn đã đánh giá và bình luận. Nếu sản phẩm có gì sai sót vui lòng liên hệ chúng tôi để được hỗ trợ";
             if (productRating != null) {
@@ -194,12 +188,10 @@ public class ApiRateStar {
             }
             productRatingVO.setId(productRating.getId());
             productRatingVO.setAccount(accountVO);
-            productRatingVO.setProduct(productsVO);
+            productRatingVO.setProductsDetail(productsVO);
             productRatingVO.setStarRating(rate);
             productRatingService.create(productRatingVO);
             return starRatingNotNullAccoutPost(productId, total, count, rate, message, null, productRatingService.create(productRatingVO));
-
-
         }
         errors = "Rất tiếc bạn không thể đánh giá sản phẩm nếu chưa mua từ phía chúng tôi";
         return starRatingNotAccoutPost(productId, total, count, null, errors);
@@ -218,7 +210,6 @@ public class ApiRateStar {
     public ReponseObjectRate starRating(String errors) {
         ReponseObjectRate reponseObjectRate = new ReponseObjectRate();
         reponseObjectRate.setErrors(errors);
-
         return reponseObjectRate;
     }
 
@@ -242,27 +233,25 @@ public class ApiRateStar {
 
         boolean booleanOrder = false;
 
-        /*for (Orders orders : ordersList) {
-            if (orderDetailsRepository.findByOrder_IdAndProduct_Id(orders.getId(), productId) != null) {
+        for (Orders orders : ordersList) {
+            if (orderDetailsRepository.findByOrder_IdAndProductsDetail_Sku(orders.getId(), productId) != null) {
                 booleanOrder = true;
                 //  orderDetails = orderDetailsRepository.findByOrder_IdAndProduct_Id(orders.getId(), productId);
                 break;
             } else {
                 booleanOrder = false;
             }
-        }*/
+        }
 
         if (booleanOrder == true) {
-            ProductRating productRating = productRatingService.findProductRatingByAccountAndProduct(auth.getName(), productId);
+            ProductRating productRating = productRatingService.findProductRatingByAccountAndProductDetail(auth.getName(), productId);
             if (productRating != null) {
                 errors = "Bạn đã đánh giá và bình luận sản phẩm rồi không thể tiếp tục";
                 return starRating(errors);
             }
             return starRating(null);
         }
-
         return starRating(null);
-
     }
 
 
@@ -295,31 +284,28 @@ public class ApiRateStar {
         }
 
         ProductRatingVO productRatingVO = new ProductRatingVO();
-        //   OrderDetails orderDetails = new OrderDetails();
         boolean booleanOrder = false;
-
-        /*for (Orders orders : ordersList) {
-            if (orderDetailsRepository.findByOrder_IdAndProduct_Id(orders.getId(), productId) != null) {
+        for (Orders orders : ordersList) {
+            if (orderDetailsRepository.findByOrder_IdAndProductsDetail_Sku(orders.getId(), productId) != null) {
                 booleanOrder = true;
-                //  orderDetails = orderDetailsRepository.findByOrder_IdAndProduct_Id(orders.getId(), productId);
                 break;
             } else {
                 booleanOrder = false;
             }
-        }*/
+        }
 
         if (booleanOrder == true) {
-            ProductRating productRating = productRatingService.findProductRatingByAccountAndProduct(auth.getName(), productId);
+            ProductRating productRating = productRatingService.findProductRatingByAccountAndProductDetail(auth.getName(), productId);
             AccountVO accountVO = accountService.findByEmailVO(auth.getName());
-            ProductsVO productsVO = productService.getOne(productId);
+            ProductsDetailVO productsVO = productDetailService.getOne(productId);
+            ProductsVO products = productService.getOne(productsVO.getIdProduct());
             if (productRating != null) {
                 errors = "Bạn đã đánh giá và bình luận sản phẩm rồi không thể tiếp tục";
                 reponseObjectRate.setErrors(errors);
                 return reponseObjectRate;
             }
-
+            productRatingVO.setProductsDetail(productsVO);
             productRatingVO.setAccount(accountVO);
-            productRatingVO.setProduct(productsVO);
             productRatingVO.setComment(comment_content);
             productRatingVO.setStartComment(new Date());
             productRatingVO.setStarRating(rate);
@@ -335,8 +321,7 @@ public class ApiRateStar {
 
 
     @GetMapping("/showComment/{page}")
-    public Page<ProductRatingVO> showCommentProductRatingVO(@PathVariable(name = "page") Integer page,@RequestParam(name = "product", defaultValue = "") String productId) {
-
+    public Page<ProductRatingVO> showCommentProductRatingVO(@PathVariable(name = "page") Integer page, @RequestParam(name = "product", defaultValue = "") String productId) {
         return productRatingService.getAllProductRatingVOByPageNumber(page, 5,productId);
     }
 }

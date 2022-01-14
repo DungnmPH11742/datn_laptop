@@ -10,7 +10,59 @@ body {
   position: relative;
   font-weight: 400px;
 }
+svg {
+  transition: transform .2s;
+}
 
+svg:hover {
+  fill: #D32F2F;
+  transform: scale(2.5);
+cursor: -webkit-grab;
+  cursor: grab;
+}
+
+fieldset, ol, ul {
+  margin: 0;
+  padding: 0;
+}
+
+.catalogue h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 8px;
+  position: relative;
+  cursor: pointer;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.w-full {
+  width: 100%;
+}
+
+ .catalogue-wrap .back_step {
+  display: block;
+  margin: 0 -16px;
+  background: #fff;
+  padding: 22px 30px 22px 18px;
+  text-align: center;
+  border-bottom: 1px solid #e3e7ef;
+  border-bottom: 1px solid var(--gray100);
+  position: -webkit-sticky;
+  position: sticky;
+  display: none;
+  top: 0;
+  z-index: 1;
+}
+
+.catalogue_final ul li {
+  margin-right: 8px;
+  font-size: 14px;
+  color: #0e0e0e;
+  margin-bottom: 12px;
+}
 ul li {
   list-style: none;
 }

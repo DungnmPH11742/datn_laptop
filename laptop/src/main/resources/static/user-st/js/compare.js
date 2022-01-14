@@ -1,4 +1,4 @@
-let type_of_item = 0;
+let type_of_item = "";
 
 let list_compare = [];
 
@@ -11,15 +11,16 @@ function addCompareProduct(sku) {
         success: function (data) {
             console.log(data);
             // if(data.key !== '003'){
-                getCompareProduct();
+            getCompareProduct();
             // }
-            $("#notification-compare").append(`<div class="alert ${data.key === '000'? 'alert-success':'alert-warning'} alert-dismissible">
+            $("#notification-compare").append(`<div class="alert ${data.key === '000' ? 'alert-success' : 'alert-warning'} alert-dismissible">
                                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                                            <strong>${data.key === '000'? 'Thành công':'Thất bại' }!</strong>
+                                                            <strong>${data.key === '000' ? 'Thành công' : 'Thất bại'}!</strong>
                                                             <p>${data.message}</p>
                                                        </div>`);
-            setTimeout(function() {
-                $('.alert').fadeOut('slow');}, 3000
+            setTimeout(function () {
+                    $('.alert').fadeOut('slow');
+                }, 3000
             );
         },
         error: function (e) {
@@ -37,7 +38,7 @@ function getCompareProduct() {
         success: function (data) {
             list_compare = data;
             console.log(data);
-            type_of_item = data[0]?.typeOfItem != null ? data[0]?.typeOfItem : 0;
+            type_of_item = data[0]?.typeOfItem != null ? data[0]?.typeOfItem : "";
             let list_product = '';
             for (let i = 0; i < data.length; i++) {
                 if (data[i] != null) {
@@ -52,11 +53,10 @@ function getCompareProduct() {
                         <div class="col-sm-6 p" id="p${i + 1}_dt">
                             <h5>${data[i]?.name}</h5>
                             ${data[i]?.productsDetail?.saleProduct != null ? `
-                            <p style="color: red;">${(data[i]?.productsDetail?.price - data[i]?.productsDetail?.price * data[i]?.productsDetail?.saleProduct?.promotion / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</p>` : 
-                                '<span>${data[i]?.productsDetail?.price.toString().replace(/\\B(?=(\\d{3})+(?!\\d))/g, ".")} đ</span>'}
-                            ${ data[i]?.productsDetail?.saleProduct != null ? `
-                            <s>${data[i]?.productsDetail?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</s>` : '' }
-                            </div>
+                            <p style="color: red;">${(data[i]?.productsDetail?.price - data[i]?.productsDetail?.price * data[i]?.productsDetail?.saleProduct?.promotion / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</p>` :
+                        `<span>${data[i]?.productsDetail?.price.toString().replace(/\\B(?=(\\d{3})+(?!\\d))/g, ".")} đ</span>`}
+                            ${data[i]?.productsDetail?.saleProduct != null ? `<s>${data[i]?.productsDetail?.price.toString().replace(/\\B(?=(\\d{3})+(?!\\d))/g, ".")} đ</s>` : ''}
+                        </div>
                         </div>`;
                 } else {
                     list_product = list_product +
@@ -96,7 +96,7 @@ function getCompareProduct() {
 const compareNow = () => {
     let img, td_pducer, td_name, td_color, td_cpu, td_hard, td_cam, td_vga, td_mass,
         td_redate, td_hdh, td_pow, td_scanf, td_bpanel, td_contrast, td_retime,
-        td_vsreen, td_dsize,td_sratio, td_bright, td_bh, td_pk;
+        td_vsreen, td_dsize, td_sratio, td_bright, td_bh, td_pk;
     for (let i = 0; i < list_compare.length; i++) {
         img += `
                     <div class="col-sm-6 d-flex">
@@ -140,7 +140,7 @@ const remove = (id) => {
 function findByNameAndType(name, type) {
     $.ajax({
         type: "Get",
-        url: "/find-by",
+        url: "/find-by-p-sku",
         data: {'name': name, 'type': type},
         success: function (data) {
             console.log(data);
@@ -150,15 +150,18 @@ function findByNameAndType(name, type) {
                             <tr>
                                 <th class="col-sm-3">
                                     <img class="col-sm-12 align-self-center p" id="p1"
-                                        src="${data[i].imgUrl}"
+                                        src="${data[i].productsDetail.imgUrl}"
                                         alt="">
                                 </th>
                                 <th class="col-sm-6">
                                     <h5>${data[i]?.name}</h5>
-                                    <p style="color: red;">${(data[i]?.outputPrice - data[i]?.outputPrice * data[i]?.saleProduct?.promotion / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</p>
+                                    ${data[i]?.productsDetail?.saleProduct != null ? `
+                            <p style="color: red;">${(data[i]?.productsDetail?.price - data[i]?.productsDetail?.price * data[i]?.productsDetail?.saleProduct?.promotion / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</p>` :
+                            `<span>${data[i]?.productsDetail?.price.toString().replace(/\\B(?=(\\d{3})+(?!\\d))/g, ".")} đ</span>`}
+                            ${data[i]?.productsDetail?.saleProduct != null ? `<s>${data[i]?.productsDetail?.price.toString().replace(/\\B(?=(\\d{3})+(?!\\d))/g, ".")} đ</s>` : ''}
                                 </th>
                                 <th class="col-sm-3">
-                                    <a style="cursor: pointer" onclick="addCompareProduct('${data[i]?.id}')">Thêm so sánh</a>
+                                    <a style="cursor: pointer" onclick="addCompareProduct('${data[i]?.productsDetail?.sku}')">Thêm so sánh</a>
                                 </th>
                             </tr>`;
                 console.log(``)
@@ -175,7 +178,7 @@ function findByNameAndType(name, type) {
 const removeAllCompare = () => {
     remove("p1");
     remove("p2");
-    type_of_item = 0;
+    type_of_item = "";
 }
 
 const closeCompare = () => {

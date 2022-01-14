@@ -1,8 +1,7 @@
 package com.poly.service.impl;
 
 import com.poly.entity.Products;
-import com.poly.filter.ProductSearchCriteria;
-import com.poly.filter.ProductsSpecifications;
+import com.poly.entity.ProductsDetail;
 import com.poly.repo.ProductsDetailRepository;
 import com.poly.repo.ProductsRepository;
 import com.poly.service.ProductService;
@@ -10,7 +9,6 @@ import com.poly.vo.ProductsDetailVO;
 import com.poly.vo.ProductsVO;
 import com.poly.vo.request.ProductRequestVO;
 import com.poly.vo.response.ProductsReponseVO;
-import jdk.nashorn.internal.ir.CallNode;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,8 +18,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -35,6 +34,8 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ModelMapper modelMapper;
 
+    private LocalDate date;
+
     @Override
     public List<ProductsVO> getList() {
         List<ProductsVO> vos = new ArrayList<>();
@@ -42,6 +43,13 @@ public class ProductServiceImpl implements ProductService {
             ProductsVO vo = modelMapper.map(products, ProductsVO.class);
             vo.getProductsDetails().forEach(val -> {
                 val.setIdProduct(vo.getId());
+                ProductsDetail detail = detailRepository.findById(val.getSku()).get();
+                if(detail.getConnectivity() != null) {
+                    val.setConnectivitys(new ArrayList<>());
+                    Arrays.asList(detail.getConnectivity().split(", ")).forEach(data -> {
+                        val.getConnectivitys().add(data);
+                    });
+                }
             });
             vos.add(vo);
         });
@@ -57,6 +65,29 @@ public class ProductServiceImpl implements ProductService {
                 vo.setProductsDetail(modelMapper.map(val, ProductsDetailVO.class));
                 vo.getProductsDetail().setIdProduct(products.getId());
                 reponseVOS.add(vo);
+            });
+        });
+        return reponseVOS;
+    }
+
+    @Override
+    public List<ProductsReponseVO> findAllSkuActive() {
+        List<ProductsReponseVO> reponseVOS = new ArrayList<>();
+        productsRepository.findByActive(1).forEach(products -> {
+            products.getProductsDetails().forEach(val -> {
+                if (val.getStatus() == 1) {
+                    ProductsReponseVO vo = modelMapper.map(products, ProductsReponseVO.class);
+                    vo.setProductsDetail(modelMapper.map(val, ProductsDetailVO.class));
+                    vo.getProductsDetail().setIdProduct(products.getId());
+                    if(val.getSaleProduct() != null) {
+                        Date day = Date.valueOf(date.now());
+                        if(val.getSaleProduct().getStatus() != 1 || val.getSaleProduct().getDateOff().compareTo(day) < 0) {
+
+                        }
+
+                    }
+                    reponseVOS.add(vo);
+                }
             });
         });
         return reponseVOS;
@@ -101,6 +132,22 @@ public class ProductServiceImpl implements ProductService {
                 val.setIdProduct(vo.getId());
             });
             vos.add(modelMapper.map(products, ProductsVO.class));
+        });
+        return vos;
+    }
+
+    @Override
+    public List<ProductsReponseVO> findByNameContainingAndTypeOfItemAndSku(String name, String type) {
+        List<ProductsReponseVO> vos = new ArrayList<>();
+        (type != "" ? productsRepository.findByNameContainingAndActiveAndTypeOfItem(name, 1, type) : productsRepository.findByNameContaining(name)).forEach(products -> {
+            products.getProductsDetails().forEach(val -> {
+                if (val.getStatus() == 1) {
+                    ProductsReponseVO vo = modelMapper.map(products, ProductsReponseVO.class);
+                    vo.setProductsDetail(modelMapper.map(val, ProductsDetailVO.class));
+                    vo.getProductsDetail().setIdProduct(vo.getId());
+                    vos.add(vo);
+                }
+            });
         });
         return vos;
     }
@@ -185,84 +232,7 @@ public class ProductServiceImpl implements ProductService {
         });*/
         return vos;
     }
-
-    @Override
-    public Page<ProductsVO> getListByPageNumber(int page, int limit, List<ProductsVO> lstProductsVO, String sortPrice) {
-        /*if (sortPrice.equals("asc")) {
-            Collections.sort(lstProductsVO, new Comparator<ProductsVO>() {
-                @Override
-                public int compare(ProductsVO p1, ProductsVO p2) {
-                    return p1.getOutputPrice().compareTo(p2.getOutputPrice());
-                }
-
-            });
-        }
-        if (sortPrice.equals("desc")) {
-            Collections.sort(lstProductsVO, new Comparator<ProductsVO>() {
-                @Override
-                public int compare(ProductsVO p1, ProductsVO p2) {
-//                    return p2.getOutputPrice().compareTo(p1.getOutputPrice());
-                }
-
-
-            });
-        }*/
-
-
-        Pageable pageable = PageRequest.of(page - 1, limit);
-        final int start = (int) pageable.getOffset();
-        final int end = Math.min((start + pageable.getPageSize()), lstProductsVO.size());
-        Page page1 = new PageImpl(lstProductsVO.subList(start, end), pageable, lstProductsVO.size());
-        return page1;
-    }
-
-
-    @Override
-    public List<ProductsVO> retrieveProducts(ProductSearchCriteria searchCriteria) {
-        List<ProductsVO> productsVOList = new ArrayList<>();
-
-        Specification<Products> productsFilterSpecification = ProductsSpecifications.createProductSpecification(searchCriteria);
-
-        this.productsRepository.findAll(productsFilterSpecification).forEach(products -> {
-            productsVOList.add(modelMapper.map(products, ProductsVO.class));
-        });
-
-        return productsVOList;
-    }
-
-    @Override
-    public Page<ProductsVO> findAllByNameLike(int page, int limit, String name, String type, String sort) {
-        System.err.println("name: " + name);
-
-        List<ProductsVO> lstProfuctsVOFindByName = convertToListDto(productsRepository.findAllByNameLike(name, type));
-        /*if (sort.equals("asc")) {
-            Collections.sort(lstProfuctsVOFindByName, new Comparator<ProductsVO>() {
-                @Override
-                public int compare(ProductsVO p1, ProductsVO p2) {
-                    return p1.getOutputPrice().compareTo(p2.getOutputPrice());
-                }
-
-            });
-        }
-        if (sort.equals("desc")) {
-            Collections.sort(lstProfuctsVOFindByName, new Comparator<ProductsVO>() {
-                @Override
-                public int compare(ProductsVO p1, ProductsVO p2) {
-                    return p2.getOutputPrice().compareTo(p1.getOutputPrice());
-                }
-
-
-            });
-        }*/
-        Pageable pageable = PageRequest.of(page - 1, limit);
-        final int start = (int) pageable.getOffset();
-        final int end = Math.min((start + pageable.getPageSize()), lstProfuctsVOFindByName.size());
-
-        Page pageProducts = new PageImpl<>(lstProfuctsVOFindByName.subList(start, end), pageable, lstProfuctsVOFindByName.size());
-
-        return pageProducts;
-    }
-
+/*
     @Override
     public List<ProductsVO> getListProductByCodeSale(String parentId) {
         return convertToListDto(productsRepository.getListProductByCodeSale(parentId));
@@ -309,5 +279,5 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductsVO> findAllByNameLikeHome(String name) {
         return convertToListDto(productsRepository.findAllByNameLikeHome(name));
-    }
+    }*/
 }

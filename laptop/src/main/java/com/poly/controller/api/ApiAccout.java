@@ -2,7 +2,6 @@ package com.poly.controller.api;
 
 import com.poly.config.JWTTokenProvider;
 import com.poly.entity.Account;
-import com.poly.entity.UserPrincipal;
 import com.poly.service.AccountService;
 import com.poly.service.impl.UserDetailsServiceImpl;
 import com.poly.vo.AccountVO;
