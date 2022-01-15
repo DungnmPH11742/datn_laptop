@@ -35,9 +35,10 @@ public class CartController {
     public String cartIndex(Model model, HttpServletRequest request){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         session = request.getSession();
-        List<CartItemDTO> list = new ArrayList<>();
-        CartDTO cartDTO = cartService.findCart();
-        session.setAttribute("myCart",cartDTO);
+        CartDTO cartDTO = new CartDTO();
+        if(session.getAttribute("myCart") != null){
+            session.setAttribute("myCart",cartService.findCart());
+        }
         headerHelper.setHeaderSession(model);
         return "user/cart";
     }
@@ -45,6 +46,7 @@ public class CartController {
     @ResponseBody
     @PutMapping(value = "/addToCart")
     public ResponseEntity<Map<String,Object>> addToCart(@RequestBody CartItemDTO cartItemDTO, HttpServletRequest request){
+        System.out.println("addToCart: " + cartItemDTO);
         Map<String,Object> map = cartService.addTocart(cartItemDTO);
         return ResponseEntity.ok(map);
     }
@@ -52,10 +54,8 @@ public class CartController {
     @ResponseBody
     @PostMapping(value = "/cart-delete-orderdetail")
     public ResponseEntity<Map<String,Object>> deletecart(@RequestBody CartItemDTO cartItemDTO){
-        System.out.println("Khong vào");
         Map<String,Object> map = detailService.deleteOrderDetail(cartItemDTO);
+        System.out.println(session.getAttribute("myCart"));
         return ResponseEntity.ok(map);
     }
-
-
 }

@@ -30,9 +30,11 @@ public class SuccesHanler implements AuthenticationSuccessHandler {
 
         Collection<? extends GrantedAuthority> author = authentication.getAuthorities();
         author.forEach(a -> {
-            cartService.addCartFromSession();
+
             if (a.getAuthority().equals("ROLE_USER")) {
                 try {
+                    cartService.addCartFromSession();
+                    cartService.transferFromOrderUpSession();
                     redirectStra.sendRedirect(request, response, "/home");
                 } catch (Exception e) {
                     // TODO: handle exception

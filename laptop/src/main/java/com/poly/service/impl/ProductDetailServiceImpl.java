@@ -55,6 +55,7 @@ public class ProductDetailServiceImpl implements ProductDetailService {
         ProductsDetailVO vo = modelMapper.map(detail, ProductsDetailVO.class);
         vo.setIdProduct(detail.getProduct().getId());
         if (!detail.getConnectivity().isEmpty()) {
+            vo.setConnectivitys(new ArrayList<>());
             Arrays.asList(detail.getConnectivity().split(", ")).forEach(val -> {
                 vo.getConnectivitys().add(val);
             });

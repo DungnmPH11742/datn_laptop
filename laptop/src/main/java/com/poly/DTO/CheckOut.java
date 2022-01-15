@@ -13,5 +13,7 @@ public class CheckOut {
 
     private String voucher;
 
+    private Integer idOrder;
+
     private String code;
 }

@@ -118,4 +118,9 @@ public class CategoryServiceImpl implements CategoryService {
         }
         return categoryVO;
     }
+
+    @Override
+    public List<CategoryVO> getAllByParentIdIsNull() {
+        return convertListCategoryDto(categoryRepository.getAllByParentIdIsNull());
+    }
 }

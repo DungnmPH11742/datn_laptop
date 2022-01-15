@@ -1,6 +1,5 @@
 package com.poly.repo;
 
-import com.poly.entity.Account;
 import com.poly.entity.Orders;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,7 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.query.Param;
 
-import javax.persistence.criteria.Order;
 import java.util.List;
 
 @EnableJpaRepositories
@@ -29,8 +27,8 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer>, JpaSpe
     Orders findByEmailAccount(String email);
 
     //    @Query("select o from Orders o where o.orderCode =:code")
-    @Query(value = "select * from dbo.[orders] o where o.order_code =?1", nativeQuery = true)
-    Orders findOrderByCodeOrder(String code);
+    @Query(value = "select * from orders o where o.order_code =?1", nativeQuery = true)
+    List<Orders> findOrderByCodeOrder(String code);
 
 
     @Query(value = "select o from Orders o where o.received =?1 and o.account.id =?2")

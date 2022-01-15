@@ -8,11 +8,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.util.List;
 
 @EnableJpaRepositories
 public interface SaleProductRepository extends JpaRepository<SaleProduct, String>, JpaSpecificationExecutor<SaleProduct> {
-    @Query("select s from SaleProduct s where s.status != -1")
+    @Query("SELECT s FROM SaleProduct s WHERE s.status = 1 and s.dateOff > ?1")
+    List<SaleProduct> findAllActive(Date date);
+
+    @Query("select s from SaleProduct s where s.status <> -1")
     List<SaleProduct> getAllSale();
 
     @Transactional

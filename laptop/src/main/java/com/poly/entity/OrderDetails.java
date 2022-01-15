@@ -1,11 +1,16 @@
 package com.poly.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Date;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "order_details")
 public class OrderDetails implements Serializable {
@@ -41,4 +46,5 @@ public class OrderDetails implements Serializable {
     @ManyToOne
     @JoinColumn(name="sku")
     private ProductsDetail productsDetail;
+
 }

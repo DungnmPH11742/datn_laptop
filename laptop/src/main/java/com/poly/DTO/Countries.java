@@ -12,10 +12,10 @@ public class Countries {
     private String nameCity;
 
     private Integer district;
+
     private String nameDistrict;
 
     private Integer ward;
+
     private String nameWard;
-
-
 }

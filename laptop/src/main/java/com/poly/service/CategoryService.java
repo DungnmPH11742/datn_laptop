@@ -27,4 +27,6 @@ public interface CategoryService {
     List<CategoryVO> findAllByParentId(String id);
 
     List<CategoryVO> findAllById(String id);
+
+    List<CategoryVO> getAllByParentIdIsNull();
 }

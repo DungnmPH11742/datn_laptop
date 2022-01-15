@@ -10,6 +10,7 @@ import com.poly.helper.HeaderHelper;
 import com.poly.helper.zalopay.HMACUtil;
 import com.poly.service.*;
 import com.poly.vo.*;
+import com.poly.vo.response.ProductsReponseVO;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -64,8 +65,12 @@ public class CheckOutController {
     private CheckoutService checkoutService;
     @Autowired
     private CartService cartService;
+    @Autowired
+    private ProductDetailService   productDetailService;
 
     private static String apptranid = "";
+
+    @Autowired private  HttpSession session;
 
     @RequestMapping(value = "/checkout")
     public String view(Model model, HttpServletRequest request) throws JsonProcessingException {
@@ -73,33 +78,42 @@ public class CheckOutController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         if (auth != null && !auth.getName().equals("anonymousUser")) {
+
             if (request.getParameter("error") != null) {
                 model.addAttribute("errorAddress", "Bạn chưa chọn địa chỉ");
+            }
+            if (request.getParameter("error-size") != null){
+                model.addAttribute("errorAddressSize",true);
             }
             String name = auth.getName();
 
             HttpSession httpSession = request.getSession();
-            CartDTO cartDTO = cartService.findCart();
-            if (httpSession.getAttribute("myCart") == null) {
-                httpSession.setAttribute("myCart", cartDTO);
-            }
-            model.addAttribute("address", new CheckOut());
-            String url = "https://provinces.open-api.vn/api/?depth=1";
-            List<HashMap<String, ?>> countries = this.countriesService.getListCountries(url);
-            model.addAttribute("countries", countries);
-            model.addAttribute("formAddress", new DeliveryAddressVO());
+            CartDTO cartDTO = new CartDTO();
+            if (httpSession.getAttribute("myCart") != null){
+                cartDTO = (CartDTO) httpSession.getAttribute("myCart");
+                if(cartDTO.getListCartItem().size() > 0){
+                    CheckOut checkOut = new CheckOut();
+                    checkOut.setPayment(1);
+                    List<CartItemDTO> cartItemDTOList = cartDTO.getListCartItem();
+                    model.addAttribute("address", checkOut);
+                    String url = "https://provinces.open-api.vn/api/?depth=1";
+                    List<HashMap<String, ?>> countries = this.countriesService.getListCountries(url);
+                    model.addAttribute("countries", countries);
+                    model.addAttribute("formAddress", new DeliveryAddressVO());
 
-            //Lấy list địa chỉ của user
-            AccountVO accountVO = this.accountService.findByEmailUser(name);
-            List<DeliveryAddressVO> addressVOList = this.addressService.getListAddressByUser(accountVO.getId());
-            DeliveryAddressVO voDe = null;
-            for (DeliveryAddressVO vo : addressVOList) {
-                if (vo.getSetAsDefault()) {
-                    voDe = vo;
+                    //Lấy list địa chỉ của user
+                    AccountVO accountVO = this.accountService.findByEmailUser(name);
+                    List<DeliveryAddressVO> addressVOList = this.addressService.getListAddressByUser(accountVO.getId());
+                    DeliveryAddressVO voDe = null;
+                    for (DeliveryAddressVO vo : addressVOList) {
+                        if (vo.getSetAsDefault()) {
+                            voDe = vo;
+                        }
+                    }
+                    model.addAttribute("addressDefault", voDe);
+                    model.addAttribute("listAddress", addressVOList);
                 }
             }
-            model.addAttribute("addressDefault", voDe);
-            model.addAttribute("listAddress", addressVOList);
             return "user/checkout";
         } else {
             return "redirect:/login";
@@ -128,32 +142,33 @@ public class CheckOutController {
                     OrdersVO ordersVO = this.checkoutService.addOrderVo(deliveryAddressVO, true, checkOut, cartDTO.getIdOrder(), this.checkoutService.getDateNowSql());
                     ordersVO.setOrderCode(checkOut.getCode());
                     ordersVO.setPaymentMethods(1);
+                    ordersVO.setTotalPrice(cartDTO.getTotalPrice());
                     OrdersVO voOrder = this.orderService.updateOrders(ordersVO);
                     //Lưu vào order detail
                     List<CartItemDTO> cartItemDTOList = cartDTO.getListCartItem();
-                    OrderDetailsVO orderDetailsVO = null;
-                    ProductsVO productsVO = null;
+                    ProductsReponseVO productsDetailVO = null;
                     for (CartItemDTO c : cartItemDTOList) {
-                        orderDetailsVO = new OrderDetailsVO();
-//                        productsVO = this.productService.getOne(c.getIdProduct());
+                        OrderDetailsVO orderDetailsVO = new OrderDetailsVO();
+                        productsDetailVO = this.productDetailService.findBySkuProduct(c.getSku());
                         /*productsVO.setQuantity(productsVO.getQuantity() - c.getQuantityProduct());
                         if (productsVO.getQuantity() == 0) {
                             productsVO.setActive(false);
                         }*/
 //                        this.productService.update(productsVO);
                         orderDetailsVO.setId(c.getIdOrderDetail());
-//                        orderDetailsVO.setProduct(productsVO);
+                        orderDetailsVO.setProductDtPrice(c.getPriceUnit());
                         orderDetailsVO.setIdOrder(ordersVO.getId());
                         orderDetailsVO.setQuantity(c.getQuantityProduct());
-//                        orderDetailsVO.setPrice(c.getTotalPriceCartItem());
+                        orderDetailsVO.setIntoMoney(c.getPriceSale());
                         orderDetailsVO.setStatus(0);
-                        this.orderDetailService.saveOderDetail(orderDetailsVO);
+                        this.orderDetailService.updateOrderDetail(orderDetailsVO);
                     }
                     checkoutService.sendEmailWhenSeccessOrder(accountVO,cartDTO,deliveryAddressVO,ordersVO.getDescription());
-                    model.addAttribute("totalPriceOrder", cartDTO.getTotalPriceCart());
+                    model.addAttribute("totalPriceOrder", cartDTO.getTotalPrice());
                     model.addAttribute("order", voOrder);
                     model.addAttribute("nameUser", deliveryAddressVO.getName());
                     model.addAttribute("message", "Thanh toán thành công");
+                    session.setAttribute("myCart", null);
                 }
             } else if (request.getParameter("code") != null) {
                 String code = request.getParameter("code");
@@ -162,7 +177,7 @@ public class CheckOutController {
                 Float priceTotaleCart = new Float(0);
                 if (detailsVO.isEmpty() || detailsVO != null) {
                     for (OrderDetailsVO deVo : detailsVO) {
-//                        priceTotaleCart += deVo.getPrice();
+                        priceTotaleCart += deVo.getIntoMoney()*deVo.getQuantity();
                     }
                 }
                 Integer nameInt = vo.getAddress().lastIndexOf('-');
@@ -171,6 +186,9 @@ public class CheckOutController {
                 model.addAttribute("nameUser", name.trim());
                 model.addAttribute("totalPriceOrder", priceTotaleCart);
                 model.addAttribute("message", "Thanh toán thành công");
+
+                // Khi thnah toán thành công tạo lại giỏ hàng
+                session.setAttribute("myCart", null);
             } else {
                 //Nếu return code = -217 thì do thẻ bị đánh cắp hoặc mất thẻ
                 //Nếu return code = -319 do settimeout
@@ -207,24 +225,22 @@ public class CheckOutController {
                     return "redirect:/error-page";
                 }
                 OrdersVO ordersVO = this.checkoutService.addOrderVo(deliveryAddressVO, false, checkOut, cartDTO.getIdOrder(), this.checkoutService.getDateNowSql());
+                System.out.println("CartDTO orderId : "+cartDTO.getIdOrder());
                 ordersVO.setPaymentMethods(0);
+                ordersVO.setTotalPrice(cartDTO.getTotalPrice());
                 this.orderService.updateOrders(ordersVO);
                 //Lưu vào order detail
                 OrderDetailsVO orderDetailsVO = null;
-                ProductsVO productsVO = null;
+                ProductsReponseVO productsDetailVO = null;
                 for (CartItemDTO c : cartItemDTOList) {
                     orderDetailsVO = new OrderDetailsVO();
-//                    productsVO = this.productService.getProductById(c.getIdProduct());
-                    /*productsVO.setQuantity(productsVO.getQuantity() - c.getQuantityProduct());
-                    if (productsVO.getQuantity() == 0) {
-                        productsVO.setActive(false);
-                    }*/
-//                    this.productService.update(productsVO);
+                    productsDetailVO = this.productDetailService.findBySkuProduct(c.getSku());
+
                     orderDetailsVO.setId(c.getIdOrderDetail());
-//                    orderDetailsVO.setProduct(productsVO);
+                    orderDetailsVO.setProductDtPrice(c.getPriceUnit());
                     orderDetailsVO.setIdOrder(ordersVO.getId());
                     orderDetailsVO.setQuantity(c.getQuantityProduct());
-//                    orderDetailsVO.setPrice(c.getTotalPriceCartItem());
+                    orderDetailsVO.setIntoMoney(c.getPriceSale());
                     orderDetailsVO.setStatus(0);
                     this.orderDetailService.updateOrderDetail(orderDetailsVO);
                 }
@@ -273,6 +289,9 @@ public class CheckOutController {
         if (auth != null && !auth.getName().equals("anonymousUser")) {
             String name = auth.getName();
             AccountVO accountVO = this.accountService.findByEmailUser(name);
+            if (addressService.getListAddressByUser(accountVO.getId()).size() >= 4){
+                return "redirect:/checkout?error-size="+true;
+            }
             if (accountVO != null) {
                 addressVO.setIdAccount(accountVO.getId());
                 if (addressVO.getId() == null) {
@@ -292,9 +311,9 @@ public class CheckOutController {
         CartDTO cartDTO = this.checkoutService.getListCartFromSession(request);
         List<CartItemDTO> cartItemSession = cartDTO.getListCartItem();
         VouchersVO vouchersVO = null;
-        for (CartItemDTO vo : cartItemSession) {
-//            vouchersVO = this.vouchersService.getVoucherTrue(voucher, vo.getIdProduct());
-        }
+        /*for (CartItemDTO vo : cartItemSession) {
+            vouchersVO = this.vouchersService.getVoucherTrue(voucher, vo.getIdProduct());
+        }*/
         if (vouchersVO != null) {
             System.out.println(vouchersVO.getIdProduct());
             System.out.println(vouchersVO.getId());

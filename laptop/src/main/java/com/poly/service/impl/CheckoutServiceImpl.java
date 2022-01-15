@@ -10,6 +10,7 @@ import com.poly.vo.OrdersVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.mail.*;
@@ -44,21 +45,22 @@ public class CheckoutServiceImpl implements CheckoutService {
     @Value("${config.mail.password}")
     private String password;
 
-    @Autowired private ThymeleafService thymeleafService;
+    @Autowired
+    private ThymeleafService thymeleafService;
 
     @Override
-    public OrdersVO addOrderVo(DeliveryAddressVO deliveryAddressVO, Boolean paymentStatus, CheckOut checkOut, Integer idOrder, Date date) {
+    public OrdersVO addOrderVo(DeliveryAddressVO deliveryAddressVO, Boolean paymentStatus, CheckOut checkOut, Integer idOrder, Date date) throws Exception {
         OrdersVO ordersVO = new OrdersVO();
         ordersVO.setOrderDate(date);
-        String addressOder = deliveryAddressVO.getName()+" - "+deliveryAddressVO.getAddress();
+        String addressOder = deliveryAddressVO.getName() + " - " + deliveryAddressVO.getAddress();
         ordersVO.setAddress(addressOder);
         ordersVO.setId(idOrder);
         // check trùng code order
         String codeOrder = getRandomCodeOrder();
-        OrdersVO voOrder = this.orderService.getByOrderCode(codeOrder);
+        /*OrdersVO voOrder = this.orderService.getByOrderCode(codeOrder);
         if (voOrder != null){
             codeOrder = getRandomCodeOrder();
-        }
+        }*/
         ordersVO.setOrderCode(codeOrder);
         ordersVO.setDescription(checkOut.getDescription());
         ordersVO.setPaymentStatus(paymentStatus);
@@ -66,12 +68,13 @@ public class CheckoutServiceImpl implements CheckoutService {
         ordersVO.setReceived(0);
         return ordersVO;
     }
+
     /**
-     * @throws ParseException
      * @return Date now of sql
+     * @throws ParseException
      */
     @Override
-     public Date getDateNowSql() throws ParseException {
+    public Date getDateNowSql() throws ParseException {
         java.util.Date dateNow = new java.util.Date();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dateNow);
@@ -80,10 +83,10 @@ public class CheckoutServiceImpl implements CheckoutService {
     }
 
     @Override
-    public String getRandomCodeOrder(){
+    public String getRandomCodeOrder() {
         SecureRandom secureRandom = new SecureRandom();
         Integer randomWithSecureRandomWithinARange = secureRandom.nextInt(99999999 - 1) + 1;
-        String num =  "011"+randomWithSecureRandomWithinARange.toString();
+        String num = "011" + randomWithSecureRandomWithinARange.toString();
         return num;
     }
 
@@ -92,17 +95,18 @@ public class CheckoutServiceImpl implements CheckoutService {
         try {
             HttpSession httpSession = request.getSession();
             CartDTO cartDTO = null;
-            if (httpSession.getAttribute("myCart") != null){
+            if (httpSession.getAttribute("myCart") != null) {
                 cartDTO = (CartDTO) httpSession.getAttribute("myCart");
             }
             return cartDTO;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public void  sendEmailWhenSeccessOrder(AccountVO accountVO, CartDTO cartDTO, DeliveryAddressVO deliveryAddressVO, String description) throws MessagingException, UnsupportedEncodingException {
+    @Async
+    public void sendEmailWhenSeccessOrder(AccountVO accountVO, CartDTO cartDTO, DeliveryAddressVO deliveryAddressVO, String description) throws MessagingException, UnsupportedEncodingException {
         Properties props = new Properties();
         props.put("mail.smtp.host", host);
         props.put("mail.smtp.starttls.enable", "true");
@@ -121,7 +125,7 @@ public class CheckoutServiceImpl implements CheckoutService {
             message.setRecipients(Message.RecipientType.TO, new InternetAddress[]{new InternetAddress(accountVO.getEmail())});
             message.setFrom(new InternetAddress(accountVO.getEmail()));
             message.setSubject("Đơn hàng của bạn");
-            message.setContent(thymeleafService.getContent(accountVO,cartDTO,deliveryAddressVO,description), CONTENT_TYPE_TEXT_HTML);
+            message.setContent(thymeleafService.getContent(accountVO, cartDTO, deliveryAddressVO, description), CONTENT_TYPE_TEXT_HTML);
             Transport.send(message);
         } catch (MessagingException e) {
             e.printStackTrace();

@@ -34,6 +34,8 @@ public class OrdersVO implements Serializable {
 
     private Integer received;
 
+    private Float totalPrice;
+
     private List<OrderDetailsVO> orderDetails;
     
     private Float priceOrder;

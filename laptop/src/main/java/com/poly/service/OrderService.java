@@ -15,7 +15,7 @@ public interface OrderService {
 
     OrdersVO saveOrders(OrdersVO orders);
 
-    OrdersVO getByOrderCode(String code);
+    OrdersVO getByOrderCode(String code) throws Exception;
 
     OrdersVO updateOrders(OrdersVO orders);
 

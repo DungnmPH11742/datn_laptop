@@ -33,19 +33,11 @@
 <main class="container">
 	<section id="clearfix" >
 		<div class="cart_items" >
-			<div>
-				<ul class="breadcrumb pb-8 flex items-center space-x-2">
-					<li class="breadcrumb-item home">
-						<a href="#" class="nuxt-link-active" itemprop="item">Trang chủ</a>
-					</li>
-					<li class="breadcrumb-item font-semibold text-sm active">
-						<a href="#" aria-current="page"
-						   class="text-black flex items-center nuxt-link-exact-active nuxt-link-active"
-						   itemprop="item">
-							Giỏ hàng
-						</a>
-					</li>
-				</ul>
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+					<li><a href="#">Home</a></li>
+					<li class="active">Giỏ hàng</li>
+				</ol>
 			</div>
 			<!--Title page-->
 			<h1>Giỏ Hàng</h1>
@@ -57,7 +49,7 @@
 				<div class="col-sm-9" >
 					<!--Header form cart-->
 					<div class="header-form-left">
-						<div class="cart-col-product"><span>Tất cả ([[${session.myCart.getListCartItem.size() > 0?session.myCart.getListCartItem.size():0}]] sản phẩm)</span></div>
+						<div class="cart-col-product"><span>Tất cả (<span th:id="numberItemInCart">[[${session.myCart.getListCartItem.size() > 0?session.myCart.getListCartItem.size():0}]]</span> sản phẩm)</span></div>
 						<div class="cart-col-price">Đơn giá</div>
 						<div class="cart-col-quantity">Số lượng</div>
 						<div class="cart-col-total-price">Thành tiền</div>
@@ -91,7 +83,8 @@
 
 							<div class="cart-col-price">
 								<div class="price-unit" th:id="ps + ${item.sku}">[[${#numbers.formatDecimal(item.priceSale, 1, 'DEFAULT', 0, 'DEFAULT')}]]đ</div>
-								<s class="price-sale">[[${#numbers.formatDecimal(item.priceUnit, 1, 'DEFAULT', 0, 'DEFAULT')}]]đ</s>
+
+								<s class="price-sale" th:if="${item.priceSale != item.priceUnit}">[[${#numbers.formatDecimal(item.priceUnit, 1, 'DEFAULT', 0, 'DEFAULT')}]]đ</s>
 							</div>
 
 							<!--quantity-->
@@ -106,7 +99,7 @@
 									</button>
 									<input class="_2KdYzP iRO3yj abc" type="number" th:id="${item.sku}" th:value="${item.quantityProduct}" min="1" th:max="${item.quantity}">
 									<!--Tăng số lượng-->
-									<button class="_2KdYzP" th:attr="onclick=|plusQty('${item.sku}','${item.quantity}')|" >
+									<button class="_2KdYzP" th:attr="onclick=|plusQty('${item.sku}',${item.quantity})|" >
 										<svg enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0"
 											 class="shopee-svg-icon icon-plus-sign">
 											<polygon	points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5"></polygon>
@@ -122,9 +115,16 @@
 							</div>
 
 							<!--Delete item-->
-							<div>
-								<button th:attr="onclick=|deleteO('${item.sku}','${item.idOrderDetail}')|">Xóa</button>
+							<!--							<div>-->
+							<div class="cart-col-delete" th:attr="onclick=|deleteO('${item.sku}','${item.idOrderDetail}')|">
+								<a href="#" class="delete-all-item">
+									<i class="far fa-trash-alt"></i>
+									<span class="canh-bao">Xóa sản phẩm</span>
+								</a>
+
 							</div>
+							<!--								<button th:attr="onclick=|deleteO('${item.sku}','${item.idOrderDetail}')|">Xóa</button>-->
+							<!--							</div>-->
 						</div>
 
 						<!-- End Product-->
@@ -138,7 +138,7 @@
 						<!--						</div>-->
 						<div class="checkout-price-total">
 							<div class="checkout-title-price-total">Thành tiền:</div>
-							<div class="checkout-value-price-total" id="sumprice">[[${#numbers.formatDecimal(session.myCart.totalPrice, 1, 'DEFAULT', 0, 'DEFAULT')}]]đ</div>
+							<div class="checkout-value-price-total" id="totalpriceCart">[[${#numbers.formatDecimal(session.myCart.totalPrice, 1, 'DEFAULT', 0, 'DEFAULT')}]]đ</div>
 						</div>
 						<div class="checkout-btn">
 							<a th:href="@{/checkout}" class="checkout-btn-a">Tiến hành thanh toán</a>
@@ -173,8 +173,7 @@
 		let qty = $('#'+sku).val();
 		if(qty< quanti){
 			qty = parseInt(qty);
-			qty++;
-			$('#'+sku).val(qty);
+
 			// Ajax
 			let  data = {
 				'sku':sku,
@@ -187,24 +186,32 @@
 				data: JSON.stringify(data),
 				dataType: "JSON",
 				success: function (data) {
-					console.log(`${data.message}`);
+					if(`${data.message}`== 'maxPrice'){
+						alert('Số tiền không được vượt quá 150.000.000đ');
+					}else {
+						// Tăng số lượng
+						qty++;
+						$('#'+sku).val(qty);
+						console.log(`${data.message}`);
 
-					let sumprice = `
-						${data.sumPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ
+						let totalpriceCart = `
+						${data.totalpriceCart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ
 					`;
-					let totalPrice = `
-						${data.totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ
+						let totalPriceProduct_dt = `
+						${data.totalPriceProduct_dt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ
 					`;
 
-					$('#hienThiSoLuong').html('');
-					$('#hienThiSoLuong').append(`${data.totalItem}`);
-					//
-					$('#tt' + sku).html('');
-					$('#tt' + sku).append(totalPrice);
+						$('#hienThiSoLuong').html('');
+						$('#hienThiSoLuong').append(`${data.totalItem}`);
+						//
+						$('#tt' + sku).html('');
+						$('#tt' + sku).append(totalPriceProduct_dt);
 
-					$('#sumprice').html('');
-					$('#sumprice').append(sumprice);
-					alert(`${data.message}`);
+						$('#totalpriceCart').html('');
+						$('#totalpriceCart').append(totalpriceCart);
+						// alert(`${data.message}`);
+					}
+
 				},error: function () {
 					alert(`${data.message}`);
 				}
@@ -235,22 +242,22 @@
 				success: function (data) {
 					console.log(`${data.message}`);
 
-					let sumprice = `
-						${data.sumPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ
+					let totalpriceCart = `
+						${data.totalpriceCart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ
 					`;
-					let totalPrice = `
-						${data.totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ
+					let totalPriceProduct_dt = `
+						${data.totalPriceProduct_dt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ
 					`;
 
 					$('#hienThiSoLuong').html('');
 					$('#hienThiSoLuong').append(`${data.totalItem}`);
 					//
 					$('#tt' + sku).html('');
-					$('#tt' + sku).append(totalPrice);
+					$('#tt' + sku).append(totalPriceProduct_dt);
 
-					$('#sumprice').html('');
-					$('#sumprice').append(sumprice);
-					alert(`${data.message}`);
+					$('#totalpriceCart').html('');
+					$('#totalpriceCart').append(totalpriceCart);
+					// alert(`${data.message}`);
 				},error: function () {
 					alert(`${data.message}`);
 				}
@@ -261,30 +268,48 @@
 	}
 
 	function deleteO(sku, iddetail) {
-		$("#pro" + sku).remove();
 
-		let  data = {
-			'sku':sku,
-			'idOrderDetail': iddetail,
-		};
-		$.ajax({
-			type: "POST",
-			url:"/cart-delete-orderdetail",
-			contentType: "application/json",
-			data: JSON.stringify(data),
-			dataType: "JSON",
-			success: function (data) {
-				let sumprice = `
-						${data.sumPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ
-					`;
-				//
-				$('#sumprice').html('');
-				$('#sumprice').append(sumprice);
+		if (confirm('Bạn có chắc chắn muốn xóa ??')) {
+			$("#pro" + sku).remove();
 
-			},error: function () {
-				alert("Không xóa được");
-			}
-		});
+			let  data = {
+				'sku':sku,
+				'idOrderDetail': iddetail,
+			};
+			$.ajax({
+				type: "POST",
+				url:"/cart-delete-orderdetail",
+				contentType: "application/json",
+				data: JSON.stringify(data),
+				dataType: "JSON",
+				success: function (data) {
+					let totalpriceCart = `
+							${data.totalpriceCart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ
+						`;
+					//
+					$('#totalpriceCart').html('');
+					$('#totalpriceCart').append(totalpriceCart);
+
+					$('#hienThiSoLuong').html('');
+					$('#hienThiSoLuong').append(`${data.totalItem != null?data.totalItem : 0}`);
+
+					$('#numberItemInCart').html('');
+					$('#numberItemInCart').append(`${data.totalItem != null?data.totalItem : 0}`);
+
+				},error: function () {
+					alert("Không xóa được");
+				}
+			});
+			$("#notification-compare").append(`<div class="alert alert-success alert-dismissible">
+                                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                            <strong>Thành công!</strong>
+                                                            <p>Đã xóa giỏ hàng thành công</p>
+                                                       </div>`);
+		}else
+		{
+			console.log('cancel')
+		}
+
 
 	}
 

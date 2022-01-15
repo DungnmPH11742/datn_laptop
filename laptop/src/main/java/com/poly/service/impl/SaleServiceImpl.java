@@ -9,6 +9,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +23,14 @@ public class SaleServiceImpl implements SaleService {
     @Autowired
     private ModelMapper modelMapper;
 
+    private LocalDate date;
+
     @Override
     public List<SaleProductVO> findAll() {
         List<SaleProductVO> vos = new ArrayList<>();
-/*        saleProductRepository.findAll().forEach(saleProduct -> {
+        saleProductRepository.findAllActive(Date.valueOf(date.now())).forEach(saleProduct -> {
             vos.add(modelMapper.map(saleProduct, SaleProductVO.class));
-        });*/
+        });
         return vos;
     }
 

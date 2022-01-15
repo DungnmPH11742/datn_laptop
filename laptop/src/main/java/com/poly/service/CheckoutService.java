@@ -12,7 +12,7 @@ import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 
 public interface CheckoutService {
-    OrdersVO addOrderVo(DeliveryAddressVO deliveryAddressVO, Boolean paymentStatus, CheckOut checkOut, Integer idOrder, java.sql.Date date);
+    OrdersVO addOrderVo(DeliveryAddressVO deliveryAddressVO, Boolean paymentStatus, CheckOut checkOut, Integer idOrder, java.sql.Date date) throws Exception;
 
     java.sql.Date getDateNowSql() throws ParseException;
 
@@ -20,5 +20,5 @@ public interface CheckoutService {
 
     CartDTO getListCartFromSession(HttpServletRequest request);
 
-    void  sendEmailWhenSeccessOrder(AccountVO accountVO, CartDTO cartDTO, DeliveryAddressVO deliveryAddressVO, String description) throws MessagingException, UnsupportedEncodingException;
+    void sendEmailWhenSeccessOrder(AccountVO accountVO, CartDTO cartDTO, DeliveryAddressVO deliveryAddressVO, String description) throws MessagingException, UnsupportedEncodingException;
 }

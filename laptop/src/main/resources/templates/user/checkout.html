@@ -6,14 +6,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<title>Thanh toán | King Of Computer</title>
+	<title>Checkout | E-Shopper</title>
 	<link th:href="@{/user-st/css/bootstrap.min.css}" rel="stylesheet">
 	<link th:href="@{/user-st/css/prettyPhoto.css}" rel="stylesheet">
 	<link th:href="@{/user-st/css/price-range.css}" rel="stylesheet">
 	<link th:href="@{/user-st/css/animate.css}" rel="stylesheet">
 	<link th:href="@{/user-st/css/form-check-out.css}" rel="stylesheet">
 	<link th:href="@{/user-st/css/responsive.css}" rel="stylesheet">
-	<link th:href="@{/user-st/css/main.css}" rel="stylesheet">
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
 		  integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
@@ -29,312 +28,304 @@
 <div th:replace="~{common/header :: headers}"></div>
 <!--/header-->
 
-<section id="cart_items">
-	<div class="container">
-		<div class="breadcrumbs">
-			<ol class="breadcrumb">
-				<li><a href="#">Home</a></li>
-				<li class="active">Check out</li>
-			</ol>
+<div th:if="${session.myCart != null && session.myCart.listCartItem.size() > 0}">
+	<section id="cart_items">
+		<div class="alert-size show showAlert" th:if="${errorAddressSize != null}">
+			<span class="fas fa-exclamation-circle"></span>
+			<span class="msg">Thông báo: Mỗi tài khoản chỉ tối đa 4 địa chỉ</span>
+			<div class="close-btn">
+				<span class="fas fa-times"></span>
+			</div>
 		</div>
-		<h4>Đặt Hàng</h4>
-		<div th:if="${session.myCart == null}" class="not-cart">
-			<span>Bạn chưa có sản phẩm nào trong giỏ hàng vui lòng <a th:href="@{/home}">mua</a> sản phẩm !!</span>
-		</div>
-		<div class="alert" th:if="${errorAddress != null}">
-			<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-			<strong>Lỗi!</strong> [[${errorAddress}]].
-		</div>
-		<form th:unless="${session.myCart == null}" id="form-checkout-submit"  th:action="@{/checkout}" th:object="${address}" method="post">
-			<div class="form-checkout">
-				<!--List Address-->
-				<div class="info-checkout">
-					<div class="form-default-checkout">
-						<div class="title-list-address">
-							Địa chỉ nhận hàng
-						</div>
-						<input type="hidden"id="id-address-select" name="idAddress" th:if="${addressDefault != null}" th:value="${addressDefault.getId()}" >
-						<input type="hidden"id="id-address-select" name="idAddress" th:if="${addressDefault == null}" value="" >
-						<div class="list-address" >
-							<th:block th:each="item:${listAddress}">
-								<div th:if="${item.getSetAsDefault().booleanValue()}" class="item-add active default">
-									<div class="radio-box">
-										<div class="custom-radio-1-box" >
-											<div class="custom-radio-1"></div>
+		<div class="container">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+					<li><a href="#">Home</a></li>
+					<li class="active">Check out</li>
+				</ol>
+			</div>
+			<h4>Đặt Hàng</h4>
+			<div th:if="${session.myCart == null || session.myCart.listCartItem.size() == 0}" class="not-cart">
+				<span>Bạn chưa có sản phẩm nào trong giỏ hàng vui lòng <a th:href="@{/home}">mua</a> sản phẩm !!</span>
+			</div>
+			<div class="alert" th:if="${errorAddress != null}">
+				<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+				<strong>Lỗi!</strong> [[${errorAddress}]].
+			</div>
+			<form th:if="${session.myCart != null && session.myCart.listCartItem.size() > 0}" id="form-checkout-submit"  th:action="@{/checkout}" th:object="${address}" method="post">
+				<div class="form-checkout">
+					<!--List Address-->
+					<div class="info-checkout">
+						<div class="form-default-checkout">
+							<div class="title-list-address">
+								Địa chỉ nhận hàng
+							</div>
+							<input type="hidden" id="id-address-select" name="idAddress" th:if="${addressDefault != null}" th:value="${addressDefault.getId()}" >
+							<input type="hidden" id="id-address-select" name="idAddress" th:if="${addressDefault == null}" value="" >
+							<div class="list-address" >
+								<th:block th:each="item:${listAddress}">
+									<div th:if="${item.getSetAsDefault().booleanValue()}" class="item-add active default">
+										<div class="radio-box">
+											<div class="custom-radio-1-box" >
+												<div class="custom-radio-1"></div>
+											</div>
+										</div>
+										<div class="name">
+											<span class="name-user" th:text="${item.getName()}"></span>
+											<div class="name-note">Mặc định</div>
+										</div>
+										<p>Địa chỉ: [[${item.getAddress()}]]</p>
+										<p>Điện thoại: [[${item.getPhone()}]]</p>
+										<div class="list-active">
+											<a href="javascript:;" class="select-address" th:attr="data-id-address=${item.getId()}">Giao đến địa chỉ này</a>
+											<a href="javascript:;" th:attr="data-id=${item.getId()}" class="edit-address">Sửa</a>
 										</div>
 									</div>
-									<div class="name">
-										<span class="name-user" th:text="${item.getName()}"></span>
-										<div class="name-note">Mặc định</div>
-									</div>
-									<p>Địa chỉ: [[${item.getAddress()}]]</p>
-									<p>Điện thoại: [[${item.getPhone()}]]</p>
-									<div class="list-active">
-										<a href="javascript:;" class="select-address" th:attr="data-id-address=${item.getId()}">Giao đến địa chỉ này</a>
-										<a href="javascript:;" th:attr="data-id=${item.getId()}" class="edit-address">Sửa</a>
-									</div>
-								</div>
-								<div th:if="${!item.getSetAsDefault().booleanValue()}" th:attr="data-address=${item.getId()}" class="item-add">
-									<div class="radio-box">
-										<div class="custom-radio-1-box" >
-											<div class="custom-radio-1"></div>
+									<div th:if="${!item.getSetAsDefault().booleanValue()}" th:attr="data-address=${item.getId()}" class="item-add">
+										<div class="radio-box">
+											<div class="custom-radio-1-box" >
+												<div class="custom-radio-1"></div>
+											</div>
+										</div>
+										<div class="name">
+											<span class="name-user" th:text="${item.getName()}"></span>
+											<div class="name-note">Mặc định</div>
+										</div>
+										<p>Địa chỉ: [[${item.getAddress()}]]</p>
+										<p>Điện thoại: [[${item.getPhone()}]]</p>
+										<div class="list-active">
+											<a href="javascript:;" class="select-address" th:attr="data-id-address=${item.getId()}">Giao đến địa chỉ này</a>
+											<a href="javascript:;" th:attr="data-id=${item.getId()}" class="edit-address">Sửa</a>
+											<a href="javascript:;" th:attr="data-delete=${item.getId()}" class="delete-address">Xóa</a>
 										</div>
 									</div>
-									<div class="name">
-										<span class="name-user" th:text="${item.getName()}"></span>
-										<div class="name-note">Mặc định</div>
-									</div>
-									<p>Địa chỉ: [[${item.getAddress()}]]</p>
-									<p>Điện thoại: [[${item.getPhone()}]]</p>
-									<div class="list-active">
-										<a href="javascript:;" class="select-address" th:attr="data-id-address=${item.getId()}">Giao đến địa chỉ này</a>
-										<a href="javascript:;" th:attr="data-id=${item.getId()}" class="edit-address">Sửa</a>
-										<a href="javascript:;" th:attr="data-delete=${item.getId()}" class="delete-address">Xóa</a>
-									</div>
-								</div>
-							</th:block>
-						</div>
-						<input type="hidden" id="size-address" th:value="${listAddress.size()}">
-						<div class="add-new-address-event" th:if="${listAddress.size()<4}">
-							Bạn muốn giao hàng đến địa chỉ khác?<a href="javascript:;" id="action-add-new"> Thêm mới địa
-							chỉ</a>
-						</div>
-						<div class="add-new-address-event remove" th:if="${listAddress.size()>=4}">
-							Bạn muốn giao hàng đến địa chỉ khác?<a href="javascript:;" id="action-add-new"> Thêm mới địa
-							chỉ</a>
-						</div>
+								</th:block>
+							</div>
+							<input type="hidden" id="size-address" th:value="${listAddress.size()}">
+							<div class="add-new-address-event" th:if="${listAddress.size()<4}">
+								Bạn muốn giao hàng đến địa chỉ khác?<a href="javascript:;" id="action-add-new"> Thêm mới địa
+								chỉ</a>
+							</div>
 
-						<div class="delivery-date-time-section" id="description_order">
-							<div class="input-wrapper-description">
-								<span class="input-wrapper__label">Để lại lời nhắn</span>
-								<textarea th:field="*{description}" name="description" aria-label="delivery note" rows="3" style="width: 100%;"></textarea>
-							</div>
-						</div>
-						<!--Payment-->
-						<div class="payment-status">
-							<div class="title-form-payment">
-								<strong>Hình thức thanh toán</strong>
-							</div>
-							<div class="form-payment row">
-								<div class="col-sm-6 form-group">
-									<div class="radio-payment">
-										<input th:field="*{payment}" value="1" type="radio" class="check-radio " id="radio-checked" name="payment">
-										<span class="radiobtn"></span>
-									</div>
-									<div class="name-form-payment">
-										Thanh toán tiền mặt khi nhận hàng (tiền mặt)
-									</div>
-								</div>
-								<div class="col-sm-6 form-group">
-									<div class="radio-payment">
-										<input th:field="*{payment}" value="2" type="radio" class="check-radio" name="payment" >
-										<span class="radiobtn"></span>
-									</div>
-									<div class="name-form-payment">
-										Thanh toán qua Zalo Pay
-									</div>
+							<div class="delivery-date-time-section" id="description_order">
+								<div class="input-wrapper-description">
+									<span class="input-wrapper__label">Để lại lời nhắn</span>
+									<textarea th:field="*{description}" name="description" aria-label="delivery note" rows="3" style="width: 100%;"></textarea>
 								</div>
 							</div>
+							<!--Payment-->
+							<div class="payment-status">
+								<div class="title-form-payment">
+									<strong>Hình thức thanh toán</strong>
+								</div>
+								<div class="form-payment row">
+									<div class="col-sm-6 form-group">
+										<div class="radio-payment">
+											<input th:field="*{payment}" value="1" type="radio" class="check-radio"  id="radio-checked" >
+											<span class="radiobtn"></span>
+										</div>
+										<div class="name-form-payment">
+											Thanh toán tiền mặt khi nhận hàng (tiền mặt)
+										</div>
+									</div>
+									<div class="col-sm-6 form-group">
+										<div class="radio-payment">
+											<input th:field="*{payment}" value="2" type="radio" class="check-radio">
+											<span class="radiobtn"></span>
+										</div>
+										<div class="name-form-payment">
+											Thanh toán qua Zalo Pay
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--End payment-->
 						</div>
-						<!--End payment-->
 					</div>
-				</div>
-				<!--Info Product-->
-				<div class="info-product-order">
-					<div class="checkout-sidebar">
-						<div class="quantity-order">
-							<div >Đơn hàng ([[${session.myCart.getListCartItem().size()}]] sp)</div>
-							<a th:href="@{/user/cart}" class="redirect-cart">
-								<strong>Về giỏ hàng</strong>
-								<i class="fas fa-chevron-right"></i>
-							</a>
-						</div>
-						<div th:each="item:${session.myCart.getListCartItem()}" th:object="${item}">
-							<div class="product-order">
-								<a href="#">
-									<div class="title-product-order">
-										<div class="img-product-order">
-											<img width="100%" th:src="${item.getImgUrl()}" alt="">
-										</div>
-										<div class="info-title-product-order">
-											[[${item.getNameProduct()}]]
-											<p>x[[${item.getQuantityProduct()}]]</p>
-										</div>
-									</div>
+					<!--Info Product-->
+					<div class="info-product-order">
+						<div class="checkout-sidebar">
+							<div class="quantity-order">
+								<div >Đơn hàng ([[${session.myCart.getListCartItem().size()}]] sp)</div>
+								<a th:href="@{/cart}" class="redirect-cart">
+									<strong>Về giỏ hàng</strong>
+									<i class="fas fa-chevron-right"></i>
 								</a>
-								<!--th:text="${item.getPriceUnit()}"-->
-								<div  class="price-product-order">
-									[[${#numbers.formatDecimal(item.getPriceSale(), 1, 'DEFAULT', 0, 'DEFAULT')}]] đ
-									<s th:if="${item.getPriceUnit() != null}">
-										[[${#numbers.formatDecimal(item.getPriceUnit(), 1, 'DEFAULT', 0, 'DEFAULT')}]] đ
-									</s>
+							</div>
+							<div th:each="item:${session.myCart.getListCartItem()}" th:object="${item}">
+								<div class="product-order">
+									<a href="#">
+										<div class="title-product-order">
+											<div class="img-product-order">
+												<img width="100%" th:src="${item.getImgUrl()}" alt="">
+											</div>
+											<div class="info-title-product-order">
+												[[${item.getNameProduct()}]]
+												<p>x[[${item.getQuantityProduct()}]]</p>
+											</div>
+										</div>
+									</a>
+									<div  class="price-product-order" >
+										[[${#numbers.formatDecimal(item.getPriceSale() * item.getQuantityProduct(), 1, 'DEFAULT', 0, 'DEFAULT')}]] đ
+										<s class="price-sale" th:if="${item.priceSale != item.priceUnit}">[[${#numbers.formatDecimal(item.priceUnit * item.getQuantityProduct(), 1, 'DEFAULT', 0, 'DEFAULT')}]]đ</s>
+									</div>
+								</div>
+							</div>
+
+							<div class="info-fee-transport-order info">
+								<div class="title-fee-transport-order title">
+									Phí vận chuyển
+								</div>
+								<div class="fee-transport-order">
+									0 đ
+								</div>
+							</div>
+							<div class="info-voucher-order">
+								<div class="title-voucher-order title">
+									Mã giảm giá
+								</div>
+								<div class="form-voucher-order info">
+									<div class="input-voucher-order">
+										<input type="text" name="voucher" class="voucher" id="voucher" placeholder="Nhập vào nếu có">
+									</div>
+									<div class="voucher-order">
+										<button type="button" class="btn btn-voucher">Áp dụng</button>
+									</div>
+								</div>
+							</div>
+
+							<div class="info-price-sale-order info">
+								<div class="title-price-sale-order title">
+									Giảm giá
+								</div>
+								<div class="price-sale-order">
+									<p>-0 đ</p>
+								</div>
+							</div>
+
+							<div class="info-price-total-order info">
+								<div class="title-price-total-order title">
+									Tổng tiền
+								</div>
+								<div class="price-total-order"
+									 th:text="${#numbers.formatDecimal(session.myCart.getTotalPrice(), 1, 'DEFAULT', 0, 'DEFAULT')} + 'đ'">
 								</div>
 							</div>
 						</div>
-
-						<div class="info-total-price-order info">
-							<div class="title-total-price-order title">
-								Tạm tính
-							</div>
-							<div class="total-price-order" th:text="${#numbers.formatDecimal(session.myCart.getTotalPriceUnit(), 1, 'DEFAULT', 0, 'DEFAULT')}+' đ'">
-
-							</div>
+					</div>
+					<div class="btn-checkout-order">
+						<button type="submit" class="btn btn-checkout">Đặt Hàng</button>
+						<a th:href="@{/home}" type="button" class="btn btn-continue">Tiếp tục mua hàng</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</section>
+	<div class="form-add-address hide" id="add-address">
+		<div class="form-add-container">
+			<form th:action="@{/add-address}" id="form-address-checkout" th:object="${formAddress}" method="post">
+				<div class="header-form">
+					<div class="title-header-form">Thêm mới địa chỉ</div>
+				</div>
+				<div class="body-form">
+					<input id="id-address" th:field="*{id}" type="hidden" >
+					<div class="form-group">
+						<div class="input-wrapper">
+							<span class="input-wrapper-lable mini">Họ và Tên</span>
+							<input th:field="*{name}" type="text" class="form-control lable-mini"  id="full_name">
 						</div>
+					</div>
 
-						<div class="info-fee-transport-order info">
-							<div class="title-fee-transport-order title">
-								Phí vận chuyển
-							</div>
-							<div class="fee-transport-order">
-								0 đ
-							</div>
+					<div class="form-group">
+						<div class="input-wrapper">
+							<span class="input-wrapper-lable mini">Số điện thoại</span>
+							<input  th:field="*{phone}" type="text" class="form-control lable-mini" maxlength="12" minlength="10" required
+									id="phone_number">
 						</div>
-						<div class="info-voucher-order">
-							<div class="title-voucher-order title">
-								Mã giảm giá
-							</div>
-							<div class="form-voucher-order info">
-								<div class="input-voucher-order">
-									<input type="text" name="voucher" class="voucher" id="voucher" placeholder="Nhập vào nếu có">
+					</div>
+
+					<div class="form-group">
+						<div class="input-wrapper">
+							<span class="input-wrapper__label select">Tỉnh / Thành Phố <em>(*)</em></span>
+							<div class="item-form-select">
+								<div class="select-style">
+									<select class="placeholder" name="city" id="city">
+										<option value disabled selected>Tỉnh/Thành phố</option>
+										<th:block th:each="item:${countries}">
+											<option th:text="${item.get('name')}" th:value="${item.get('code')}"></option>
+										</th:block>
+									</select>
+									<input name="cityname" id="name-city" type="hidden">
 								</div>
-								<div class="voucher-order">
-									<button type="button" class="btn btn-voucher">Áp dụng</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="input-wrapper">
+							<span class="input-wrapper__label select">Quận / Huyện <em>(*)</em></span>
+							<div class="item-form-select">
+								<div class="select-style">
+									<select class="placeholder" name="district" id="district">
+										<option value disabled selected>Quận / Huyện</option>
+									</select>
+									<input name="districtname" id="name-district" type="hidden">
 								</div>
 							</div>
 						</div>
+					</div>
 
-						<div class="info-price-sale-order info">
-							<div class="title-price-sale-order title">
-								Giảm giá
-							</div>
-							<div class="price-sale-order">
-								<p>-990.000 đ</p>
-								<p>-990.000 đ</p>
-							</div>
-						</div>
-
-						<div class="info-price-total-order info">
-							<div class="title-price-total-order title">
-								Tổng tiền
-							</div>
-							<div class="price-total-order">
-								[[${#numbers.formatDecimal(session.myCart.getTotalPriceCart(), 1, 'DEFAULT', 0, 'DEFAULT')}]] đ
+					<div class="form-group">
+						<div class="input-wrapper">
+							<span class="input-wrapper__label select">Xã / Phường <em>(*)</em></span>
+							<div class="item-form-select">
+								<div class="select-style">
+									<select class="placeholder" name="wards" id="wards">
+										<option value disabled selected>Phường/Xã</option>
+									</select>
+									<input name="wardsname" id="name-wards" type="hidden">
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="btn-checkout-order">
-					<button type="submit" class="btn btn-checkout">Đặt Hàng</button>
-					<a th:href="@{/home}" type="button" class="btn btn-continue">Tiếp tục mua hàng</a>
-				</div>
-			</div>
-		</form>
-	</div>
-</section>
-<div class="form-add-address hide" id="add-address">
-	<div class="form-add-container">
-		<form th:action="@{/add-address}" id="form-address-checkout" th:object="${formAddress}" method="post">
-			<div class="header-form">
-				<div class="title-header-form">Thêm mới địa chỉ</div>
-			</div>
-			<div class="body-form">
-				<input id="id-address" th:field="*{id}" type="hidden" >
-				<div class="form-group">
-					<div class="input-wrapper">
-						<span class="input-wrapper-lable mini">Họ và Tên</span>
-						<input th:field="*{name}" type="text" class="form-control lable-mini"  id="full_name">
+					<div class="form-group">
+						<div class="input-wrapper">
+							<span class="input-wrapper-lable mini">Số nhà/ Tên đường</span>
+							<input type="text" id="addressDetail"  class="form-control lable-mini" name="addressDetail">
+						</div>
 					</div>
-				</div>
-
-				<div class="form-group">
-					<div class="input-wrapper">
-						<span class="input-wrapper-lable mini">Số điện thoại</span>
-						<input  th:field="*{phone}" type="text" class="form-control lable-mini" maxlength="12" minlength="10" required
-								id="phone_number">
-					</div>
-				</div>
-
-				<div class="form-group">
-					<div class="input-wrapper">
-						<span class="input-wrapper__label select">Tỉnh / Thành Phố <em>(*)</em></span>
-						<div class="item-form-select">
-							<div class="select-style">
-								<select class="placeholder" name="city" id="city">
-									<option value disabled selected>Tỉnh/Thành phố</option>
-									<th:block th:each="item:${countries}">
-										<option th:text="${item.get('name')}" th:value="${item.get('code')}"></option>
-									</th:block>
-								</select>
-								<input name="cityname" id="name-city" type="hidden">
+					<div class="form-group">
+						<div class="input-wrapper">
+							<div class="item-tk-ct item-tk-ct-checkbox">
+								<input th:field="*{setAsDefault}" id="checkBox-default" class="inputCheckbox" type="checkbox" name="setAsDefault">
+								<span>Đặt làm địa chỉ mặc định</span>
 							</div>
 						</div>
 					</div>
 				</div>
-
-				<div class="form-group">
-					<div class="input-wrapper">
-						<span class="input-wrapper__label select">Quận / Huyện <em>(*)</em></span>
-						<div class="item-form-select">
-							<div class="select-style">
-								<select class="placeholder" name="district" id="district">
-									<option value disabled selected>Quận / Huyện</option>
-								</select>
-								<input name="districtname" id="name-district" type="hidden">
-							</div>
-						</div>
-					</div>
+				<div class="footer-form">
+					<button type="submit" class="button button-add-new-address">Lưu Địa Chỉ</button>
+					<a href="javascript:;" class="button btn-close-while close-modal">Quay Lại </a>
 				</div>
-
-				<div class="form-group">
-					<div class="input-wrapper">
-						<span class="input-wrapper__label select">Xã / Phường <em>(*)</em></span>
-						<div class="item-form-select">
-							<div class="select-style">
-								<select class="placeholder" name="wards" id="wards">
-									<option value disabled selected>Phường/Xã</option>
-								</select>
-								<input name="wardsname" id="name-wards" type="hidden">
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="input-wrapper">
-						<span class="input-wrapper-lable mini">Số nhà/ Tên đường</span>
-						<input type="text" id="addressDetail"  class="form-control lable-mini" name="addressDetail">
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="input-wrapper">
-						<div class="item-tk-ct item-tk-ct-checkbox">
-							<input th:field="*{setAsDefault}" id="checkBox-default" class="inputCheckbox" type="checkbox" name="setAsDefault">
-							<span>Đặt làm địa chỉ mặc định</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="footer-form">
-				<button type="submit" class="button button-add-new-address">Lưu Địa Chỉ</button>
-				<a href="javascript:;" class="button btn-close-while close-modal">Quay Lại </a>
-			</div>
-		</form>
-	</div>
-</div>
-<div class="popup-delate-address-cart">
-	<div class="h-pop">
-		<span class="txt">Xóa địa chỉ</span>
-		<span class="h-pop-close"><i class="fas fa-times"></i></span>
-	</div>
-	<div class="ct-pop">
-		<input type="hidden" id="js-delete-address-id">
-		<p>Bạn có muốn xóa địa chỉ này khỏi sổ địa chỉ?</p>
-		<div class="h-pop-action">
-			<a href="javascript:;"  class="h-pop-not">Không</a>
-			<a href="javascript:;"  class="h-pop-ok">Đồng ý</a>
+			</form>
 		</div>
 	</div>
+	<div class="popup-delate-address-cart">
+		<div class="h-pop">
+			<span class="txt">Xóa địa chỉ</span>
+			<span class="h-pop-close"><i class="fas fa-times"></i></span>
+		</div>
+		<div class="ct-pop">
+			<input type="hidden" id="js-delete-address-id">
+			<p>Bạn có muốn xóa địa chỉ này khỏi sổ địa chỉ?</p>
+			<div class="h-pop-action">
+				<a href="javascript:;"  class="h-pop-not">Không</a>
+				<a href="javascript:;"  class="h-pop-ok">Đồng ý</a>
+			</div>
+		</div>
+	</div>
+	<div class="bg-h-pop" ></div>
 </div>
-<div class="bg-h-pop" ></div>
 
 
 
@@ -350,6 +341,14 @@
 <script th:src="@{/user-st/js/main.js}"></script>
 <script th:src="@{/user-st/js/checkout.js}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+<script>
+	if ($('.alert-size').hasClass('showAlert')){
+		setTimeout(function(){
+			$('.alert-size').addClass("hide");
+			$('.alert-size').removeClass("show");
+		},3000);
+	}
 
+</script>
 </body>
 </html>

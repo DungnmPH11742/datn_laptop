@@ -21,4 +21,6 @@ public interface CategoryRepository extends JpaRepository<Category, String>, Jpa
     List<Category> findAllByParentId(String id);
 
     List<Category> findAllById(String id);
+
+    List<Category> getAllByParentIdIsNull();
 }

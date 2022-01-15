@@ -82,9 +82,8 @@ public class ProductServiceImpl implements ProductService {
                     if(val.getSaleProduct() != null) {
                         Date day = Date.valueOf(date.now());
                         if(val.getSaleProduct().getStatus() != 1 || val.getSaleProduct().getDateOff().compareTo(day) < 0) {
-
+                            vo.getProductsDetail().setSaleProduct(null);
                         }
-
                     }
                     reponseVOS.add(vo);
                 }

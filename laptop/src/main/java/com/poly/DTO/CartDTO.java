@@ -19,7 +19,7 @@ public class CartDTO {
     private Float totalPriceUnit;
 
     // Tổng tiền(Hiếu)
-    private Float totalPrice;
+    private float totalPrice;
 
     private List<CartItemDTO> listCartItem = new ArrayList<>();
 }

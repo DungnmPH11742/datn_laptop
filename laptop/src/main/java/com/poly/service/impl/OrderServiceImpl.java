@@ -13,6 +13,9 @@ import com.poly.vo.response.OrderDetailResponseVO;
 import com.poly.vo.response.OrderResponseVO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -130,12 +133,15 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrdersVO getByOrderCode(String code) {
-        Orders orders = this.repository.findOrderByCodeOrder(code);
-        if (orders != null){
-            return modelMapper.map(orders,OrdersVO.class);
+    public OrdersVO getByOrderCode(String code) throws Exception {
+        List<Orders> orders = repository.findOrderByCodeOrder(code);
+        /*System.out.println("Code orderservice: "+code);
+        System.out.println("Size OrderService: "+orders.size() + orders.get(0).getId());*/
+        if (orders != null && orders.size() == 1){
+            return modelMapper.map(orders.get(0),OrdersVO.class);
+        }else {
+            return null;
         }
-        return null;
     }
 
     @Override
@@ -161,7 +167,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrdersVO> findOrdersByAccount(Integer idAccount) {
-        /*List<OrdersVO> listVO = new ArrayList<>();
+        List<OrdersVO> listVO = new ArrayList<>();
         List<Orders> ordersList = this.repository.findByIdAccount(idAccount);
         if(ordersList != null){
             repository.findByIdAccount(idAccount).forEach(orders -> {
@@ -172,16 +178,10 @@ public class OrderServiceImpl implements OrderService {
                     List<OrderDetailsVO> orderDetailsVOList = new ArrayList<>();
                     orders.getOrderDetails().forEach(detail ->{
                         if (detail.getOrder().getId() == orders.getId()){
-                            ProductsVO productsVO = modelMapper.map(detail.getProduct(),ProductsVO.class);
-                            CategoryVO categoryVO = this.categoryService.getOne(detail.getProduct().getCategory().getId());
-                            productsVO.setCategory(categoryVO);
+                            ProductsDetailVO productsDetailVO = modelMapper.map(detail.getProductsDetail(),ProductsDetailVO.class);
+                            productsDetailVO.setNameProduct(detail.getProductsDetail().getProduct().getName());
                             OrderDetailsVO orderDetailsVO = modelMapper.map(detail,OrderDetailsVO.class);
-                            orderDetailsVO.setProduct(productsVO);
-                            if (ordersVO.getPriceOrder()!=null){
-                                ordersVO.setPriceOrder(ordersVO.getPriceOrder()+detail.getPrice());
-                            }else {
-                                ordersVO.setPriceOrder(detail.getPrice());
-                            }
+                            orderDetailsVO.setProductsDetailVO(productsDetailVO);
                             orderDetailsVOList.add(orderDetailsVO);
                         }
                     });
@@ -190,9 +190,10 @@ public class OrderServiceImpl implements OrderService {
                 }
             });
             return listVO;
-        }*/
+        }
         return null;
     }
+
     //Lấy ra thằng order Received -2 theo account
     @Override
     public OrdersVO findOrdersByAccountCart(String email) {
@@ -207,11 +208,19 @@ public class OrderServiceImpl implements OrderService {
             orders.getOrderDetails().forEach(orderDetails -> {
                 OrderDetailsVO orderDetailsVO = modelMapper.map(orderDetails,OrderDetailsVO.class);
                 detailsVOList.add(orderDetailsVO);
-                ProductsDetailVO productsDetailVO = modelMapper.map(orderDetails.getProductsDetail(),ProductsDetailVO.class);
+                ProductsDetailVO productsDetailVO = new ProductsDetailVO();
+                if(orderDetails.getProductsDetail()!= null){
+                    productsDetailVO = modelMapper.map(orderDetails.getProductsDetail(),ProductsDetailVO.class);
+                }
+
                 if(orderDetails.getProductsDetail().getSaleProduct() != null){
                     SaleProductVO saleProductVO = modelMapper.map(orderDetails.getProductsDetail().getSaleProduct(),SaleProductVO.class);
                     productsDetailVO.setSaleProduct(saleProductVO);
                 }
+//                if(orderDetails.getVouchers()!= null){
+//                    VouchersVO vouchersVO = modelMapper.map(orderDetails.getVouchers(),VouchersVO.class);
+//                    orderDetailsVO.setVoucher(vouchersVO);
+//                }
                 orderDetailsVO.setProductsDetailVO(productsDetailVO);
             });
             vo.setAccount(accountVO);
@@ -231,7 +240,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Map<String, Object> getAllOrderPaging(Integer idAccount,int page, int size) {
-        /*List<OrdersVO> voList = new ArrayList<>();
+        List<OrdersVO> voList = new ArrayList<>();
         Pageable pageable = PageRequest.of(page-1,size);
         Page<Orders> ordersPage = this.repository.findAllByAccountPage(idAccount,pageable);
         ordersPage.getContent().forEach(orders ->{
@@ -242,62 +251,50 @@ public class OrderServiceImpl implements OrderService {
                 List<OrderDetailsVO> orderDetailsVOList = new ArrayList<>();
                 orders.getOrderDetails().forEach(detail ->{
                     if (detail.getOrder().getId() == orders.getId()){
-                        ProductsVO productsVO = modelMapper.map(detail.getProduct(),ProductsVO.class);
-                        CategoryVO categoryVO = this.categoryService.getOne(detail.getProduct().getCategory().getId());
-                        productsVO.setCategory(categoryVO);
+                        ProductsDetailVO productsVO = modelMapper.map(detail.getProductsDetail(),ProductsDetailVO.class);
+                        productsVO.setNameProduct(detail.getProductsDetail().getProduct().getName());
                         OrderDetailsVO orderDetailsVO = modelMapper.map(detail,OrderDetailsVO.class);
-                        orderDetailsVO.setProduct(productsVO);
-                        if (ordersVO.getPriceOrder()!=null){
-                            ordersVO.setPriceOrder(ordersVO.getPriceOrder()+detail.getPrice());
-                        }else {
-                            ordersVO.setPriceOrder(detail.getPrice());
-                        }
+                        orderDetailsVO.setProductsDetailVO(productsVO);
                         orderDetailsVOList.add(orderDetailsVO);
                     }
                 });
                 ordersVO.setOrderDetails(orderDetailsVOList);
                 voList.add(ordersVO);
             }
-        });*/
+        });
         Map<String,Object> map = new HashMap<>();
-//        map.put("listOrder",voList);
+        map.put("listOrder",voList);
         map.put("currentPage",page);
-//        map.put("totalPage",ordersPage.getTotalPages());
+        map.put("totalPage",ordersPage.getTotalPages());
         return map;
     }
 
     @Override
     public Map<String, Object> getOrderByReceivedPaging(Integer idAccount,Integer received, int page, int size) {
-        /*List<OrdersVO> voList = new ArrayList<>();
+        List<OrdersVO> voList = new ArrayList<>();
         Pageable pageable = PageRequest.of(page-1,size);
         Page<Orders> ordersPage = this.repository.findOrderByReceivedOrderPage(received,idAccount,pageable);
         ordersPage.getContent().forEach(orders ->{
             OrdersVO ordersVO = modelMapper.map(orders,OrdersVO.class);
             AccountVO accountVO = modelMapper.map(orders.getAccount(),AccountVO.class);
-                ordersVO.setAccount(accountVO);
-                List<OrderDetailsVO> orderDetailsVOList = new ArrayList<>();
-                orders.getOrderDetails().forEach(detail ->{
-                    if (detail.getOrder().getId() == orders.getId()){
-                        ProductsVO productsVO = modelMapper.map(detail.getProduct(),ProductsVO.class);
-                        CategoryVO categoryVO = this.categoryService.getOne(detail.getProduct().getCategory().getId());
-                        productsVO.setCategory(categoryVO);
-                        OrderDetailsVO orderDetailsVO = modelMapper.map(detail,OrderDetailsVO.class);
-                        orderDetailsVO.setProduct(productsVO);
-                        if (ordersVO.getPriceOrder()!=null){
-                            ordersVO.setPriceOrder(ordersVO.getPriceOrder()+detail.getPrice());
-                        }else {
-                            ordersVO.setPriceOrder(detail.getPrice());
-                        }
-                        orderDetailsVOList.add(orderDetailsVO);
-                    }
-                });
-                ordersVO.setOrderDetails(orderDetailsVOList);
-                voList.add(ordersVO);
-        });*/
+            ordersVO.setAccount(accountVO);
+            List<OrderDetailsVO> orderDetailsVOList = new ArrayList<>();
+            orders.getOrderDetails().forEach(detail ->{
+                if (detail.getOrder().getId() == orders.getId()){
+                    ProductsDetailVO productsVO = modelMapper.map(detail.getProductsDetail(),ProductsDetailVO.class);
+                    productsVO.setNameProduct(detail.getProductsDetail().getProduct().getName());
+                    OrderDetailsVO orderDetailsVO = modelMapper.map(detail,OrderDetailsVO.class);
+                    orderDetailsVO.setProductsDetailVO(productsVO);
+                    orderDetailsVOList.add(orderDetailsVO);
+                }
+            });
+            ordersVO.setOrderDetails(orderDetailsVOList);
+            voList.add(ordersVO);
+        });
         Map<String,Object> map = new HashMap<>();
-//        map.put("listOrder",voList);
+        map.put("listOrder",voList);
         map.put("currentPage",page);
-//        map.put("totalPage",ordersPage.getTotalPages());
+        map.put("totalPage",ordersPage.getTotalPages());
         return map;
     }
 

@@ -184,6 +184,13 @@
                                 <i class="fas fa-search"></i>
                             </button>
                             <div class="suggest-search" id="suggest-search">
+                                <div class="block suggest-keyword">
+                                    <h3 class="key">Lịch sử tìm kiếm</h3>
+                                    <ul class="list-key">
+
+                                    </ul>
+                                    <div id="remove-search" style="text-align: center; color: #d53b2a; cursor: pointer"><p>Xoá tìm kiếm</p></div>
+                                </div>
                                 <div class="block suggest-product productLT">
                                     <h3 class="key flex items-center"><span>Laptop</span> <a
                                             href="#"
@@ -226,7 +233,7 @@
                         <li class="gio-hang">
                             <a th:href="@{/cart}" class="link-cart-user action-cart">
                                 <i class="fas fa-shopping-cart"></i>
-                                <span class="quantity-cart" th:id="hienThiSoLuong"></span>
+                                <span class="quantity-cart" th:id="hienThiSoLuong" >[[${session.myCart !=null ? session.myCart.getListCartItem().size() : 0}]]</span>
                                 <!---->
                             </a>
                             <!---->

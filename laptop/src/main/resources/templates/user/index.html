@@ -271,7 +271,7 @@
                                 40 - 50 triệu
                             </label>
                             <label>
-                                <span hidden="hidden">category/laptop?price=6</span>
+                                <span hidden="hidden">category/laptop?price=4</span>
                                 30 - 40 triệu
                             </label>
                             <label>
@@ -722,17 +722,30 @@
             dataType: "JSON",
             success: function (data) {
 
-                $('#hienThiSoLuong').html('');
-                $('#hienThiSoLuong').append(`${data.totalItem}`);
+                $("#hienThiSoLuong").html('');
+                $("#hienThiSoLuong").append(`${data.totalItem}`);
 
-                $("#notification-compare").append(`<div class="alert alert-success alert-dismissible">
+                if(`${data.message}` == 'maxPrice'){
+                    $("#notification-compare").append(`<div class="alert alert-warning alert-dismissible">
+                                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                            <strong>Thất bại</strong>
+                                                            <p>Tổng tiền không vượt quá 150.000.000đ</p>
+                                                       </div>`);
+                }else if(`${data.message}` == 'maxQuantity'){
+                    $("#notification-compare").append(`<div class="alert alert-warning alert-dismissible">
+                                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                            <strong>Thất bại</strong>
+                                                            <p>Đã đạt só lượng tối đa</p>
+                                                       </div>`);
+                }else {
+                    $("#notification-compare").append(`<div class="alert alert-success alert-dismissible">
                                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                                             <strong>Thành công!</strong>
                                                             <p>Thêm vào giỏ hàng thành công, đang có ${data.totalItem} sản phẩm</p>
                                                        </div>`);
-                setTimeout(function () {
-                        $('.alert').fadeOut(`${data.message}`);
-                    }, 4000
+                }
+                setTimeout(function() {
+                    $('.alert').fadeOut('slow');}, 5000
                 );
             }, error: function () {
                 alert("Lỗi addToCart");
