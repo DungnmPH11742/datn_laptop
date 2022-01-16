@@ -32,6 +32,12 @@ public class OrderApiController {
         return ResponseEntity.ok(orderService.findIdOrder(0));
     }
 
+
+    @GetMapping("/find-by-name-account/{received}")
+    public ResponseEntity<List<OrderResponseVO>> findByNameAccount(@PathVariable("received") Integer received, @RequestParam("name") String name){
+        return ResponseEntity.ok(orderService.findByNameAccount(name, received));
+    }
+
     @GetMapping("/find-order-dt-by-id/{id}")
     public ResponseEntity<OrderDetailsVO> findOrderDetailById(@PathVariable("id") int id) {
         return ResponseEntity.ok(orderDetailService.findById(id));

@@ -363,19 +363,19 @@ public class CartServiceImpl implements CartService {
     @Override
     public List<CartItemDTO> getListCartItemOrder(Integer idOrder) {
         List<OrderDetailsVO> cartItemDTOList = this.orderDetailService.getOrderDetailByIdOrder(idOrder);
+
         List<CartItemDTO> itemDTO = new ArrayList<>();
         cartItemDTOList.forEach(vo ->{
             CartItemDTO cartItemDTO = new CartItemDTO();
             System.out.println("SKU: "+vo.getProductsDetailVO().getSku());
             ProductsDetailVO productsDetailVO = productDetailService.findBySku(vo.getProductsDetailVO().getSku());
-            cartItemDTO.setSku(vo.getProductsDetailVO().getSku());
+            cartItemDTO.setSku(productsDetailVO.getSku());
             cartItemDTO.setNameProduct(productService.getOne(productsDetailVO.getIdProduct()).getName());
             cartItemDTO.setNameCate(productService.getOne(productsDetailVO.getIdProduct()).getCategory().getName());
             cartItemDTO.setImgUrl(productsDetailVO.getImgUrl());
             cartItemDTO.setQuantityProduct(vo.getQuantity());
             cartItemDTO.setPriceUnit(productsDetailVO.getPrice());
             cartItemDTO.setIdOrderDetail(vo.getId());
-            cartItemDTO.setQuantity(productsDetailVO.getQuantity());
             float price = 0;
             if(productsDetailVO.getSaleProduct() != null){
                 price += productsDetailVO.getPrice() - ( productsDetailVO.getPrice()/100 * productsDetailVO.getSaleProduct().getPromotion());

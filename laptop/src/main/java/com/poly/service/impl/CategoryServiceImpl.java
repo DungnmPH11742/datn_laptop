@@ -46,7 +46,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryVO create(CategoryVO vo) {
-        return modelMapper.map(categoryRepository.save(modelMapper.map(vo, Category.class)), CategoryVO.class);
+        Category category = modelMapper.map(vo, Category.class);
+        category.setActived(true);
+        return modelMapper.map(categoryRepository.save(category), CategoryVO.class);
     }
 
     @Override

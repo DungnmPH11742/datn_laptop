@@ -27,66 +27,73 @@ import java.util.stream.Collectors;
 
 @Controller
 public class OrderWebController {
-    @Autowired private OrderService orderService;
-    @Autowired private HttpServletRequest request;
-    @Autowired private ProductService productService;
-    @Autowired private HeaderHelper headerHelper;
-    @Autowired private AccountService accountService;
-    @Autowired private CartService cartService;
+    @Autowired
+    private OrderService orderService;
+    @Autowired
+    private HttpServletRequest request;
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private HeaderHelper headerHelper;
+    @Autowired
+    private AccountService accountService;
+    @Autowired
+    private CartService cartService;
 
     @RequestMapping("/orderproductdetail")
-    public String index(Model model){
+    public String index(Model model) {
 
-        model.addAttribute("listoderproduct",orderService.findOrdersByAccount(1));
+        model.addAttribute("listoderproduct", orderService.findOrdersByAccount(1));
         return "user/order-detail-user";
     }
+
     @RequestMapping("/order-detail/{id}")
-    public String index(Model model, @PathVariable("id") Integer id){
+    public String index(Model model, @PathVariable("id") Integer id) {
         headerHelper.setHeaderSession(model);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null && !auth.getName().equals("anonymousUser")){
+        if (auth != null && !auth.getName().equals("anonymousUser")) {
             String name = auth.getName();
             AccountVO accountVO = this.accountService.findByEmailUser(name);
-            OrdersVO ordersVO = this.orderService.findOrderByIdAndAccount(id,accountVO.getId());
+            OrdersVO ordersVO = this.orderService.findOrderByIdAndAccount(id, accountVO.getId());
 
-            if (ordersVO!=null){
+            if (ordersVO != null) {
                 SimpleDateFormat sd = new SimpleDateFormat("HH:mm");
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                 Date date = ordersVO.getOrderDate();
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(date);
-                cal.add(Calendar.DAY_OF_WEEK,7);
+                cal.add(Calendar.DAY_OF_WEEK, 7);
                 String estimated = df.format(cal.getTime());
                 Integer nameInt = ordersVO.getAddress().lastIndexOf('-');
-                String nameUser = ordersVO.getAddress().substring(0,nameInt);
-                String address = ordersVO.getAddress().substring(nameInt+1);
-                model.addAttribute("estimatedTime",estimated);
-                model.addAttribute("nameUser",nameUser.trim());
-                model.addAttribute("addressUser",address.trim());
-                model.addAttribute("order",ordersVO);
+                String nameUser = ordersVO.getAddress().substring(0, nameInt);
+                String address = ordersVO.getAddress().substring(nameInt + 1);
+                model.addAttribute("estimatedTime", estimated);
+                model.addAttribute("nameUser", nameUser.trim());
+                model.addAttribute("addressUser", address.trim());
+                model.addAttribute("order", ordersVO);
                 return "user/order-detail-user";
-            }else {
+            } else {
                 //Cái này phải redirect sang 404
                 return "redirect:/error-page";
             }
-        }else {
+        } else {
             return "redirect:/login";
         }
     }
 
     @PostMapping(value = "/cancel-order/{id}")
-    public ResponseEntity<Map<String,Object>> cancelOrder(@PathVariable("id") Integer id){
+    public ResponseEntity<Map<String, Object>> cancelOrder(@PathVariable("id") Integer id) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println("ID: "+id);
-        Map<String,Object> map = new HashMap<>();
+        System.out.println("ID: " + id);
+        Map<String, Object> map = new HashMap<>();
         if (auth != null && !auth.getName().equals("anonymousUser")) {
             String name = auth.getName();
             AccountVO accountVO = this.accountService.findByEmailUser(name);
-            OrdersVO vo = this.orderService.findOrderByIdAndAccount(id,accountVO.getId());
-            if (!vo.isPaymentStatus()){
+            OrdersVO vo = this.orderService.findOrderByIdAndAccount(id, accountVO.getId());
+            if (!vo.isPaymentStatus()) {
                 vo.setReceived(-1);
                 this.orderService.updateOrders(vo);
-                map.put("data",vo);
+                map.put("data", vo);
             }
             return ResponseEntity.ok(map);
         }
@@ -96,67 +103,69 @@ public class OrderWebController {
 
     @RequestMapping("/list-order")
     public String order(Model model, HttpServletRequest request, @RequestParam("status") Optional<Integer> status,
-                        @RequestParam("page") Optional<Integer> page){
+                        @RequestParam("page") Optional<Integer> page) {
         headerHelper.setHeaderSession(model);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null && !auth.getName().equals("anonymousUser")){
+        if (auth != null && !auth.getName().equals("anonymousUser")) {
             String name = auth.getName();
             AccountVO accountVO = this.accountService.findByEmailUser(name);
             List<OrdersVO> ordersVOList = this.orderService.findOrdersByAccount(accountVO.getId());
             float totalOrder = 0;
             int countOrder = ordersVOList.size();
-            for (OrdersVO v:ordersVOList) {
-                totalOrder+=v.getTotalPrice();
+            for (OrdersVO v : ordersVOList) {
+                if (v.getTotalPrice() != null) {
+                    totalOrder += v.getTotalPrice();
+                }
             }
-            model.addAttribute("totalOrder",totalOrder);
-            model.addAttribute("countOrder",countOrder);
+            model.addAttribute("totalOrder", totalOrder);
+            model.addAttribute("countOrder", countOrder);
             Comparator<OrdersVO> comparing = Comparator
                     .comparing(OrdersVO::getReceived)
                     .reversed()
                     .thenComparing(OrdersVO::getId);
-            if (status.isPresent()){
-                if (page.isPresent()){
-                    Map<String,Object> mapDefault = this.orderService.getOrderByReceivedPaging(accountVO.getId(),status.get(),page.get(),10);
+            if (status.isPresent()) {
+                if (page.isPresent()) {
+                    Map<String, Object> mapDefault = this.orderService.getOrderByReceivedPaging(accountVO.getId(), status.get(), page.get(), 10);
                     List<OrdersVO> listDefault = (List<OrdersVO>) mapDefault.get("listOrder");
-                    model.addAttribute("totalPage",(Integer) mapDefault.get("totalPage"));
-                    model.addAttribute("listOrder",listDefault);
-                    model.addAttribute("currentPage",mapDefault.get("currentPage"));
-                }else {
-                    Map<String,Object> mapDefault = this.orderService.getOrderByReceivedPaging(accountVO.getId(),status.get(),1,10);
+                    model.addAttribute("totalPage", (Integer) mapDefault.get("totalPage"));
+                    model.addAttribute("listOrder", listDefault);
+                    model.addAttribute("currentPage", mapDefault.get("currentPage"));
+                } else {
+                    Map<String, Object> mapDefault = this.orderService.getOrderByReceivedPaging(accountVO.getId(), status.get(), 1, 10);
                     List<OrdersVO> listDefault = (List<OrdersVO>) mapDefault.get("listOrder");
-                    model.addAttribute("totalPage",(Integer) mapDefault.get("totalPage"));
-                    model.addAttribute("listOrder",listDefault);
-                    model.addAttribute("currentPage",mapDefault.get("currentPage"));
+                    model.addAttribute("totalPage", (Integer) mapDefault.get("totalPage"));
+                    model.addAttribute("listOrder", listDefault);
+                    model.addAttribute("currentPage", mapDefault.get("currentPage"));
                 }
-            }else {
-                if (page.isPresent()){
-                    Map<String,Object> mapDefault = this.orderService.getAllOrderPaging(accountVO.getId(),page.get(),10);
+            } else {
+                if (page.isPresent()) {
+                    Map<String, Object> mapDefault = this.orderService.getAllOrderPaging(accountVO.getId(), page.get(), 10);
                     List<OrdersVO> listDefault = (List<OrdersVO>) mapDefault.get("listOrder");
 
                     listDefault.stream().sorted(comparing).collect(Collectors.toList());
-                    model.addAttribute("totalPage",(Integer) mapDefault.get("totalPage"));
-                    model.addAttribute("listOrder",listDefault);
-                    model.addAttribute("currentPage",mapDefault.get("currentPage"));
-                }else {
-                    Map<String,Object> mapDefault = this.orderService.getAllOrderPaging(accountVO.getId(),1,10);
+                    model.addAttribute("totalPage", (Integer) mapDefault.get("totalPage"));
+                    model.addAttribute("listOrder", listDefault);
+                    model.addAttribute("currentPage", mapDefault.get("currentPage"));
+                } else {
+                    Map<String, Object> mapDefault = this.orderService.getAllOrderPaging(accountVO.getId(), 1, 10);
                     List<OrdersVO> listDefault = (List<OrdersVO>) mapDefault.get("listOrder");
                     listDefault.stream().sorted(comparing).collect(Collectors.toList());
-                    model.addAttribute("totalPage",(Integer) mapDefault.get("totalPage"));
-                    model.addAttribute("listOrder",listDefault);
-                    model.addAttribute("currentPage",mapDefault.get("currentPage"));
+                    model.addAttribute("totalPage", (Integer) mapDefault.get("totalPage"));
+                    model.addAttribute("listOrder", listDefault);
+                    model.addAttribute("currentPage", mapDefault.get("currentPage"));
                 }
             }
             return "user/order";
-        }else {
+        } else {
             return "redirect:/login";
         }
     }
 
     @PostMapping(value = "/buy-again/{id}")
-    public String buyAgain(@PathVariable("id") Integer id , Model model){
+    public String buyAgain(@PathVariable("id") Integer id, Model model) {
         System.out.println(id);
         List<CartItemDTO> itemDtos = this.cartService.getListCartItemOrder(id);
-        for (CartItemDTO c:itemDtos) {
+        for (CartItemDTO c : itemDtos) {
             cartService.addTocart(c);
         }
         return "redirect:/cart";

@@ -13,6 +13,8 @@ public interface OrderService {
 
     OrdersVO findIdOrder(Integer id);
 
+    List<OrderResponseVO> findByNameAccount(String name, int received);
+
     OrdersVO saveOrders(OrdersVO orders);
 
     OrdersVO getByOrderCode(String code) throws Exception;

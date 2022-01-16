@@ -11,6 +11,7 @@ import com.poly.repo.OrdersRepository;
 import com.poly.service.CartService;
 import com.poly.service.OrderDetailService;
 import com.poly.vo.OrderDetailsVO;
+import com.poly.vo.ProductsDetailVO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -70,12 +71,17 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         if (orderDetails.size() > 0 || orderDetails.isEmpty()){
             List<OrderDetailsVO> listVo = new ArrayList<>();
             orderDetails.forEach(o -> {
-                listVo.add(this.modelMapper.map(o,OrderDetailsVO.class));
+                o.getProductsDetail().getSku();
+                OrderDetailsVO orderDetailsVO = this.modelMapper.map(o,OrderDetailsVO.class);
+                orderDetailsVO.setProductsDetailVO(modelMapper.map(o.getProductsDetail(),ProductsDetailVO.class));
+                orderDetailsVO.setProductsDetailVO(this.modelMapper.map(o.getProductsDetail(), ProductsDetailVO.class));
+                listVo.add(orderDetailsVO);
             });
             return listVo;
         }
         return null;
     }
+
     @Override
     public void updateQuantityOrderDetail(Integer quan, Integer id) {
         repository.updateQuantityOrderDetail(quan,id);

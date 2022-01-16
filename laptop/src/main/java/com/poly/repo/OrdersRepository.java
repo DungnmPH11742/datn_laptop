@@ -40,4 +40,7 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer>, JpaSpe
 
     @Query("select o from Orders o where o.received <> -2 and o.received =?1 order by o.id")
     List<Orders> findAllOrdersByReceived(Integer received);
+
+    @Query("select o from Orders o where o.received <> -2 and o.received =?1 order by o.id")
+    List<Orders> findAllOrdersByReceivedAndNameAccount(Integer received);
 }

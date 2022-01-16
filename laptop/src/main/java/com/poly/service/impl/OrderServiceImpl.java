@@ -4,6 +4,7 @@ import com.poly.entity.Account;
 import com.poly.entity.OrderDetails;
 import com.poly.entity.Orders;
 import com.poly.repo.AccountRepository;
+import com.poly.repo.OrderDetailsRepository;
 import com.poly.repo.OrdersRepository;
 import com.poly.service.OrderDetailService;
 import com.poly.service.OrderService;
@@ -12,6 +13,7 @@ import com.poly.vo.*;
 import com.poly.vo.response.OrderDetailResponseVO;
 import com.poly.vo.response.OrderResponseVO;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -44,6 +46,9 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderDetailService orderDetailService;
 
+    @Autowired
+    private OrderDetailsRepository orderDetailsRepository;
+
 
     @Override
     public List<OrdersVO> getAllOrders() {
@@ -57,69 +62,77 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrdersVO findIdOrder(Integer id) {
-//        Optional<Orders> orders = repository.findById(id);
-//        if (orders.isPresent()){
-//            OrdersVO ordersVO = modelMapper.map(orders,OrdersVO.class);
-//            ordersVO.setOrderCode(orders.get().getOrderCode());
-//            ordersVO.setPaymentMethods(orders.get().getPaymentMethods());
-//            AccountVO accountVO = modelMapper.map(orders.get().getAccount(),AccountVO.class);
-//            if (orders.get().getReceived()==1 || orders.get().getReceived()==2 || orders.get().getReceived()==3 || orders.get().getReceived()==0 || orders.get().getReceived()==-1){
-//                ordersVO.setAccount(accountVO);
-//                List<OrderDetailsVO> orderDetailsVOList = new ArrayList<>();
-//                orders.get().getOrderDetails().forEach(detail ->{
-//                    if (detail.getOrder().getId() == orders.get().getId()){
-//                        ProductsVO productsVO = modelMapper.map(detail.getProduct(),ProductsVO.class);
-//                        CategoryVO categoryVO = this.categoryService.getOne(detail.getProduct().getCategory().getId());
-//                        productsVO.setCategory(categoryVO);
-//                        OrderDetailsVO orderDetailsVO = modelMapper.map(detail,OrderDetailsVO.class);
-//                        orderDetailsVO.setProduct(productsVO);
-//                        if (ordersVO.getPriceOrder()!=null){
-//                            ordersVO.setPriceOrder(ordersVO.getPriceOrder()+detail.getPrice());
-//                        }else {
-//                            ordersVO.setPriceOrder(detail.getPrice());
-//                        }
-//                        orderDetailsVOList.add(orderDetailsVO);
-//                    }
-//                });
-//                ordersVO.setOrderDetails(orderDetailsVOList);
-//            }
-//            return ordersVO;
-//        }
+        Optional<Orders> orders = repository.findById(id);
+        if (orders.isPresent()){
+            OrdersVO ordersVO = modelMapper.map(orders,OrdersVO.class);
+            ordersVO.setOrderCode(orders.get().getOrderCode());
+            ordersVO.setPaymentMethods(orders.get().getPaymentMethods());
+            AccountVO accountVO = modelMapper.map(orders.get().getAccount(),AccountVO.class);
+            if (orders.get().getReceived()==1 || orders.get().getReceived()==2 || orders.get().getReceived()==3 || orders.get().getReceived()==0 || orders.get().getReceived()==-1){
+                ordersVO.setAccount(accountVO);
+                List<OrderDetailsVO> orderDetailsVOList = new ArrayList<>();
+                orders.get().getOrderDetails().forEach(detail ->{
+                    if (detail.getOrder().getId() == orders.get().getId()){
+                        ProductsDetailVO productsDetailVO = modelMapper.map(detail.getProductsDetail(),ProductsDetailVO.class);
+                        productsDetailVO.setNameProduct(detail.getProductsDetail().getProduct().getName());
+                        OrderDetailsVO orderDetailsVO = modelMapper.map(detail,OrderDetailsVO.class);
+                        orderDetailsVO.setProductsDetailVO(productsDetailVO);
+                        orderDetailsVOList.add(orderDetailsVO);
+                    }
+                });
+                ordersVO.setOrderDetails(orderDetailsVOList);
+            }
+            return ordersVO;
+        }
         return null;
     }
 
     @Override
+    public List<OrderResponseVO> findByNameAccount(String name, int received) {
+        List<OrderResponseVO> vos = new ArrayList<>();
+        repository.findAllOrdersByReceivedAndNameAccount(received).forEach(orders -> {
+            if (orders.getAddress() != null) {
+                List<String> lstAddressSplit = Arrays.asList(orders.getAddress().split(" - "));
+                if (lstAddressSplit.get(0).toLowerCase().contains(name.toLowerCase())) {
+                    OrderResponseVO vo = modelMapper.map(orders, OrderResponseVO.class);
+                    for(int i = 0; i< orders.getOrderDetails().size(); i++) {
+                        OrderDetails orderDetails = orders.getOrderDetails().get(i);
+                        OrderDetailResponseVO detailResponseVO = vo.getOrderDetails().get(i);
+                        detailResponseVO.setProductsReponse(productService.getProductBySku(orderDetails.getProductsDetail().getSku()));
+                    }
+                    vos.add(vo);
+                }
+            }
+        });
+        return vos;
+    }
+
+    @Override
     public OrdersVO findOrderByIdAndAccount(Integer id, Integer idAccount) {
-//        Optional<Orders> orders = repository.findById(id);
-//        if (orders.isPresent() && orders.get().getAccount().getId()==idAccount){
-//            OrdersVO ordersVO = new OrdersVO();
-//            BeanUtils.copyProperties(orders.get(),ordersVO);
-//            ordersVO.setOrderCode(orders.get().getOrderCode());
-//            ordersVO.setPaymentMethods(orders.get().getPaymentMethods());
-//            ordersVO.setReceived(orders.get().getReceived());
-//            AccountVO accountVO = modelMapper.map(orders.get().getAccount(),AccountVO.class);
-//            if (orders.get().getReceived()==1 || orders.get().getReceived()==2 || orders.get().getReceived()==3 || orders.get().getReceived()==0 || orders.get().getReceived()==-1){
-//                ordersVO.setAccount(accountVO);
-//                List<OrderDetailsVO> orderDetailsVOList = new ArrayList<>();
-//                orders.get().getOrderDetails().forEach(detail ->{
-//                    if (detail.getOrder().getId() == orders.get().getId()){
-//                        ProductsVO productsVO = modelMapper.map(detail.getProduct(),ProductsVO.class);
-//                        CategoryVO categoryVO = this.categoryService.getOne(detail.getProduct().getCategory().getId());
-//                        productsVO.setCategory(categoryVO);
-//                        OrderDetailsVO orderDetailsVO = modelMapper.map(detail,OrderDetailsVO.class);
-//                        orderDetailsVO.setProduct(productsVO);
-//                        if (ordersVO.getPriceOrder()!=null){
-//                            ordersVO.setPriceOrder(ordersVO.getPriceOrder()+detail.getPrice());
-//                        }else {
-//                            ordersVO.setPriceOrder(detail.getPrice());
-//                        }
-//                        orderDetailsVOList.add(orderDetailsVO);
-//                    }
-//                });
-//                ordersVO.setOrderDetails(orderDetailsVOList);
-//            }
-//            return ordersVO;
-//        }
+        Optional<Orders> orders = repository.findById(id);
+        if (orders.isPresent() && orders.get().getAccount().getId()==idAccount){
+            OrdersVO ordersVO = new OrdersVO();
+            BeanUtils.copyProperties(orders.get(),ordersVO);
+            ordersVO.setOrderCode(orders.get().getOrderCode());
+            ordersVO.setPaymentMethods(orders.get().getPaymentMethods());
+            ordersVO.setReceived(orders.get().getReceived());
+            AccountVO accountVO = modelMapper.map(orders.get().getAccount(),AccountVO.class);
+            if (orders.get().getReceived()==1 || orders.get().getReceived()==2 || orders.get().getReceived()==3 || orders.get().getReceived()==0 || orders.get().getReceived()==-1){
+                ordersVO.setAccount(accountVO);
+                List<OrderDetailsVO> orderDetailsVOList = new ArrayList<>();
+                orders.get().getOrderDetails().forEach(detail ->{
+                    if (detail.getOrder().getId() == orders.get().getId()){
+                        ProductsDetailVO productsDetailVO = modelMapper.map(detail.getProductsDetail(),ProductsDetailVO.class);
+                        productsDetailVO.setNameProduct(detail.getProductsDetail().getProduct().getName());
+                        OrderDetailsVO orderDetailsVO = modelMapper.map(detail,OrderDetailsVO.class);
+                        orderDetailsVO.setProductsDetailVO(productsDetailVO);
+                        orderDetailsVOList.add(orderDetailsVO);
+                    }
+                });
+                ordersVO.setOrderDetails(orderDetailsVOList);
+            }
+            return ordersVO;
+        }
         return null;
     }
 
@@ -211,13 +224,15 @@ public class OrderServiceImpl implements OrderService {
         OrdersVO vo = new OrdersVO();
         Orders order1 = repository.findByEmailAccount(email);
         if(order1 != null){
-            System.out.println(order1.getId());
+            System.out.println("Khac null: "+order1.getId());
             Orders  orders = repository.findByEmailAccount(email);
             vo = modelMapper.map(orders,OrdersVO.class);
             AccountVO accountVO = modelMapper.map(orders.getAccount(),AccountVO.class);
             List<OrderDetailsVO> detailsVOList = new ArrayList<>();
-            orders.getOrderDetails().forEach(orderDetails -> {
+            List<OrderDetails> orderDetailsList = this.orderDetailsRepository.getOrderDetailsByOrder(orders.getId());
+            orderDetailsList.forEach(orderDetails -> {
                 OrderDetailsVO orderDetailsVO = modelMapper.map(orderDetails,OrderDetailsVO.class);
+                System.out.println("Id :"+orderDetails.getId());
                 detailsVOList.add(orderDetailsVO);
                 ProductsDetailVO productsDetailVO = new ProductsDetailVO();
                 if(orderDetails.getProductsDetail()!= null){
@@ -313,7 +328,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderResponseVO> findAllOrdersByReceived(Integer received){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         List<OrderResponseVO> vos = new ArrayList<>();
         repository.findAllOrdersByReceived(received).forEach(orders -> {
             OrderResponseVO vo = modelMapper.map(orders, OrderResponseVO.class);
