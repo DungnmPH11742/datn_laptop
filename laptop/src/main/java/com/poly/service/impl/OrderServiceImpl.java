@@ -5,7 +5,7 @@ import com.poly.entity.OrderDetails;
 import com.poly.entity.Orders;
 import com.poly.repo.AccountRepository;
 import com.poly.repo.OrdersRepository;
-import com.poly.service.CategoryService;
+import com.poly.service.OrderDetailService;
 import com.poly.service.OrderService;
 import com.poly.service.ProductService;
 import com.poly.vo.*;
@@ -40,6 +40,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private UserDetailsServiceImpl detailsService;
+
+    @Autowired
+    private OrderDetailService orderDetailService;
+
 
     @Override
     public List<OrdersVO> getAllOrders() {
@@ -162,6 +166,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void deleteById(Integer id) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        OrdersVO ordersVO =  findOrdersByAccountCart(auth.getName());
+        if(ordersVO.getOrderDetails()!= null){
+            ordersVO.getOrderDetails().forEach(vo -> {
+                orderDetailService.deleteOrderDetail(vo.getProductsDetailVO().getSku());
+            });
+        }
         repository.deleteById(id);
     }
 
@@ -262,8 +273,9 @@ public class OrderServiceImpl implements OrderService {
                 voList.add(ordersVO);
             }
         });
+        List<OrdersVO> listOrder = voList.stream().sorted(Comparator.comparing(OrdersVO::getId).reversed()).collect(Collectors.toList());
         Map<String,Object> map = new HashMap<>();
-        map.put("listOrder",voList);
+        map.put("listOrder",listOrder);
         map.put("currentPage",page);
         map.put("totalPage",ordersPage.getTotalPages());
         return map;
@@ -291,8 +303,9 @@ public class OrderServiceImpl implements OrderService {
             ordersVO.setOrderDetails(orderDetailsVOList);
             voList.add(ordersVO);
         });
+        List<OrdersVO> listOrder = voList.stream().sorted(Comparator.comparing(OrdersVO::getId).reversed()).collect(Collectors.toList());
         Map<String,Object> map = new HashMap<>();
-        map.put("listOrder",voList);
+        map.put("listOrder",listOrder);
         map.put("currentPage",page);
         map.put("totalPage",ordersPage.getTotalPages());
         return map;

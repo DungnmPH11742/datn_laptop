@@ -1,7 +1,9 @@
 package com.poly.controller.web;
 
+import com.poly.DTO.CartItemDTO;
 import com.poly.helper.HeaderHelper;
 import com.poly.service.AccountService;
+import com.poly.service.CartService;
 import com.poly.service.OrderService;
 import com.poly.service.ProductService;
 import com.poly.vo.AccountVO;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class OrderWebController {
@@ -29,6 +32,7 @@ public class OrderWebController {
     @Autowired private ProductService productService;
     @Autowired private HeaderHelper headerHelper;
     @Autowired private AccountService accountService;
+    @Autowired private CartService cartService;
 
     @RequestMapping("/orderproductdetail")
     public String index(Model model){
@@ -46,14 +50,6 @@ public class OrderWebController {
             OrdersVO ordersVO = this.orderService.findOrderByIdAndAccount(id,accountVO.getId());
 
             if (ordersVO!=null){
-                float totalPrice = 0;
-                float totalPriceOutPut = 0;
-                for (OrderDetailsVO x:ordersVO.getOrderDetails()) {
-//                    totalPrice += x.getPrice();
-                }
-                for (int i=0;i<ordersVO.getOrderDetails().size();i++) {
-//                    totalPriceOutPut+=ordersVO.getOrderDetails().get(i).getProduct().getOutputPrice();
-                }
                 SimpleDateFormat sd = new SimpleDateFormat("HH:mm");
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                 Date date = ordersVO.getOrderDate();
@@ -67,9 +63,7 @@ public class OrderWebController {
                 model.addAttribute("estimatedTime",estimated);
                 model.addAttribute("nameUser",nameUser.trim());
                 model.addAttribute("addressUser",address.trim());
-                model.addAttribute("totalPriceOutPut",totalPriceOutPut);
-                model.addAttribute("totalPrice",totalPrice);
-                model.addAttribute("orderDetail",ordersVO);
+                model.addAttribute("order",ordersVO);
                 return "user/order-detail-user";
             }else {
                 //Cái này phải redirect sang 404
@@ -83,6 +77,7 @@ public class OrderWebController {
     @PostMapping(value = "/cancel-order/{id}")
     public ResponseEntity<Map<String,Object>> cancelOrder(@PathVariable("id") Integer id){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("ID: "+id);
         Map<String,Object> map = new HashMap<>();
         if (auth != null && !auth.getName().equals("anonymousUser")) {
             String name = auth.getName();
@@ -98,55 +93,72 @@ public class OrderWebController {
         return null;
 
     }
+
     @RequestMapping("/list-order")
-    public String order(Model model, HttpServletRequest request, @RequestParam("status") Optional<Integer> status){
+    public String order(Model model, HttpServletRequest request, @RequestParam("status") Optional<Integer> status,
+                        @RequestParam("page") Optional<Integer> page){
         headerHelper.setHeaderSession(model);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && !auth.getName().equals("anonymousUser")){
             String name = auth.getName();
             AccountVO accountVO = this.accountService.findByEmailUser(name);
+            List<OrdersVO> ordersVOList = this.orderService.findOrdersByAccount(accountVO.getId());
+            float totalOrder = 0;
+            int countOrder = ordersVOList.size();
+            for (OrdersVO v:ordersVOList) {
+                totalOrder+=v.getTotalPrice();
+            }
+            model.addAttribute("totalOrder",totalOrder);
+            model.addAttribute("countOrder",countOrder);
+            Comparator<OrdersVO> comparing = Comparator
+                    .comparing(OrdersVO::getReceived)
+                    .reversed()
+                    .thenComparing(OrdersVO::getId);
             if (status.isPresent()){
-                model.addAttribute("listOrder",orderService.findOrdersByAccountAndReceived(accountVO.getId(),status.get()));
+                if (page.isPresent()){
+                    Map<String,Object> mapDefault = this.orderService.getOrderByReceivedPaging(accountVO.getId(),status.get(),page.get(),10);
+                    List<OrdersVO> listDefault = (List<OrdersVO>) mapDefault.get("listOrder");
+                    model.addAttribute("totalPage",(Integer) mapDefault.get("totalPage"));
+                    model.addAttribute("listOrder",listDefault);
+                    model.addAttribute("currentPage",mapDefault.get("currentPage"));
+                }else {
+                    Map<String,Object> mapDefault = this.orderService.getOrderByReceivedPaging(accountVO.getId(),status.get(),1,10);
+                    List<OrdersVO> listDefault = (List<OrdersVO>) mapDefault.get("listOrder");
+                    model.addAttribute("totalPage",(Integer) mapDefault.get("totalPage"));
+                    model.addAttribute("listOrder",listDefault);
+                    model.addAttribute("currentPage",mapDefault.get("currentPage"));
+                }
             }else {
-                model.addAttribute("listOrder",orderService.findOrdersByAccount(accountVO.getId()));
+                if (page.isPresent()){
+                    Map<String,Object> mapDefault = this.orderService.getAllOrderPaging(accountVO.getId(),page.get(),10);
+                    List<OrdersVO> listDefault = (List<OrdersVO>) mapDefault.get("listOrder");
+
+                    listDefault.stream().sorted(comparing).collect(Collectors.toList());
+                    model.addAttribute("totalPage",(Integer) mapDefault.get("totalPage"));
+                    model.addAttribute("listOrder",listDefault);
+                    model.addAttribute("currentPage",mapDefault.get("currentPage"));
+                }else {
+                    Map<String,Object> mapDefault = this.orderService.getAllOrderPaging(accountVO.getId(),1,10);
+                    List<OrdersVO> listDefault = (List<OrdersVO>) mapDefault.get("listOrder");
+                    listDefault.stream().sorted(comparing).collect(Collectors.toList());
+                    model.addAttribute("totalPage",(Integer) mapDefault.get("totalPage"));
+                    model.addAttribute("listOrder",listDefault);
+                    model.addAttribute("currentPage",mapDefault.get("currentPage"));
+                }
             }
             return "user/order";
         }else {
             return "redirect:/login";
         }
-
-
     }
 
-    @RequestMapping("/carttest")
-    public String test(){
-        return "user/cart";
+    @PostMapping(value = "/buy-again/{id}")
+    public String buyAgain(@PathVariable("id") Integer id , Model model){
+        System.out.println(id);
+        List<CartItemDTO> itemDtos = this.cartService.getListCartItemOrder(id);
+        for (CartItemDTO c:itemDtos) {
+            cartService.addTocart(c);
+        }
+        return "redirect:/cart";
     }
-
-
-    @RequestMapping("/cart")
-    public String indexCart(Model model){
-
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        List<OrderDetailsVO> list = new ArrayList<>();
-//        // Khi chưa đăng nhập
-//        if(auth ==null || auth.getPrincipal() =="anonymousUser"){
-//            Cookie[] cookies = request.getCookies();
-//            if(cookies != null){
-//                for (Cookie cookie:cookies){
-//                    System.out.println(cookie);
-//                    OrderDetailsVO detailsVO = new OrderDetailsVO();
-//                    detailsVO.setProductsVO(productService.getOne(cookie.getName()));
-//                    detailsVO.setQuantity(Integer.parseInt(cookie.getValue()));
-//                    list.add(detailsVO);
-//                }
-//            }
-//        }else{ // Đã đăng nhập
-//
-//        }
-//        model.addAttribute("listcart",list);
-        return "user/cart";
-    }
-
-
 }

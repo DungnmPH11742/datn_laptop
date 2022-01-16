@@ -14,14 +14,13 @@ public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private String id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "actived", nullable = false)
+    @Column(name = "actived")
     private Boolean actived;
 
     @Column(name = "parent_id")

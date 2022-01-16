@@ -136,10 +136,10 @@ $(document).ready(function () {
 
 
                             content += '          ' +
-                                '      <a href="#" class="btn btn-default add-to-cart" onClick="addToCart(\'' + products.idProduct + '\')">\n' +
+                                '      <a href="#" class="btn btn-default add-to-cart" onClick="addToCart(\'' + products.sku + '\')">\n' +
                                 '                    <i class="fa fa-shopping-cart"></i>\n' +
                                 '                </a>\n' +
-                                '                <a href="#" class="btn add-to-cart" onClick="addCompareProduct(\'' + products.idProduct + '\')">\n' +
+                                '                <a href="#" class="btn add-to-cart" onClick="addCompareProduct(\'' + products.sku + '\')">\n' +
                                 '                    <i class="fa fa-plus"></i>\n' +
                                 '                </a>\n' +
                                 '            </div>\n' +
@@ -200,10 +200,10 @@ $(document).ready(function () {
                             }
 
                             content += '          ' +
-                                '      <a href="#" class="btn btn-default add-to-cart" onClick="addToCart(\'' + products.idProduct + '\')">\n' +
+                                '      <a href="#" class="btn btn-default add-to-cart" onClick="addToCart(\'' + products.sku + '\')">\n' +
                                 '                    <i class="fa fa-shopping-cart"></i>\n' +
                                 '                </a>\n' +
-                                '                <a href="#" class="btn add-to-cart" onClick="addCompareProduct(\'' + products.idProduct + '\')">\n' +
+                                '                <a href="#" class="btn add-to-cart" onClick="addCompareProduct(\'' + products.sku + '\')">\n' +
                                 '                    <i class="fa fa-plus"></i>\n' +
                                 '                </a>\n' +
                                 '            </div>\n' +
@@ -606,26 +606,43 @@ $(document).ready(function () {
     }
 })
 
-function addToCart(id) {
+function addToCart(sku) {
     let data = {
-        'idProduct': id,
+        'sku': sku,
         'quantityProduct': 1,
     };
     $.ajax({
-        type: "POST",
+        type: "PUT",
         url: "/addToCart",
         contentType: "application/json",
         data: JSON.stringify(data),
         dataType: "JSON",
         success: function (data) {
-            $("#notification-compare").append(`<div class="alert alert-success alert-dismissible">
+
+            if(`${data.message}` == 'maxPrice'){
+                $("#notification-compare").append(`<div class="alert alert-warning alert-dismissible">
+                                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                            <strong>Thất bại</strong>
+                                                            <p>Tổng tiền không vượt quá 150.000.000đ</p>
+                                                       </div>`);
+            }else if(`${data.message}` == 'maxQuantity'){
+                $("#notification-compare").append(`<div class="alert alert-warning alert-dismissible">
+                                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                            <strong>Thất bại</strong>
+                                                            <p>Đã đạt só lượng tối đa</p>
+                                                       </div>`);
+            }else {
+                $("#notification-compare").append(`<div class="alert alert-success alert-dismissible">
                                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                                             <strong>Thành công!</strong>
                                                             <p>Thêm vào giỏ hàng thành công, đang có ${data.totalItem} sản phẩm</p>
                                                        </div>`);
-            setTimeout(function () {
-                    $('.alert').fadeOut('slow');
-                }, 3000
+
+                $("#hienThiSoLuong").html('');
+                $("#hienThiSoLuong").append(`${data.totalItem}`);
+            }
+            setTimeout(function() {
+                $('.alert').fadeOut('slow');}, 5000
             );
         }, error: function () {
             alert("Lỗi addToCart");

@@ -12,11 +12,13 @@ public interface OrderDetailService {
 
     void updateQuantityOrderDetail(Integer quan, Integer id);
 
+    OrderDetailsVO findById(int id);
+
     OrderDetailsVO saveOderDetail(OrderDetailsVO orderDetailsVO);
 
     OrderDetailsVO updateOrderDetail(OrderDetailsVO orderDetailsVO);
 
     List<OrderDetailsVO> getOrderDetailByIdOrder(Integer idOrder);
 
-    Map<String, Object> deleteOrderDetail(CartItemDTO cartItemDTO);
+    Map<String, Object> deleteOrderDetail(String sku);
 }

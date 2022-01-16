@@ -44,10 +44,10 @@ public class ProductServiceImpl implements ProductService {
             vo.getProductsDetails().forEach(val -> {
                 val.setIdProduct(vo.getId());
                 ProductsDetail detail = detailRepository.findById(val.getSku()).get();
-                if(detail.getConnectivity() != null) {
-                    val.setConnectivitys(new ArrayList<>());
+                if (detail.getConnectivity() != null) {
+                    val.setLstConnectivity(new ArrayList<>());
                     Arrays.asList(detail.getConnectivity().split(", ")).forEach(data -> {
-                        val.getConnectivitys().add(data);
+                        val.getLstConnectivity().add(data);
                     });
                 }
             });
@@ -71,6 +71,31 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductsVO> findAllSkuNotDel() {
+        List<ProductsVO> reponseVOS = new ArrayList<>();
+        productsRepository.findAll().forEach(products -> {
+            ProductsVO vo = modelMapper.map(products, ProductsVO.class);
+            vo.setProductsDetails(new ArrayList<>());
+            products.getProductsDetails().forEach(val -> {
+                if (val.getStatus() != -1) {
+                    ProductsDetailVO detailVO = modelMapper.map(val, ProductsDetailVO.class);
+                    detailVO.setIdProduct(vo.getId());
+                    ProductsDetail detail = detailRepository.findById(val.getSku()).get();
+                    if (detail.getConnectivity() != null) {
+                        detailVO.setLstConnectivity(new ArrayList<>());
+                        Arrays.asList(detail.getConnectivity().split(", ")).forEach(data -> {
+                            detailVO.getLstConnectivity().add(data);
+                        });
+                    }
+                    vo.getProductsDetails().add(detailVO);
+                }
+            });
+            reponseVOS.add(vo);
+        });
+        return reponseVOS;
+    }
+
+    @Override
     public List<ProductsReponseVO> findAllSkuActive() {
         List<ProductsReponseVO> reponseVOS = new ArrayList<>();
         productsRepository.findByActive(1).forEach(products -> {
@@ -79,9 +104,9 @@ public class ProductServiceImpl implements ProductService {
                     ProductsReponseVO vo = modelMapper.map(products, ProductsReponseVO.class);
                     vo.setProductsDetail(modelMapper.map(val, ProductsDetailVO.class));
                     vo.getProductsDetail().setIdProduct(products.getId());
-                    if(val.getSaleProduct() != null) {
+                    if (val.getSaleProduct() != null) {
                         Date day = Date.valueOf(date.now());
-                        if(val.getSaleProduct().getStatus() != 1 || val.getSaleProduct().getDateOff().compareTo(day) < 0) {
+                        if (val.getSaleProduct().getStatus() != 1 || val.getSaleProduct().getDateOff().compareTo(day) < 0) {
                             vo.getProductsDetail().setSaleProduct(null);
                         }
                     }
@@ -200,7 +225,9 @@ public class ProductServiceImpl implements ProductService {
         Optional<Products> optionalProducts = this.productsRepository.findById(id);
         if (optionalProducts.isPresent()) {
             Products products = optionalProducts.get();
-            products.setActive(1);
+            if (products.getProductsDetails().size() == 1) {
+                products.setActive(-1);
+            }
             this.productsRepository.save(products);
             return true;
         } else {

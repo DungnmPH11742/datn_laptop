@@ -1457,39 +1457,6 @@ h2.title {
   margin-bottom: 50px;
 }
 
-.breadcrumbs {
-  position: relative;
-}
-
-
-.breadcrumbs .breadcrumb {
-  background: transparent;
-  margin-bottom: 75px;
-  padding-left: 0;
-}
-
-.breadcrumbs .breadcrumb li a {
-  background: #fe980f;
-  color: #ffffff;
-  padding: 3px 7px;
-}
-
-.breadcrumbs .breadcrumb li a:after {
-  content: "";
-  height: auto;
-  width: auto;
-  border-width: 8px;
-  border-style: solid;
-  border-color: transparent transparent transparent #fe980f;
-  position: absolute;
-  top: 11px;
-  left: 48px;
-}
-
-.breadcrumbs .breadcrumb > li + li:before {
-  content: " ";
-}
-
 #cart_items .cart_info {
   border: 1px solid #e6e4df;
   margin-bottom: 50px;
@@ -2465,10 +2432,15 @@ textarea {
   align-items: center;
   margin-bottom: 15px;
 }
+.account-information_left .avatar-side-bar{
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+}
 
-.account-information_left .info-user-header img{
-  width: 48px;
-  margin-right: 10px;
+.account-information_left .info-user-header img {
+  border-radius: 50%;
+
 }
 .account-information_left .info-user-header .info-user-header-detail{
   width: calc(100% - 58px);
@@ -2650,6 +2622,7 @@ table .th-status > span{
 }
 .breadcrumb li:first-child a{
   font-weight: 500;
+  font-size: 18px;
 }
 #pagination {
   margin: 0;

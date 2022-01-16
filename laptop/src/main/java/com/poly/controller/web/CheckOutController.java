@@ -150,11 +150,17 @@ public class CheckOutController {
                     for (CartItemDTO c : cartItemDTOList) {
                         OrderDetailsVO orderDetailsVO = new OrderDetailsVO();
                         productsDetailVO = this.productDetailService.findBySkuProduct(c.getSku());
-                        /*productsVO.setQuantity(productsVO.getQuantity() - c.getQuantityProduct());
-                        if (productsVO.getQuantity() == 0) {
-                            productsVO.setActive(false);
-                        }*/
-//                        this.productService.update(productsVO);
+                        ProductsDetailVO productsDetailVO1 = this.productDetailService.findBySku(c.getSku());
+                        System.out.println("productsDetailVO1: "+productsDetailVO1.getQuantity() + " : "+productsDetailVO1.getSku());
+                        System.out.println("Quantity 1: " + " : "+c.getQuantityProduct());
+                        if (productsDetailVO1.getQuantity() == 0){
+                            productsDetailVO1.setQuantity(0);
+                        }else {
+                            productsDetailVO1.setQuantity(productsDetailVO1.getQuantity() - c.getQuantityProduct());
+                        }
+
+                        ProductsDetailVO pr = this.productDetailService.save(productsDetailVO1);
+                        System.out.println("Quantity 2: "+pr.getQuantity() + " : "+(productsDetailVO1.getQuantity() - c.getQuantity()));
                         orderDetailsVO.setId(c.getIdOrderDetail());
                         orderDetailsVO.setProductDtPrice(c.getPriceUnit());
                         orderDetailsVO.setIdOrder(ordersVO.getId());
@@ -227,6 +233,7 @@ public class CheckOutController {
                 OrdersVO ordersVO = this.checkoutService.addOrderVo(deliveryAddressVO, false, checkOut, cartDTO.getIdOrder(), this.checkoutService.getDateNowSql());
                 System.out.println("CartDTO orderId : "+cartDTO.getIdOrder());
                 ordersVO.setPaymentMethods(0);
+                System.out.println(cartDTO.getTotalPrice());
                 ordersVO.setTotalPrice(cartDTO.getTotalPrice());
                 this.orderService.updateOrders(ordersVO);
                 //Lưu vào order detail
@@ -235,7 +242,17 @@ public class CheckOutController {
                 for (CartItemDTO c : cartItemDTOList) {
                     orderDetailsVO = new OrderDetailsVO();
                     productsDetailVO = this.productDetailService.findBySkuProduct(c.getSku());
+                    ProductsDetailVO productsDetailVO1 = this.productDetailService.findBySku(c.getSku());
+                    System.out.println("productsDetailVO1: "+productsDetailVO1.getQuantity() + " : "+productsDetailVO1.getSku());
+                    System.out.println("Quantity 1: " + " : "+c.getQuantityProduct());
+                    if (productsDetailVO1.getQuantity() == 0){
+                        productsDetailVO1.setQuantity(0);
+                    }else {
+                        productsDetailVO1.setQuantity(productsDetailVO1.getQuantity() - c.getQuantityProduct());
+                    }
 
+                    ProductsDetailVO pr = this.productDetailService.save(productsDetailVO1);
+                    System.out.println("Quantity 2: "+pr.getQuantity() + " : "+(productsDetailVO1.getQuantity() - c.getQuantity()));
                     orderDetailsVO.setId(c.getIdOrderDetail());
                     orderDetailsVO.setProductDtPrice(c.getPriceUnit());
                     orderDetailsVO.setIdOrder(ordersVO.getId());
@@ -368,7 +385,7 @@ public class CheckOutController {
         };
         final String codeOrder = random;
         final List<CartItemDTO> itemDTOList = cartDTO.getListCartItem();
-        Float totalPrice = cartDTO.getTotalPriceCart();
+        Float totalPrice = cartDTO.getTotalPrice();
         final Integer price = Integer.parseInt(String.format("%.0f", totalPrice));
         Map<String, Object> order = new HashMap<String, Object>() {{
             put("appid", config.get("appid"));

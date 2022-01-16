@@ -648,46 +648,13 @@ footer .blog-content ul li a {
     flex: 1 1 0%;
 }
 /* End FOOTER EDITER DUONGBT */
-
-.breadcrumbs {
-    position: relative;
-}
-
-.breadcrumbs .breadcrumb {
-    background: transparent;
-    margin-bottom: 75px;
-    padding-left: 0;
-}
-
-.breadcrumbs .breadcrumb li a {
-    background: #fe980f;
-    color: #ffffff;
-    padding: 3px 7px;
-}
-
-.breadcrumbs .breadcrumb li a:after {
-    content: "";
-    height: auto;
-    width: auto;
-    border-width: 8px;
-    border-style: solid;
-    border-color: transparent transparent transparent #fe980f;
-    position: absolute;
-    top: 11px;
-    left: 48px;
-}
-
-.breadcrumbs .breadcrumb > li + li:before {
-    content: " ";
-}
 .breadcrumb li a {
     font-size: 18px;
     color: #000;
 }
-.breadcrumb li:first-child a {
+.breadcrumb li:first-child a{
     font-weight: 500;
 }
-
 /*Quản lý user*/
 @font-face {
     font-family: nk-font;
@@ -714,10 +681,15 @@ footer .blog-content ul li a {
     align-items: center;
     margin-bottom: 15px;
 }
+.account-information_left .avatar-side-bar{
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+}
 
 .account-information_left .info-user-header img {
-    width: 48px;
-    margin-right: 10px;
+    border-radius: 50%;
+
 }
 .account-information_left .info-user-header .info-user-header-detail {
     width: calc(100% - 58px);
@@ -1277,7 +1249,7 @@ input:focus{
     -webkit-transform: translate(-240px,-90px);
     transform: translate(-240px,-90px);
     z-index: 999;
-     display: none;
+    display: none;
 }
 .popup-delate-address-cart .h-pop {
     width: 100%;
@@ -1341,7 +1313,7 @@ input:focus{
     top: 0;
     z-index: 998;
     background: rgba(0,0,0,.5);
-     display: none;
+    display: none;
 }
 .bg-h-pop.active {
     display: block;

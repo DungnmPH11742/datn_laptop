@@ -67,13 +67,13 @@ const generateInformationShort = (value) => {
                 </span>
                 <div>
                     <label>Số lượng:</label>
-                    <input type="number" value="1" min="1" max="${data.quantity}" />
+                    <input  type="number" value="1" min="1" max="${data.quantity}" th:attr="onchange=|checkNumberCartOnblur(${item.quantity})|"/>
                 </div>
             </span>
             <br>`
     //Mô tả laptop
     const informationLaptop =
-        `${data.cpu == '' || data.cpu == null? '' : `<p><b>Vi xử lý: </b>${data.cpu}</p>`}
+        `${data.cpu == '' || data.cpu == null ? '' : `<p><b>Vi xử lý: </b>${data.cpu}</p>`}
             ${data.ram == '' || data.ram == null ? '' : `<p><b>RAM:</b>${data.ram}</p>`}
             ${data.hardDrive == '' || data.hardDrive == null ? '' : `<p><b>Ổ cứng: </b>${data.hardDrive}</p>`}
             ${data.vga == '' || data.vga == null ? '' : `<p><b>Card đồ họa: </b> ${data.vga} </p>`}
@@ -83,7 +83,7 @@ const generateInformationShort = (value) => {
 
     //mô tả PC
     const informationPC =
-        `${data.cpu == '' || data.cpu == null? '' : `<p><b>Vi xử lý: </b>${data.cpu}</p>`}
+        `${data.cpu == '' || data.cpu == null ? '' : `<p><b>Vi xử lý: </b>${data.cpu}</p>`}
             ${data.ram == '' || data.ram == null ? '' : `<p><b>RAM:</b>${data.ram}</p>`}
             ${data.hardDrive == '' || data.hardDrive == null ? '' : `<p><b>Ổ cứng: </b>${data.hardDrive}</p>`}
             ${data.vga == '' || data.vga == null ? '' : `<p><b>Card đồ họa: </b> ${data.vga} </p>`}
@@ -94,7 +94,7 @@ const generateInformationShort = (value) => {
 
     //mô tả màn hình
     const informationMonitor =
-        `${data.displaySize == '' || data.displaySize == null? '' : `<p><b>Kích thước màn hình: </b>${data.displaySize}</p>`}
+        `${data.displaySize == '' || data.displaySize == null ? '' : `<p><b>Kích thước màn hình: </b>${data.displaySize}</p>`}
             ${data.brightness == '' || data.brightness == null ? '' : `<p><b>Độ sáng:</b>${data.brightness}</p>`}
             ${data.contrast == '' || data.contrast == null ? '' : `<p><b>Tỉ lệ tương phản: </b>${data.contrast}</p>`}
             ${data.resolution == '' || data.resolution == null ? '' : `<p><b>Độ phân giải: </b> ${data.resolution} </p>`}
@@ -104,5 +104,5 @@ const generateInformationShort = (value) => {
     //mô tả trạng thái sản phẩm
     const informationStatus =
         `${data.quantity == '' ? '' || data.quantity == null : `<p><b>Tình trạng: </b>${data.quantity != 0 ? 'Còn hàng' : 'Hết hàng'}</p>`}`;
-    return information + ${data.typeOfItem == 'LT01'? informationLaptop : data.typeOfItem == 'PC01'? informationPC : informationMonitor} + informationStatus;
+    return information + ${data.typeOfItem == 'LT01'? informationLaptop : data.typeOfItem == 'PC01'? informationPC : informationMonitor} +informationStatus;
 }

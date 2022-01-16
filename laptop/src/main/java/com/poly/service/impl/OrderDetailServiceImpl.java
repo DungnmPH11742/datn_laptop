@@ -78,37 +78,38 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     }
     @Override
     public void updateQuantityOrderDetail(Integer quan, Integer id) {
-        System.out.println("updateQuantityOrderDetail");
         repository.updateQuantityOrderDetail(quan,id);
     }
 
     @Override
-    public Map<String, Object> deleteOrderDetail(CartItemDTO dto) {
+    public OrderDetailsVO findById(int id) {
+        return modelMapper.map(repository.findById(id).get(), OrderDetailsVO.class);
+    }
+
+    @Override
+    public Map<String, Object> deleteOrderDetail(String sku) {
         Map<String,Object> map = new HashMap<>();
-        float sumPrice = 0;
-        CartDTO cartDTO = new CartDTO();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if(auth == null || auth.getPrincipal().equals("anonymousUser")){
-            cartDTO = (CartDTO) cartService.findCart();
-
-            //
-            Iterator<CartItemDTO> itemDTOIterator = cartDTO.getListCartItem().iterator();
-            while (itemDTOIterator.hasNext()){
-                CartItemDTO itemDTO = itemDTOIterator.next();
-                if(itemDTO.getSku().equals(dto.getSku())){
-                    sumPrice = cartDTO.getTotalPrice() - itemDTO.getQuantityProduct() * itemDTO.getPriceSale();
-                    itemDTOIterator.remove();
+        float sumPrice = 0;
+        CartDTO cartDTO = (CartDTO) session.getAttribute("myCart");
+        System.out.println("Khi chưa xóa: " + cartDTO);
+        for (int i =0; i < cartDTO.getListCartItem().size(); i++){
+            if(sku.equals(cartDTO.getListCartItem().get(i).getSku())){
+                if(auth == null || auth.getPrincipal().equals("anonymousUser")){
+                }else{
+                    repository.deleteById(cartDTO.getListCartItem().get(i).getIdOrderDetail());
                 }
+                sumPrice = cartDTO.getTotalPrice() - cartDTO.getListCartItem().get(i).getTotalPriceCartItem();
+                cartDTO.getListCartItem().remove(i);
+
             }
-
-
-        }else{
-            repository.deleteById(dto.getIdOrderDetail());
-            cartDTO = cartService.findCart();
-            sumPrice = cartDTO.getTotalPrice();
-
         }
-        map.put("sumPrice",sumPrice);
+
+        System.out.println("sau khi trừ là : + " + sumPrice);
+        System.out.println("Sau khi đã xóa: " + cartDTO);
+        cartDTO.setTotalPrice(sumPrice);
+        map.put("totalpriceCart",cartDTO.getTotalPrice());
+        map.put("totalItem",cartDTO.getListCartItem().size());
         session.setAttribute("myCart",cartDTO);
         return map;
     }

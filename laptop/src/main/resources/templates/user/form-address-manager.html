@@ -34,19 +34,11 @@
     <section class="container clearfix">
         <div>
             <!--Title breadcrumb-->
-            <div>
-                <ul class="breadcrumb pb-8 flex items-center space-x-2">
-                    <li class="breadcrumb-item home">
-                        <a href="#" class="nuxt-link-active" itemprop="item">Trang chủ</a>
-                    </li>
-                    <li class="breadcrumb-item font-semibold text-sm active">
-                        <a href="#" aria-current="page"
-                           class="text-black flex items-center nuxt-link-exact-active nuxt-link-active"
-                           itemprop="item">
-                            Thông tin tài khoản
-                        </a>
-                    </li>
-                </ul>
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li class="active">Address</li>
+                </ol>
             </div>
 
             <section class="clearfix">
@@ -54,7 +46,10 @@
                     <!--Side bar manager-->
                     <div class="account-information_left">
                         <div class="info-user-header">
-                            <img th:src="@{/user-st/images/icon-tk-2021.png}" alt="taikhoan" width="100%" class="loading">
+                            <div class="avatar-side-bar">
+                                <img th:src="${account.getImgUrl()}" th:if="${account.getImgUrl() != null}" alt="taikhoan" width="100%" class="loading">
+                                <img th:src="@{/user-st/images/avatarDefault.png}" th:unless="${account.getImgUrl() != null}" alt="taikhoan" width="100%" class="loading">
+                            </div>
                             <div class="info-user-header-detail">
                                 <span class="title-user">Tài khoản của</span>
                                 <span class="name-user" th:text="${account.getFullName()}"></span>
@@ -96,105 +91,105 @@
                                 </h2>
                             </div>
                             <form method="post" id="form-address" th:action="@{/save-update-address}">
-                            <div class="form-manager-address">
-                                <input th:if="${address == null}" name="idaddress" type="hidden">
-                                <input th:unless="${address == null}" th:value="${address.getId()}" name="idaddress" type="hidden">
-                                <div class="item-form">
-                                    <label>Họ và tên</label>
-                                    <div class="item-form-input">
-                                        <input th:if="${address == null}" type="text" name="username" class="inputText" placeholder="Họ và tên">
-                                        <input th:unless="${address == null}" th:value="${address.getName()}" type="text" name="username" class="inputText" placeholder="Họ và tên">
+                                <div class="form-manager-address">
+                                    <input th:if="${address == null}" name="idaddress" type="hidden">
+                                    <input th:unless="${address == null}" th:value="${address.getId()}" name="idaddress" type="hidden">
+                                    <div class="item-form">
+                                        <label>Họ và tên</label>
+                                        <div class="item-form-input">
+                                            <input th:if="${address == null}" type="text" name="username" class="inputText" placeholder="Họ và tên">
+                                            <input th:unless="${address == null}" th:value="${address.getName()}" type="text" name="username" class="inputText" placeholder="Họ và tên">
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="item-form">
-                                    <label>Số điện thoại</label>
-                                    <div class="item-form-input">
-                                        <input th:if="${address == null}" type="text" name="userphone" class="inputText" placeholder="Số điện thoại">
-                                        <input th:unless="${address == null}" th:value="${address.getPhone()}" type="text" name="userphone" class="inputText" placeholder="Số điện thoại">
+                                    <div class="item-form">
+                                        <label>Số điện thoại</label>
+                                        <div class="item-form-input">
+                                            <input th:if="${address == null}" type="text" name="userphone" class="inputText" placeholder="Số điện thoại">
+                                            <input th:unless="${address == null}" th:value="${address.getPhone()}" type="text" name="userphone" class="inputText" placeholder="Số điện thoại">
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="item-form number-home">
-                                    <label>Đường / Số nhà</label>
-                                    <div class="item-form-input">
-                                        <input th:if="${country == null}" type="text" name="numberhome" class="inputText">
-                                        <input th:unless="${country == null}" th:value="${country.getSoNha()}" type="text" name="numberhome" class="inputText">
-                                    </div>
-                                </div>
-                                <div class="item-form">
-                                    <label>Tỉnh / Thành phố</label>
-                                    <div class="item-form-select">
-                                        <div class="select-style">
-                                            <select th:if="${country == null}" class="placeholder" name="city" id="city">
-                                                <option value disabled selected>Tỉnh/Thành phố</option>
-                                                <th:block th:each="item:${countries}">
-                                                    <option th:value="${item.get('code')}" th:text="${item.get('name')}"></option>
-                                                </th:block>
-                                            </select>
-                                            <select class="placeholder" th:unless="${country == null}" th:value="${country.getCity()}" name="city" id="city">
-                                                <option value disabled selected>Tỉnh/Thành phố</option>
-                                                <th:block th:each="item:${countries}">
-                                                    <option th:selected="${item.get('code') == country.getCity()}" th:value="${item.get('code')}" th:text="${item.get('name')}"></option>
-                                                </th:block>
-                                            </select>
-                                            <input th:if="${country == null}" name="cityname" id="name-city" type="hidden">
-                                            <input th:unless="${country == null}" th:value="${country.getNameCity()}" name="cityname" id="name-city" type="hidden">
+                                    <div class="item-form number-home">
+                                        <label>Đường / Số nhà</label>
+                                        <div class="item-form-input">
+                                            <input th:if="${country == null}" type="text" name="numberhome" class="inputText">
+                                            <input th:unless="${country == null}" th:value="${country.getSoNha()}" type="text" name="numberhome" class="inputText">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="item-form">
-                                    <label>Quận / Huyện</label>
-                                    <div class="item-form-select">
-                                        <div class="select-style">
-                                            <select th:if="${country == null}" class="placeholder" name="district" id="district">
-                                                <option value disabled selected>Quận/Huyện</option>
-                                            </select>
-                                            <select th:unless="${country == null}" class="placeholder" name="district" id="district">
-                                                <option value disabled selected>Quận/Huyện</option>
-                                                <th:block th:each="item:${listDistrict}">
-                                                    <option th:selected="${item.get('code') == country.getDistrict()}" th:value="${item.get('code')}" th:text="${item.get('name')}"></option>
-                                                </th:block>
-                                            </select>
-                                            <input th:if="${country == null}" name="districtname" id="name-district" type="hidden">
-                                            <input th:unless="${country == null}" th:value="${country.getNameDistrict()}" name="districtname" id="name-district" type="hidden">
+                                    <div class="item-form">
+                                        <label>Tỉnh / Thành phố</label>
+                                        <div class="item-form-select">
+                                            <div class="select-style">
+                                                <select th:if="${country == null}" class="placeholder" name="city" id="city">
+                                                    <option value disabled selected>Tỉnh/Thành phố</option>
+                                                    <th:block th:each="item:${countries}">
+                                                        <option th:value="${item.get('code')}" th:text="${item.get('name')}"></option>
+                                                    </th:block>
+                                                </select>
+                                                <select class="placeholder" th:unless="${country == null}" th:value="${country.getCity()}" name="city" id="city">
+                                                    <option value disabled selected>Tỉnh/Thành phố</option>
+                                                    <th:block th:each="item:${countries}">
+                                                        <option th:selected="${item.get('code') == country.getCity()}" th:value="${item.get('code')}" th:text="${item.get('name')}"></option>
+                                                    </th:block>
+                                                </select>
+                                                <input th:if="${country == null}" name="cityname" id="name-city" type="hidden">
+                                                <input th:unless="${country == null}" th:value="${country.getNameCity()}" name="cityname" id="name-city" type="hidden">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="item-form">
-                                    <label>Phường / Xã</label>
-                                    <div class="item-form-select">
-                                        <div class="select-style">
-                                            <select th:if="${country == null}" class="placeholder" name="wards" id="wards">
-                                                <option value disabled selected>Phường/Xã</option>
-                                            </select>
-                                            <select th:unless="${country == null}" class="placeholder" name="wards" id="wards">
-                                                <option value disabled selected>Phường/Xã</option>
-                                                <th:block th:each="item:${listWard}">
-                                                    <option th:selected="${item.get('code') == country.getWard()}" th:value="${item.get('code')}" th:text="${item.get('name')}"></option>
-                                                </th:block>
-                                            </select>
-                                            <input th:if="${country == null}" name="wardsname" id="name-wards" type="hidden">
-                                            <input th:unless="${country == null}" th:value="${country.getNameWard()}" name="wardsname" id="name-wards" type="hidden">
+                                    <div class="item-form">
+                                        <label>Quận / Huyện</label>
+                                        <div class="item-form-select">
+                                            <div class="select-style">
+                                                <select th:if="${country == null}" class="placeholder" name="district" id="district">
+                                                    <option value disabled selected>Quận/Huyện</option>
+                                                </select>
+                                                <select th:unless="${country == null}" class="placeholder" name="district" id="district">
+                                                    <option value disabled selected>Quận/Huyện</option>
+                                                    <th:block th:each="item:${listDistrict}">
+                                                        <option th:selected="${item.get('code') == country.getDistrict()}" th:value="${item.get('code')}" th:text="${item.get('name')}"></option>
+                                                    </th:block>
+                                                </select>
+                                                <input th:if="${country == null}" name="districtname" id="name-district" type="hidden">
+                                                <input th:unless="${country == null}" th:value="${country.getNameDistrict()}" name="districtname" id="name-district" type="hidden">
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="item-form">
+                                        <label>Phường / Xã</label>
+                                        <div class="item-form-select">
+                                            <div class="select-style">
+                                                <select th:if="${country == null}" class="placeholder" name="wards" id="wards">
+                                                    <option value disabled selected>Phường/Xã</option>
+                                                </select>
+                                                <select th:unless="${country == null}" class="placeholder" name="wards" id="wards">
+                                                    <option value disabled selected>Phường/Xã</option>
+                                                    <th:block th:each="item:${listWard}">
+                                                        <option th:selected="${item.get('code') == country.getWard()}" th:value="${item.get('code')}" th:text="${item.get('name')}"></option>
+                                                    </th:block>
+                                                </select>
+                                                <input th:if="${country == null}" name="wardsname" id="name-wards" type="hidden">
+                                                <input th:unless="${country == null}" th:value="${country.getNameWard()}" name="wardsname" id="name-wards" type="hidden">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item-form item-checkbox">
+                                        <label></label>
+                                        <lable class="lable-check-default">
+                                            <input th:if="${address == null}" type="checkbox" name="setdefault"  class="checkbox-default" >
+                                            <th:block th:unless="${address == null}">
+                                                <input th:if="${address.getSetAsDefault()}" checked type="checkbox" name="setdefault"  class="checkbox-default" >
+                                                <input th:unless="${address.getSetAsDefault()}" type="checkbox" name="setdefault"  class="checkbox-default" >
+                                            </th:block>
+                                            <span class="theme-checkbox"></span>
+                                            <span>Đặt làm địa chỉ mặt định</span>
+                                        </lable>
+                                    </div>
                                 </div>
-                                <div class="item-form item-checkbox">
-                                    <label></label>
-                                    <lable class="lable-check-default">
-                                        <input th:if="${address == null}" type="checkbox" name="setdefault"  class="checkbox-default" >
-                                        <th:block th:unless="${address == null}">
-                                            <input th:if="${address.getSetAsDefault()}" checked type="checkbox" name="setdefault"  class="checkbox-default" >
-                                            <input th:unless="${address.getSetAsDefault()}" type="checkbox" name="setdefault"  class="checkbox-default" >
-                                        </th:block>
-                                        <span class="theme-checkbox"></span>
-                                        <span>Đặt làm địa chỉ mặt định</span>
-                                    </lable>
+                                <div class="btn-submit-form">
+                                    <button type="submit" id="btn-submit-address" class="btn btn-submit">Lưu thông tin</button>
                                 </div>
-                            </div>
-                            <div class="btn-submit-form">
-                                <button type="submit" id="btn-submit-address" class="btn btn-submit">Lưu thông tin</button>
-                            </div>
                             </form>
                         </div>
                     </div>

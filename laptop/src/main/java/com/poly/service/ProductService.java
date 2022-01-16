@@ -15,6 +15,8 @@ public interface ProductService {
 
     List<ProductsReponseVO> findAllSkuActive();
 
+    List<ProductsVO> findAllSkuNotDel();
+
     ProductsVO getOne(String id);
 
     ProductsVO getProductById(String id);

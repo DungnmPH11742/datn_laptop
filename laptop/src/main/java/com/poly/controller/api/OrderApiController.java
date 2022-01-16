@@ -1,6 +1,8 @@
 package com.poly.controller.api;
 
+import com.poly.service.OrderDetailService;
 import com.poly.service.OrderService;
+import com.poly.vo.OrderDetailsVO;
 import com.poly.vo.OrdersVO;
 import com.poly.vo.response.OrderResponseVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ public class OrderApiController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private OrderDetailService orderDetailService;
+
     @GetMapping("/list-order/{received}")
     public ResponseEntity<List<OrderResponseVO>> findAllOrders(@PathVariable("received") Integer received){
         return ResponseEntity.ok(orderService.findAllOrdersByReceived(received));
@@ -25,6 +30,11 @@ public class OrderApiController {
     @GetMapping("/find-by-id")
     public ResponseEntity<OrdersVO> findById(){
         return ResponseEntity.ok(orderService.findIdOrder(0));
+    }
+
+    @GetMapping("/find-order-dt-by-id/{id}")
+    public ResponseEntity<OrderDetailsVO> findOrderDetailById(@PathVariable("id") int id) {
+        return ResponseEntity.ok(orderDetailService.findById(id));
     }
 
     @PutMapping("/update-order")

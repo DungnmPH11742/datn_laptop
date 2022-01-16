@@ -105,8 +105,8 @@
 										 #numbers.formatDecimal(pd.price, 1, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></span>
 										<div>
 											<label>Số lượng:</label>
-											<input type="number" value="1" min="1" ,
-                                                   th:max="${pd.quantity}"/>
+											<input  th:id="quantityProductDt" type="number" value="1" min="1" ,
+                                                    th:max="${pd.quantity}" th:attr="onchange=|checkNumberCartOnblur(${pd.quantity})|"/>
 										</div>
 									</span>
                                     <br>
@@ -569,9 +569,6 @@
             dataType: "JSON",
             success: function (data) {
 
-                $('#hienThiSoLuong').html('');
-                $('#hienThiSoLuong').append(`${data.totalItem}`);
-
                 if(`${data.message}` == 'maxPrice'){
                     $("#notification-compare").append(`<div class="alert alert-warning alert-dismissible">
                                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -590,6 +587,9 @@
                                                             <strong>Thành công!</strong>
                                                             <p>Thêm vào giỏ hàng thành công, đang có ${data.totalItem} sản phẩm</p>
                                                        </div>`);
+
+                    $('#hienThiSoLuong').html('');
+                    $('#hienThiSoLuong').append(`${data.totalItem}`);
                 }
                 setTimeout(function() {
                     $('.alert').fadeOut('slow');}, 4000
@@ -600,7 +600,39 @@
         });
 
     }
+    function checkNumberCartOnblur(max){
 
+        let x = $('#quantityProductDt').val();
+        let text;
+        if(isNaN(x)){
+            $('#quantityProductDt').val(1);
+            $("#notification-compare").append(`<div class="alert alert-warning alert-dismissible">
+                                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                            <strong>Thông báo</strong>
+                                                            <p>Đã nhập không đúng</p>
+                                                       </div>`);
+        }else if(x < 1){
+            $('#quantityProductDt').val(1);
+            $("#notification-compare").append(`<div class="alert alert-warning alert-dismissible">
+                                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                            <strong>Thông báo</strong>
+                                                            <p>Bạn đã nhập sai định dạng</p>
+                                                       </div>`);
+        }else if(x> max){
+            $('#quantityProductDt').val(1);
+            $("#notification-compare").append(`<div class="alert alert-warning alert-dismissible">
+                                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                            <strong>Thông báo</strong>
+                                                            <p>Số lượng Sản phẩm còn dưới ${max}</p>
+                                                       </div>`);
+        } else {
+            $('#quantityProductDt').val(x);
+        }
+        setTimeout(function() {
+            $('.alert').fadeOut('slow');}, 4000
+        );
+
+    }
     //    Lựa chọn cấu hình
     function selectOption(sku) {
         const url = $(location).attr('href').split("=")[0];
@@ -639,7 +671,7 @@
                 </span>
                 <div>
                     <label>Số lượng:</label>
-                    <input type="number" value="1" min="1" max="${data.quantity}" />
+                    <input th:id="quantityProductDt" th:attr="onchange=|checkNumberCartOnblur(${item.quantity})|"  type="number" value="1" th:min="1" th:max="${data.quantity}" />
                 </div>
             </span>
             <br>`

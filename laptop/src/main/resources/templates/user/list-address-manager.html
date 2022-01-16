@@ -34,19 +34,11 @@
     <section class="container clearfix">
         <div>
             <!--Title breadcrumb-->
-            <div>
-                <ul class="breadcrumb pb-8 flex items-center space-x-2">
-                    <li class="breadcrumb-item home">
-                        <a href="#" class="nuxt-link-active" itemprop="item">Trang chủ</a>
-                    </li>
-                    <li class="breadcrumb-item font-semibold text-sm active">
-                        <a href="#" aria-current="page"
-                           class="text-black flex items-center nuxt-link-exact-active nuxt-link-active"
-                           itemprop="item">
-                            Thông tin tài khoản
-                        </a>
-                    </li>
-                </ul>
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li class="active">Address</li>
+                </ol>
             </div>
 
             <section class="clearfix">
@@ -54,7 +46,10 @@
                     <!--Side bar manager-->
                     <div class="account-information_left">
                         <div class="info-user-header">
-                            <img th:src="@{/user-st/images/icon-tk-2021.png}" alt="taikhoan" width="100%" class="loading">
+                            <div class="avatar-side-bar">
+                                <img th:src="${account.getImgUrl()}" th:if="${account.getImgUrl() != null}" alt="taikhoan" width="100%" class="loading">
+                                <img th:src="@{/user-st/images/avatarDefault.png}" th:unless="${account.getImgUrl() != null}" alt="taikhoan" width="100%" class="loading">
+                            </div>
                             <div class="info-user-header-detail">
                                 <span class="title-user">Tài khoản của</span>
                                 <span class="name-user" th:text="${account.getFullName()}"></span>
@@ -80,7 +75,7 @@
                                 </a>
                             </li>
                             <li class="">
-                                <a href="#" class="link-change-password">
+                                <a th:href="@{/view-change-password}" class="link-change-password">
                                     <i class="fas fa-lock"></i>
                                     <span>Thay đổi mật khẩu</span>
                                 </a>

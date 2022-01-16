@@ -98,7 +98,8 @@ public class ManagerAccountClient {
                 model.addAttribute("success","Chúc mừng bạn đã thay đổi mật khẩu thành công");
             }
             session.removeAttribute("passwordOldError");
-            session.removeAttribute("success");
+//            session.removeAttribute("success");
+            session.removeAttribute("successChangePass");
             session.removeAttribute("errorRePassword");
             return "user/form-change-password";
         }else {

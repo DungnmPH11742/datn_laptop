@@ -35,8 +35,17 @@ public class ProductAdminAPI {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+    @GetMapping(value = "/product/find-all-not-del")
+    public ResponseEntity<List<ProductsVO>> getListProductNotDel() {
+        List<ProductsVO> voList = this.productService.findAllSkuNotDel();
+        if (voList != null) {
+            return ResponseEntity.ok(voList);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 
-    @GetMapping(value = "/product/{id}")
+        @GetMapping(value = "/product/{id}")
     public ResponseEntity<ProductsVO> getProduct(@PathVariable("id") String id) {
         ProductsVO productsVO = this.productService.getOne(id);
         if (productsVO != null) {

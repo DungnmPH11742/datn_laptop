@@ -64,7 +64,7 @@ public class ProductsDetailVO implements Serializable {
 
     private String viewScreenshots;
 
-    private List<String> connectivitys;
+    private List<String> lstConnectivity;
 
     private String battery;
 
@@ -80,7 +80,7 @@ public class ProductsDetailVO implements Serializable {
 
     private int status;
 
-    private OrderDetailsVO orderDetails;
+//    private OrderDetailsVO orderDetails;
 
     @JsonBackReference
     private ProductsVO product;

@@ -722,9 +722,6 @@
             dataType: "JSON",
             success: function (data) {
 
-                $("#hienThiSoLuong").html('');
-                $("#hienThiSoLuong").append(`${data.totalItem}`);
-
                 if(`${data.message}` == 'maxPrice'){
                     $("#notification-compare").append(`<div class="alert alert-warning alert-dismissible">
                                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -743,6 +740,9 @@
                                                             <strong>Thành công!</strong>
                                                             <p>Thêm vào giỏ hàng thành công, đang có ${data.totalItem} sản phẩm</p>
                                                        </div>`);
+
+                    $("#hienThiSoLuong").html('');
+                    $("#hienThiSoLuong").append(`${data.totalItem}`);
                 }
                 setTimeout(function() {
                     $('.alert').fadeOut('slow');}, 5000

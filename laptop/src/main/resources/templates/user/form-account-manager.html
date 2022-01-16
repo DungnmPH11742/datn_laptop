@@ -32,19 +32,11 @@
     <section class="container clearfix">
         <div>
             <!--Title breadcrumb-->
-            <div>
-                <ul class="breadcrumb pb-8 flex items-center space-x-2">
-                    <li class="breadcrumb-item home">
-                        <a href="#" class="nuxt-link-active" itemprop="item">Trang chủ</a>
-                    </li>
-                    <li class="breadcrumb-item font-semibold text-sm active">
-                        <a href="#" aria-current="page"
-                           class="text-black flex items-center nuxt-link-exact-active nuxt-link-active"
-                           itemprop="item">
-                            Thông tin tài khoản
-                        </a>
-                    </li>
-                </ul>
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li class="active">Account</li>
+                </ol>
             </div>
 
             <section class="clearfix">
@@ -52,7 +44,10 @@
                     <!--Side bar manager-->
                     <div class="account-information_left">
                         <div class="info-user-header">
-                            <img th:src="@{/user-st/images/icon-tk-2021.png}" alt="taikhoan" width="100%" class="loading">
+                            <div class="avatar-side-bar">
+                                <img th:src="${account.getImgUrl()}" th:if="${account.getImgUrl() != null}" alt="taikhoan" width="100%" class="loading">
+                                <img th:src="@{/user-st/images/avatarDefault.png}" th:unless="${account.getImgUrl() != null}" alt="taikhoan" width="100%" class="loading">
+                            </div>
                             <div class="info-user-header-detail">
                                 <span class="title-user">Tài khoản của</span>
                                 <span class="name-user" th:text="${account.getFullName()}"></span>
@@ -88,95 +83,98 @@
                     <div class="right-manager">
                         <div class="info-user">
                             <form id="form-manager-user" th:method="post" th:action="@{/save-user}" enctype="multipart/form-data" th:object="${accountVO}">
-                            <div class="header-info-user">
-                                <h2 class="title-form">
-                                    <span>Thông tin tài khoản</span>
-                                </h2>
-                            </div>
-                            <div class="form-user">
-                                <div class="form-info-user">
-                                    <div class="item-form">
-                                        <input type="hidden" th:field="*{id}">
-                                        <label>Họ và tên</label>
-                                        <div class="item-form-input">
-                                            <input type="text" name="name" th:field="*{fullName}" class="inputText" placeholder="Họ và tên">
-                                        </div>
-                                    </div>
-
-                                    <div class="item-form">
-                                        <label>Số điện thoại</label>
-                                        <div class="item-form-input">
-                                            <input th:field="*{phone}" type="text" name="phone" class="inputText"
-                                                   placeholder="Số điện thoại">
-                                        </div>
-                                    </div>
-
-                                    <div class="item-form">
-                                        <label>Email</label>
-                                        <div class="item-form-input">
-                                            <input th:disabled="disabled"  th:field="*{email}" type="email" name="email" class="inputText">
-                                        </div>
-                                    </div>
-                                    <div class="item-form">
-                                        <label>Giới tính</label>
-                                        <div class="item-form-radio">
-                                            <label for="gender-male">
-                                               <!-- <input th:if="${accountVO.getSex() == null}" type="radio" value="0" name="sex" id="gender-male" class="check-radio">
-                                                <input th:if="${accountVO.getSex() != null && !accountVO.getSex() }" th:field="*{sex}"  value="0" type="radio" name="sex" id="gender-male" class="check-radio">
-                                               --> <input type="radio" th:field="*{sex}" value="0" name="sex" id="gender-male" class="check-radio">
-
-                                                <span class="radiobtn"></span>
-                                                Nam
-                                            </label>
-                                            <label for="gender-female">
-<!--                                                <input th:if="${accountVO.getSex() == null || !accountVO.getSex()}" type="radio" name="sex" value="1" id="gender-female" class="check-radio">-->
-<!--                                                <input th:if="${accountVO.getSex() != null && accountVO.getSex() }" th:checked="checked" value="1" type="radio" name="sex" id="gender-female" class="check-radio">-->
-                                                <input th:field="*{sex}" type="radio" name="sex" value="1" id="gender-female" class="check-radio">
-                                                <span class="radiobtn"></span>
-                                                Nữ
-                                            </label>
-                                            <div id="sex-error" class="error"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="item-form">
-                                        <label>Ngày sinh</label>
-                                        <div class="item-form-select">
-                                            <div class="select-style">
-                                                <select name="dayBird" class="placeholder" id="day">
-                                                    <option value disabled selected>Ngày</option>
-                                                </select>
+                                <div class="header-info-user">
+                                    <h2 class="title-form">
+                                        <span>Thông tin tài khoản</span>
+                                    </h2>
+                                </div>
+                                <div class="form-user">
+                                    <div class="form-info-user">
+                                        <div class="item-form">
+                                            <input type="hidden" th:field="*{id}">
+                                            <label>Họ và tên</label>
+                                            <div class="item-form-input">
+                                                <input type="text" name="name" th:field="*{fullName}" class="inputText" placeholder="Họ và tên">
                                             </div>
-                                            <div class="select-style">
-                                                <select name="monthBird" class="placeholder" id="month">
-                                                    <option value disabled selected>Tháng</option>
-                                                </select>
-                                            </div>
+                                        </div>
 
-                                            <div class="select-style">
-                                                <select name="yearBird" class="placeholder" id="years">
-                                                    <option value disabled selected>Năm</option>
-                                                </select>
+                                        <div class="item-form">
+                                            <label>Số điện thoại</label>
+                                            <div class="item-form-input">
+                                                <input th:field="*{phone}" type="text" name="phone" class="inputText"
+                                                       placeholder="Số điện thoại">
                                             </div>
+                                        </div>
+
+                                        <div class="item-form">
+                                            <label>Email</label>
+                                            <div class="item-form-input">
+                                                <input th:disabled="disabled"  th:field="*{email}" type="email" name="email" class="inputText">
+                                            </div>
+                                        </div>
+                                        <div class="item-form">
+                                            <label>Giới tính</label>
+                                            <div class="item-form-radio">
+                                                <label for="gender-male">
+                                                    <!-- <input th:if="${accountVO.getSex() == null}" type="radio" value="0" name="sex" id="gender-male" class="check-radio">
+                                                     <input th:if="${accountVO.getSex() != null && !accountVO.getSex() }" th:field="*{sex}"  value="0" type="radio" name="sex" id="gender-male" class="check-radio">
+                                                    --> <input type="radio" th:field="*{sex}" value="0" name="sex" id="gender-male" class="check-radio">
+
+                                                    <span class="radiobtn"></span>
+                                                    Nam
+                                                </label>
+                                                <label for="gender-female">
+                                                    <!--                                                <input th:if="${accountVO.getSex() == null || !accountVO.getSex()}" type="radio" name="sex" value="1" id="gender-female" class="check-radio">-->
+                                                    <!--                                                <input th:if="${accountVO.getSex() != null && accountVO.getSex() }" th:checked="checked" value="1" type="radio" name="sex" id="gender-female" class="check-radio">-->
+                                                    <input th:field="*{sex}" type="radio" name="sex" value="1" id="gender-female" class="check-radio">
+                                                    <span class="radiobtn"></span>
+                                                    Nữ
+                                                </label>
+                                                <div id="sex-error" class="error"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="item-form">
+                                            <label>Ngày sinh</label>
+                                            <div class="item-form-select">
+                                                <div class="select-style">
+                                                    <select name="dayBird" class="placeholder" id="day">
+                                                        <option value disabled selected>Ngày</option>
+                                                    </select>
+                                                </div>
+                                                <div class="select-style">
+                                                    <select name="monthBird" class="placeholder" id="month">
+                                                        <option value disabled selected>Tháng</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="select-style">
+                                                    <select name="yearBird" class="placeholder" id="years">
+                                                        <option value disabled selected>Năm</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-img-user">
+                                        <div class="parent-img-user">
+                                            <div class="info-img-user">
+                                                <div id="avatar-user" class="img-user" th:if="${accountVO.getImgUrl() != null}"
+                                                     th:style="'background-image: url('+${accountVO.getImgUrl()}+');'">
+                                                </div>
+                                                <div id="avatar-user" class="img-user" th:if="${accountVO.getImgUrl() == null}"
+                                                     th:style="'background-image: url('+ @{/user-st/images/avatarDefault.png}+');'">
+                                                </div>
+                                            </div>
+                                            <input type="file" name="fileImageUser" class="input-file-img" id="image-user" accept=".jpg,.jpeg,.png">
+                                            <button type="button" id="btn-select-file" class="btn btn-select-img">Chọn
+                                                ảnh</button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-img-user">
-                                    <div class="parent-img-user">
-                                        <div class="info-img-user">
-                                            <div id="avatar-user" class="img-user"
-                                                 th:style="'background-image: url('+${accountVO.getImgUrl()}+');'">
-                                            </div>
-                                        </div>
-                                        <input type="file" name="fileImageUser" class="input-file-img" id="image-user" accept=".jpg,.jpeg,.png">
-                                        <button type="button" id="btn-select-file" class="btn btn-select-img">Chọn
-                                            ảnh</button>
-                                    </div>
+                                <div class="btn-submit-form">
+                                    <button class="btn btn-submit">Lưu thông tin</button>
                                 </div>
-                            </div>
-                            <div class="btn-submit-form">
-                                <button class="btn btn-submit">Lưu thông tin</button>
-                            </div>
                             </form>
                         </div>
                     </div>

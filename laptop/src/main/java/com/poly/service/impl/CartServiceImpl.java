@@ -78,11 +78,8 @@ public class CartServiceImpl implements CartService {
                 map.put("message","maxPrice");
             }else {
                 for (int i=0;i < cartDTO.getListCartItem().size(); i++){
-
-                    System.out.println("SKU Cart ITEM: "+cartItemDTO.getSku());
                     if(cartDTO.getListCartItem().get(i).getSku().equalsIgnoreCase(cartItemDTO.getSku()) || cartDTO.getListCartItem().get(i).getSku().equals(cartItemDTO.getSku())){
 // Sô lượng vượt quá giới hạn
-                        System.out.println("SKU order detail: "+ cartDTO.getListCartItem().get(i).getSku());
                         if(cartDTO.getListCartItem().get(i).getQuantityProduct() + cartItemDTO.getQuantityProduct() > productsDetailVO.getQuantity()){
                             map.put("message","maxQuantity");
                             isExitsCart = true;
@@ -101,9 +98,18 @@ public class CartServiceImpl implements CartService {
                 }
             }
         }else {
-            cartDTO = new CartDTO();
-            session.setAttribute("myCart",cartDTO);
-            checkCart = true;
+            if(priceSale * cartItemDTO.getQuantityProduct() > 150000000){
+                checkCart = false;
+                map.put("message","maxPrice");
+            }else if(cartItemDTO.getQuantityProduct() > productsDetailVO.getQuantity()) {
+                checkCart = false;
+                map.put("message","maxQuantity");
+            }else {
+                cartDTO = new CartDTO();
+                session.setAttribute("myCart",cartDTO);
+                checkCart = true;
+            }
+
         }
 // Nếu sản phẩm đã tồn tại trong giỏ hàng
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -127,7 +133,7 @@ public class CartServiceImpl implements CartService {
                 // Khi đã đăng nhập  ( Cập nhật lại số lượng sản phẩm trong orderDetail )
                 if(auth == null || auth.getPrincipal().equals("anonymousUser")) {
                 }else {
-                    orderDetailService.updateQuantityOrderDetail(itemDTO.getQuantityProduct() + cartItemDTO.getQuantityProduct(), itemDTO.getIdOrderDetail());
+                    orderDetailService.updateQuantityOrderDetail(cartDTO.getListCartItem().get(indexCartItem).getQuantityProduct(), itemDTO.getIdOrderDetail());
                 }
                 map.put("totalPriceProduct_dt",cartDTO.getListCartItem().get(indexCartItem).getTotalPriceCartItem());
                 map.put("message","Cập nhật thành công");
@@ -170,12 +176,13 @@ public class CartServiceImpl implements CartService {
                 totalprice+= cartItemDTO1.getTotalPriceCartItem();
             }
             cartDTO.setTotalPrice(totalprice);
+            map.put("totalpriceCart",cartDTO.getTotalPrice());
+            map.put("totalItem",cartDTO.getListCartItem().size());
+            session.setAttribute("myCart",cartDTO);
+            map.put("code",200);
+            System.out.println("Tổng số bản ghi là: " + cartDTO.getListCartItem().size());
         }
-        map.put("totalpriceCart",cartDTO.getTotalPrice());
-        map.put("totalItem",cartDTO.getListCartItem().size());
-        session.setAttribute("myCart",cartDTO);
-        map.put("code",200);
-        System.out.println("Tổng số bản ghi là: " + cartDTO.getListCartItem().size());
+
         return map;
     }
 

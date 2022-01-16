@@ -41,9 +41,9 @@ public class ProductDetailServiceImpl implements ProductDetailService {
         reponseVO.getProductsDetail().setIdProduct(reponseVO.getId());
         ProductsDetailVO vo = reponseVO.getProductsDetail();
         if (detail.getConnectivity() != null) {
-            vo.setConnectivitys(new ArrayList<>());
+            vo.setLstConnectivity(new ArrayList<>());
             Arrays.asList(detail.getConnectivity().split(", ")).forEach(val -> {
-                vo.getConnectivitys().add(val);
+                vo.getLstConnectivity().add(val);
             });
         }
         return reponseVO;
@@ -54,10 +54,10 @@ public class ProductDetailServiceImpl implements ProductDetailService {
         ProductsDetail detail = repository.findBySkuAndStatusNot(sku, -1);
         ProductsDetailVO vo = modelMapper.map(detail, ProductsDetailVO.class);
         vo.setIdProduct(detail.getProduct().getId());
-        if (!detail.getConnectivity().isEmpty()) {
-            vo.setConnectivitys(new ArrayList<>());
+        if (detail.getConnectivity() != null) {
+            vo.setLstConnectivity(new ArrayList<>());
             Arrays.asList(detail.getConnectivity().split(", ")).forEach(val -> {
-                vo.getConnectivitys().add(val);
+                vo.getLstConnectivity().add(val);
             });
         }
         return vo;
@@ -67,9 +67,10 @@ public class ProductDetailServiceImpl implements ProductDetailService {
     public ProductsDetailVO save(ProductsDetailVO vo) {
         ProductsDetail detail = modelMapper.map(vo, ProductsDetail.class);
         detail.setProduct(productsRepository.findProductsById(vo.getIdProduct()));
-        if (vo.getConnectivitys() != null) {
-            detail.setConnectivity(String.join(", ", vo.getConnectivitys()));
+        if (vo.getLstConnectivity() != null) {
+            detail.setConnectivity(String.join(", ", vo.getLstConnectivity()));
         }
+        detail.setProduct(productsRepository.findProductsById(vo.getIdProduct()));
         detail = repository.save(detail);
         vo = modelMapper.map(detail, ProductsDetailVO.class);
         vo.setIdProduct(detail.getProduct().getId());
