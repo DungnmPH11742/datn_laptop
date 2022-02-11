@@ -2,7 +2,6 @@ package com.poly.controller.web;
 
 import com.poly.helper.CompareHelper;
 import com.poly.helper.HeaderHelper;
-import com.poly.service.SessionService;
 import com.poly.vo.ProductsVO;
 import com.poly.vo.response.ProductsReponseVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +25,13 @@ public class CompareWebController {
         boolean check = false;
         List<ProductsReponseVO> vos = compareHelper.getAllProductVo();
         for (int i = 0; i < vos.size(); i++) {
-            if(vos.get(i) != null){
+            if (vos.get(i) != null) {
                 check = true;
                 break;
             }
         }
         headerHelper.setHeaderSession(model);
 
-        return check ?"user/compare" : "redirect:/home";
+        return check ? "user/compare" : "redirect:/home";
     }
 }
