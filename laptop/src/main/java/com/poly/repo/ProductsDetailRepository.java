@@ -1,5 +1,6 @@
 package com.poly.repo;
 
+import com.poly.entity.Products;
 import com.poly.entity.ProductsDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

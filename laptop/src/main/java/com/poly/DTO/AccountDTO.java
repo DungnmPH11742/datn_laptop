@@ -29,4 +29,6 @@ public class AccountDTO {
 
     private List<RoleVO> role;
 
+    private Object abc;
+
 }
