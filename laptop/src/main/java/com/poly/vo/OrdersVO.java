@@ -5,13 +5,16 @@ import lombok.Data;
 import javax.persistence.Column;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 @Data
 public class OrdersVO implements Serializable {
 
     private Integer id;
 
-    private Integer idAccount;
+    private String orderCode;
+
+    private AccountVO account;
 
     private Date orderDate;
 
@@ -21,8 +24,20 @@ public class OrdersVO implements Serializable {
 
     private String description;
 
-    private Integer paymentStatus;
+    private boolean paymentStatus;
+
+    private Integer paymentMethods;
+
+    private Date completionDate;
+
+    private String authenticator;
 
     private Integer received;
+
+    private Float totalPrice;
+
+    private List<OrderDetailsVO> orderDetails;
+    
+    private Float priceOrder;
 
 }

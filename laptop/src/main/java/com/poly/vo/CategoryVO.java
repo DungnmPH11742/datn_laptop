@@ -7,12 +7,12 @@ import java.io.Serializable;
 @Data
 public class CategoryVO implements Serializable {
 
-    private Integer id;
+    private String id;
 
     private String name;
 
     private Boolean actived;
 
-    private Integer parentId;
+    private String parentId;
 
 }

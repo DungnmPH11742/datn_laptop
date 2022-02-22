@@ -24,7 +24,7 @@
                                 <div class="modal-body">
                                     <div class="category-tab">
                                         <input type="hidden" id="type_of_item" th:value="${session?.list_compare[0] != null ? session?.list_compare[0]?.typeOfItem : session?.list_compare[1]?.typeOfItem}">
-                                        <input class="form-control" id="search-p-compare" onfocus="focusHandler()" oninput="onchangSearch()" type="text" placeholder="Search">
+                                        <input class="form-control" id="search-p-compare" oninput="onchangSearch()" type="text" placeholder="Search">
                                         <br>
                                         <hr>
                                         <div class="col-sm-12 col-1-compare" id="p2_compare">

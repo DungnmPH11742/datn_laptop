@@ -10,20 +10,21 @@
     <div class="product-image-wrapper">
         <a th:href="'/view?id='+${p.getId()}" class="single-products">
             <div class="productinfo">
-                <img class="anhSP" th:src="@{/user-st/images/product/{path}(path=${p.getId()+'.jpg'})}" alt="">
+                <img class="anhSP" th:src="${p.productsDetail.imgUrl}" alt="">
                 <div class="content--product">
                     <b th:text="${p.getName()}"></b>
                     <h4 class="price"
-                        th:text="${#numbers.formatDecimal(p.getOutputPrice(), 1, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></h4>
-                    <s>56.750.000 đ</s>
+                        th:text="${p.productsDetail.saleProduct != null ? #numbers.formatDecimal(p.productsDetail.price * (100 - p.productsDetail.saleProduct.promotion)/100, 1, 'DEFAULT', 0, 'DEFAULT'):#numbers.formatDecimal(p.productsDetail.price, 1, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></h4>
+                    <s th:if="${p.productsDetail.saleProduct != null}" class="price"
+                       th:text="${#numbers.formatDecimal(p.productsDetail.price, 1, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></s>
                 </div>
                 <div>
                     <i class="fa fa-gift"></i><span style="margin-left: 5px;">Giảm giá</span>
                 </div>
-                <a th:attr="onclick=|addCompareProduct('${p.getId()}')|" class="btn btn-default add-to-cart">
+                <a class="btn btn-default add-to-cart">
                     <i class="fa fa-shopping-cart"></i>
                 </a>
-                <a onclick="getCompareProduct()" class="btn add-to-cart">
+                <a th:attr="onclick=|addCompareProduct('${p.getProductsDetail().getSku()}')|"  class="btn add-to-cart">
                     <i class="fa fa-plus"></i>
                 </a>
             </div>
@@ -36,23 +37,23 @@
 <!--products sale-->
 <div class="col-sm-3" th:fragment="p_sale">
     <div class="product-image-wrapper">
-        <a th:href="'/view?id='+${p.getId()}" class="single-products">
+        <a th:href="'/view/'+${p.getId()}+'?sku='+${p.productsDetail.sku}" class="single-products">
             <div class="productinfo">
-                <img class="anhSP" th:src="@{/user-st/images/product/{path}(path=${p.getId()+'.jpg'})}" alt="">
+                <img class="anhSP" th:src="${p.productsDetail.imgUrl}" alt="">
                 <div class="content--product">
                     <b th:text="${p.getName()}"></b>
                     <h4 class="price"
-                        th:text="${#numbers.formatDecimal(p.getOutputPrice() * (100 - p.getSaleProduct().getPromotion())/100, 1, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></h4>
-                    <s class="price"
-                       th:text="${#numbers.formatDecimal(p.getOutputPrice(), 1, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></s>
+                        th:text="${p.productsDetail.saleProduct != null ? #numbers.formatDecimal(p.productsDetail.price * (100 - p.productsDetail.saleProduct.promotion)/100, 1, 'DEFAULT', 0, 'DEFAULT'):#numbers.formatDecimal(p.productsDetail.price, 1, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></h4>
+                    <s th:if="${p.productsDetail.saleProduct != null}" class="price"
+                       th:text="${#numbers.formatDecimal(p.productsDetail.price, 1, 'DEFAULT', 0, 'DEFAULT')} + ' đ'"></s>
                 </div>
                 <div>
                     <i class="fa fa-gift"></i><span style="margin-left: 5px;">Giảm giá</span>
                 </div>
-                <a th:attr="onclick=|addCompareProduct('${p.getId()}')|" class="btn btn-default add-to-cart">
+                <a th:attr="onclick=|addToCart('${p.getProductsDetail().getSku()}')|" class="btn btn-default add-to-cart">
                     <i class="fa fa-shopping-cart"></i>
                 </a>
-                <a onclick="getCompareProduct()" class="btn add-to-cart">
+                <a th:attr="onclick=|addCompareProduct('${p.getProductsDetail().getSku()}')|"  class="btn add-to-cart">
                     <i class="fa fa-plus"></i>
                 </a>
             </div>

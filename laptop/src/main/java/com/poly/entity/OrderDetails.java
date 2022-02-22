@@ -1,12 +1,16 @@
 package com.poly.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "order_details")
 public class OrderDetails implements Serializable {
@@ -18,20 +22,20 @@ public class OrderDetails implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "price", nullable = false)
-    private Float price;
+    @Column(name = "product_dt_price")
+    private Float productDtPrice;
 
-    @Column(name = "quantity", nullable = false)
+    @Column(name = "into_money")
+    private Float intoMoney;
+
+    @Column(name = "quantity")
     private Integer quantity;
-
-    @Column(name = "completion_date")
-    private Date completionDate;
-
-    @Column(name = "payment_methods")
-    private Integer paymentMethods;
 
     @Column(name = "status")
     private Integer status;
+
+    @Column(name = "serial_number")
+    private String serialNumber;
 
     //bi-directional many-to-one association to Order
     @ManyToOne
@@ -40,11 +44,7 @@ public class OrderDetails implements Serializable {
 
     //bi-directional many-to-one association to Product
     @ManyToOne
-    @JoinColumn(name="id_product")
-    private Products product;
+    @JoinColumn(name="sku")
+    private ProductsDetail productsDetail;
 
-    //bi-directional many-to-one association to Voucher
-    @ManyToOne
-    @JoinColumn(name="id_voucher")
-    private Vouchers voucher;
 }

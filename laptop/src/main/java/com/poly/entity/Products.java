@@ -3,21 +3,12 @@ package com.poly.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.List;
 
 @Data
 @Entity
 @Table(name = "products")
-@NamedStoredProcedureQuery(name = "filter_Sales_Products",
-        procedureName = "filter_Sales_Products",
-        resultClasses = {Products.class},
-        parameters={
-                @StoredProcedureParameter(name="@ParentId", type= Integer.class)}
-
-)
 public class Products implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,74 +20,32 @@ public class Products implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "date_on", nullable = false)
-    private Date dateOn;
+    @Column(name = "company")
+    private String company;
 
     @Column(name = "type_of_item", nullable = false)
-    private Integer typeOfItem;
-
-    @Column(name = "img_url")
-    private String imgUrl;
-
-    @Column(name = "input_price")
-    private Float inputPrice;
-
-    @Column(name = "output_price")
-    private Float outputPrice;
-
-    @Column(name = "quantity")
-    private Integer quantity;
-
-    @Column(name = "mass")
-    private Float mass;
+    private String typeOfItem;
 
     @Column(name = "unit", nullable = false)
     private String unit;
 
-    @Column(name = "release_date")
-    private String releaseDate;
-
-    @Column(name = "date_of_manufacture")
-    private String dateOfManufacture;
+    @Column(name = "release_year")
+    private String releaseYear;
 
     @Column(name = "active")
-    private Boolean active;
-
-    //bi-directional many-to-one association to Description
-    @OneToMany(mappedBy="product")
-    private List<Description> descriptions;
-
-    //bi-directional many-to-one association to ImageDetail
-    @OneToMany(mappedBy="product")
-    private List<ImageDetail> imageDetails;
-
-    //bi-directional many-to-one association to OrderDetail
-    @OneToMany(mappedBy="product")
-    private List<OrderDetails> orderDetails;
-
-    //bi-directional many-to-one association to ProductRating
-//    @OneToMany(mappedBy="product")
-//    private List<ProductRating> productRatings;
+    private int active;
 
     //bi-directional many-to-one association to Category
     @ManyToOne
     @JoinColumn(name="id_category")
     private Category category;
 
-    //bi-directional many-to-one association to SaleProduct
+    //bi-directional many-to-one association to Category
     @ManyToOne
-    @JoinColumn(name="on_sale")
-    private SaleProduct saleProduct;
+    @JoinColumn(name="id_acount")
+    private Account account;
 
     //bi-directional one-to-one association to ProductsDetail
-    @OneToOne(mappedBy="product")
-    private ProductsDetail productsDetail;
-
-    //bi-directional many-to-one association to ShipmentDetail
     @OneToMany(mappedBy="product")
-    private List<ShipmentDetail> shipmentDetails;
-
-    //bi-directional many-to-one association to Voucher
-    @OneToMany(mappedBy="product")
-    private List<Vouchers> vouchers;
+    private List<ProductsDetail> productsDetails;
 }

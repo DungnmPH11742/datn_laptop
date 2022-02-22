@@ -22,7 +22,7 @@ import java.io.UnsupportedEncodingException;
 @Controller
 public class LoginWebController {
     @Autowired
-    private AccountService service;
+    private AccountService accountService;
     @Autowired
     private AccountRepository repository;
     @Autowired
@@ -46,13 +46,13 @@ public class LoginWebController {
         if (bindingResult.hasErrors()) {
             return "user/register";
         }
-        Account accountRegister = service.findUserAccountByEmailFalse(account.getEmail());
+        Account accountRegister = accountService.findUserAccountByEmailFalse(account.getEmail());
         if (accountRegister != null) {
             Integer id = accountRegister.getId();
             account.setId(id);
-            service.updateAccountByRegister(account, getSiteURL(request));
+            accountService.updateAccountByRegister(account, getSiteURL(request));
         } else {
-            service.createAccountByRegister(account, getSiteURL(request));
+            accountService.createAccountByRegister(account, getSiteURL(request));
         }
 
         return "user/register_success";
@@ -65,7 +65,7 @@ public class LoginWebController {
 
     @GetMapping("/verify")
     public String verifyUser(@Param("token") String token, WebRequest request, Model model) {
-        if (service.verify(token)) {
+        if (accountService.verify(token)) {
             return "user/verify_success";
         } else {
             return "user/verify_fail";
@@ -75,5 +75,34 @@ public class LoginWebController {
     @GetMapping("/admin")
     public String admin() {
         return "admin";
+    }
+
+
+    @GetMapping("/reset_password")
+    public String showResetPasswordForm(@Param(value = "token") String token, Model model) {
+        Account account = accountService.getByResetPasswordToken(token);
+        model.addAttribute("token", token);
+
+        if (account == null) {
+            model.addAttribute("message", "Mã không hợp lệ vui lòng kiểm tra lại đường dẫn trong email của bạn");
+            return "user/reset_password_form";
+        }
+
+        return "user/reset_password_form";
+    }
+
+    @PostMapping("/reset_password")
+    public String processResetPassword(HttpServletRequest request, Model model) {
+        String token = request.getParameter("token");
+        String password = request.getParameter("password");
+        Account account = accountService.getByResetPasswordToken(token);
+        if (account == null) {
+            model.addAttribute("message", "Mã không hợp lệ vui lòng kiểm tra lại đường dẫn trong email của bạn");
+            return "user/reset_password_form";
+        } else {
+            accountService.updatePassword(account, password);
+            model.addAttribute("messageSuccess", "Bạn đã thay đổi thành công mật khẩu của bạn.");
+            return "user/login";
+        }
     }
 }

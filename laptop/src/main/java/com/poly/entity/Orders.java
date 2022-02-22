@@ -1,6 +1,8 @@
 package com.poly.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,6 +10,8 @@ import java.sql.Date;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "orders")
 public class Orders implements Serializable {
@@ -19,20 +23,35 @@ public class Orders implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "order_code")
+    private String orderCode;
+
     @Column(name = "order_date")
     private Date orderDate;
 
-    @Column(name = "phone_number", nullable = false)
+    @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "address", nullable = false)
+    @Column(name = "address")
     private String address;
 
     @Column(name = "description")
     private String description;
 
     @Column(name = "payment_status")
-    private Integer paymentStatus;
+    private boolean paymentStatus;
+
+    @Column(name = "payment_methods")
+    private Integer paymentMethods;
+
+    @Column(name = "completion_date")
+    private Date completionDate;
+
+    @Column(name = "authenticator")
+    private String authenticator;
+
+    @Column(name = "total_price")
+    private Float totalPrice;
 
     @Column(name = "received")
     private Integer received;

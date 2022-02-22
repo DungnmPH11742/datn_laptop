@@ -9,8 +9,10 @@ public class ImageDetailVO implements Serializable {
 
     private Integer id;
 
-    private Integer idProduct;
+    private String sku;
 
     private String namePath;
+
+    private int typeImg;
 
 }

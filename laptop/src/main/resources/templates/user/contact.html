@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Login | E-Shopper</title>
+    <link th:href="@{/user-st/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/font-awesome.min.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/prettyPhoto.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/price-range.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/animate.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/main.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/responsive.css}" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script th:src="@{/user-st/js/html5shiv.js}"></script>
+    <script th:src="@{/user-st/js/respond.min.js}"></script>
+    <!-- <![endif]&ndash;&gt;
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <style>
+        .error {
+            color: red
+        }
+    </style>
+</head>
+<!--/head-->
+
+<body>
+<!--/header-->
+<div th:replace="~{common/header :: headers}"></div>
+<!--/header-->
+
+<!--form Login-->
+<section>
+    <div class="container">
+            <div class="contact-form">
+                <h2 class="title text-center">Liên hệ</h2>
+                <div class="status alert alert-success" style="display: none"></div>
+                <form id="main-contact-form" class="contact-form row" name="contact-form">
+
+                    <div class="form-group col-md-4">
+                        <label for="name">Tên của bạn:</label>
+                        <p id="nameError" style="color: red"></p>
+                        <input type="text" name="name" id="name" class="form-control" required="required"
+                               placeholder="Name">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="email">Địa chỉ email của bạn:</label>
+                        <p id="emailError" style="color: red"></p>
+                        <input type="email" name="email" id="email" class="form-control" required="required"
+                               placeholder="Email">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="phoneNumber">Số điện thoại</label>
+                        <p id="phoneNumberError" style="color: red"></p>
+                        <input type="text" name="phoneNumber" id="phoneNumber" class="form-control" required="required"
+                               placeholder="Số điện thoại">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="message">Nội dung:</label>
+                        <p id="messageError" style="color: red"></p>
+                        <textarea name="message" id="message" required="required" class="form-control" rows="8"
+                                  placeholder="Your Message Here"></textarea>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input type="button" onClick="sendContact()" name="submit" class="btn btn-primary pull-right"
+                               value="Submit">
+                    </div>
+                </form>
+
+            </div>
+    </div>
+</section>
+
+<!--End form Login-->
+
+<!--/Footer-->
+<div th:replace="~{common/footer :: footers}"></div>
+<!--/Footer-->
+
+<script th:src="@{/user-st/js/jquery.js}"></script>
+<script th:src="@{/user-st/js/price-range.js}"></script>
+<script th:src="@{/user-st/js/jquery.scrollUp.min.js}"></script>
+<script th:src="@{/user-st/js/bootstrap.min.js}"></script>
+<script th:src="@{/user-st/js/jquery.prettyPhoto.js}"></script>
+<script th:src="@{/user-st/js/main.js}"></script>
+<script th:src="@{/user-st/contactAjax.js}"></script>
+</body>
+</html>
+
+

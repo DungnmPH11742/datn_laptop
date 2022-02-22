@@ -14,25 +14,20 @@ public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "id")
+    private String id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "actived", nullable = false)
+    @Column(name = "actived")
     private Boolean actived;
 
     @Column(name = "parent_id")
-    private Integer parentId;
+    private String parentId;
 
     //bi-directional many-to-one association to Product
     @OneToMany(mappedBy="category")
     private List<Products> products;
-
-    //bi-directional many-to-one association to Voucher
-    @OneToMany(mappedBy="category")
-    private List<Vouchers> vouchers;
 
 }

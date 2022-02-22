@@ -1,0 +1,272 @@
+@import url(https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+@import url(http://fonts.googleapis.com/css?family=Calibri:400,300,700);
+
+
+.text-body-main {
+    --text-opacity: 1;
+    /* color: #161616; */
+    color: rgba(22,22,22,var(--text-opacity));
+
+}
+.mb-4 {
+    margin-top: -5rem;
+    margin-bottom: 5rem;
+}
+
+.leading-5 {
+    line-height: 1.25rem;
+}
+
+.text-sm {
+    font-size: 1.4rem;
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.flex {
+    display: flex;
+}
+
+.space-x-3 > :not(template) ~ :not(template) {
+    --space-x-reverse: 0;
+    margin-right: calc(0.75rem * var(--space-x-reverse));
+    margin-left: calc(0.75rem * (1 - var(--space-x-reverse)));
+}
+
+.text-gray-100 {
+    --text-opacity: 1;
+    color: #e3e7ef;
+    color: rgba(227, 231, 239, var(--text-opacity));
+}
+
+
+fieldset,
+label {
+    margin: 0;
+    padding: 0
+}
+
+h1 {
+    font-size: 1.5em;
+    margin: 10px
+}
+
+.rating {
+    border: none;
+    float: left;
+    margin-left: -15px;
+}
+
+.myratings {
+    font-size: 20px;
+    color: green;
+    float: left;
+}
+
+.rating > [id^="star"] {
+    display: none
+}
+
+.rating > label:before {
+    margin: 5px;
+    font-size: 1.25em;
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f005"
+}
+
+.rating > .half:before {
+    content: "\f089";
+    position: absolute
+}
+
+.rating > label {
+    color: #ddd;
+    float: right
+}
+
+.rating > [id^="star"]:checked ~ label {
+    color: #FFD700
+}
+
+/*.rating>[id^="star"]:checked+label:hover,*/
+/*.rating>[id^="star"]:checked~label:hover,*/
+/*.rating>label:hover~[id^="star"]:checked~label,*/
+/*.rating>[id^="star"]:checked~label:hover~label {*/
+/*    color: #FFED85*/
+/*}*/
+
+.reset-option {
+    display: none
+}
+
+.reset-button {
+    margin: 6px 12px;
+    background-color: rgb(255, 255, 255);
+    text-transform: uppercase
+}
+
+.mt-100 {
+    margin-top: 100px
+}
+
+.card {
+    position: relative;
+    display: flex;
+    width: 300px;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #d2d2dc;
+    border-radius: 11px;
+    -webkit-box-shadow: 0px 0px 5px 0px rgb(249, 249, 250);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(212, 182, 212, 1);
+    box-shadow: 0px 0px 5px 0px rgb(161, 163, 164)
+}
+
+.card .card-body {
+    padding: 1rem 1rem
+}
+
+.card-body {
+    flex: 1 1 auto;
+    padding: 1.25rem
+}
+
+.starShowResult p {
+    font-size: 14px
+}
+
+.starShowResult h4 {
+    margin-top: 18px
+}
+
+.starShowResult .btn:focus {
+    outline: none
+}
+
+.starShowResult .btn {
+    border-radius: 22px;
+    text-transform: capitalize;
+    font-size: 13px;
+    padding: 8px 19px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #D50000
+}
+
+.starShowResult .btn:hover {
+    background-color: #D32F2F !important
+}
+
+
+.ratingUser .starUser {
+    display: inline-block;
+    margin: 5px;
+    font-size: 30px;
+    color: whitesmoke;
+    position: relative;
+
+}
+
+.starUser .animate {
+    -webkit-animation: stretch-bounce .5s ease-in-out;
+}
+
+.starUser .hiddenUser {
+    opacity: 0;
+}
+
+
+.fullUser:before {
+    font-family: fontAwesome;
+    display: inline-block;
+    content: "\f005";
+    position: relative;
+    float: right;
+    z-index: 2;
+}
+
+
+.halfUser:before {
+    font-family: fontAwesome;
+    content: "\f089";
+    position: absolute;
+    float: left;
+    z-index: 3;
+}
+
+
+.star-colourUser {
+    color: #ffd700;
+}
+
+
+@-webkit-keyframes stretch-bounce {
+    0% {
+        -webkit-transform: scale(1);
+    }
+    25% {
+        -webkit-transform: scale(1.5);
+    }
+    50% {
+        -webkit-transform: scale(0.9);
+    }
+    75% {
+        -webkit-transform: scale(1.2);
+    }
+    100% {
+        -webkit-transform: scale(1);
+    }
+}
+
+.selectedUser :before {
+    font-family: fontAwesome;
+    display: inline-block;
+    content: "\f005";
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-transform: scale(1);
+    opacity: 1;
+    z-index: 1;
+}
+
+.selectedUser .pulse :before {
+    -webkit-transform: scale(3);
+    opacity: 0;
+}
+
+.selectedUser .is-animated :before {
+    transition: 1s ease-out;
+}
+
+
+.scoreUser {
+    font-family: arial;
+    font-size: 17px;
+    margin-top: -10px;
+    margin-left: 2px;
+    margin-bottom: 50px;
+}
+
+.score-ratingUser {
+    vertical-align: sub;
+    top: -5px;
+    position: relative;
+    font-size: 140%;
+}
+
+.totalUser {
+
+}
+
+

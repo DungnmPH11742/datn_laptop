@@ -29,7 +29,7 @@
                                    th:text="${c.getName()}"><i
                                         class="fa fa-angle-down"></i>
                                 </a>
-                                <ul role="menu" class="sub-menu" th:if="${c.getId() == 1}">
+                                <ul role="menu" class="sub-menu" th:if="${c.getId() == 'LT01'}">
                                     <div class="col-sm-10 right-menu">
                                         <!---->
                                         <div class="row-li"
@@ -74,7 +74,7 @@
                                     </div>
                                 </ul>
                                 <!-- PC văn phòng -->
-                                <ul role="menu" class="sub-menu" th:if="${c.getId() == 57}">
+                                <ul role="menu" class="sub-menu" th:if="${c.getId() == 'PC01'}">
                                     <div class="col-sm-10 right-menu">
                                         <!---->
                                         <div class="row-li"
@@ -123,7 +123,7 @@
                                 </ul>
 
                                 <!-- Màn Hinh -->
-                                <ul role="menu" class="sub-menu" th:if="${c.getId() == 76}">
+                                <ul role="menu" class="sub-menu" th:if="${c.getId() == 'MN01'}">
                                     <div class="col-sm-10 right-menu">
                                         <!---->
                                         <div class="row-li"
@@ -173,28 +173,134 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-sm-7">
-                    <div class="shop-menu clearfix pull-right">
-                        <ul class="nav navbar-nav">
-                            <li><a href=""><i class="fa fa-user"></i> Tài khoản</a></li>
-                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
-                            <li><a href="login.html"><i class="fa fa-lock"></i> Đăng nhập</a></li>
-                        </ul>
-                    </div>
-                    <div class="search_box pull-right">
-                        <input type="text" id="search" placeholder="Tìm kiếm..."/>
-                    </div>
-                    <div class="links">
-                        <div>
+                <div class="col-sm-7 user-header">
+                    <div itemscope="itemscope" class="search-index">
+                        <div class="action-wrap search">
+                            <input name="search_term_string" itemprop="query-input" type="text" id="search"
+                                   placeholder="Tìm kiếm trên king of computer" autocomplete="off" maxlength="50"
+                                   value="" class="fs-stxt onclick-togle search-input">
+                            <button aria-label="search"
+                                    class="search-button w-10 h-10 flex items-center justify-center">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            <div class="suggest-search" id="suggest-search">
+                                <div class="block suggest-keyword">
+                                    <h3 class="key">Lịch sử tìm kiếm</h3>
+                                    <ul class="list-key">
 
+                                    </ul>
+                                    <div id="remove-search" style="text-align: center; color: #d53b2a; cursor: pointer"><p>Xoá tìm kiếm</p></div>
+                                </div>
+                                <div class="block suggest-product productLT">
+                                    <h3 class="key flex items-center"><span>Laptop</span> <a
+                                            href="#"
+                                            class="view-all flex items-center space-x-1"><span id="wathAllLaptop"></span>
 
+                                    </a></h3>
+                                    <div id="laptop">
+
+                                    </div>
+
+                                </div>
+
+                                <div class="block suggest-product productPC" style="">
+                                    <h3 class="key flex items-center"><span>PC</span> <a
+                                            href="#"
+                                            class="view-all flex items-center space-x-1"><span id="wathAllPC"></span>
+
+                                    </a></h3>
+                                    <div id="PC">
+
+                                    </div>
+
+                                </div>
+
+                                <div class="block suggest-product productMH">
+                                    <h3 class="key flex items-center"><span >Màn hình</span> <a
+                                            href="#"
+                                            class="view-all flex items-center space-x-1"><span id="wathAllMH" ></span>
+
+                                    </a></h3>
+                                    <div id="manhinh">
+
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <ul class="list-item-header">
+                        <li class="gio-hang">
+                            <a th:href="@{/cart}" class="link-cart-user action-cart">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="quantity-cart" th:id="hienThiSoLuong" >[[${session.myCart !=null ? session.myCart.getListCartItem().size() : 0}]]</span>
+                                <!---->
+                            </a>
+                            <!---->
+                        </li>
+                        <li class="relative">
+                            <a href="#" class="link-cart-user link-action-user">
+                                <i class="fas fa-user-circle"></i>
+                                <!---->
+                            </a>
+                            <div class="wrap-fill wrap-fill-account">
+                                <ul class="list-action-logout" th:if="${account} == null">
+                                    <li class="px-4 py-3 li-logout">
+                                        <h3>
+                                            <a th:href="@{/login}" class="login block">
+                                                Đăng nhập
+                                            </a>
+                                        </h3>
+                                    </li>
+                                    <li class="px-4 py-3 li-register">
+                                        <h3>
+                                            <a href="/register" class="login block">
+                                                Tạo tài khoản
+                                            </a>
+                                        </h3>
+                                    </li>
+                                </ul>
+                                <ul class="list-action-logout" th:if="${account} != null">
+                                    <li class="px-4 py-3">
+                                        <h3>
+                                            <a th:href="@{/view-account}" class="block">
+                                                <span><i class="far fa-user-circle"></i></span> Tài khoản
+                                            </a>
+                                        </h3>
+                                    </li>
+                                    <li class="px-4 py-3 ">
+                                        <h3>
+                                            <a th:href="@{/list-order}" class=" block">
+                                                <span><i class="fas fa-list"></i></span> Đơn hàng
+                                            </a>
+                                        </h3>
+                                    </li>
+                                    <li class="px-4 py-3 ">
+                                        <h3>
+                                            <a th:href="@{/logout}" class=" block">
+                                                <span><i class="fas fa-sign-out-alt"></i></span> Đăng xuất
+                                            </a>
+                                        </h3>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!---->
+                        </li>
+                    </ul>
+
                 </div>
             </div>
         </div>
     </div>
     <!--/header-bottom-->
+    <div id="notification-compare"></div>
+    <script th:src="@{/user-st/js/jquery.js}"></script>
+    <script th:src="@{/user-st/js/price-range.js}"></script>
+    <script th:src="@{/user-st/js/jquery.scrollUp.min.js}"></script>
+    <script th:src="@{/user-st/js/bootstrap.min.js}"></script>
+    <script th:src="@{/user-st/js/jquery.prettyPhoto.js}"></script>
+    <script th:src="@{/user-st/js/main.js}"></script>
+    <script th:src="@{/user-st/searchHome.js}"></script>
 </header>
 </body>
 </html>

@@ -33,6 +33,6 @@ public class Description implements Serializable {
 
     //bi-directional many-to-one association to Product
     @ManyToOne
-    @JoinColumn(name="id_product")
-    private Products product;
+    @JoinColumn(name="product_sku")
+    private ProductsDetail productsDetail;
 }

@@ -13,18 +13,21 @@ Create table account(
 	date_of_birth date,
 	verification_code varchar(64),
 	time_token datetime,
+	reset_password_token nvarchar(30) default null,
+	auth_provider varchar(50),
 	actived bit,
+	sex bit
 )
 
 
 /*------------------------------------------------------BẢNG ACCOUNT-----------------------------------------------------------------------------*/
-insert into account(full_name, phone, email,password,date_of_birth, verification_code, time_token, actived)
-values ('Nam','0374563546','admin@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2010-09-08',null,null,1)
-insert into account(full_name, phone, email,password,date_of_birth, verification_code, time_token, actived)
-values ('Hằng','0374656354','user@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2003-06-02',null,null,1)
+insert into account(full_name, phone, email,password,date_of_birth, verification_code, time_token, actived, sex, img_url)
+values ('Đào Quý Nam','0374563546','admin@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2010-09-08',null,null,1, 0, 'http://localhost:8080/viewFile/ec6295d5.jpg')
+insert into account(full_name, phone, email,password,date_of_birth, verification_code, time_token, actived, sex, img_url)
+values (N'Trần Thúy Hằng','0374656354','user@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2003-06-02',null,null,1, 1, 'http://localhost:8080/viewFile/ec6295d5.jpg')
 /*-----------------------------------------------------------------------------------------------------------------------------------*/
-insert into account(full_name, phone, email,password,date_of_birth, verification_code, time_token, actived)
-values ('hu','0374656354','user@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2003-06-02',null,null,1)
+insert into account(full_name, phone, email,password,date_of_birth, verification_code, time_token, actived, sex, img_url)
+values ('Nguyễn Trung Hiếu','0374656354','user1@gmail.com','$2a$12$KCCdTXZKuNEVPW4.lgjYUeK/qo5eUbfQkobauR3Nh4i7d.HLB9.3S','2003-06-02',null,null,1, 1, 'http://localhost:8080/viewFile/ec6295d5.jpg')
 
 Create table role(
 	id int identity(1,1) primary key,
@@ -53,149 +56,149 @@ insert into account_role values (1,2), (2,1)
 
 
 create table category(
-	id int identity(1,1) primary key,
+	id varchar(55) primary key,
 	name nvarchar(100) not null,
 	actived bit not null,
-	parent_id int -- khóa ngoại của bảng
+	parent_id varchar(55) -- khóa ngoại của bảng
 )
 
 /*-------------------------------------------------------BẢNG THỂ LOẠI----------------------------------------------------------------------------*/
 Select * from category
-insert into category(name,actived,parent_id) values 
-('Laptop',1, null),
+insert into category values 
+('LT01', 'Laptop',1, null),
 /* Dell */
-('Dell',1, 1), 
-('Dell Latitude',1, 2),
-('Dell XPS',1, 2),
-('Dell Precision',1, 2),
-('Dell Inspiron',1, 2),
-('Dell Gaming G Series',1, 2),
-('Dell Alienware',1, 2),
-('Dell Vostro',1, 2),
+('LTDELL', 'Dell',1, 'LT01'), 
+('LTDELL1', 'Dell Latitude',1,'LTDELL'),
+('LTDELL2', 'Dell XPS',1, 'LTDELL'),
+('LTDELL3', 'Dell Precision',1, 'LTDELL'),
+('LTDELL4', 'Dell Inspiron',1, 'LTDELL'),
+('LTDELL5', 'Dell Gaming G Series',1, 'LTDELL'),
+('LTDELL6', 'Dell Alienware',1, 'LTDELL'),
+('LTDELL7', 'Dell Vostro',1, 'LTDELL'),
 
 /* Apple */
-('Apple',1, 1),
-('MacBook Air ',1, 10),
-('MacBook Pro',1, 10),
+('LTApple', 'Apple', 1, 'LT01'),
+('LTApple1', 'MacBook Air ',1, 'LTApple'),
+('LTApple2', 'MacBook Pro',1, 'LTApple'),
 
 /* Asus */
-('Asus',1, 1),
-('ExpertBook',1, 13),
-('VivoBook',1, 13),
-('ZenBook',1, 13),
-('TUF/ROG Gaming',1, 13),
-('ProArt Studio',1, 13),
+('LTAsus', 'Asus',1, 'LT01'),
+('LTAsus1', 'ExpertBook',1, 'LTAsus'),
+('LTAsus2', 'VivoBook',1, 'LTAsus'),
+('LTAsus3', 'ZenBook',1, 'LTAsus'),
+('LTAsus4', 'TUF/ROG Gaming',1, 'LTAsus'),
+('LTAsus5', 'ProArt Studio',1, 'LTAsus'),
 
 /* Acer */
-('Acer',1, 1),
-('Nitro',1, 19),
-('Predator',1, 19),
-('Aspire',1, 19),
-('Swift',1, 19),
+('LTAcer', 'Acer',1, 'LT01'),
+('LTAcer1', 'Nitro',1, 'LTAcer'),
+('LTAcer2', 'Predator',1, 'LTAcer'),
+('LTAcer3', 'Aspire',1, 'LTAcer'),
+('LTAcer4', 'Swift',1, 'LTAcer'),
 
 /* Lenovo */
-('Lenovo',1, 1),
-('Thinkpad',1, 24),
-('IdeaPad',1, 24),
-('Legion',1, 24),
-('ThinkBook',1, 24),
+('LTLenovo', 'Lenovo',1, 'LT01'),
+('LTLenovo1', 'Thinkpad',1, 'LTLenovo'),
+('LTLenovo2', 'IdeaPad',1, 'LTLenovo'),
+('LTLenovo3', 'Legion',1, 'LTLenovo'),
+('LTLenovo4', 'ThinkBook',1, 'LTLenovo'),
 
 /* Razer */
-('Razer',1, 1),
-('Blade 14',1, 29),
-('Blade 15',1, 29),
-('Blade 17',1, 29),
-('Blade Stealth',1, 29),
+('LTRazer', 'Razer',1, 'LT01'),
+('LTRazer1', 'Blade 14',1, 'LTRazer'),
+('LTRazer2', 'Blade 15',1, 'LTRazer'),
+('LTRazer3', 'Blade 17',1, 'LTRazer'),
+('LTRazer4', 'Blade Stealth',1, 'LTRazer'),
 
 /* HP */
-('HP',1, 1),
-('Elitebook',1, 34),
-('ZBook',1, 34),
-('Pavilion',1, 34),
-('14s/15s',1, 34), 
-('Envy',1, 34),
-('Omen',1, 34),
+('LTHP', 'HP',1, 'LT01'),
+('LTHP1', 'Elitebook',1, 'LTHP'),
+('LTHP2', 'ZBook',1, 'LTHP'),
+('LTHP3', 'Pavilion',1, 'LTHP'),
+('LTHP4', '14s/15s',1, 'LTHP'), 
+('LTHP5', 'Envy',1, 'LTHP'),
+('LTHP6', 'Omen',1, 'LTHP'),
 
 /* Microsoft */
-('Microsoft',1, 1),
-('Surface Book',1, 41),
-('Surface Laptop',1, 41),
-('Surface Pro',1, 41),
+('LTMicrosoft', 'Microsoft',1, 'LT01'),
+('LTMicrosoft1', 'Surface Book',1, 'LTMicrosoft'),
+('LTMicrosoft2', 'Surface Laptop',1, 'LTMicrosoft'),
+('LTMicrosoft3', 'Surface Pro',1, 'LTMicrosoft'),
 
 
 /* MSI */
-('MSI',1, 1),
-('GF Series',1, 45),
-('Prestige',1, 45),
-('Modern',1, 45),
-('Alpha',1, 45),
-('Bravo',1, 45),
-('GL Series',1, 45),
-('GE Series',1, 45),
-('GS Series',1, 45),
-('GT Series',1, 45),
+('LTMSI', 'MSI',1, 'LT01'),
+('LTMSI1', 'GF Series',1, 'LTMSI'),
+('LTMSI2', 'Prestige',1, 'LTMSI'),
+('LTMSI3', 'Modern',1, 'LTMSI'),
+('LTMSI4', 'Alpha',1, 'LTMSI'),
+('LTMSI5', 'Bravo',1, 'LTMSI'),
+('LTMSI6', 'GL Series',1, 'LTMSI'),
+('LTMSI7', 'GE Series',1, 'LTMSI'),
+('LTMSI8', 'GS Series',1, 'LTMSI'),
+('LTMSI9', 'GT Series',1, 'LTMSI'),
 
 /* Lg */
-('Lg',1, 1),
-('Gram',1, 55)
+('LTLg', 'Lg',1, 'LT01'),
+('LTLg1', 'Gram',1, 'LTLg')
 
 
 /*------------------------ PC-------------------        */
-insert into category(name,actived,parent_id) values 
-('PC Văn Phòng',1, null), --57
+insert into category values 
+('PC01', 'PC Văn Phòng',1, null), --57
 /* Dell */
-('Máy Tính Văn Phòng Dell',1, 57), 
-('Dell OptiPlex',1, 58),
-('Dell Inspiron',1, 58),
-('Dell Vostro',1, 58),
-('Dell XPS',1, 58),
+('PCDell', 'Máy Tính Văn Phòng Dell',1, 'PC01'), 
+('PCDell1', 'Dell OptiPlex',1, 'PCDell'),
+('PCDell2', 'Dell Inspiron',1, 'PCDell'),
+('PCDell3', 'Dell Vostro',1, 'PCDell'),
+('PCDell4', 'Dell XPS',1, 'PCDell'),
 
 /* HP */
-('Máy Tính Văn Phòng HP',1, 57), --63
-('HP 280',1, 63),
-('HP 290',1, 63),
-('HP 390',1, 63),
-('HP Pavilion',1, 63),
-('HP ProDesk',1, 63),
-('HP EliteDesk',1, 63),
-('HP ProOne',1, 63),
-('HP Pro',1, 63),
-('HP EliteOne',1, 63), -- Trừ 3
+('PCHP', 'Máy Tính Văn Phòng HP',1, 'PC01'), --63
+('PCHP1', 'HP 280',1, 'PCHP'),
+('PCHP2', 'HP 290',1, 'PCHP'),
+('PCHP3', 'HP 390',1, 'PCHP'),
+('PCHP4', 'HP Pavilion',1, 'PCHP'),
+('PCHP5', 'HP ProDesk',1, 'PCHP'),
+('PCHP6', 'HP EliteDesk',1, 'PCHP'),
+('PCHP7', 'HP ProOne',1, 'PCHP'),
+('PCHP8', 'HP Pro',1, 'PCHP'),
+('PCHP9', 'HP EliteOne',1, 'PCHP'),
 
 /* Asus */
-('Máy Tính Văn Phòng Asus',1, 57),
+('PCAsus', 'Máy Tính Văn Phòng Asus',1, 'PC01'),
 
 /* Lenovo */
-('Máy Tính Văn Phòng Lenovo',1, 57), 
+('PCLenovo', 'Máy Tính Văn Phòng Lenovo',1, 'PC01'), 
 
 /* Acer */
-('Máy Tính Văn Phòng Acer',1, 57)
+('PCAcer', 'Máy Tính Văn Phòng Acer',1, 'PC01')
 
 /*------------------------ Màn hình máy tính-------------------        */
-insert into category(name,actived,parent_id) values 
-('Màn Hình',1, null), --76
-('Màn Hình Dell',1, 76), --77
-('Màn Hình Dell UltraSharp',1, 77),
-('Màn Hình Dell E-Series',1, 77),
-('Màn Hình Dell S-Series',1, 77),
-('Màn Hình Dell Gaming',1, 77),
+insert into category values 
+('MN01', 'Màn Hình',1, null), --76
+('MNDell', 'Màn Hình Dell',1, 'MN01'), --77
+('MNDell1', 'Màn Hình Dell UltraSharp',1, 'MNDell'),
+('MNDell2', 'Màn Hình Dell E-Series',1, 'MNDell'),
+('MNDell3', 'Màn Hình Dell S-Series',1, 'MNDell'),
+('MNDell4', 'Màn Hình Dell Gaming',1, 'MNDell'),
 --Sửa lại phần bên dưới
 
-('Màn Hình Acer',1, 76), 
-('Màn Hình AOC',1, 76), 
-('Màn Hình Apple',1, 76), 
-('Màn Hình Asus',1, 76), 
-('Màn Hình BenQ',1, 76), 
-('Màn Hình Concept D',1, 76), 
-('Màn Hình Gigabyte',1, 76), 
-('Màn Hình HKC',1, 76), 
-('Màn Hình HP',1, 76), 
-('Màn Hình HuntKey',1, 76), 
-('Màn Hình Lenovo',1, 76), 
-('Màn Hình LG',1, 76), 
-('Màn Hình MSI',1, 76), 
-('Màn Hình Samsung',1, 76),
-('Màn Hình ViewSonic',1, 76)
+('MNAcer', 'Màn Hình Acer',1, 'MN01'), 
+('MNAOC', 'Màn Hình AOC',1, 'MN01'), 
+('MNApple', 'Màn Hình Apple',1, 'MN01'), 
+('MNAsus', 'Màn Hình Asus',1, 'MN01'), 
+('MNBenQ', 'Màn Hình BenQ',1, 'MN01'), 
+('MNConcept', 'Màn Hình Concept D',1, 'MN01'), 
+('MNGigabyte', 'Màn Hình Gigabyte',1, 'MN01'), 
+('MNHKC', 'Màn Hình HKC',1, 'MN01'), 
+('MNHP', 'Màn Hình HP',1, 'MN01'), 
+('MNHuntKey', 'Màn Hình HuntKey',1, 'MN01'), 
+('MNLenovo', 'Màn Hình Lenovo',1, 'MN01'), 
+('MNLG', 'Màn Hình LG',1, 'MN01'), 
+('MNMSI', 'Màn Hình MSI',1, 'MN01'), 
+('MNSamsung', 'Màn Hình Samsung',1, 'MN01'),
+('MNViewSonic', 'Màn Hình ViewSonic',1, 'MN01')
 
 
 /*-----------------------------------------------------------------------------------------------------------------------------------*/
@@ -225,10 +228,11 @@ insert into sale_product(sale_code, promotion_type,date_on,date_off,promotion,qu
 --Sản phẩm
 create table products(
 	id varchar(25) primary key, --Ảnh chính + list ảnh của image_detail 
+	id_acount int,
 	name nvarchar(100) not null,
 	date_on date not null,
-	id_category int not null,
-	type_of_item int not null,
+	id_category varchar(55) not null,
+	type_of_item varchar(55) not null,
 	img_url ntext,
 	input_price float,
 	output_price float,
@@ -245,31 +249,33 @@ create table products(
 --Khóa ngoại sản phẩm 1-1 danh mục | 1-1 sale - thay đổi được 
 ALTER TABLE products ADD FOREIGN KEY (id_category) REFERENCES category(id);	
 
+ALTER TABLE products ADD FOREIGN KEY (id_acount) REFERENCES account(id);	
+
 ALTER TABLE products ADD FOREIGN KEY (on_sale) REFERENCES sale_product(sale_code);	
 
 /*-----------------------------------------------------------------BẢNG SẢN PHẨM------------------------------------------------------------------*/
 insert into products values
 	-- lap top
-	('MQD32SA', N'Macbook Air MQD32SA/A i5 5350U','2020-11-05',11, 1, '',19000000,23990000,40,1.35,'1 cái','2021','05-2021','SL001',1),
-	('DL3520I5', N'Dell Latitude 3520 Intel (Chính hãng)','2021-01-05',3, 1, '',12000000,15990000 ,80,1.79,'1 cái','2021','06-2021','SL001',1),
-	('APH30021', N'Acer Predator Helios 300 2021','2020-12-15', 21, 1, '',29000000,33990000 ,40,2.3,'1 cái','2021','08-2021','SL003',1),
-	('DV3400I5', N'Dell Vostro 14 3400 Intel gen 11 (Chính Hãng)','2020-11-05', 9, 1, '' ,15000000,18990000,35,1.64,'1 cái','2021','04-2021','SL003',1),
-	('LI314R5', N'Lenovo IdeaPad 3 14 (AMD Ryzen 5000)','2021-05-05', 26, 1, '',10000000,14290000,30,1.41,'1 cái','2021','06-2021','SL001',1),
-	('AS514', N'Acer Swift 5 14 (Chính hãng)','2021-05-05', 23, 1, '',22000000,26990000,20,1,'1 cái','2021','10-2021','SL005',1),
-	('LYS714ITL05',N'Laptop Lenovo Yoga Slim 7 14ITL05','2021-07-10', 24, 1, '',2300000,26490000,13,1.36,N'1 cái','2021','05-2021','SL003',1),
-	('HPZB15G5',N'Laptop Workstation HP Zbook 15 G5 3AX12AV','2021-10-15', 36, 1, '',43990000,43990000,10,2.6,N'1 cái','2021','10-2021',null,1),
-	('MBPR13MWP52',N'Apple Macbook Pro 13 Touchbar (MWP52)','2020-10-15',12, 1, '',21600000,23990000,30,1.4,N'1 cái','2020','08-2020',null,1),
+	('MQD32SA',1 , N'Macbook Air MQD32SA/A i5 5350U','2020-11-05','LTApple1', 'LT01', 'http://localhost:8080/viewFile/68941dc1.jpg',19000000,23990000,40,1.35,'1 cái','2021','05-2021','SL001',1),
+	('DL3520I5',1 , N'Dell Latitude 3520 Intel (Chính hãng)','2021-01-05','LTDELL1', 'LT01', 'http://localhost:8080/viewFile/maxresdefault.jpg',12000000,15990000 ,80,1.79,'1 cái','2021','06-2021','SL001',1),
+	('APH30021',1 , N'Acer Predator Helios 300 2021','2020-12-15', 'LTAcer2', 'LT01', 'http://localhost:8080/viewFile/LYS714ITL05.jpg',29000000,33990000 ,40,2.3,'1 cái','2021','08-2021','SL003',1),
+	('DV3400I5',1 , N'Dell Vostro 14 3400 Intel gen 11 (Chính Hãng)','2020-11-05', 'LTDELL7', 'LT01', 'http://localhost:8080/viewFile/LI314R5.jpg' ,15000000,18990000,35,1.64,'1 cái','2021','04-2021','SL003',1),
+	('LI314R5',1 , N'Lenovo IdeaPad 3 14 (AMD Ryzen 5000)','2021-05-05', 'LTLenovo2', 'LT01', 'http://localhost:8080/viewFile/LYS714ITL05.jpg',10000000,14290000,30,1.41,'1 cái','2021','06-2021','SL001',1),
+	('AS514',1 , N'Acer Swift 5 14 (Chính hãng)','2021-05-05', 'LTAcer4', 'LT01', 'http://localhost:8080/viewFile/HPZB15G5.jpg',22000000,26990000,20,1,'1 cái','2021','10-2021','SL005',1),
+	('LYS714ITL05',1 ,N'Laptop Lenovo Yoga Slim 7 14ITL05','2021-07-10', 'LTLenovo', 'LT01', 'http://localhost:8080/viewFile/APH30021.jpg',2300000,26490000,13,1.36,N'1 cái','2021','05-2021','SL003',1),
+	('HPZB15G5',1 ,N'Laptop Workstation HP Zbook 15 G5 3AX12AV','2021-10-15', 'LTHP2', 'LT01', 'http://localhost:8080/viewFile/dell-xps-17-9700-4-min.jpg',43990000,43990000,10,2.6,N'1 cái','2021','10-2021',null,1),
+	('MBPR13MWP52',1 ,N'Apple Macbook Pro 13 Touchbar (MWP52)','2020-10-15','LTApple2', 'LT01', 'http://localhost:8080/viewFile/MQD32SA.jpg',21600000,23990000,30,1.4,N'1 cái','2020','08-2020',null,1),
 	-- PC
-	('PCDOAIO7080',N'PC Dell OptiPlex All in One 7480','2021-09-30', 59, 57, '',29600000,30299000,5,5.94,N'1 cái','2021','05-2021',null,1),
-	('PCAPN608250U',N'PC Mini Asus PN60 i5-8250U','2021-10-15', 73, 57, '',7000000,8349000,5,0.7,N'1 cái','2021','10-2021','SL002',1),
-	('PCHP280G3SFF',N'PC HP 280 G3 SFF','2020-12-27',64, 57, '',8000000,8989000,13,5.94,N'1 cái','2021','08-2020','SL001',1),
+	('PCDOAIO7080',1 ,N'PC Dell OptiPlex All in One 7480','2021-09-30', 'PCDell1', 'PC01', 'http://localhost:8080/viewFile/PCHP280G3SFF.jpg',29600000,30299000,5,5.94,N'1 cái','2021','05-2021',null,1),
+	('PCAPN608250U',1 ,N'PC Mini Asus PN60 i5-8250U','2021-10-15', 'PCAsus', 'PC01', 'http://localhost:8080/viewFile/PCAPN608250U.jpg',7000000,8349000,5,0.7,N'1 cái','2021','10-2021','SL002',1),
+	('PCHP280G3SFF',1 ,N'PC HP 280 G3 SFF','2020-12-27','PCHP1', 'PC01', 'http://localhost:8080/viewFile/PCDOAIO7080.jpg',8000000,8989000,13,5.94,N'1 cái','2021','08-2020','SL001',1),
 
 	--Màn hình
-	('MAVG240YS' ,N'Màn hình Acer VG240YS','2021-10-16', 82, 76, '',4000000,6259000,15,3.85,'1 cái','2020','2020-05-01','SL001',1),
-	('MATGVG249Q', N'Màn hình Asus TUF GAMING VG249Q','2021-09-26', 85,76, '',4500000,6390000,10,5.6,'1 cái','2021','2021-01-01','SL003',1),
-	('MDE2020H', N'Màn hình Dell E2020H','2021-04-12',79, 76, '',2399000,4399000,10,2.94,'1 cái','2021', '2021-01-01','SL003',1),
-	('MHM24F', N'Màn hình HP M24F','2021-05-15', 90, 76, '',3500000,4849000,5,2.5,'1 cái','2021', '2021-05-01','SL003',1),
-	('MHM27FW', N'Màn hình HP M27FW','2020-02-15',90, 76, '',4500000,6059000,10,2.5,'1 cái','2021', '2021-02-02','SL004',1);
+	('MAVG240YS' ,1 ,N'Màn hình Acer VG240YS','2021-10-16', 'MNAcer', 'MN01', 'http://localhost:8080/viewFile/MHM24F.jpg',4000000,6259000,15,3.85,'1 cái','2020','2020-05-01','SL001',1),
+	('MATGVG249Q',1 , N'Màn hình Asus TUF GAMING VG249Q','2021-09-26', 'MNAsus','MN01', 'http://localhost:8080/viewFile/MHM27FW.jpg',4500000,6390000,10,5.6,'1 cái','2021','2021-01-01','SL003',1),
+	('MDE2020H',1 , N'Màn hình Dell E2020H','2021-04-12','MNDell2', 'MN01', 'http://localhost:8080/viewFile/MATGVG249Q.jpg',2399000,4399000,10,2.94,'1 cái','2021', '2021-01-01','SL003',1),
+	('MHM24F',1 , N'Màn hình HP M24F','2021-05-15', 'MNHP', 'MN01', 'http://localhost:8080/viewFile/aef9ad8e.jpg',3500000,4849000,5,2.5,'1 cái','2021', '2021-05-01','SL003',1),
+	('MHM27FW',1 , N'Màn hình HP M27FW','2020-02-15','MNHP', 'MN01', 'http://localhost:8080/viewFile/2.jpg',4500000,6059000,10,2.5,'1 cái','2021', '2021-02-02','SL004',1);
 /*-----------------------------------------------------------------------------------------------------------------------------------*/
 
 create table products_detail(
@@ -292,10 +298,10 @@ create table products_detail(
 	scan_frequency nvarchar(100), --tần số quét
 	background_panels varchar(9), --tấm nền
 	resolution varchar(35), --Độ phân giải
-	contrast varchar(35), --Độ tương phản
+	contrast varchar(105), --Độ tương phản
 	response_time varchar(9), --Thời gian phản hồi
-	brightness varchar(9), -- Độ sáng
-	view_screenshots varchar(9), --Góc nhìn
+	brightness varchar(35), -- Độ sáng
+	view_screenshots varchar(55), --Góc nhìn
 	warranty_period int not null, --Thời gian bảo hành
 	accessories_included ntext, --Phụ kiện đi kèm
 	see_more ntext, --Xem thêm
@@ -363,6 +369,7 @@ create table image_detail(
 	id int identity(1,1) primary key,
 	id_product varchar(25) not null,
 	name_path ntext not null,
+	type_img int not null,
 )
 --Khóa ngoại ct hình ảnh N-1 sản phẩm
 ALTER TABLE image_detail ADD FOREIGN KEY (id_product) REFERENCES products(id);	
@@ -392,37 +399,15 @@ ALTER TABLE description ADD FOREIGN KEY (id_product) REFERENCES products(id);
 
 ALTER TABLE description ADD FOREIGN KEY (id_blog) REFERENCES blogs(id);
 
---Phân lô hàng nhập
-create table imported_shipment( --Nếu giá tiền thay đổi thống kê tiền lãi lấy giá bán từng đợt nhập trừ đi giá nhập bên lô nhập)
-	id int identity(1,1) primary key,
-	date_added date not null,
-	id_account int not null,
-	supplier nvarchar(255),
-	status bit,
-)
---Khóa ngoạilô nhập 1-1 account
-ALTER TABLE imported_shipment ADD FOREIGN KEY (id_account) REFERENCES account(id);	
-
---Chi tiết lô nhập
-create table shipment_detail(
-	id_shipment int not null,
-	id_product varchar(25) not null,
-	price float not null, --
-	quantity int not null, --
-	primary key(id_shipment, id_product),
-)
---Khóa ngoại ct lô nhập N-1 lô nhập | 1-1 sản phẩm
-ALTER TABLE shipment_detail ADD FOREIGN KEY (id_shipment) REFERENCES imported_shipment(id);	
-
-ALTER TABLE shipment_detail ADD FOREIGN KEY (id_product) REFERENCES products(id);	
-
 --Đánh giá sản phẩm
 CREATE TABLE product_rating(
+	id int identity(1,1) primary key,
 	id_product varchar(25) not null,
 	id_account int not null,
 	img_url ntext,
 	star_rating int not null,
 	comment ntext,
+	start_comment datetime
 )
 --Khóa ngoại đánh giá N-1 sản phẩm
 ALTER TABLE product_rating ADD FOREIGN KEY (id_product) REFERENCES products(id);
@@ -432,7 +417,7 @@ ALTER TABLE product_rating ADD FOREIGN KEY (id_account) REFERENCES account(id);
 --Khuyến mãi
 Create table vouchers(
 	id nvarchar(10) primary key not null,
-	id_category int, --Không nhập id sản phẩm hoặc danh mục sẽ áp dụng toàn bộ sản phẩm
+	id_category varchar(55), --Không nhập id sản phẩm hoặc danh mục sẽ áp dụng toàn bộ sản phẩm
 	id_product varchar(25),
 	name nvarchar(50) not null,
 	promotion int not null,
@@ -462,13 +447,16 @@ ALTER TABLE delivery_address ADD FOREIGN KEY (id_account) REFERENCES account(id)
 --Bảng mua hàng
 Create table orders( -- Trả hàng | Đổi hàng | Bảo hành 
 	id int identity(1,1) primary key,
+	order_code varchar(12),
 	id_account int,
 	order_date date,
-	phone_number varchar(10) not null,
-	address nvarchar(60) not null,
-	--quantity int not null,
+	phone_number varchar(10),
+	address nvarchar(255),
 	description ntext,
 	payment_status bit,
+	payment_methods int,
+	completion_date date,--Đã nhận được hàng
+	authenticator nvarchar(255),
 	received int, --0 chờ xác nhận | 1 Đang giao | 2 Đã giao | 3 Đã nhận được hàng | -1 Hủy | -2 giỏ hàng
 )
 --Khóa ngoại orders N-1 người dùng
@@ -482,9 +470,8 @@ Create table order_details(
 	id_voucher nvarchar(10),
 	price float not null,
 	quantity int not null,
-	completion_date date,--Đã nhận được hàng
-	payment_methods int,
-	status int, --1 Bảo hành | -1 Đổi hàng | 2 Đã giao | 3 Bảo hành 
+	serial_number varchar(25),
+	status int, -- | 0 Không có gì | 1 Bảo hành 
 )
 
 --Khóa ngoại order_details 1-1 voucher | 1-N order | 1-1 product
@@ -499,7 +486,13 @@ create table contact(
 	id int identity(1,1) primary key,
 	name nvarchar(150) not null,
 	email varchar(150) not null,
-	subject nvarchar(255) not null,
+	subject nvarchar(255) default null,
 	message ntext not null,
+	contact_date datetime  default null,
+	reply_date datetime  default null,
+	reply_content nvarchar(255)  default null,
+	phone_number nvarchar(10)  default null,
+	status nvarchar(30)  default null,
+	contact_person_email nvarchar(255)  default null,
 )
 select * from category

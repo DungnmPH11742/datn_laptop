@@ -58,6 +58,7 @@
                     </div>
                 </div>
             </div>
+
             <form class="col-md-6 clear--padding" id="login-form" th:action="@{/j_spring_security_check}" method='POST'>
                 <div class="conatiner form-login">
                     <div class="title-text-login">
@@ -66,7 +67,23 @@
                             ,it takes less than a minute
                         </div>
                     </div>
+                    <th:block th:if="${param.error != null}">
+                        <div class="alert alert-danger" style="width: 70%;margin-left: 15%">
+                            <p style="margin-bottom: 0.2rem">Tên đăng nhập hoặc mật
+                                khẩu không đúng.</p>
+                        </div>
+                    </th:block>
 
+                    <th:block th:if="${param.logout != null}" >
+                        <div class="alert alert-success" style="width: 70%;margin-left: 15%">
+                            <p style="margin-bottom: 0.2rem">Bạn đã đăng xuất thành công.</p>
+                        </div>
+                    </th:block>
+                    <th:block th:if="${param.accessDenied != null}">
+                        <div class="alert alert-danger" style="width: 70%;margin-left: 15%">
+                            <p style="margin-bottom: 0.2rem">Bạn không có quyền truy cập vào trang này</p>
+                        </div>
+                    </th:block>
                     <div class="form-control-login">
                         <div class="md-form">
                             <input type="text" id="defaultForm-email" name='username' class="form-control"/>
@@ -82,7 +99,8 @@
                             <input type="checkbox" name="remember" class="remember-login" id=""> Remember Me
                         </div>
                         <div class="forgot-pass">
-                            <a href="#" class="forgot-password">Forgot Password ?</a> || <a href="">Đăng ký</a>
+                            <a href="#" class="forgot-password" id="forgotPassword">Forgot Password ?</a> || <a
+                                href="/register">Đăng ký</a>
                         </div>
                     </div>
                     <div class="btn-login">
@@ -90,36 +108,40 @@
                     </div>
                 </div>
             </form>
-            <form class="col-md-6 clear--padding" id="sigup-form">
-                <div class="conatiner form-login">
-                    <div class="title-text-login">
-                        <div class="text-log">Đăng ký</div>
-                    </div>
 
-                    <div class="form-control-login">
-                        <div class="md-form">
-                            <input type="text" id="defaultForm-email" class="form-control">
-                            <label for="defaultForm-email" id="lableEmail" class="email">Email</label>
+
+            <div class="modal fade forgotPasswordModal" id="myModal">
+                <div class="modal-dialog" style="width: 20%; margin-top: 20%">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="close" data-dismiss="modal" type="button">&times;</button>
+                            <h4 class="modal-title" id="phan-dau-modal">Quên mật khẩu</h4>
                         </div>
-                        <div class="md-form">
-                            <input type="password" id="defaultForm-password" class="form-control"/>
-                            <label for="defaultForm-password" id="lablePass" class="password">Mật khẩu</label>
+                        <div class="modal-body">
+
+                            <p class="text-danger" id="error"></p>
+
+                            <p class="text-warning" id="message"></p>
+                            <div class="form-group ">
+                                <label class="control-label " for="emailForgot">
+                                    Email
+                                </label>
+                                <div class="input-group">
+                                    <input class="form-control" id="emailForgot" name="email" type="text"/>
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-envelope-o"></i>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="md-form">
-                            <input type="password" id="defaultForm-password" class="form-control"/>
-                            <label for="defaultForm-password" id="lablePass" class="password">Xác nhận mật khẩu</label>
+                        <div class="modal-footer">
+                            <button class="btn btn-default" data-dismiss="modal" type="button">Đóng</button>
+                            <input class="btn btn-default" id="btnSubmit" type="submit"
+                                   value="Xác nhận"/>
                         </div>
-                    </div>
-                    <div class="action-form-login">
-                        <div class="forgot-pass">
-                            <a href="#" class="forgot-password">Đăng nhập</a>
-                        </div>
-                    </div>
-                    <div class="btn-login">
-                        <button type="button" class="btn-log fill submit-login">Đăng ký</button>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </section>
@@ -135,6 +157,8 @@
 <script th:src="@{/user-st/js/bootstrap.min.js}"></script>
 <script th:src="@{/user-st/js/jquery.prettyPhoto.js}"></script>
 <script th:src="@{/user-st/js/main.js}"></script>
+<script th:src="@{/user-st/client/click.js}"></script>
+<script th:src="@{/user-st/loginAjax.js}"></script>
 <script>
 
     $(function () {

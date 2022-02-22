@@ -4,6 +4,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -13,11 +15,23 @@ public class ProductsDetail implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "id", nullable = false)
-    private String id;
+    @Column(name = "sku")
+    private String sku;
 
-    @Column(name = "producer")
-    private String producer;
+    @Column(name = "date_on", nullable = false)
+    private Date dateOn;
+
+    @Column(name = "img_url")
+    private String imgUrl;
+
+    @Column(name = "price")
+    private Float price;
+
+    @Column(name = "quantity")
+    private Integer quantity;
+
+    @Column(name = "dimensions")
+    private String dimensions;
 
     @Column(name = "cpu")
     private String cpu;
@@ -37,8 +51,8 @@ public class ProductsDetail implements Serializable {
     @Column(name = "vga")
     private String vga;
 
-    @Column(name = "operating_system")
-    private String operatingSystem;
+    @Column(name = "os")
+    private String os;
 
     @Column(name = "power")
     private String power;
@@ -70,6 +84,12 @@ public class ProductsDetail implements Serializable {
     @Column(name = "view_screenshots")
     private String viewScreenshots;
 
+    @Column(name = "connectivity")
+    private String connectivity;
+
+    @Column(name = "battery")
+    private String battery;
+
     @Column(name = "warranty_period", nullable = false)
     private Integer warrantyPeriod;
 
@@ -79,8 +99,30 @@ public class ProductsDetail implements Serializable {
     @Column(name = "see_more")
     private String seeMore;
 
+    @Column(name = "status")
+    private int status;
+
     //bi-directional one-to-one association to Product
-    @OneToOne
-    @JoinColumn(name="id")
+    @ManyToOne
+    @JoinColumn(name="id_product")
     private Products product;
+
+    //bi-directional many-to-one association to ImageDetail
+    @OneToMany(mappedBy="productsDetail")
+    private List<ImageDetail> imageDetails;
+
+    @ManyToOne
+    @JoinColumn(name="on_sale")
+    private SaleProduct saleProduct;
+
+    //bi-directional many-to-one association to Description
+    @OneToMany(mappedBy="productsDetail")
+    private List<Description> descriptions;
+
+    @OneToMany(mappedBy="productsDetail")
+    private List<ProductRating> productRatings;
+
+    //bi-directional many-to-one association to OrderDetail
+    @OneToMany(mappedBy="productsDetail")
+    private List<OrderDetails> orderDetails;
 }

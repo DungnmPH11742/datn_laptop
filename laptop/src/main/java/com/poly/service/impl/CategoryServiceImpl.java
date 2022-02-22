@@ -31,23 +31,37 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryVO getOne(Integer id) {
+    public List<CategoryVO> getNodeCate() {
+        List<CategoryVO> vos = new ArrayList<>();
+        categoryRepository.findByParentIdIsNull().forEach(category -> {
+            vos.add(modelMapper.map(category, CategoryVO.class));
+        });
+        return vos;
+    }
+
+    @Override
+    public CategoryVO getOne(String id) {
         return convertCategoryToDtoById(id);
     }
 
     @Override
     public CategoryVO create(CategoryVO vo) {
-        return null;
+        Category category = modelMapper.map(vo, Category.class);
+        category.setActived(true);
+        return modelMapper.map(categoryRepository.save(category), CategoryVO.class);
     }
 
     @Override
     public CategoryVO update(CategoryVO vo) {
-        return null;
+        if (!categoryRepository.existsById(vo.getId())) {
+            return null;
+        } else
+            return modelMapper.map(categoryRepository.save(modelMapper.map(vo, Category.class)), CategoryVO.class);
     }
 
     @Override
-    public void delete(String id) {
-
+    public boolean delete(String id) {
+        return false;
     }
 
     @Override
@@ -56,7 +70,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryVO> getListByParent(Integer id) {
+    public List<CategoryVO> getListByParent(String id) {
         List<CategoryVO> vos = new ArrayList<>();
         categoryRepository.getListByParent(id).forEach(category -> {
             vos.add(modelMapper.map(category, CategoryVO.class));
@@ -70,7 +84,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryVO> findAllByParentId(Integer id) {
+    public List<CategoryVO> findAllByParentId(String id) {
         List<CategoryVO> vos = new ArrayList<>();
         categoryRepository.findAllByParentId(id).forEach(category -> {
             vos.add(modelMapper.map(category, CategoryVO.class));
@@ -79,7 +93,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryVO> findAllById(Integer id) {
+    public List<CategoryVO> findAllById(String id) {
         return convertListCategoryDto(categoryRepository.findAllById(id));
     }
 
@@ -96,14 +110,19 @@ public class CategoryServiceImpl implements CategoryService {
         return vos;
     }
 
-    public CategoryVO convertCategoryToDtoById(Integer id) {
+    public CategoryVO convertCategoryToDtoById(String id) {
 
         CategoryVO categoryVO = new CategoryVO();
         Optional<Category> optional = categoryRepository.findById(id);
         if (optional.isPresent()) {
             Category category = optional.get();
-          categoryVO =  modelMapper.map(category, CategoryVO.class);
+            categoryVO = modelMapper.map(category, CategoryVO.class);
         }
         return categoryVO;
+    }
+
+    @Override
+    public List<CategoryVO> getAllByParentIdIsNull() {
+        return convertListCategoryDto(categoryRepository.getAllByParentIdIsNull());
     }
 }
