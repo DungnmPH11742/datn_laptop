@@ -14,18 +14,12 @@
     <link th:href="@{/user-st/css/animate.css}" rel="stylesheet">
     <link th:href="@{/user-st/css/main.css}" rel="stylesheet">
     <link th:href="@{/user-st/css/responsive.css}" rel="stylesheet">
-    <!--[if lt IE 9]>
     <script th:src="@{/user-st/js/html5shiv.js}"></script>
     <script th:src="@{/user-st/js/respond.min.js}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-latest.pack.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <!-- <![endif]&ndash;&gt;
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">-->
+
 </head>
 <!--/head-->
 
@@ -86,11 +80,11 @@
 <section>
     <div class="container">
         <div class="row">
-            <div class="col-sm-2">
+            <!--<div class="col-sm-2">
                 <div class="left-sidebar">
                     <h2>Danh mục</h2>
                     <div class="panel-group category-products" id="accordian">
-                        <!--category-productsr-->
+                        &lt;!&ndash;category-productsr&ndash;&gt;
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
@@ -194,10 +188,10 @@
                             </div>
                         </div>
                     </div>
-                    <!--/category-products-->
+                    &lt;!&ndash;/category-products&ndash;&gt;
 
                     <div class="brands_products">
-                        <!--brands_products-->
+                        &lt;!&ndash;brands_products&ndash;&gt;
                         <h2>Brands</h2>
                         <div class="brands-name">
                             <ul class="nav nav-pills nav-stacked">
@@ -211,10 +205,10 @@
                             </ul>
                         </div>
                     </div>
-                    <!--/brands_products-->
+                    &lt;!&ndash;/brands_products&ndash;&gt;
 
                     <div class="price-range">
-                        <!--price-range-->
+                        &lt;!&ndash;price-range&ndash;&gt;
                         <h2>Price Range</h2>
                         <div class="well text-center">
                             <input type="text" class="span2" value="" data-slider-min="0"
@@ -223,11 +217,11 @@
                             <b class="pull-left">0 vnđ</b> <b class="pull-right">100.000.000 vnđ</b>
                         </div>
                     </div>
-                    <!--/price-range-->
+                    &lt;!&ndash;/price-range&ndash;&gt;
                 </div>
-            </div>
+            </div>-->
 
-            <div class="col-sm-10 padding-right">
+            <div class="col-sm-12 padding-right">
                 <div class="recommended_items">
                     <!--recommended_items-->
                     <h2 class="title text-center">Giảm giá sốc</h2>
@@ -264,41 +258,130 @@
                     </div>
                 </div>
                 <!--/recommended_items-->
-
+                <div class="fillter-home">
+                    <div class="flex items-center">
+                        <div class="title">Khoảng giá</div>
+                        <div class="content">
+                            <label>
+                                <span hidden="hidden">category/laptop?price=6</span>
+                                Trên 50 triệu
+                            </label>
+                            <label>
+                                <span hidden="hidden">category/laptop?price=5</span>
+                                40 - 50 triệu
+                            </label>
+                            <label>
+                                <span hidden="hidden">category/laptop?price=4</span>
+                                30 - 40 triệu
+                            </label>
+                            <label>
+                                <span hidden="hidden">category/laptop?price=3</span>
+                                20 - 30 triệu
+                            </label>
+                            <label>
+                                <span hidden="hidden">category/laptop?price=2</span>
+                                10 - 20 triệu
+                            </label>
+                            <label>
+                                <span hidden="hidden">category/laptop?price=1</span>
+                                Dưới 10 triệu
+                            </label>
+                        </div>
+                    </div>
+                </div>
                 <div class="features_items">
                     <!--features_items-->
                     <h2 class="title text-center">Máy tính xách tay</h2>
                     <div th:each="p, key: ${list_product}">
-                        <div th:if="${p.getTypeOfItem() == 1} and ${key.count <=12}">
-                            <div th:replace="~{common/list_product :: products}"></div>
+                        <div th:if="${p.getTypeOfItem() == 'LT01'} and ${key.count <=12}">
+                            <div th:replace="~{common/list_product :: p_sale}"></div>
                         </div>
                     </div>
                 </div>
-
+                <div class="fillter-home">
+                    <div class="flex items-center">
+                        <div class="title">Khoảng giá</div>
+                        <div class="content">
+                            <label>
+                                <span hidden="hidden">category/pc%20van%20phòng?price=6</span>
+                                Trên 50 triệu
+                            </label>
+                            <label>
+                                <span hidden="hidden">category/pc%20van%20phòng?price=5</span>
+                                40 - 50 triệu
+                            </label>
+                            <label>
+                                <span hidden="hidden">category/pc%20van%20phòng?price=4</span>
+                                30 - 40 triệu
+                            </label>
+                            <label>
+                                <span hidden="hidden">category/pc%20van%20phòng?price=3</span>
+                                20 - 30 triệu
+                            </label>
+                            <label>
+                                <span hidden="hidden">category/pc%20van%20phòng?price=2</span>
+                                10 - 20 triệu
+                            </label>
+                            <label>
+                                <span hidden="hidden">category/pc%20van%20phòng?price=1</span>
+                                Dưới 10 triệu
+                            </label></div>
+                    </div>
+                </div>
                 <div class="features_items">
                     <!--features_items-->
                     <h2 class="title text-center">Máy tính - PC</h2>
                     <div th:each="p, key: ${list_product}">
-                        <div th:if="${p.getTypeOfItem() == 57}">
-                            <div th:replace="~{common/list_product :: products}"></div>
+                        <div th:if="${p.getTypeOfItem() == 'PC01'}">
+                            <div th:replace="~{common/list_product :: p_sale}"></div>
                         </div>
                     </div>
                 </div>
                 <!-- Màn hình -->
-
+                <div class="fillter-home">
+                    <div class="flex items-center">
+                        <div class="title">Khoảng giá</div>
+                        <div class="content">
+                            <label>
+                                <span hidden="hidden">category/màn%20hình?price=6</span>
+                                Trên 50 triệu
+                            </label>
+                            <label>
+                                <span hidden="hidden">category/màn%20hình?price=5</span>
+                                40 - 50 triệu
+                            </label>
+                            <label>
+                                <span hidden="hidden">category/màn%20hình?price=4</span>
+                                30 - 40 triệu
+                            </label>
+                            <label>
+                                <span hidden="hidden">category/màn%20hình?price=3</span>
+                                20 - 30 triệu
+                            </label>
+                            <label>
+                                <span hidden="hidden">category/màn%20hình?price=2</span>
+                                10 - 20 triệu
+                            </label>
+                            <label>
+                                <span hidden="hidden">category/màn%20hình?price=1</span>
+                                Dưới 10 triệu
+                            </label>
+                        </div>
+                    </div>
+                </div>
                 <div class="features_items">
                     <!--features_items-->
                     <h2 class="title text-center">Màn hình</h2>
                     <div th:each="p, key: ${list_product}">
-                        <div th:if="${p.getTypeOfItem() == 76} and ${key.count <=12}">
-                            <div th:replace="~{common/list_product :: products}"></div>
+                        <div th:if="${p.getTypeOfItem() == 'MN01'} and ${key.count <=12}">
+                            <div th:replace="~{common/list_product :: p_sale}"></div>
                         </div>
                     </div>
                 </div>
                 <!--features_items-->
 
-                <div class="category-tab">
-                    <!--category-tab-->
+                <!--<div class="category-tab">
+                    &lt;!&ndash;category-tab&ndash;&gt;
                     <div class="col-sm-12">
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#tshirt" data-toggle="tab">T-Shirt</a></li>
@@ -314,7 +397,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <!--												<img src="images/home/gallery1.jpg" alt="" />-->
+                                            &lt;!&ndash;												<img src="images/home/gallery1.jpg" alt="" />&ndash;&gt;
                                             <h2>$56</h2>
                                             <p>Easy Polo Black Edition</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -328,7 +411,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <!--												<img src="images/home/gallery2.jpg" alt="" />-->
+                                            &lt;!&ndash;												<img src="images/home/gallery2.jpg" alt="" />&ndash;&gt;
                                             <h2>$56</h2>
                                             <p>Easy Polo Black Edition</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -342,7 +425,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <!--												<img src="images/home/gallery3.jpg" alt="" />-->
+                                            &lt;!&ndash;												<img src="images/home/gallery3.jpg" alt="" />&ndash;&gt;
                                             <h2>$56</h2>
                                             <p>Easy Polo Black Edition</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -356,7 +439,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <!--												<img src="images/home/gallery4.jpg" alt="" />-->
+                                            &lt;!&ndash;												<img src="images/home/gallery4.jpg" alt="" />&ndash;&gt;
                                             <h2>$56</h2>
                                             <p>Easy Polo Black Edition</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -373,7 +456,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <!--												<img src="images/home/gallery4.jpg" alt="" />-->
+                                            &lt;!&ndash;												<img src="images/home/gallery4.jpg" alt="" />&ndash;&gt;
                                             <h2>$56</h2>
                                             <p>Easy Polo Black Edition</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -387,7 +470,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <!--												<img src="images/home/gallery3.jpg" alt="" />-->
+                                            &lt;!&ndash;												<img src="images/home/gallery3.jpg" alt="" />&ndash;&gt;
                                             <h2>$56</h2>
                                             <p>Easy Polo Black Edition</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -401,7 +484,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <!--												<img src="images/home/gallery2.jpg" alt="" />-->
+                                            &lt;!&ndash;												<img src="images/home/gallery2.jpg" alt="" />&ndash;&gt;
                                             <h2>$56</h2>
                                             <p>Easy Polo Black Edition</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -415,7 +498,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <!--												<img src="images/home/gallery1.jpg" alt="" />-->
+                                            &lt;!&ndash;												<img src="images/home/gallery1.jpg" alt="" />&ndash;&gt;
                                             <h2>$56</h2>
                                             <p>Easy Polo Black Edition</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -432,7 +515,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <!--												<img src="images/home/gallery3.jpg" alt="" />-->
+                                            &lt;!&ndash;												<img src="images/home/gallery3.jpg" alt="" />&ndash;&gt;
                                             <h2>$56</h2>
                                             <p>Easy Polo Black Edition</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -446,7 +529,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <!--												<img src="images/home/gallery4.jpg" alt="" />-->
+                                            &lt;!&ndash;												<img src="images/home/gallery4.jpg" alt="" />&ndash;&gt;
                                             <h2>$56</h2>
                                             <p>Easy Polo Black Edition</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -460,7 +543,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <!--												<img src="images/home/gallery1.jpg" alt="" />-->
+                                            &lt;!&ndash;												<img src="images/home/gallery1.jpg" alt="" />&ndash;&gt;
                                             <h2>$56</h2>
                                             <p>Easy Polo Black Edition</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -474,7 +557,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <!--												<img src="images/home/gallery2.jpg" alt="" />-->
+                                            &lt;!&ndash;												<img src="images/home/gallery2.jpg" alt="" />&ndash;&gt;
                                             <h2>$56</h2>
                                             <p>Easy Polo Black Edition</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -491,7 +574,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <!--												<img src="images/home/gallery1.jpg" alt="" />-->
+                                            &lt;!&ndash;												<img src="images/home/gallery1.jpg" alt="" />&ndash;&gt;
                                             <h2>$56</h2>
                                             <p>Easy Polo Black Edition</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -505,7 +588,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <!--												<img src="images/home/gallery2.jpg" alt="" />-->
+                                            &lt;!&ndash;												<img src="images/home/gallery2.jpg" alt="" />&ndash;&gt;
                                             <h2>$56</h2>
                                             <p>Easy Polo Black Edition</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -519,7 +602,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <!--												<img src="images/home/gallery3.jpg" alt="" />-->
+                                            &lt;!&ndash;												<img src="images/home/gallery3.jpg" alt="" />&ndash;&gt;
                                             <h2>$56</h2>
                                             <p>Easy Polo Black Edition</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -533,7 +616,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <!--												<img src="images/home/gallery4.jpg" alt="" />-->
+                                            &lt;!&ndash;												<img src="images/home/gallery4.jpg" alt="" />&ndash;&gt;
                                             <h2>$56</h2>
                                             <p>Easy Polo Black Edition</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -550,7 +633,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <!--												<img src="images/home/gallery2.jpg" alt="" />-->
+                                            &lt;!&ndash;												<img src="images/home/gallery2.jpg" alt="" />&ndash;&gt;
                                             <h2>$56</h2>
                                             <p>Easy Polo Black Edition</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -564,7 +647,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <!--												<img src="images/home/gallery4.jpg" alt="" />-->
+                                            &lt;!&ndash;												<img src="images/home/gallery4.jpg" alt="" />&ndash;&gt;
                                             <h2>$56</h2>
                                             <p>Easy Polo Black Edition</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -578,7 +661,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <!--												<img src="images/home/gallery3.jpg" alt="" />-->
+                                            &lt;!&ndash;												<img src="images/home/gallery3.jpg" alt="" />&ndash;&gt;
                                             <h2>$56</h2>
                                             <p>Easy Polo Black Edition</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -592,7 +675,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <!--												<img src="images/home/gallery1.jpg" alt="" />-->
+                                            &lt;!&ndash;												<img src="images/home/gallery1.jpg" alt="" />&ndash;&gt;
                                             <h2>$56</h2>
                                             <p>Easy Polo Black Edition</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -604,7 +687,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>
@@ -613,221 +696,65 @@
 
 </div>
 
-    <!--<div th:replace="~{common/footer :: footers}"></div>-->
+<div th:replace="~{common/footer :: footers}"></div>
 
 
-    <script th:src="@{/user-st/js/jquery.js}"></script>
-    <script th:src="@{/user-st/js/price-range.js}"></script>
-    <script th:src="@{/user-st/js/jquery.scrollUp.min.js}"></script>
-    <script th:src="@{/user-st/js/bootstrap.min.js}"></script>
-    <script th:src="@{/user-st/js/jquery.prettyPhoto.js}"></script>
-    <script th:src="@{/user-st/js/main.js}"></script>
-    <script type="text/javascript">
+<script th:src="@{/user-st/js/jquery.js}"></script>
+<script th:src="@{/user-st/js/price-range.js}"></script>
+<script th:src="@{/user-st/js/jquery.scrollUp.min.js}"></script>
+<script th:src="@{/user-st/js/bootstrap.min.js}"></script>
+<script th:src="@{/user-st/js/jquery.prettyPhoto.js}"></script>
+<script th:src="@{/user-st/js/main.js}"></script>
+<script th:src="@{/user-st/js/compare.js}"></script>
+<script th:src="@{/user-st/filterHome.js}"></script>
+<script type="text/javascript">
+    // Thêm vào giỏ hàng
+    function addToCart(sku) {
+        let data = {
+            'sku': sku,
+            'quantityProduct': 1,
+        };
+        $.ajax({
+            type: "PUT",
+            url: "/addToCart",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            dataType: "JSON",
+            success: function (data) {
 
-        let type_of_item = 0;
+                if(`${data.message}` == 'maxPrice'){
+                    $("#notification-compare").append(`<div class="alert alert-warning alert-dismissible">
+                                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                            <strong>Thất bại</strong>
+                                                            <p>Tổng tiền không vượt quá 150.000.000đ</p>
+                                                       </div>`);
+                }else if(`${data.message}` == 'maxQuantity'){
+                    $("#notification-compare").append(`<div class="alert alert-warning alert-dismissible">
+                                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                            <strong>Thất bại</strong>
+                                                            <p>Đã đạt só lượng tối đa</p>
+                                                       </div>`);
+                }else {
+                    $("#notification-compare").append(`<div class="alert alert-success alert-dismissible">
+                                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                            <strong>Thành công!</strong>
+                                                            <p>Thêm vào giỏ hàng thành công, đang có ${data.totalItem} sản phẩm</p>
+                                                       </div>`);
 
-        let list_compare = [];
-
-        //Thêm vào so sánh
-        function addCompareProduct(id) {
-            $.ajax({
-                type: "Get",
-                url: "/add-compare",
-                data: {'id': id},
-                success: function (data) {
-                    console.log(data);
-                    getCompareProduct();
-                },
-                error: function () {
-                    alert("Lỗi rồi")
+                    $("#hienThiSoLuong").html('');
+                    $("#hienThiSoLuong").append(`${data.totalItem}`);
                 }
-            });
-        }
-
-
-        //Gọi danh sách so sánh
-        function getCompareProduct() {
-            $.ajax({
-                type: "Get",
-                url: "/get-compare",
-                success: function (data) {
-                    list_compare = data;
-                    console.log(data);
-                    type_of_item = data[0]?.typeOfItem != null ? data[0]?.typeOfItem : 0;
-                    let list_product = '';
-                    for (let i = 0; i < data.length; i++) {
-                        if (data[i] != null) {
-                            list_product = list_product + `
-                        <div class="col-1-compare col-sm-5">
-                            <div class="col-sm-6 d-flex">
-                            <img class="col-sm-10 align-self-center p" id="p${i + 1}"
-                                 src="/user-st/images/product/${data[i]?.id}.jpg"
-                                 alt="">
-                            <i class="fa fa-times-circle" onclick="remove('p${i + 1}')"></i>
-                        </div>
-                        <div class="col-sm-6 p" id="p${i + 1}_dt">
-                            <h5>${data[i]?.name}</h5>
-                            <p style="color: red;">${(data[i]?.outputPrice - data[i]?.outputPrice * data[i]?.saleProduct?.promotion / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</p>
-                            <s>${data[i]?.outputPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</s>
-                            </div>
-                        </div>`;
-                        } else {
-                            list_product = list_product +
-                                `<div class="col-sm-5" id="p2_compare">
-                                <div class="col-sm-12 d-flex">
-                                    <button class="btn" onclick="showBoxSearch()">Thêm so sánh</button>
-                                </div>
-                            </div>`
-                        }
-                    }
-
-                    //
-                    let html =
-                        `<nav role="navigation" id="nav-compare" class="navbar navbar-white navbar-embossed navbar-lg navbar-fixed-top d-compera">
-                <i onclick="closeCompare()" class="fa fa-times col-sm-1 float-right"></i>
-                <div class="col-sm-11 float-right">
-                    <div class="d-content">
-                        ${list_product}
-                        <div class="col-sm-2">
-                            <a class="btn btn-primary" href="/compare">So sánh ngay</a>
-                            <br>
-                            <a onclick="removeAllCompare()" style="cursor: pointer;">Xóa tất cả sản phẩm</a>
-                        </div>
-                    </div>
-                </div>
-            </nav>`;
-                    $('#compare').html('');
-                    $('#compare').append(html);
-                },
-                error: function () {
-                    alert("Lỗi rồi")
-                }
-            })
-        }
-
-
-        const compareNow = () => {
-            let img, td_pducer, td_name, td_color, td_cpu, td_hard, td_cam, td_vga, td_mass,
-                td_redate, td_hdh, td_pow, td_scanf, td_bpanel, td_contrast, td_retime,
-                td_vsreen, td_dsize,td_sratio, td_bright, td_bh, td_pk;
-            for (let i = 0; i < list_compare.length; i++) {
-                img += `
-                    <div class="col-sm-6 d-flex">
-                        <img class="col-sm-11 align-self-center" src="/user-st/images/product/${list_compare[i]?.id}.jpg" alt="">
-                        <i class="fa fa-times-circle"></i>
-                    </div>`;
-                td_pducer += `<td>${list_compare[i]?.productsDetail.producer}</td>`;
+                setTimeout(function() {
+                    $('.alert').fadeOut('slow');}, 5000
+                );
+            }, error: function () {
+                alert("Lỗi addToCart");
             }
-            let body = `
-            <div class=" category-tab shop-details-tab">
-                <h4>So sánh</h4>
-                <div class="col-sm-11 float-right">
-                    ${img}
-                </div>
-                <table class="table">
-                    <tbody class="compare-tab">
+        });
 
-                    </tbody>
-                </table>
-            </div>`
-            $('#body_modal_compare').append(body);
-        }
-
-        const remove = (id) => {
-            $.ajax({
-                type: "Get",
-                url: "/remove-compare",
-                data: {'key': id},
-                success: function (data) {
-                    console.log(data);
-                    getCompareProduct();
-                    $('#compare_button').attr("disabled", true);
-                },
-                error: function () {
-                    alert("Lỗi rồi")
-                }
-            })
-        }
-
-        //Thêm vào so sánh
-        function findByNameAndType(name, type) {
-            $.ajax({
-                type: "Get",
-                url: "/find-by",
-                data: {'name': name, 'type': type},
-                success: function (data) {
-                    console.log(data);
-                    let tcontent = '';
-                    for (let i = 0; i < data.length; i++) {
-                        tcontent += `
-                            <tr>
-                                <th class="col-sm-3">
-                                    <img class="col-sm-12 align-self-center p" id="p1"
-                                        src="/user-st/images/product/${data[i]?.id}.jpg"
-                                        alt="">
-                                </th>
-                                <th class="col-sm-6">
-                                    <h5>${data[i]?.name}</h5>
-                                    <p style="color: red;">${(data[i]?.outputPrice - data[i]?.outputPrice * data[i]?.saleProduct?.promotion / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</p>
-                                </th>
-                                <th class="col-sm-3">
-                                    <a style="cursor: pointer" onclick="addCompareProduct('${data[i]?.id}')">Thêm so sánh</a>
-                                </th>
-                            </tr>`;
-                        console.log(``)
-                    }
-                    $('#searchProducts').html('');
-                    $('#searchProducts').append(tcontent);
-                },
-                error: function () {
-                    alert("Lỗi rồi")
-                }
-            });
-        }
-
-        const removeAllCompare = () => {
-            remove("p1");
-            remove("p2");
-            type_of_item = 0;
-        }
-
-        const closeCompare = () => {
-            document.getElementById('nav-compare').style.animation = 'change_height_default ease .3s forwards';
-        }
-
-        const onfocusHandler = () => {
-            document.getElementById('nav-compare').style.animation = 'change_height_max ease .3s forwards';
-            findByNameAndType('', type_of_item);
-        }
-
-        const showBoxSearch = () => {
-            $('#p2_compare').html('');
-            $('#p2_compare').append(`
-				<div class="col-sm-12 d-flex">
-					<input class="col-sm-2 form-control" id="search-p-compare" onfocus="onfocusHandler()" oninput="onchangSearch()" type="text" placeholder="Search">
-					<button class="col-sm-2 btn" onclick="cancelBoxSearch()">Hủy</button>
-				</div>
-                <table class="table">
-                    <thead class="thead-light" id="searchProducts">
-
-                    </thead>
-                    <tbody id="searchProducts">
-
-                    </tbody>
-                </table>`);
-        }
-
-        const cancelBoxSearch = () => {
-            $('#p2_compare').html('');
-            document.getElementById('nav-compare').style.animation = 'change_height_min ease .3s forwards';
-            $('#p2_compare').append(`<button class="btn" onclick="showBoxSearch()">Thêm so sánh</button>`);
-        }
+    }
 
 
-        const onchangSearch = () => {
-            let name = $('#search-p-compare').val();
-            findByNameAndType(name, type_of_item);
-        }
+</script>
 
-    </script>
 </body>

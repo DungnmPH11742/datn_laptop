@@ -29,4 +29,23 @@ public class Contact implements Serializable {
     @Column(name = "message", nullable = false)
     private String message;
 
+    @Column(name = "contact_date")
+    private String contactDate;
+
+    @Column(name = "reply_date")
+    private String replyDate;
+
+    @Column(name = "reply_content")
+    private String replyContent;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Column(name = "status")
+    private String status;
+
+    @Column(name = "contact_person_email")
+    private String contactPersonEmail;
+
+
 }

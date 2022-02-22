@@ -1558,7 +1558,7 @@ h2.title {
   border-color: transparent transparent transparent #fe980f;
   position: absolute;
   top: 11px;
-  left: 48px;
+  left: 67px;
 }
 
 .breadcrumbs .breadcrumb > li + li:before {
@@ -2514,172 +2514,172 @@ textarea {
   padding: 5px;
 }
 .card {
-    position: relative;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 0.10rem
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.10rem
 }
 .info .row {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 .col{
-    position: relative;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
 }
 .card-body {
-    -webkit-box-flex: 1;
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    padding: 1.25rem;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1.25rem;
 }
 .card-header:first-child {
-    border-radius: calc(0.37rem - 1px) calc(0.37rem - 1px) 0 0
+  border-radius: calc(0.37rem - 1px) calc(0.37rem - 1px) 0 0
 }
 
 .card-header {
-    padding: 0.75rem 1.25rem;
-    margin-bottom: 0;
-    background-color: #fff;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0;
+  background-color: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1)
 }
 
 .track {
-    position: relative;
-    background-color: #ddd;
-    height: 7px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    margin-bottom: 60px;
-    margin-top: 50px
+  position: relative;
+  background-color: #ddd;
+  height: 7px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 60px;
+  margin-top: 50px
 }
 
 .track .step {
-    -webkit-box-flex: 1;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
-    width: 25%;
-    margin-top: -18px;
-    text-align: center;
-    position: relative
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  width: 25%;
+  margin-top: -18px;
+  text-align: center;
+  position: relative
 }
 
 .track .step.active:before {
-    background: #FF5722
+  background: #FF5722
 }
 
 .track .step::before {
-    height: 7px;
-    position: absolute;
-    content: "";
-    width: 100%;
-    left: 0;
-    top: 18px
+  height: 7px;
+  position: absolute;
+  content: "";
+  width: 100%;
+  left: 0;
+  top: 18px
 }
 
 .track .step.active .icon {
-    background: #ee5435;
-    color: #fff
+  background: #ee5435;
+  color: #fff
 }
 
 .track .icon {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    position: relative;
-    border-radius: 100%;
-    background: #ddd
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  position: relative;
+  border-radius: 100%;
+  background: #ddd
 }
 
 .track .step.active .text {
-    font-weight: 400;
-    color: #000
+  font-weight: 400;
+  color: #000
 }
 
 .track .text {
-    display: block;
-    margin-top: 7px
+  display: block;
+  margin-top: 7px
 }
 
 .itemside {
-    position: relative;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    width: 100%
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%
 }
 
 .itemside .aside {
-    position: relative;
-    -ms-flex-negative: 0;
-    flex-shrink: 0
+  position: relative;
+  -ms-flex-negative: 0;
+  flex-shrink: 0
 }
 
 .img-sm {
-    width: 80px;
-    height: 80px;
-    padding: 7px
+  width: 80px;
+  height: 80px;
+  padding: 7px
 }
 
 ul.row,
 ul.row-sm {
-    list-style: none;
-    padding: 0
+  list-style: none;
+  padding: 0
 }
 
 .itemside .info {
-    padding-left: 15px;
-    padding-right: 7px
+  padding-left: 15px;
+  padding-right: 7px
 }
 
 .itemside .title {
-    display: block;
-    margin-bottom: 5px;
-    color: #212529
+  display: block;
+  margin-bottom: 5px;
+  color: #212529
 }
 
 p {
-    margin-top: 0;
-    margin-bottom: 1rem
+  margin-top: 0;
+  margin-bottom: 1rem
 }
 
 .btn-warning {
-    color: #ffffff;
-    background-color: #ee5435;
-    border-color: #ee5435;
-    border-radius: 1px
+  color: #ffffff;
+  background-color: #ee5435;
+  border-color: #ee5435;
+  border-radius: 1px
 }
 .price {
   color: #d53b2a;
 }
 .btn-warning:hover {
-    color: #ffffff;
-    background-color: #ff2b00;
-    border-color: #ff2b00;
-    border-radius: 1px
+  color: #ffffff;
+  background-color: #ff2b00;
+  border-color: #ff2b00;
+  border-radius: 1px
 }
 
 .info-product{
-    display: flex;
- 
+  display: flex;
+
 }
 .info-product .img-product{
   width: 130px;
@@ -2692,33 +2692,33 @@ p {
   }
 }
 .product-detail{
-    flex: 1;
-    flex-direction: column;
-    margin: 17px 0 0 16px;
+  flex: 1;
+  flex-direction: column;
+  margin: 17px 0 0 16px;
 }
 .info-order-detail > h3{
-    margin-left: 15px;
-    color: #ee5435;
+  margin-left: 15px;
+  color: #ee5435;
 }
 .info-order{
-    margin-top: 20px;
+  margin-top: 20px;
 }
 .info-order > div{
-    display: flex;
-    margin-bottom: 10px;
-    padding: 20px;
-    justify-content: space-between;
-    border-bottom: 1px solid #ccc ;
+  display: flex;
+  margin-bottom: 10px;
+  padding: 20px;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc ;
 }
 .info-total-price-order-detail .fee-total-price-order > span{
-    font-size: 20px;
-    color: #ee5435;
-    font-weight: 600;
+  font-size: 20px;
+  color: #ee5435;
+  font-weight: 600;
 }
 .info-payment-order .title-payment-order i{
-    font-size: 18px;
-    padding-right: 10px;
-    color: #ee5435;
+  font-size: 18px;
+  padding-right: 10px;
+  color: #ee5435;
 }
 .address-status-order{
   margin-top: 100px;

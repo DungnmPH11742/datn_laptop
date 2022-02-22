@@ -10,8 +10,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ResponObject {
-    private Integer id;
+
+    private String id;
+
     private Object data;
+
     private Integer totalPages;
+
     private Long totalElements;
 }

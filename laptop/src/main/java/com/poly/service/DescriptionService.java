@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface DescriptionService {
 
-    List<DescriptionVO> getDescriptionByProduct(String idProduct);
+    List<DescriptionVO> getDescriptionBySku(String sku);
 
     List<DescriptionVO> getDescriptionByBlog(String idBlog);
 

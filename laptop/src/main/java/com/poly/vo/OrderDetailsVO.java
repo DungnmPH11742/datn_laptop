@@ -3,27 +3,29 @@ package com.poly.vo;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 @Data
 public class OrderDetailsVO implements Serializable {
 
     private Integer id;
 
-    private Integer idOrder;
+    private Float productDtPrice;
 
-    private Integer idProduct;
-
-    private String idVoucher;
-
-    private Float price;
+    private Float intoMoney;
 
     private Integer quantity;
 
-    private Date completionDate;
-
-    private Integer paymentMethods;
-
     private Integer status;
+
+    private String serialNumber;
+
+    private Integer idOrder;
+
+    private ProductsDetailVO productsDetailVO;
+
+    private VouchersVO voucher;
+
+
+
 
 }

@@ -19,4 +19,9 @@ public class CategoryWebController {
         headerHelper.setHeaderSession(model);
         return "user/duong-test";
     }
+    @GetMapping("/search")
+    public String getBrandCate(Model model) {
+        headerHelper.setHeaderSession(model);
+        return "user/search-us";
+    }
 }

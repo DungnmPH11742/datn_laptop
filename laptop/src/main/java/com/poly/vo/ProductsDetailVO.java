@@ -1,19 +1,34 @@
 package com.poly.vo;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
+import org.springframework.data.annotation.Transient;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.io.Serializable;
+import java.sql.Date;
+import java.util.List;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductsDetailVO implements Serializable {
 
-    private String id;
+    private String sku;
+    @Transient
+    private String idProduct;
+    @Transient
+    private String nameProduct;
 
-    private String producer;
+    private Date dateOn;
+
+    private String imgUrl;
+
+    private Float price;
+
+    private Integer quantity;
+
+    private String dimensions;
 
     private String cpu;
 
@@ -27,7 +42,7 @@ public class ProductsDetailVO implements Serializable {
 
     private String vga;
 
-    private String operatingSystem;
+    private String os;
 
     private String power;
 
@@ -49,10 +64,29 @@ public class ProductsDetailVO implements Serializable {
 
     private String viewScreenshots;
 
+    private List<String> lstConnectivity;
+
+    private String battery;
+
     private Integer warrantyPeriod;
 
     private String accessoriesIncluded;
 
     private String seeMore;
+
+    private List<ImageDetailVO> imageDetails;
+
+    private SaleProductVO saleProduct;
+
+    private int status;
+
+//    private OrderDetailsVO orderDetails;
+
+    @JsonBackReference
+    private ProductsVO product;
+
+    @Transient
+    private String typeOfItem;
+
 
 }

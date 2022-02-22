@@ -39,18 +39,4 @@ public class Vouchers implements Serializable {
     @Column(name = "actived")
     private Boolean actived;
 
-    //bi-directional many-to-one association to OrderDetail
-    @OneToMany(mappedBy="voucher")
-    private List<OrderDetails> orderDetails;
-
-    //bi-directional many-to-one association to Category
-    @ManyToOne
-    @JoinColumn(name="id_category")
-    private Category category;
-
-    //bi-directional many-to-one association to Product
-    @ManyToOne
-    @JoinColumn(name="id_product")
-    private Products product;
-
 }

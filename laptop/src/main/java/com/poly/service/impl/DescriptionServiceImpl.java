@@ -3,8 +3,10 @@ package com.poly.service.impl;
 import com.poly.entity.Blogs;
 import com.poly.entity.Description;
 import com.poly.entity.Products;
+import com.poly.entity.ProductsDetail;
 import com.poly.repo.BlogsRepository;
 import com.poly.repo.DescriptionRepository;
+import com.poly.repo.ProductsDetailRepository;
 import com.poly.repo.ProductsRepository;
 import com.poly.service.DescriptionService;
 import com.poly.vo.DescriptionVO;
@@ -28,18 +30,21 @@ public class DescriptionServiceImpl implements DescriptionService {
     private ProductsRepository productsRepository;
 
     @Autowired
+    private ProductsDetailRepository detailRepository;
+
+    @Autowired
     private BlogsRepository blogsRepository;
 
 
     @Override
-    public List<DescriptionVO> getDescriptionByProduct(String idProduct) {
-        List<Description> descriptionList = this.descriptionRepository.getDescriptionByProductId(idProduct);
+    public List<DescriptionVO> getDescriptionBySku(String sku) {
+        List<Description> descriptionList = this.descriptionRepository.getDescriptionByProductsDetailSku(sku);
         if (descriptionList != null || descriptionList.size() > 0) {
             List<DescriptionVO> descriptionVOList = new ArrayList<>();
             descriptionList.forEach(d -> {
                 DescriptionVO vo = modelMapper.map(d, DescriptionVO.class);
-                if (d.getProduct() != null) {
-                    vo.setIdProduct(d.getProduct().getId());
+                if (d.getProductsDetail() != null) {
+                    vo.setSku(d.getProductsDetail().getSku());
                 }
                 if (d.getBlog() != null) {
                     vo.setIdBlog(d.getBlog().getTitle());
@@ -58,8 +63,8 @@ public class DescriptionServiceImpl implements DescriptionService {
         if (descriptionList != null || descriptionList.size() > 0) {
             descriptionList.forEach(d -> {
                 DescriptionVO vo = modelMapper.map(d, DescriptionVO.class);
-                if (d.getProduct() != null) {
-                    vo.setIdProduct(d.getProduct().getId());
+                if (d.getProductsDetail() != null) {
+                    vo.setSku(d.getProductsDetail().getSku());
                 }
                 if (d.getBlog() != null) {
                     vo.setIdBlog(d.getBlog().getTitle());
@@ -84,8 +89,8 @@ public class DescriptionServiceImpl implements DescriptionService {
             } else {
                 descriptionVO.setIdBlog(null);
             }
-            if (description.getProduct() != null) {
-                descriptionVO.setIdProduct(description.getProduct().getId());
+            if (description.getProductsDetail() != null) {
+                descriptionVO.setSku(description.getProductsDetail().getSku());
             }
             BeanUtils.copyProperties(description, descriptionVO);
             return descriptionVO;
@@ -97,12 +102,15 @@ public class DescriptionServiceImpl implements DescriptionService {
 
     @Override
     public DescriptionVO create(DescriptionVO vo) {
-        Optional<Products> products = this.productsRepository.findById(vo.getIdProduct());
+        Optional<ProductsDetail> productsDetail = this.detailRepository.findById(vo.getSku());
         Optional<Blogs> optionalBlogs = this.blogsRepository.findById(vo.getIdBlog());
-        if (products.isPresent() && optionalBlogs.isPresent()) {
-            Description description = new Description();
-            description.setProduct(products.get());
-            description.setBlog(optionalBlogs.get());
+        Description description = new Description();
+        if (productsDetail.isPresent() || optionalBlogs.isPresent()) {
+            if (productsDetail.isPresent()) {
+                description.setProductsDetail(productsDetail.get());
+            } else if (optionalBlogs.isPresent()) {
+                description.setBlog(optionalBlogs.get());
+            }
             BeanUtils.copyProperties(vo, description);
             this.descriptionRepository.save(description);
             vo.setId(description.getId());
@@ -117,12 +125,12 @@ public class DescriptionServiceImpl implements DescriptionService {
     public DescriptionVO update(DescriptionVO vo, Integer id) {
         vo.setId(id);
         Optional<Description> optionalDescription = this.descriptionRepository.findById(vo.getId());
-        Optional<Products> optionalProducts = this.productsRepository.findById(vo.getIdProduct());
+        Optional<ProductsDetail> productsDetail = this.detailRepository.findById(vo.getSku());
         Optional<Blogs> optionalBlogs = this.blogsRepository.findById(vo.getIdBlog());
-        if (optionalDescription.isPresent() && optionalProducts.isPresent() && optionalBlogs.isPresent()) {
+        if (optionalDescription.isPresent() && productsDetail.isPresent() && optionalBlogs.isPresent()) {
             Description description = optionalDescription.get();
             description.setBlog(optionalBlogs.get());
-            description.setProduct(optionalProducts.get());
+            description.setProductsDetail(productsDetail.get());
             BeanUtils.copyProperties(vo, description);
             this.descriptionRepository.save(description);
             return vo;
@@ -136,8 +144,8 @@ public class DescriptionServiceImpl implements DescriptionService {
         if (optionalDescription.isPresent()) {
             Description description = optionalDescription.get();
             DescriptionVO vo = modelMapper.map(description, DescriptionVO.class);
-            if (description.getProduct() != null) {
-                vo.setIdProduct(description.getProduct().getId());
+            if (description.getProductsDetail() != null) {
+                vo.setSku(description.getProductsDetail().getSku());
             }
             if (description.getBlog() != null) {
                 vo.setIdBlog(description.getBlog().getTitle());

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Shop | E-Shopper</title>
+    <th:block th:replace="~{common/link :: link}"></th:block>
+    <link th:href="@{/user-st/css/duongtest.css}" rel="stylesheet">
+</head>
+<!--/head-->
+
+<body>
+<div th:replace="~{common/header :: headers}"></div>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="col-left">
+                    <div class="text-base tong_sp" id="totalElements">
+                    </div>
+                    <form id="test">
+                        <div class="filter-output"></div>
+                        <div class="catalogue-wrap sticky">
+                            <div class="back_step"><a href="javascript:;"
+                                                      class="back">
+                            </a>
+                                <h2 class="title_cate"><span>Lọc</span></h2> <a href="javascript:;"
+                                                                                class="btn-default apply active">
+                                    Áp dụng
+                                </a></div>
+                            <div class="catalogue catalogue_final">
+                                <div class="flex items-center mb-2">
+                                    <h3 class="text-base leading-5 font-semibold flex items-center w-full">
+                                        <span>Bộ lọc được áp dụng</span> <a href="javascript:;"
+                                                                            class="ml-auto text-sm font-normal underline leading-5" id="delFilter">
+                                        Bỏ lọc
+                                    </a></h3></div>
+                                <ul class="flex flex-wrap" id="filterPD">
+                                </ul>
+                            </div>
+
+                            <div class="catalogue">
+                                <h3 class=" items-center"><span>Thương hiệu</span>
+                                    <p class="btn-plus-category"><i class="fas fa-plus"></i></p>
+                                </h3>
+
+                                <div class="catalogue__list" id="trademark">
+
+
+                                </div>
+                            </div>
+                            <!-- Khoảng Giá -->
+                            <div class="catalogue">
+                                <h3 class=" items-center"><span>Khoảng Giá</span>
+                                    <p class="btn-plus-category"><i id="khoang" class="fas fa-plus"></i></p>
+                                </h3>
+                                <div class="catalogue__list">
+                                    <label class="check-list">
+                                        <span class="text">Trên 50 triệu</span>
+                                        <input class="br" id="checkbox2" type="checkbox" value="tren_50_trieu"
+                                        >
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">40 - 50 triệu</span>
+                                        <input class="br" id="checkbox2" type="checkbox" value="40_50_trieu"
+                                        >
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">30 - 40 triệu</span>
+                                        <input class="br" type="checkbox" id="checkbox2" value="30_40_trieu"
+                                        >
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">20 - 30 triệu</span>
+                                        <input class="br" type="checkbox" id="checkbox2" value="20_30_trieu"
+                                        >
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">10 - 20 triệu</span>
+                                        <input class="br" type="checkbox" id="checkbox2" value="10_20_trieu"
+                                        >
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="check-list">
+                                        <span class="text">Dưới 10 triệu</span>
+                                        <input class="br" type="checkbox" id="checkbox2" value="duoi_10_trieu"
+                                        >
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!--Chỉ hiển thị khuyến mại-->
+                            <div class="catalogue" style="padding-top: 15px;">
+                                <label class="type__toggle-button items-start">
+                                    <span class="text">Chỉ hiện thị khuyến mại</span>
+                                    <input type="checkbox" id="checkboxSale" class="toggle_button">
+                                </label>
+                            </div>
+
+                            <!--CPU-->
+                            <!--Tỉ lệ màn hình-->
+
+                            <!--Tần số quyét-->
+
+                            <!--Độ phân giải-->
+
+                            <!--Card đồ họa-->
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+            <div class="col-sm-9 padding-right">
+                <div class="features_items col_right">
+                    <!--features_items-->
+                    <div class="sort-fillter">
+                        <div class="sort-fillter__left">
+                            <strong>Sắp xếp theo:</strong>&ensp;
+                            <span style="cursor: pointer" class="sortAsc"> Giá tăng dần</span>
+                            <input class="asc" style="visibility: hidden" type="checkbox" id="checkbox0" value="asc"
+                                   name="fooby[0][]">
+                            <span style="cursor: pointer" class="sortDesc">Giá giảm dần </span>
+                            <input class="desc" style="visibility: hidden" type="checkbox" id="checkbox0" value="desc"
+                                   name="fooby[0][]">
+                        </div>
+                    </div>
+
+                    <div id="emty">
+
+                    </div>
+
+                    <div id="formFilter">
+
+                    </div>
+                </div>
+
+
+                <div id="pagination">
+                    <ul id="pagination-2" class="pagination"></ul>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+<div id="compare">
+
+</div>
+<div th:replace="~{common/footer :: footers}"></div>
+<!--/Footer-->
+
+<th:block th:replace="~{common/script_src :: script}"></th:block>
+<script th:src="@{/user-st/js/duongtest.js}"></script>
+<script th:src="@{/user-st/serchProducts2.js}"></script>
+<script th:src="@{/user-st/pagination.js}"></script>
+<script th:src="@{/user-st/js/compare.js}"></script>
+</body>
+
+</html>

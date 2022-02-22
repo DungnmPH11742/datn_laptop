@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Shop | King Of Computer</title>
+    <link th:href="@{/user-st/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/prettyPhoto.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/price-range.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/animate.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/responsive.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+          integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script th:src="@{/user-st/js/html5shiv.js}"></script>
+    <script th:src="@{/user-st/js/respond.min.js}"></script>
+    <link th:href="@{/user-st/css/manager.css}" rel="stylesheet">
+    <link th:href="@{/user-st/css/main.css}" rel="stylesheet">
+</head>
+<!--/head-->
+
+<body>
+
+<!--header-->
+<div th:replace="~{common/header :: headers}"></div>
+<!--/header-->
+
+<main id="main" class="main-order">
+    <section class="container clearfix">
+        <div>
+            <!--Title breadcrumb-->
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li class="active">Account</li>
+                </ol>
+            </div>
+
+            <section class="clearfix">
+                <div class="account-information">
+                    <!--Side bar manager-->
+                    <div class="account-information_left">
+                        <div class="info-user-header">
+                            <div class="avatar-side-bar">
+                                <img th:src="${account.getImgUrl()}" th:if="${account.getImgUrl() != null}" alt="taikhoan" width="100%" class="loading">
+                                <img th:src="@{/user-st/images/avatarDefault.png}" th:unless="${account.getImgUrl() != null}" alt="taikhoan" width="100%" class="loading">
+                            </div>
+                            <div class="info-user-header-detail">
+                                <span class="title-user">Tài khoản của</span>
+                                <span class="name-user" th:text="${account.getFullName()}"></span>
+                            </div>
+                        </div>
+                        <ul class="menu-nav">
+                            <li class="active">
+                                <a th:href="@{/view-account}" class="link-account">
+                                    <i class="far fa-user-circle"></i>
+                                    <span>Tài Khoản</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/list-order}" class="link-order">
+                                    <i class="far fa-list-alt"></i>
+                                    <span>Danh sách đơn hàng</span>
+                                </a>
+                            </li>
+                            <li >
+                                <a th:href="@{/list-address}" class="link-account">
+                                    <i class="far fa-address-card"></i>
+                                    <span>Quản lý địa chỉ</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a th:href="@{/view-change-password}" class="link-change-password">
+                                    <i class="fas fa-lock"></i>
+                                    <span>Thay đổi mật khẩu</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="right-manager">
+                        <div class="info-user">
+                            <form id="form-manager-user" th:method="post" th:action="@{/save-user}" enctype="multipart/form-data" th:object="${accountVO}">
+                                <div class="header-info-user">
+                                    <h2 class="title-form">
+                                        <span>Thông tin tài khoản</span>
+                                    </h2>
+                                </div>
+                                <div class="form-user">
+                                    <div class="form-info-user">
+                                        <div class="item-form">
+                                            <input type="hidden" th:field="*{id}">
+                                            <label>Họ và tên</label>
+                                            <div class="item-form-input">
+                                                <input type="text" name="name" th:field="*{fullName}" class="inputText" placeholder="Họ và tên">
+                                            </div>
+                                        </div>
+
+                                        <div class="item-form">
+                                            <label>Số điện thoại</label>
+                                            <div class="item-form-input">
+                                                <input th:field="*{phone}" type="text" name="phone" class="inputText"
+                                                       placeholder="Số điện thoại">
+                                            </div>
+                                        </div>
+
+                                        <div class="item-form">
+                                            <label>Email</label>
+                                            <div class="item-form-input">
+                                                <input th:disabled="disabled"  th:field="*{email}" type="email" name="email" class="inputText">
+                                            </div>
+                                        </div>
+                                        <div class="item-form">
+                                            <label>Giới tính</label>
+                                            <div class="item-form-radio">
+                                                <label for="gender-male">
+                                                    <!-- <input th:if="${accountVO.getSex() == null}" type="radio" value="0" name="sex" id="gender-male" class="check-radio">
+                                                     <input th:if="${accountVO.getSex() != null && !accountVO.getSex() }" th:field="*{sex}"  value="0" type="radio" name="sex" id="gender-male" class="check-radio">
+                                                    --> <input type="radio" th:field="*{sex}" value="0" name="sex" id="gender-male" class="check-radio">
+
+                                                    <span class="radiobtn"></span>
+                                                    Nam
+                                                </label>
+                                                <label for="gender-female">
+                                                    <!--                                                <input th:if="${accountVO.getSex() == null || !accountVO.getSex()}" type="radio" name="sex" value="1" id="gender-female" class="check-radio">-->
+                                                    <!--                                                <input th:if="${accountVO.getSex() != null && accountVO.getSex() }" th:checked="checked" value="1" type="radio" name="sex" id="gender-female" class="check-radio">-->
+                                                    <input th:field="*{sex}" type="radio" name="sex" value="1" id="gender-female" class="check-radio">
+                                                    <span class="radiobtn"></span>
+                                                    Nữ
+                                                </label>
+                                                <div id="sex-error" class="error"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="item-form">
+                                            <label>Ngày sinh</label>
+                                            <div class="item-form-select">
+                                                <div class="select-style">
+                                                    <select name="dayBird" class="placeholder" id="day">
+                                                        <option value disabled selected>Ngày</option>
+                                                    </select>
+                                                </div>
+                                                <div class="select-style">
+                                                    <select name="monthBird" class="placeholder" id="month">
+                                                        <option value disabled selected>Tháng</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="select-style">
+                                                    <select name="yearBird" class="placeholder" id="years">
+                                                        <option value disabled selected>Năm</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-img-user">
+                                        <div class="parent-img-user">
+                                            <div class="info-img-user">
+                                                <div id="avatar-user" class="img-user" th:if="${accountVO.getImgUrl() != null}"
+                                                     th:style="'background-image: url('+${accountVO.getImgUrl()}+');'">
+                                                </div>
+                                                <div id="avatar-user" class="img-user" th:if="${accountVO.getImgUrl() == null}"
+                                                     th:style="'background-image: url('+ @{/user-st/images/avatarDefault.png}+');'">
+                                                </div>
+                                            </div>
+                                            <input type="file" name="fileImageUser" class="input-file-img" id="image-user" accept=".jpg,.jpeg,.png">
+                                            <button type="button" id="btn-select-file" class="btn btn-select-img">Chọn
+                                                ảnh</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="btn-submit-form">
+                                    <button class="btn btn-submit">Lưu thông tin</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+</main>
+
+<!--/Footer-->
+<div th:replace="~{common/footer :: footers}"></div>
+<!--/Footer-->
+<script th:src="@{/user-st/js/jquery.js}"></script>
+<script th:src="@{/user-st/js/price-range.js}"></script>
+<script th:src="@{/user-st/js/jquery.scrollUp.min.js}"></script>
+<script th:src="@{/user-st/js/bootstrap.min.js}"></script>
+<script th:src="@{/user-st/js/jquery.prettyPhoto.js}"></script>
+<script th:src="@{/user-st/js/main.js}"></script>
+<script th:src="@{/user-st/js/manager.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    $(document).ready(function () {
+        let qntYears = 60;
+        let selectMonth = $('#month');
+        let selectDay = $('#day');
+        let selectYear = $('#years');
+        let currentYear = new Date().getFullYear();
+        let dayBird = [[${dayBird}]];
+        let monthBird = [[${monthBird}]];
+        let yearBird = [[${yearBird}]];
+
+        for (var y = 0; y < qntYears; y++) {
+            let date = new Date(currentYear);
+            let yearElem = document.createElement("option");
+            if (currentYear == yearBird){
+                yearElem.setAttribute("selected","selected");
+            }
+            yearElem.value = currentYear
+            yearElem.textContent = currentYear;
+            selectYear.append(yearElem);
+            currentYear--;
+        }
+        for (var m = 1; m <= 12; m++) {
+            let month = m;
+            let monthElem = document.createElement("option");
+            if (m == monthBird){
+                monthElem.setAttribute("selected","selected");
+            }
+            monthElem.value = m;
+            monthElem.textContent = m;
+            selectMonth.append(monthElem);
+        }
+
+
+        for (var d = 1; d <= 31; d++) {
+            let day = d;
+            let dayElem = document.createElement("option");
+            if(d == dayBird){
+                dayElem.setAttribute("selected","selected");
+            }
+            dayElem.value = d;
+            dayElem.textContent = d;
+            selectDay.append(dayElem);
+        }
+    })
+    /*]]>*/
+
+</script>
+<script >
+    document.getElementById('btn-select-file').onclick = function () {
+        document.getElementById('image-user').click();
+    };
+    $('input[type=file]').change(function (e) {
+        var image = URL.createObjectURL(e.target.files[0]);
+        $('#avatar-user').css('background-image','url('+image+')');
+    });
+
+</script>
+</body>
+
+</html>

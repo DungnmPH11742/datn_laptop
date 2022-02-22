@@ -43,27 +43,31 @@ public class Account implements Serializable {
     @Column(name = "actived")
     private Boolean actived;
 
+    @Column(name = "sex")
+    private Boolean sex;
+
     //từ đây, cả đăng kí t nữa nên cứ thêm vào
     @Column(name = "verification_code", length = 64)
     private String verificationCode;
+
     @Column(name = "time_token")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date timeToken;
+
+    @Column(name = "reset_password_token")
+    private String resetPasswordToken;
+
     //bi-directional many-to-one association to Blog
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
     private List<Blogs> blogs;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "auth_provider")
     private AuthenticationProvider authProvider;
-//    hết
-
 
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
     private List<DeliveryAddress> deliveryAddresses;
 
-    //bi-directional many-to-one association to ImportedShipment
-    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
-    private List<ImportedShipment> importedShipments;
 
     //bi-directional many-to-one association to Order
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
